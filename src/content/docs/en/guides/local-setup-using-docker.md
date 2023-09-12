@@ -13,7 +13,7 @@ Clones the platform repository from GitHub:
    cd platform
  ```
   
-Create a `.env` file and set the required environment variables as per the `.env.example`. To start the API gateway and microservices.
+Create a .env file and set the required environment variables as per the `.env.sample` file.To start the API gateway and microservices. 
 
 Start the services:
 
@@ -36,7 +36,7 @@ Clone the CREDEBL Studio repository:
   cd studio
 ```
 
-Create a `.env` file and set the required environment variables as per the `.env.example`. To start the Studio UI. 
+Create a .env file and set the required environment variables as per the `.env.sample` file.To start the API gateway and microservices. 
 
 Build docker image
 

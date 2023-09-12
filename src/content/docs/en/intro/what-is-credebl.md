@@ -23,4 +23,4 @@ CREDEBL consistently hones its capabilities across an array of industry vertical
 
 A steadfast commitment to data privacy underscores CREDEBL's design philosophy, steadfastly embracing core tenets such as Privacy by Design and the sovereign control of data.
 
-![Example Image](./credebl-graph.png)
+![Example Image](./credebl.png)
