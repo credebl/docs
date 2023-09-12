@@ -7,4 +7,4 @@ This guide leads you through all the details of the CREDEBL Platform Architectur
 
 ## Platform Architecture
 
-- Coming soon.
+![Example Image](./architecture.png)
