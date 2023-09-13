@@ -14,7 +14,7 @@ Clone the platform repository from GitHub:
   
 Create a .env file and set the required environment variables as per the `.env.sample` file.
 
-Install dependancie
+Install dependencies
 ```bash
   pnpm i
 ```
