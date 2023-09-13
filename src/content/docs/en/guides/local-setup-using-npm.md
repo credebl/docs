@@ -18,14 +18,14 @@ Install dependancie
 ```bash
   npm i
 ```
-Keep your database schema in sync with your Prisma schema as it evolves and. Maintain existing data in your database.
+Keep your database schema in sync with your Prisma schema as it evolves and Maintain existing data in your database.
 ```bash
   cd lib/prisma-service/
   npx prisma migrate deploy 
 ```
-Generate Prisma Client with the following command:
+Generate Prisma Client to access schema model with the following command:
 ```bash 
-  npm primsa generate
+  npx primsa generate
 ```
 For initial master table entry create a credebl-master-table.json file at **lib/prisma-service/prisma/data** and set the required variables as per the `credebl-master-table.json` file.run following command.
 ```bash 
@@ -63,7 +63,7 @@ Clone the studio repository:
   cd studio
 ```
 
-Create a .env file and set the required environment variables as per the `.env.sample` file.To start the API gateway and microservices. 
+Create a .env file and set the required environment variables as per the `.env.sample` file. 
 
 Install dependencies and start the Studio UI:
 

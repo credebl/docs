@@ -36,7 +36,7 @@ Clone the CREDEBL Studio repository:
   cd studio
 ```
 
-Create a .env file and set the required environment variables as per the `.env.sample` file.To start the API gateway and microservices. 
+Create a .env file and set the required environment variables as per the `.env.sample` file.
 
 Build docker image
 
