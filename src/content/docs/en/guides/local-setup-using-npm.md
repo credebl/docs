@@ -16,7 +16,7 @@ Create a .env file and set the required environment variables as per the `.env.s
 
 Install dependancie
 ```bash
-  npm i
+  pnpm i
 ```
 Keep your database schema in sync with your Prisma schema as it evolves and Maintain existing data in your database.
 ```bash
@@ -33,12 +33,12 @@ For initial master table entry create a credebl-master-table.json file at **lib/
 ```
 To start the API gateway
 ```bash
-   npm run start
+   pnpm run start
 ```
 To start all microservices using below command followed by microservice name, example: start user service.
 
 ```bash
-  npm run start user
+  pnpm run start user
 ```
 
 Access the Platform API by navigating to:
