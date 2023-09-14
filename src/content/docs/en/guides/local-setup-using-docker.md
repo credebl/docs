@@ -20,6 +20,10 @@ Start the services:
 ```bash
   docker compose up -d
 ```
+For initial master table entry create a credebl-master-table.json file at **lib/prisma-service/prisma/data** and set the required variables as per the `credebl-master-table.json` file.run following command.
+```bash 
+  npx primsa db seed
+```
 
 Access the Platform API by navigating to:
 
