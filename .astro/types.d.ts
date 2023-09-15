@@ -221,9 +221,9 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/using-credebl-id.md": {
-	id: "en/guides/using-credebl-id.md";
-  slug: "en/guides/using-credebl-id";
+"en/guides/using-credebl-cloud.md": {
+	id: "en/guides/using-credebl-cloud.md";
+  slug: "en/guides/using-credebl-cloud";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -252,6 +252,13 @@ declare module 'astro:content' {
 "en/intro/what-is-credebl.md": {
 	id: "en/intro/what-is-credebl.md";
   slug: "en/intro/what-is-credebl";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/license/copyright-and-license.md": {
+	id: "en/license/copyright-and-license.md";
+  slug: "en/license/copyright-and-license";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">

@@ -49,11 +49,15 @@ integrations: [
 						// Each item here is one entry in the navigation menu.
 					{ label: 'Getting Started', link: '/en/guides/getting-started/' },
 					{ label: 'Architecture', link: '/en/guides/architecture/' },
-					{ label: 'NATS', link: '/en/guides/nats/' },
-						{ label: 'Local Setup using NPM',link: '/en/guides/local-setup-using-npm/' },
-					{ label: 'Local Setup using Docker', link: '/en/guides/local-setup-using-docker/' },
-						//{ label: 'Self-hosting', link: '/en/guides/self-hosting/' },
-						{ label: 'Using CREDEBL Cloud', link: '/en/guides/using-credebl-cloud/' },
+					{
+						label: 'Local Setup',
+						items: [
+							{ label: 'Install NATS Server', link: '/en/guides/nats/' },
+							{ label: 'Install from repository',link: '/en/guides/local-setup-using-npm/' },
+							{ label: 'Install using docker', link: '/en/guides/local-setup-using-docker/' },
+						]
+					},
+					{ label: 'Using CREDEBL Cloud', link: '/en/guides/using-credebl-cloud/' },
 					],
 				},
 				{

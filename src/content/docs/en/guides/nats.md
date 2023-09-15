@@ -2,8 +2,16 @@
 title: NATS Messaging
 description: NATS Messaging
 ---
+CREDEBL Platform uses [NATS](https://nats.io) for message-driven data exchange between CREDEBL microservices.
 
-## Create NATS config `nats-server.conf`
+CREDEVL Platform services need to exchange data. NATS is an infrastructure that allows such data exchange, segmented in the form of messages. It is called as "message oriented middleware".
+With NATS, application developers can:
+- Effortlessly build distributed and scalable client-server applications.
+- Store and distribute data in realtime in a general manner. This can flexibly be achieved across various environments, languages, cloud providers and on-premises systems.
+
+## Setup a NATS Server:
+
+### Create NATS config `nats-server.conf`
 
 ```yaml
 port: 4222
@@ -14,7 +22,7 @@ websocket:
 
 ```
 
-## Create `docker-compose`
+### Create `docker-compose`
 
 ``` yaml
 version: '3'
@@ -32,7 +40,7 @@ services:
 
 ```
 
-## Start NATS Server
+### Start NATS Server
 
 ```yaml
 docker compose up

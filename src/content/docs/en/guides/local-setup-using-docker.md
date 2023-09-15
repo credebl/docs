@@ -1,19 +1,19 @@
 ---
-title: Local Setup using NPM
+title: Install CREDEBL using Docker
 description: A reference page in my new CREDEBL docs site.
 ---
 
 
 ## Platform API
 
-Clones the platform repository:
+Clones the platform repository from GitHub:
 
  ```bash
    git clone https://github.com/credebl/platform.git 
    cd platform
  ```
   
-Create a .env file and set the required environment variables as per the .env.example.To start the API gateway and microservices. 
+Create a `.env` file and set the required environment variables as per the `.env.example`. To start the API gateway and microservices.
 
 Start the services:
 
@@ -21,7 +21,7 @@ Start the services:
   docker compose up -d
 ```
 
-Access the dockerized Platform API by navigating to:
+Access the Platform API by navigating to:
 
 ```bash
   http://localhost:5000
@@ -36,7 +36,7 @@ Clone the CREDEBL Studio repository:
   cd studio
 ```
 
-Create a .env file and set the required environment variables as per the .env.example.To start the API gateway and microservices. 
+Create a `.env` file and set the required environment variables as per the `.env.example`. To start the Studio UI. 
 
 Build docker image
 
