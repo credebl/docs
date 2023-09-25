@@ -22,7 +22,7 @@ Start the services:
 ```
 For initial master table entry create a credebl-master-table.json file at **lib/prisma-service/prisma/data** and set the required variables as per the `credebl-master-table.json` file.run following command.
 ```bash 
-  npx primsa db seed
+  npx prisma db seed
 ```
 
 Access the dockerized Platform API by navigating to:
