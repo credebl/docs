@@ -1,5 +1,5 @@
 ---
-title: Install CREDEBL from repository
+title: Local setup using NPM
 description: A reference page in my new CREDEBL docs site.
 ---
 
@@ -14,13 +14,18 @@ Clone the platform repository from GitHub:
   
 Create a .env file and set the required environment variables as per the `.env.sample` file.
 
+Install the pnpm package using the following command if it isn't already installed on your machine:
+
+```bash
+ npm install -g pnpm 
+```
 Install dependencies
 ```bash
   pnpm i
 ```
 Keep your database schema in sync with your Prisma schema as it evolves and Maintain existing data in your database.
 ```bash
-  cd lib/prisma-service/
+  cd libs/prisma-service/
   npx prisma migrate deploy 
 ```
 Generate Prisma Client to access schema model with the following command:

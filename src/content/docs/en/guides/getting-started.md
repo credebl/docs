@@ -5,12 +5,12 @@ description: A reference page in my new CREDEBL docs site.
 
 ## Setting Up CREDEBL
 
-Welcome to the manual that will walk you through the process of setting up CREDEBL Platform on your local machine
+Welcome to the CREDEBL Platform Setup Guide! This manual will walk you through the process of installing CREDEBL on your local machine. Let's get started.
 
 ### Initial Setup
 
 There are two ways you can setup the platform: 
-- Using [NPM](/en/guides/local-setup-using-npm/) directly by cloning the repository. OR
+- Using [NPM](/en/guides/local-setup-using-npm/) directly by cloning the repository   OR
 - Using [Docker](/en/guides/local-setup-using-docker/)
 
 ### Pre-requisites
@@ -34,7 +34,7 @@ Before you begin with the project, make sure the following software's are instal
 
 The CREDEBL Platform, being open source , mandates user authentication and utilizes a database for storing agent wallets and platform data.Supabase is used as a database service.
 
-To set up authentication and the database server, you have the option to either utilize [supabase](https://supabase.com/docs/guides/self-hosting/docker) or take advantage of the [Supabase SaaS service](https://supabase.com/).
+To set up authentication and the database server, you have the option to either utilize [supabase](https://supabase.com/docs/guides/cli/local-development) or take advantage of the [Supabase SaaS service](https://supabase.com/).
 
 **SendGrid** 
 
