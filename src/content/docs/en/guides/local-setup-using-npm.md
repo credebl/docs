@@ -30,11 +30,11 @@ Keep your database schema in sync with your Prisma schema as it evolves and Main
 ```
 Generate Prisma Client to access schema model with the following command:
 ```bash 
-  npx primsa generate
+  npx prisma generate
 ```
 For initial master table entry create a credebl-master-table.json file at **lib/prisma-service/prisma/data** and set the required variables as per the `credebl-master-table.json` file.run following command.
 ```bash 
-  npx primsa db seed
+  npx prisma db seed
 ```
 To start the API gateway
 ```bash

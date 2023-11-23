@@ -190,168 +190,168 @@ declare module 'astro:content' {
   slug: "en/guides/afj_setup";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/architecture.md": {
 	id: "en/guides/architecture.md";
   slug: "en/guides/architecture";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/getting-started.md": {
 	id: "en/guides/getting-started.md";
   slug: "en/guides/getting-started";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/local-setup-using-docker.md": {
 	id: "en/guides/local-setup-using-docker.md";
   slug: "en/guides/local-setup-using-docker";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/local-setup-using-npm.md": {
 	id: "en/guides/local-setup-using-npm.md";
   slug: "en/guides/local-setup-using-npm";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/nats.md": {
 	id: "en/guides/nats.md";
   slug: "en/guides/nats";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/self-hosting.md": {
 	id: "en/guides/self-hosting.md";
   slug: "en/guides/self-hosting";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/guides/using-credebl-cloud.md": {
 	id: "en/guides/using-credebl-cloud.md";
   slug: "en/guides/using-credebl-cloud";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/intro/intro-to-ssi.md": {
 	id: "en/intro/intro-to-ssi.md";
   slug: "en/intro/intro-to-ssi";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/intro/key-concepts.md": {
 	id: "en/intro/key-concepts.md";
   slug: "en/intro/key-concepts";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/intro/platform-features.md": {
 	id: "en/intro/platform-features.md";
   slug: "en/intro/platform-features";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/intro/what-is-credebl.md": {
 	id: "en/intro/what-is-credebl.md";
   slug: "en/intro/what-is-credebl";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/license/copyright-and-license.md": {
 	id: "en/license/copyright-and-license.md";
   slug: "en/license/copyright-and-license";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/reference/api-reference.md": {
 	id: "en/reference/api-reference.md";
   slug: "en/reference/api-reference";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/reference/example.md": {
 	id: "en/reference/example.md";
   slug: "en/reference/example";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/support/community.md": {
 	id: "en/support/community.md";
   slug: "en/support/community";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "en/support/troubleshooting.md": {
 	id: "en/support/troubleshooting.md";
   slug: "en/support/troubleshooting";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "hi/guides/architecture.md": {
 	id: "hi/guides/architecture.md";
   slug: "hi/guides/architecture";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "hi/guides/getting-started.md": {
 	id: "hi/guides/getting-started.md";
   slug: "hi/guides/getting-started";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "hi/intro/intro-to-ssi.md": {
 	id: "hi/intro/intro-to-ssi.md";
   slug: "hi/intro/intro-to-ssi";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "hi/intro/what-is-credebl.md": {
 	id: "hi/intro/what-is-credebl.md";
   slug: "hi/intro/what-is-credebl";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "hi/reference/api-reference.md": {
 	id: "hi/reference/api-reference.md";
   slug: "hi/reference/api-reference";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "hi/reference/example.md": {
 	id: "hi/reference/example.md";
   slug: "hi/reference/example";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
 "index.mdx": {
 	id: "index.mdx";
   slug: "index";
   body: string;
   collection: "docs";
-  data: any
+  data: InferEntrySchema<"docs">
 } & { render(): Render[".mdx"] };
 };
 
@@ -363,5 +363,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	type ContentConfig = never;
+	type ContentConfig = typeof import("../src/content/config");
 }

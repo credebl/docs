@@ -1,5 +1,5 @@
 ---
-title: AFJ local setup
+title: Agent Setup
 description: Describe the CREDEBL Platform Architecture
 ---
 

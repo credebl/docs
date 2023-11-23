@@ -49,7 +49,7 @@ integrations: [
 						// Each item here is one entry in the navigation menu.
 					{ label: 'Getting Started', link: '/en/guides/getting-started/' },
 					{ label: 'Architecture', link: '/en/guides/architecture/' },
-					{ label: 'AFJ Setup', link: '/en/guides/afj_setup/' },
+					{ label: 'Agent Setup', link: '/en/guides/afj_setup/' },
 					{ label: 'NATS', link: '/en/guides/nats/' },
 						{ label: 'Local Setup using NPM',link: '/en/guides/local-setup-using-npm/' },
 					{ label: 'Local Setup using Docker', link: '/en/guides/local-setup-using-docker/' },
