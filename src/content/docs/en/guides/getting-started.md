@@ -15,10 +15,8 @@ There are two ways you can setup the platform:
 
 ### Pre-requisites
 
-At the base of the CREDEBL Platform consist of Prerequisite Softwares. 
-
+At the base of the CREDEBL Platform consist of prerequisite softwares.
 Before you begin with the project, make sure the following software's are installed on your machine.
-
 
 **Node.js and npm:**  use node 18 version
 

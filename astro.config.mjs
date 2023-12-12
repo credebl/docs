@@ -8,7 +8,7 @@ integrations: [
 			title: 'CREDEBL Docs',
 			logo: {
 				alt: 'CREDEBL Logo',
-				src: './src/assets/CREDEBL_ICON.png',
+				src: './src/assets/CREDEBL_ICON.svg',
 			  },
 			defaultLocale: 'root',
 			locales: {
