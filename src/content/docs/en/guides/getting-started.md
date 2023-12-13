@@ -28,6 +28,8 @@ Before you begin with the project, make sure the following software's are instal
 
 **NATS:** Download and install [NATS](/en/guides/nats/).
 
+**REDIS:** Download and install [REDIS](https://redis.io/docs/install/install-stack/docker/).
+
 **Authentication and Database** 
 
 The CREDEBL Platform, being open source , mandates user authentication and utilizes a database for storing agent wallets and platform data.Supabase is used as a database service.
