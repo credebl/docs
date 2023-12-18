@@ -21,10 +21,10 @@ integrations: [
 				// 	label: 'Dzongkha (Bhutan)',
 				// 	lang: 'dz_BT',
 				// },
-				hi: {
-					label: 'हिंदी (India)',
-					lang: 'hi',
-				},
+				// hi: {
+				// 	label: 'हिंदी (India)',
+				// 	lang: 'hi',
+				// },
 			},
 			social: {
 				github: 'https://github.com/credebl',
