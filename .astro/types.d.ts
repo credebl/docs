@@ -213,6 +213,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"en/guides/keycloak.md": {
+	id: "en/guides/keycloak.md";
+  slug: "en/guides/keycloak";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
 "en/guides/local-setup-using-docker.md": {
 	id: "en/guides/local-setup-using-docker.md";
   slug: "en/guides/local-setup-using-docker";
