@@ -30,11 +30,11 @@ Before you begin with the project, make sure the following software's are instal
 
 **REDIS:** Download and install [REDIS](https://redis.io/docs/install/install-stack/docker/).
 
-**Authentication and Database** 
+#### Authentication and Database 
 
-The CREDEBL Platform, being open source , mandates user authentication and utilizes a database for storing agent wallets and platform data.Supabase is used as a database service.
+The CREDEBL Platform, being open source , mandates user authentication and utilizes a database for storing agent wallets and platform data. Keycloak is used as a database service.
 
-To set up authentication and the database server, you have the option to either utilize [supabase](https://supabase.com/docs/guides/cli/local-development) or take advantage of the [Supabase SaaS service](https://supabase.com/).
+To set up keycloak for authentication follow the [Keycloak Setup using Docker](/en/guides/keycloak) section. Learn more about keycloak from their [official website](https://www.keycloak.org/).
 
 **SendGrid** 
 
