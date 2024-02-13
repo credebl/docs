@@ -54,6 +54,7 @@ integrations: [
 						{ label: 'Local Setup using NPM',link: '/en/guides/local-setup-using-npm/' },
 					{ label: 'Local Setup using Docker', link: '/en/guides/local-setup-using-docker/' },
 						//{ label: 'Self-hosting', link: '/en/guides/self-hosting/' },
+						{ label: 'Keycloak Setup using Docker', link: '/en/guides/keycloak/' },
 						{ label: 'Using CREDEBL Cloud', link: '/en/guides/using-credebl-cloud/' },
 					
 					],
