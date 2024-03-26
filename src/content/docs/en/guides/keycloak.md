@@ -53,6 +53,17 @@ This section outlines the configuration of service account roles to manage permi
     - View-clients
     - View-users
 
+## Realm Roles Settings:
+This section covers the configuration of realm role settings within Keycloak.
+
+1. Under the **credebl-platform** realm, from the menu select **realm-roles**.
+2. In **realm-roles**, click on **Create Role** and create a role with **Role name**=**"holder"**, as when a new user registers on the platform we are assigning him a **"holder"** role from the realm.
+
+## SSO Session Settings:
+
+Set SSO Session Idle to 2 days. This is the expiration time of the refresh token if the user is idle on the platform. We can configure this as per our need.
+
+
 ## Update the .env
 
 This section covers the setup of environment variables for seamless integration with your application
