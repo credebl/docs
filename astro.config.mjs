@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,6 +33,16 @@ integrations: [
 				discord: 'https://discord.gg/w4hnQT7NJG',
 				youtube: 'https://www.youtube.com/@blocksterlabs5489',
 			},
+			plugins: [
+				// Generate the OpenAPI documentation pages.
+				starlightOpenAPI([
+					{
+					 base: 'api',
+					 label: 'Credo Agent',
+					 schema: './schemas/credoSwagger.yaml',
+					},
+				]),
+			],
 			sidebar: [
 				{
 					label: 'Intro',
@@ -60,14 +71,6 @@ integrations: [
 					],
 				},
 				{
-					label: 'Reference',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'API Reference', link: '/en/reference/api-reference/' },
-					],
-					autogenerate: { directory: 'reference' },
-				},
-				{
 					label: 'Support',
 					items: [
 						// Each item here is one entry in the navigation menu.
@@ -82,6 +85,8 @@ integrations: [
 						{ label: 'License', link: '/en/license/copyright-and-license/' },
 					],
 				},
+				// Add the generated sidebar group to the sidebar.
+        ...openAPISidebarGroups,
 			],
 		}),
 	],
