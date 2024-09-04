@@ -15,12 +15,24 @@ With NATS, application developers can:
 
 ```yaml
 port: 4222
-max_payload: 4194304  # 4 MB in bytes
-websocket:
+max_payload: 8388608  # 4 MB in bytes
+websocket{
   port: 443
-  no_tls: true 
+  no_tls: true
+  }
+
+# add your nkeys for each micro-service to authenticate clients securely without storing secrets on the server
+  authorization: {
+  users: [
+    { nkey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx},
+    { nkey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx},
+    { nkey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx}
+    ]
+  }
 
 ```
+To generate nkeys, you'll need the [`NATS tool`](https://docs.nats.io/using-nats/nats-tools/nk),                                                
+To know more about NATS Nkeys [link](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth)
 
 ### Create `docker-compose`
 
