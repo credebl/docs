@@ -192,65 +192,205 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/afj_setup.md": {
-	id: "en/guides/afj_setup.md";
-  slug: "en/guides/afj_setup";
+"en/contributorsguide/gettingstarted/architecture.md": {
+	id: "en/contributorsguide/gettingstarted/architecture.md";
+  slug: "en/contributorsguide/gettingstarted/architecture";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/architecture.md": {
-	id: "en/guides/architecture.md";
-  slug: "en/guides/architecture";
+"en/contributorsguide/gettingstarted/basic-info.md": {
+	id: "en/contributorsguide/gettingstarted/basic-info.md";
+  slug: "en/contributorsguide/gettingstarted/basic-info";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/getting-started.md": {
-	id: "en/guides/getting-started.md";
-  slug: "en/guides/getting-started";
+"en/contributorsguide/previouscontent/afj_setup.md": {
+	id: "en/contributorsguide/previouscontent/afj_setup.md";
+  slug: "en/contributorsguide/previouscontent/afj_setup";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/keycloak.md": {
-	id: "en/guides/keycloak.md";
-  slug: "en/guides/keycloak";
+"en/contributorsguide/previouscontent/getting-started.md": {
+	id: "en/contributorsguide/previouscontent/getting-started.md";
+  slug: "en/contributorsguide/previouscontent/getting-started";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/local-setup-using-docker.md": {
-	id: "en/guides/local-setup-using-docker.md";
-  slug: "en/guides/local-setup-using-docker";
+"en/contributorsguide/previouscontent/local-setup-using-docker.md": {
+	id: "en/contributorsguide/previouscontent/local-setup-using-docker.md";
+  slug: "en/contributorsguide/previouscontent/local-setup-using-docker";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/local-setup-using-npm.md": {
-	id: "en/guides/local-setup-using-npm.md";
-  slug: "en/guides/local-setup-using-npm";
+"en/contributorsguide/previouscontent/local-setup-using-npm.md": {
+	id: "en/contributorsguide/previouscontent/local-setup-using-npm.md";
+  slug: "en/contributorsguide/previouscontent/local-setup-using-npm";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/nats.md": {
-	id: "en/guides/nats.md";
-  slug: "en/guides/nats";
+"en/contributorsguide/previouscontent/self-hosting.md": {
+	id: "en/contributorsguide/previouscontent/self-hosting.md";
+  slug: "en/contributorsguide/previouscontent/self-hosting";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/self-hosting.md": {
-	id: "en/guides/self-hosting.md";
-  slug: "en/guides/self-hosting";
+"en/contributorsguide/previouscontent/using-credebl-cloud.md": {
+	id: "en/contributorsguide/previouscontent/using-credebl-cloud.md";
+  slug: "en/contributorsguide/previouscontent/using-credebl-cloud";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/guides/using-credebl-cloud.md": {
-	id: "en/guides/using-credebl-cloud.md";
-  slug: "en/guides/using-credebl-cloud";
+"en/contributorsguide/setup/agent/basicsetup/docker.md": {
+	id: "en/contributorsguide/setup/agent/basicsetup/docker.md";
+  slug: "en/contributorsguide/setup/agent/basicsetup/docker";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/agent/basicsetup/npm.md": {
+	id: "en/contributorsguide/setup/agent/basicsetup/npm.md";
+  slug: "en/contributorsguide/setup/agent/basicsetup/npm";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/agent/envsetup.md": {
+	id: "en/contributorsguide/setup/agent/envsetup.md";
+  slug: "en/contributorsguide/setup/agent/envsetup";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/agent/intro.md": {
+	id: "en/contributorsguide/setup/agent/intro.md";
+  slug: "en/contributorsguide/setup/agent/intro";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/agent/references.md": {
+	id: "en/contributorsguide/setup/agent/references.md";
+  slug: "en/contributorsguide/setup/agent/references";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/platform/basicsetup/docker.md": {
+	id: "en/contributorsguide/setup/platform/basicsetup/docker.md";
+  slug: "en/contributorsguide/setup/platform/basicsetup/docker";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/platform/basicsetup/npm.md": {
+	id: "en/contributorsguide/setup/platform/basicsetup/npm.md";
+  slug: "en/contributorsguide/setup/platform/basicsetup/npm";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/platform/envsetup.md": {
+	id: "en/contributorsguide/setup/platform/envsetup.md";
+  slug: "en/contributorsguide/setup/platform/envsetup";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/platform/intro.md": {
+	id: "en/contributorsguide/setup/platform/intro.md";
+  slug: "en/contributorsguide/setup/platform/intro";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/platform/references.md": {
+	id: "en/contributorsguide/setup/platform/references.md";
+  slug: "en/contributorsguide/setup/platform/references";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/keycloak.md": {
+	id: "en/contributorsguide/setup/prerequisites/keycloak.md";
+  slug: "en/contributorsguide/setup/prerequisites/keycloak";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/nats.md": {
+	id: "en/contributorsguide/setup/prerequisites/nats.md";
+  slug: "en/contributorsguide/setup/prerequisites/nats";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/prerequisitesoftwares.md": {
+	id: "en/contributorsguide/setup/prerequisites/prerequisitesoftwares.md";
+  slug: "en/contributorsguide/setup/prerequisites/prerequisitesoftwares";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/studio/basicsetup/docker.md": {
+	id: "en/contributorsguide/setup/studio/basicsetup/docker.md";
+  slug: "en/contributorsguide/setup/studio/basicsetup/docker";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/studio/basicsetup/npm.md": {
+	id: "en/contributorsguide/setup/studio/basicsetup/npm.md";
+  slug: "en/contributorsguide/setup/studio/basicsetup/npm";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/studio/envsetup.md": {
+	id: "en/contributorsguide/setup/studio/envsetup.md";
+  slug: "en/contributorsguide/setup/studio/envsetup";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/studio/intro.md": {
+	id: "en/contributorsguide/setup/studio/intro.md";
+  slug: "en/contributorsguide/setup/studio/intro";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/studio/references.md": {
+	id: "en/contributorsguide/setup/studio/references.md";
+  slug: "en/contributorsguide/setup/studio/references";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/troubleshooting.md": {
+	id: "en/contributorsguide/troubleshooting.md";
+  slug: "en/contributorsguide/troubleshooting";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/copyright-and-license.md": {
+	id: "en/copyright-and-license.md";
+  slug: "en/copyright-and-license";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/intro/architecture.md": {
+	id: "en/intro/architecture.md";
+  slug: "en/intro/architecture";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -283,20 +423,6 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/license/copyright-and-license.md": {
-	id: "en/license/copyright-and-license.md";
-  slug: "en/license/copyright-and-license";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
-"en/reference/api-reference.md": {
-	id: "en/reference/api-reference.md";
-  slug: "en/reference/api-reference";
-  body: string;
-  collection: "docs";
-  data: InferEntrySchema<"docs">
-} & { render(): Render[".md"] };
 "en/reference/example.md": {
 	id: "en/reference/example.md";
   slug: "en/reference/example";
@@ -304,16 +430,44 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/support/community.md": {
-	id: "en/support/community.md";
-  slug: "en/support/community";
+"en/support.md": {
+	id: "en/support.md";
+  slug: "en/support";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
-"en/support/troubleshooting.md": {
-	id: "en/support/troubleshooting.md";
-  slug: "en/support/troubleshooting";
+"en/userguide/api-flow.md": {
+	id: "en/userguide/api-flow.md";
+  slug: "en/userguide/api-flow";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/userguide/api-reference/credo-api-reference.md": {
+	id: "en/userguide/api-reference/credo-api-reference.md";
+  slug: "en/userguide/api-reference/credo-api-reference";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/userguide/api-reference/platform-api-reference.md": {
+	id: "en/userguide/api-reference/platform-api-reference.md";
+  slug: "en/userguide/api-reference/platform-api-reference";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/userguide/getting-started.md": {
+	id: "en/userguide/getting-started.md";
+  slug: "en/userguide/getting-started";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/userguide/ui-flow.md": {
+	id: "en/userguide/ui-flow.md";
+  slug: "en/userguide/ui-flow";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
