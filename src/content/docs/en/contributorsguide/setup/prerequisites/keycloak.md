@@ -10,7 +10,7 @@ This guide aims to walk you through the setup of Keycloak using Docker, facilita
 To set up Keycloak as a Docker image, follow these steps:
 
 ```bash
-docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:23.0.6 start-dev
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
 ```
 
 This command installs and starts Keycloak at the specified endpoints, locally accessible at http://localhost:8080.
