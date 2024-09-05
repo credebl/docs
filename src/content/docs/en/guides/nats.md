@@ -2,7 +2,7 @@
 title: NATS Messaging
 description: NATS Messaging
 ---
-CREDEBL Platform uses [NATS](https://nats.io) for message-driven data exchange between CREDEBL microservices.
+CREDEBL Platform uses <a href="https://nats.io" target="_blank">NATS</a> for message-driven data exchange between CREDEBL microservices.
 
 CREDEBL Platform services need to exchange data. NATS is an infrastructure that allows such data exchange, segmented in the form of messages. It is called as "message oriented middleware".
 With NATS, application developers can:
@@ -31,10 +31,10 @@ websocket{
   }
 
 ```
-To generate nkeys, you'll need the [`NATS tool`](https://docs.nats.io/using-nats/nats-tools/nk),                                                
-To know more about NATS Nkeys [link](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth)
+To generate nkeys, you'll need the <a href="https://docs.nats.io/using-nats/nats-tools/nk" target="_blank">NATS tool</a>,                                                
+To know more about <a href = "https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth" target="_blank">NATS Nkeys</a>
 
-### Create `docker-compose`
+### Create `docker-compose.yml`
 
 ``` yaml
 version: '3'
@@ -55,5 +55,5 @@ services:
 ### Start NATS Server
 
 ```yaml
-docker compose up
+docker compose up -d
 ```
