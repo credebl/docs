@@ -15,7 +15,7 @@ With NATS, application developers can:
 
 ```yaml
 port: 4222
-max_payload: 8388608  # 4 MB in bytes
+max_payload: 8388608  # 8 MB in bytes
 websocket{
   port: 443
   no_tls: true
