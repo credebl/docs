@@ -3,13 +3,13 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-integrations: [
-	starlight({
+	integrations: [
+		starlight({
 			title: 'CREDEBL Docs',
 			logo: {
 				alt: 'CREDEBL Logo',
 				src: './src/assets/CREDEBL_ICON.svg',
-			  },
+			},
 			defaultLocale: 'root',
 			locales: {
 				// English docs in `src/content/docs/en/`
@@ -37,51 +37,115 @@ integrations: [
 					label: 'Intro',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'What is CREDEBL?', link: '/en/intro/what-is-credebl/' },
-						{ label: 'Platform Features', link: '/en/intro/platform-features/' },
 						{ label: 'Intro to SSI', link: '/en/intro/intro-to-ssi/' },
+						{ label: 'What is CREDEBL?', link: '/en/intro/what-is-credebl/' },
+						{ label: 'Architecture', link: '/en/intro/architecture/' },
+
 						//{ label: 'Key Concepts', link: '/en/intro/key-concepts/' },
 					],
 				},
 				{
-					label: 'Guides',
+					label: "User Guide",
 					items: [
-						// Each item here is one entry in the navigation menu.
-					{ label: 'Getting Started', link: '/en/guides/getting-started/' },
-					{ label: 'Architecture', link: '/en/guides/architecture/' },
-					{ label: 'Agent Setup', link: '/en/guides/afj_setup/' },
-					{ label: 'NATS', link: '/en/guides/nats/' },
-						{ label: 'Local Setup using NPM',link: '/en/guides/local-setup-using-npm/' },
-					{ label: 'Local Setup using Docker', link: '/en/guides/local-setup-using-docker/' },
-						//{ label: 'Self-hosting', link: '/en/guides/self-hosting/' },
-						{ label: 'Keycloak Setup using Docker', link: '/en/guides/keycloak/' },
-						{ label: 'Using CREDEBL Cloud', link: '/en/guides/using-credebl-cloud/' },
-					
-					],
+						{ label: "Getting started", "link": "/en/userguide/getting-started" },
+						{ label: "UI flow", "link": "/en/userguide/ui-flow/" },
+						{ label: "CREDEBL APIs flow", "link": "/en/userguide/api-flow/" },
+						{
+							label: "API Reference",
+							items: [
+								{ label: "Platform API reference", "link": "/en/userguide/api-reference/platform-api-reference/" },
+								{ label: "Credo API reference", "link": "/en/userguide/api-reference/credo-api-reference/" }
+							]
+						}
+					]
 				},
 				{
-					label: 'Reference',
+					label: 'Contributors Guide',
 					items: [
 						// Each item here is one entry in the navigation menu.
-						{ label: 'API Reference', link: '/en/reference/api-reference/' },
+						{
+							label: "Getting started",
+							items: [
+								{ label: "Basic info", "link": "/en/contributorsguide/gettingstarted/basic-info/" },
+								{ label: "Architecture", "link": "/en/contributorsguide/gettingstarted/architecture/" },
+							]
+						},
+						{
+							label: "Setup",
+							items: [
+								//   { label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
+								{
+									label: "Prerequisites",
+									items: [
+										{ label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
+										{ label: "Keycloak", "link": "/en/contributorsguide/setup/prerequisites/keycloak/" },
+										{ label: "NATS", "link": "/en/contributorsguide/setup/prerequisites/nats/" },
+
+									]
+								},
+
+
+								{
+									label: "Platform",
+									items: [
+										{ label: "Intro", "link": "/en/contributorsguide/setup/platform/intro/" },
+										{
+											label: "Basic setup",
+											items: [
+												{ label: "Using NPM", "link": "/en/contributorsguide/setup/platform/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/contributorsguide/setup/platform/basicsetup/docker/" },
+											]
+										},
+										{ label: ".env setup", "link": "/en/contributorsguide/setup/platform/envsetup/" },
+										{ label: "References", "link": "/en/contributorsguide/setup/platform/references/" },
+
+									]
+								},
+
+								{
+									label: "Agent",
+									items: [
+										{ label: "Intro", "link": "/en/contributorsguide/setup/agent/intro/" },
+										{
+											label: "Basic setup",
+											items: [
+												{ label: "Using NPM", "link": "/en/contributorsguide/setup/agent/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/contributorsguide/setup/agent/basicsetup/docker/" },
+											]
+										},
+										{ label: ".env setup", "link": "/en/contributorsguide/setup/agent/envsetup/" },
+										{ label: "References", "link": "/en/contributorsguide/setup/agent/references/" },
+
+									]
+								},
+								{
+									label: "Studio",
+									items: [
+										{ label: "Intro", "link": "/en/contributorsguide/setup/studio/intro/" },
+										{
+											label: "Basic setup",
+											items: [
+												{ label: "Using NPM", "link": "/en/contributorsguide/setup/studio/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/contributorsguide/setup/studio/basicsetup/docker/" },
+											]
+										},
+										{ label: ".env setup", "link": "/en/contributorsguide/setup/studio/envsetup/" },
+										{ label: "References", "link": "/en/contributorsguide/setup/studio/references/" },
+
+									]
+								},
+
+
+							]
+						},
+						{ label: "Troubleshooting", "link": "/en/contributorsguide/troubleshooting/" },
+
+
 					],
-					autogenerate: { directory: 'reference' },
 				},
-				{
-					label: 'Support',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Community', link: '/en/support/community/' },
-						// { label: 'Troubleshooting', link: '/en/support/troubleshooting/' },
-					],
-				},
-				{
-					label: 'License',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'License', link: '/en/license/copyright-and-license/' },
-					],
-				},
+				{ label: "Support", "link": "/en/support/" },
+				{ label: "License", "link": "/en/copyright-and-license/" },
+
 			],
 		}),
 	],
