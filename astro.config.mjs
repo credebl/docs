@@ -80,7 +80,7 @@ export default defineConfig({
 										{ label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
 										{ label: "Keycloak", "link": "/en/contributorsguide/setup/prerequisites/keycloak/" },
 										{ label: "NATS", "link": "/en/contributorsguide/setup/prerequisites/nats/" },
-
+										{ label: "REDIS", "link": "/en/contributorsguide/setup/prerequisites/redis/" },
 									]
 								},
 
@@ -94,6 +94,8 @@ export default defineConfig({
 											items: [
 												{ label: "Using NPM", "link": "/en/contributorsguide/setup/platform/basicsetup/npm/" },
 												{ label: "Using Docker", "link": "/en/contributorsguide/setup/platform/basicsetup/docker/" },
+												{ label: "Using PostgreSQL", "link": "/en/contributorsguide/setup/platform/basicsetup/postgres/" },
+
 											]
 										},
 										{ label: ".env setup", "link": "/en/contributorsguide/setup/platform/envsetup/" },

@@ -3,9 +3,6 @@ title: Local setup using Docker
 description: A reference page in my new CREDEBL docs site.
 ---
 
-
-## Platform API
-
 Clones the platform repository from GitHub:
 
  ```bash

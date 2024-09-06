@@ -297,6 +297,13 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"en/contributorsguide/setup/platform/basicsetup/postgres.md": {
+	id: "en/contributorsguide/setup/platform/basicsetup/postgres.md";
+  slug: "en/contributorsguide/setup/platform/basicsetup/postgres";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
 "en/contributorsguide/setup/platform/envsetup.md": {
 	id: "en/contributorsguide/setup/platform/envsetup.md";
   slug: "en/contributorsguide/setup/platform/envsetup";
