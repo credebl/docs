@@ -29,7 +29,7 @@ Below is the cliConfig.json file, which needs to be used to set up the agent
   "walletId": "sample",  # Mention your walletId here
   "walletKey": "sample",   # Mention your walletKey here
   "walletType": "postgres",  # Mention wallet type here
-  "walletUrl": "localhost:5432",  # Mention your wallet type here
+  "walletUrl": "localhost:5432",  # Mention your wallet url here
   "walletAccount": "********",  # Mention your wallet account name here
   "walletPassword": "********",   # Mention your wallet password here
   "walletAdminAccount": "********",
@@ -69,7 +69,7 @@ Below is the cliConfig.json file, which needs to be used to set up the agent
   "schemaManagerContractAddress": "0x4742d43C2dFCa5a1d4238240Afa8547Daf87Ee7a",
   "rpcUrl": "https://rpc-amoy.polygon.technology",
   "fileServerUrl": "https://schema.credebl.id",
-  "fileServerToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6ImNhZDI3ZjhjLTMyNWYtNDRmZC04ZmZkLWExNGNhZTY3NTMyMSJ9.I3IR7abjWbfStnxzn1BhxhV0OEzt1x3mULjDdUcgWHk"
+  "fileServerToken":     #Use your token here
 }
 
 ```
