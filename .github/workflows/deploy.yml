@@ -1,9 +1,9 @@
 name: Deploy
 on:
   push:
-    branches: main
+    branches: feat/suport-deno
   pull_request:
-    branches: main
+    branches: feat/suport-deno
 
 jobs:
   deploy:
