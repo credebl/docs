@@ -1,8 +1,13 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, passthroughImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import deno from "@deno/astro-adapter";
 
 // https://astro.build/config
 export default defineConfig({
+
+  output: "hybrid",
+  adapter: deno(),
+
 	integrations: [
 		starlight({
 			title: 'CREDEBL Docs',
@@ -153,5 +158,9 @@ export default defineConfig({
 	],
 
 	// Process images with sharp: https://docs.astro.build/en/guides/assets/#using-sharp
-	image: { service: { entrypoint: 'astro/assets/services/sharp' } },
+	// image: { service: { entrypoint: 'astro/assets/services/sharp' } },
+	// Changing image processing to support server build
+	image: {
+    service: passthroughImageService()
+  }
 });
