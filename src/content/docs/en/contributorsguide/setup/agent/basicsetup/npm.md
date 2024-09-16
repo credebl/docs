@@ -7,8 +7,8 @@ description: A reference page in my new CREDEBL docs site.
 Clone the following repository:
 
 ```bash
-git clone https://github.com/credebl/afj-controller
-cd afj-controller
+git clone https://github.com/credebl/credo-controller
+cd credo-controller
 ```
 
 Use following commands to install and upgrade Yarn:
