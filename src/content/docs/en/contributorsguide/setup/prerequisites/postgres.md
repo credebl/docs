@@ -1,5 +1,5 @@
 ---
-title: Local setup using PostgreSQL
+title: PostgreSQL Database
 description: A reference page in my new CREDEBL docs site.
 ---
 
