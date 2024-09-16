@@ -8,8 +8,8 @@ The Docker image built during this process is used to launch agents for new orga
 Clone the following repository:
 
 ```bash
-git clone https://github.com/credebl/afj-controller
-cd afj-controller
+git clone https://github.com/credebl/credo-controller
+cd credo-controller
 ```
 
 Use following commands to install and upgrade Yarn:
@@ -28,5 +28,5 @@ yarn build
 
 Create Docker Image using following command :
 ```bash 
-docker build . -t afj-0.4.2:latest // Mention afj version or any tag name
+docker build . -t credo-controller-0.4.2:latest // Mention credo controller version or any tag name
 ```
