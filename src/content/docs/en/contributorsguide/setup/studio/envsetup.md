@@ -1,6 +1,6 @@
 ---
-title: .env setup
-description: .env setup
+title: Environment Configuration
+description: A guide to setting up environment variables for the CREDEBL studio.
 ---
 
 To ensure your local development environment is correctly configured, you need to set up your .env file with the appropriate environment variables. 
