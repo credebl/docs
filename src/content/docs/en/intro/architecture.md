@@ -38,7 +38,7 @@ Provides an efficient way to onboard team members for the organization through a
 
 
 ##### Web Wallet for Organizations
-Organizations can setup their own SSI Web Wallet based on a shared [multi-tenant] Aries agent and on-prem [dedicated] Credo agent.
+Organizations can setup their own SSI Web Wallet based on a shared [multi-tenant] Aries agent and on-prem [dedicated] Hyperledger Aries agent.
 For multi-tenant agent platform handles all the processes. For dedicated agent currently platform supports on-prem agent. To know more about [dedicated] on-prem agent please click here. 
 
 ##### ADEYA Mobile Wallet for Holders
