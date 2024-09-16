@@ -2,7 +2,7 @@
 title: NATS Messaging
 description: NATS Messaging
 ---
-The CREDEBL platform utilizes NATS for message-driven data exchange between its microservices. NATS serves as a lightweight and high-performance "message-oriented middleware," allowing services to communicate seamlessly in real-time.
+The CREDEBL platform utilizes [NATS](https://nats.io/) for message-driven data exchange between its microservices. NATS serves as a lightweight and high-performance "message-oriented middleware," allowing services to communicate seamlessly in real-time.
 
 ### Why NATS?
 NATS enables CREDEBL platform services to exchange data effectively by breaking down communication into discrete messages. With NATS, application developers can:
