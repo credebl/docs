@@ -1,5 +1,5 @@
 ---
-title: Studio UI flow
+title: Studio UI
 description: A reference page in my new CREDEBL docs site.
 ---
 
@@ -120,7 +120,7 @@ On the mobile side, User will receive the Proof Request in the mobile applicatio
 - On the mobile side, User will receive the Proof Request in the application, the user has to view the request and choose the operations to perform.Operation is to either share the requested information or to decline the request.
 
 
-## 2. Working Flow with using the W3C standards
+## 2. Working Flow with the W3C standards
 
 
 - #### Flow with Polygon Ledger
@@ -145,7 +145,7 @@ We can do that by using two methods, did : key and did : web.
 - Once a user selects this method, the user has to enter the domain name in the visible text field. After submission, the wallet gets associated with the organization. Now, users can proceed for the schema creation and other processes.
 
 
-## 2.1. Create Schema
+## 2.1. Create Schema using W3C standards
 - Now, the next step is to provide the template in which we will be getting the information for the use. Schema is nothing but a template of the data, which the user is going to provide for the use. 
 - User can reach the Schema creation screen using two ways:
 1) One, User can click directly on the Schema’s tab on the dashboard and can reach the creation screen.
