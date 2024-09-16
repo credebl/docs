@@ -142,6 +142,8 @@ export default defineConfig({
 					],
 				},
 				{ label: "Support", "link": "/en/support/" },
+				{ label: "FAQ", "link": "/en/faq" },
+
 				{ label: "License", "link": "/en/copyright-and-license/" },
 
 			],
