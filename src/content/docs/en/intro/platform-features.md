@@ -16,7 +16,7 @@ With CREDEBL, end-to-end credential management can be enabled with these feature
 
 ##### User Registration
 
-The platform provides an efficient user registration process through email-based verification. Furthermore, the platform offers modern & highly secure authentication mechanisms such as FIDO Passkey for phishing-resistent user verification. These measures establish a multi-layered approach to user authentication, mitigating the potential for unauthorized access and preserving the security of sensitive user data.
+The platform provides an efficient user registration process through email-based verification. Furthermore, the platform offers modern & highly secure authentication mechanisms such as FIDO Passkey for phishing-resistent user verification. These measures establish a multi-layered approach to user authentication, mitigating the potential for unauthorized access and preserving the security of sensitive user data. Platform also provides highly secure mechanisms such as ClientId and ClientSecret for API authentication.
 
 
 ##### Organization onboarding
@@ -30,7 +30,8 @@ Provides an efficient way to onboard team members for the organization through a
 
 
 ##### Web Wallet for Organizations
-Organizations can setup their own SSI Web Wallet based on a multi-tenant shared Aries agent. Agent creates a separate wallet database for each organization wallet in order to keep the data isolated.
+Organizations can setup their own SSI Web Wallet based on a shared [multi-tenant] Aries agent and on-prem [dedicated] Credo agent.
+For multi-tenant agent platform handles all the processes. For dedicated agent currently platform supports on-prem agent. To know more about [dedicated] on-prem agent please click here. 
 
 ##### ADEYA Mobile Wallet for Holders
 ADEYA wallet is a user-friendly mobile wallet app designed to store and manage digital identities. It also facilitates secure data sharing among trusted connections, all while ensuring privacy, security & selective disclosure. It harnesses the capabilities of decentralized identity components developed using DIDComm protocols and cutting-edge features from Hyperledger Aries Bifold project. 
