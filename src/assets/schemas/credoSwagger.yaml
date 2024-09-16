@@ -398,8 +398,7 @@ components:
         routing:
           $ref: '#/components/schemas/Routing'
         appendedAttachments:
-          items:
-            $ref: '#/components/schemas/Attachment'
+          items: {}
           type: array
         invitationDid:
           type: string
@@ -707,8 +706,7 @@ components:
             $ref: '#/components/schemas/AgentMessage'
           type: array
         appendedAttachments:
-          items:
-            $ref: '#/components/schemas/Attachment'
+          items: {}
           type: array
         invitationDid:
           type: string
@@ -877,9 +875,7 @@ components:
         attributeName:
           type: string
           description: The name that will be used to generate the linked credential
-        attachment:
-          $ref: '#/components/schemas/Attachment'
-          description: The attachment that needs to be linked to the credential
+        attachment: {}
       required:
         - attributeName
         - attachment
@@ -902,9 +898,7 @@ components:
             $ref: '#/components/schemas/CredentialPreviewAttributeOptions'
           type: array
         linkedAttachments:
-          items:
-            $ref: '#/components/schemas/LinkedAttachment'
-          type: array
+          type: object
       required:
         - credentialDefinitionId
         - attributes
@@ -981,11 +975,14 @@ components:
     CredentialFormatPayload_CredentialFormats.createOffer_:
       properties:
         indy:
-          $ref: '#/components/schemas/AnonCredsOfferCredentialFormat'
+          type: object
+          description: Indy object
         jsonld:
-          $ref: '#/components/schemas/JsonLdCredentialDetailFormat'
+          type: object
+          description: jsonld object
         anoncreds:
-          $ref: '#/components/schemas/AnonCredsOfferCredentialFormat'
+          type: object
+          description: anoncreds object
       type: object
       description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
     AutoAcceptCredential:
@@ -1016,11 +1013,14 @@ components:
     CredentialFormatPayload_CredentialFormatType-Array.createOffer_:
       properties:
         indy:
-          $ref: '#/components/schemas/AnonCredsOfferCredentialFormat'
+          type: object
+          description: Indy object
         jsonld:
-          $ref: '#/components/schemas/JsonLdCredentialDetailFormat'
+          type: object
+          description: jsonld object
         anoncreds:
-          $ref: '#/components/schemas/AnonCredsOfferCredentialFormat'
+          type: object
+          description: anoncreds object
       type: object
       description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
     CreateOfferOobOptions:
@@ -1627,11 +1627,14 @@ components:
     CredentialFormatPayload_CredentialFormatType-Array.createProposal_:
       properties:
         indy:
-          $ref: '#/components/schemas/LegacyIndyProposeCredentialFormat'
+          type: object
+          description: Indy object
         jsonld:
-          $ref: '#/components/schemas/JsonLdCredentialDetailFormat'
+          type: object
+          description: jsonld object
         anoncreds:
-          $ref: '#/components/schemas/AnonCredsProposeCredentialFormat'
+          type: object
+          description: anoncreds object
       type: object
       description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
     ProposeCredentialOptions:
@@ -1681,11 +1684,14 @@ components:
     CredentialFormatPayload_CredentialFormats.acceptProposal_:
       properties:
         indy:
-          $ref: '#/components/schemas/AnonCredsAcceptProposalFormat'
+          type: object
+          description: Indy object
         jsonld:
-          $ref: '#/components/schemas/EmptyObject'
+          type: object
+          description: jsonld object
         anoncreds:
-          $ref: '#/components/schemas/AnonCredsAcceptProposalFormat'
+          type: object
+          description: anoncreds object
       type: object
       description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
     AcceptCredentialProposalOptions:
@@ -1714,11 +1720,14 @@ components:
     CredentialFormatPayload_CredentialFormats.acceptOffer_:
       properties:
         indy:
-          $ref: '#/components/schemas/AnonCredsAcceptOfferFormat'
+          type: object
+          description: Indy object
         jsonld:
-          $ref: '#/components/schemas/EmptyObject'
+          type: object
+          description: jsonld object
         anoncreds:
-          $ref: '#/components/schemas/AnonCredsAcceptOfferFormat'
+          type: object
+          description: anoncreds object
       type: object
       description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
     CredentialOfferOptions:
@@ -1773,11 +1782,14 @@ components:
     CredentialFormatPayload_CredentialFormats.acceptRequest_:
       properties:
         indy:
-          $ref: '#/components/schemas/AnonCredsAcceptRequestFormat'
+          type: object
+          description: Indy object
         jsonld:
-          $ref: '#/components/schemas/JsonLdAcceptRequestFormat'
+          type: object
+          description: jsonld object
         anoncreds:
-          $ref: '#/components/schemas/AnonCredsAcceptRequestFormat'
+          type: object
+          description: anoncreds object
       type: object
       description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
     AcceptCredentialRequestOptions:
@@ -1932,7 +1944,7 @@ paths:
               $ref: '#/components/schemas/RequestProofProposalOptions'
   /proofs/{proofRecordId}/accept-proposal:
     post:
-      operationId: AcceptProposal
+      operationId: proof-AcceptProposal
       responses:
         '200':
           description: ProofRecord
@@ -1956,7 +1968,12 @@ paths:
         - Proofs
       security:
         - apiKey: []
-      parameters: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
       requestBody:
         required: true
         content:
@@ -2041,7 +2058,7 @@ paths:
               $ref: '#/components/schemas/CreateProofRequestOobOptions'
   /proofs/{proofRecordId}/accept-request:
     post:
-      operationId: AcceptRequest
+      operationId: proof-AcceptRequest
       responses:
         '200':
           description: ProofRecord
@@ -2174,7 +2191,7 @@ paths:
       parameters: []
   /polygon/create-schema:
     post:
-      operationId: CreateSchema
+      operationId: polygon-CreateSchema
       responses:
         '200':
           description: Schema JSON
@@ -2235,7 +2252,7 @@ paths:
               type: object
   /polygon/{did}/{schemaId}:
     get:
-      operationId: GetSchemaById
+      operationId: polygon-GetSchemaById
       responses:
         '200':
           description: Schema Object
@@ -2870,7 +2887,7 @@ paths:
               $ref: '#/components/schemas/CreateTenantOptions'
   /multi-tenancy/create-did/{tenantId}:
     post:
-      operationId: CreateDid
+      operationId: tenant_CreateDid
       responses:
         '200':
           description: Ok
@@ -2895,7 +2912,7 @@ paths:
               $ref: '#/components/schemas/DidCreate'
   /multi-tenancy/dids/{tenantId}:
     get:
-      operationId: GetDids
+      operationId: tenant_GetDids
       responses:
         '200':
           description: Ok
@@ -2914,7 +2931,7 @@ paths:
             type: string
   /multi-tenancy/transactions/set-endorser-role/{tenantId}:
     post:
-      operationId: DidNymTransaction
+      operationId: tenant_DidNymTransaction
       responses:
         '200':
           description: Ok
@@ -2939,7 +2956,7 @@ paths:
               $ref: '#/components/schemas/DidNymTransaction'
   /multi-tenancy/transactions/endorse/{tenantId}:
     post:
-      operationId: EndorserTransaction
+      operationId: tenant_EndorserTransaction
       responses:
         '200':
           description: Ok
@@ -2969,7 +2986,7 @@ paths:
               $ref: '#/components/schemas/EndorserTransaction'
   /multi-tenancy/connections/{connectionId}/{tenantId}:
     get:
-      operationId: GetConnectionById
+      operationId: tenant_GetConnectionById
       responses:
         '200':
           description: Ok
@@ -3008,7 +3025,7 @@ paths:
             $ref: '#/components/schemas/RecordId'
   /multi-tenancy/create-invitation/{tenantId}:
     post:
-      operationId: CreateInvitation
+      operationId: tenant_CreateInvitation
       responses:
         '200':
           description: Ok
@@ -3044,13 +3061,14 @@ paths:
         required: false
         content:
           application/json:
-            schema:
+          # Changed schema to object because of build filure
+            schema: 
               allOf:
                 - $ref: '#/components/schemas/Omit_CreateOutOfBandInvitationConfig.routing_'
                 - $ref: '#/components/schemas/RecipientKeyOption'
   /multi-tenancy/create-legacy-invitation/{tenantId}:
     post:
-      operationId: CreateLegacyInvitation
+      operationId: tenant_CreateLegacyInvitation
       responses:
         '200':
           description: Ok
@@ -3077,7 +3095,7 @@ paths:
                 - $ref: '#/components/schemas/RecipientKeyOption'
   /multi-tenancy/receive-invitation/{tenantId}:
     post:
-      operationId: ReceiveInvitation
+      operationId: tenant_ReceiveInvitation
       responses:
         '200':
           description: Ok
@@ -3102,7 +3120,7 @@ paths:
               $ref: '#/components/schemas/ReceiveInvitationProps'
   /multi-tenancy/receive-invitation-url/{tenantId}:
     post:
-      operationId: ReceiveInvitationFromUrl
+      operationId: tenant_ReceiveInvitationFromUrl
       responses:
         '200':
           description: Ok
@@ -3127,7 +3145,7 @@ paths:
               $ref: '#/components/schemas/ReceiveInvitationByUrlProps'
   /multi-tenancy/oob/{invitationId}/{tenantId}:
     get:
-      operationId: GetAllOutOfBandRecords
+      operationId: tenant_GetAllOutOfBandRecords
       responses:
         '200':
           description: Ok
@@ -3151,7 +3169,7 @@ paths:
             type: string
   /multi-tenancy/connections/{tenantId}:
     get:
-      operationId: GetAllConnections
+      operationId: tenant_GetAllConnections
       responses:
         '200':
           description: Ok
@@ -3200,7 +3218,7 @@ paths:
             type: string
   /multi-tenancy/url/{tenantId}/{invitationId}:
     get:
-      operationId: GetInvitation
+      operationId: tenant_GetInvitation
       responses:
         '200':
           description: Ok
@@ -3223,7 +3241,7 @@ paths:
             type: string
   /multi-tenancy/schema/{tenantId}:
     post:
-      operationId: CreateSchema
+      operationId: tenant_CreateSchema
       responses:
         '200':
           description: Ok
@@ -3316,7 +3334,7 @@ paths:
             type: string
   /multi-tenancy/transactions/write/{tenantId}:
     post:
-      operationId: WriteSchemaAndCredDefOnLedger
+      operationId: tenant_WriteSchemaAndCredDefOnLedger
       responses:
         '200':
           description: Ok
@@ -3341,7 +3359,7 @@ paths:
               $ref: '#/components/schemas/WriteTransaction'
   /multi-tenancy/schema/{schemaId}/{tenantId}:
     get:
-      operationId: GetSchemaById
+      operationId: tenant_GetSchemaById
       responses:
         '200':
           description: Ok
@@ -3365,7 +3383,7 @@ paths:
             type: string
   /multi-tenancy/credential-definition/{tenantId}:
     post:
-      operationId: CreateCredentialDefinition
+      operationId: tenant_CreateCredentialDefinition
       responses:
         '200':
           description: Ok
@@ -3407,7 +3425,7 @@ paths:
               type: object
   /multi-tenancy/credential-definition/{credentialDefinitionId}/{tenantId}:
     get:
-      operationId: GetCredentialDefinitionById
+      operationId: tenant_GetCredentialDefinitionById
       responses:
         '200':
           description: Ok
@@ -3431,7 +3449,7 @@ paths:
             type: string
   /multi-tenancy/credentials/create-offer/{tenantId}:
     post:
-      operationId: CreateOffer
+      operationId: tenant_CreateOffer
       responses:
         '200':
           description: Ok
@@ -3456,7 +3474,7 @@ paths:
               $ref: '#/components/schemas/CreateOfferOptions'
   /multi-tenancy/credentials/create-offer-oob/{tenantId}:
     post:
-      operationId: CreateOfferOob
+      operationId: tenant_CreateOfferOob
       responses:
         '200':
           description: Ok
@@ -3481,7 +3499,7 @@ paths:
               $ref: '#/components/schemas/CreateOfferOobOptions'
   /multi-tenancy/credentials/accept-offer/{tenantId}:
     post:
-      operationId: AcceptOffer
+      operationId: tenant_AcceptOffer
       responses:
         '200':
           description: Ok
@@ -3506,7 +3524,7 @@ paths:
               $ref: '#/components/schemas/AcceptCredentialOfferOptions'
   /multi-tenancy/credentials/{credentialRecordId}/{tenantId}:
     get:
-      operationId: GetCredentialById
+      operationId: tenant_GetCredentialById
       responses:
         '200':
           description: Ok
@@ -3530,7 +3548,7 @@ paths:
             type: string
   /multi-tenancy/credentials/{tenantId}:
     get:
-      operationId: GetAllCredentials
+      operationId: tenant_GetAllCredentials
       responses:
         '200':
           description: Ok
@@ -3564,7 +3582,7 @@ paths:
             $ref: '#/components/schemas/CredentialState'
   /multi-tenancy/proofs/{tenantId}:
     get:
-      operationId: GetAllProofs
+      operationId: tenant_GetAllProofs
       responses:
         '200':
           description: Ok
@@ -3588,7 +3606,7 @@ paths:
             type: string
   /multi-tenancy/form-data/{tenantId}/{proofRecordId}:
     get:
-      operationId: ProofFormData
+      operationId: tenant_ProofFormData
       responses:
         '200':
           description: Ok
@@ -3621,7 +3639,7 @@ paths:
             type: string
   /multi-tenancy/proofs/request-proof/{tenantId}:
     post:
-      operationId: RequestProof
+      operationId: tenant_RequestProof
       responses:
         '200':
           description: Ok
@@ -3655,7 +3673,7 @@ paths:
               $ref: '#/components/schemas/RequestProofOptions'
   /multi-tenancy/proofs/create-request-oob/{tenantId}:
     post:
-      operationId: CreateRequest
+      operationId: tenant_CreateRequest
       responses:
         '200':
           description: Ok
@@ -3680,7 +3698,7 @@ paths:
               $ref: '#/components/schemas/CreateProofRequestOobOptions'
   /multi-tenancy/proofs/{proofRecordId}/accept-request/{tenantId}:
     post:
-      operationId: AcceptRequest
+      operationId: tenant_proof_AcceptRequest
       responses:
         '200':
           description: Ok
@@ -3726,7 +3744,7 @@ paths:
               type: object
   /multi-tenancy/proofs/{proofRecordId}/accept-presentation/{tenantId}:
     post:
-      operationId: AcceptPresentation
+      operationId: tenant_AcceptPresentation
       responses:
         '200':
           description: Ok
@@ -3759,7 +3777,7 @@ paths:
             type: string
   /multi-tenancy/proofs/{proofRecordId}/{tenantId}:
     get:
-      operationId: GetProofById
+      operationId: tenant_GetProofById
       responses:
         '200':
           description: Ok
@@ -3792,7 +3810,7 @@ paths:
             $ref: '#/components/schemas/RecordId'
   /multi-tenancy/{tenantId}:
     delete:
-      operationId: DeleteTenantById
+      operationId: tenant_DeleteTenantById
       responses:
         '200':
           description: Ok
@@ -3862,7 +3880,7 @@ paths:
               $ref: '#/components/schemas/DidCreate'
   /multi-tenancy/question-answer/{tenantId}:
     get:
-      operationId: GetQuestionAnswerRecords
+      operationId: tenant_GetQuestionAnswerRecords
       responses:
         '200':
           description: QuestionAnswerRecord[]
@@ -3910,7 +3928,7 @@ paths:
             type: string
   /multi-tenancy/question-answer/question/{connectionId}/{tenantId}:
     post:
-      operationId: SendQuestion
+      operationId: tenant_SendQuestion
       responses:
         '200':
           description: Ok
@@ -3955,7 +3973,7 @@ paths:
               type: object
   /multi-tenancy/question-answer/answer/{id}/{tenantId}:
     post:
-      operationId: SendAnswer
+      operationId: tenant_SendAnswer
       responses:
         '200':
           description: Ok
@@ -3988,7 +4006,7 @@ paths:
               $ref: '#/components/schemas/Record_response.string_'
   /multi-tenancy/question-answer/{id}/{tenantId}:
     get:
-      operationId: GetQuestionAnswerRecordById
+      operationId: tenant_GetQuestionAnswerRecordById
       responses:
         '200':
           description: ConnectionRecord
@@ -4015,7 +4033,7 @@ paths:
             type: string
   /multi-tenancy/basic-messages/{connectionId}/{tenantId}:
     get:
-      operationId: GetBasicMessages
+      operationId: tenant_GetBasicMessages
       responses:
         '200':
           description: BasicMessageRecord[]
@@ -4052,7 +4070,7 @@ paths:
           schema:
             type: string
     post:
-      operationId: SendMessage
+      operationId: tenant_SendMessage
       responses:
         '200':
           description: Ok
@@ -4571,7 +4589,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Record_string.unknown_'
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
               examples:
                 Example 1:
                   value:
@@ -4645,7 +4665,7 @@ paths:
               $ref: '#/components/schemas/ProposeCredentialOptions'
   /credentials/accept-proposal:
     post:
-      operationId: AcceptProposal
+      operationId: credential_AcceptProposal
       responses:
         '200':
           description: CredentialExchangeRecord
@@ -4848,7 +4868,7 @@ paths:
               $ref: '#/components/schemas/NegotiateCredentialOfferOptions'
   /credentials/accept-request:
     post:
-      operationId: AcceptRequest
+      operationId: credential-AcceptRequest
       responses:
         '200':
           description: CredentialExchangeRecord
@@ -5054,7 +5074,7 @@ paths:
             $ref: '#/components/schemas/RecordId'
   /connections/{connectionId}/accept-request:
     post:
-      operationId: AcceptRequest
+      operationId: connection-AcceptRequest
       responses:
         '200':
           description: ConnectionRecord
@@ -5307,8 +5327,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Record_string.unknown_'
-              examples:
-                Example 1: {}
       description: Send a question to a connection
       tags:
         - Question Answer
