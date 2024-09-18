@@ -53,8 +53,8 @@ export default defineConfig({
 					label: "User Guide",
 					items: [
 						{ label: "Getting started", "link": "/en/userguide/getting-started" },
-						{ label: "UI flow", "link": "/en/userguide/ui-flow/" },
-						{ label: "CREDEBL APIs flow", "link": "/en/userguide/api-flow/" },
+						{ label: "Studio UI workflow", "link": "/en/userguide/ui-flow/" },
+						{ label: "CREDEBL APIs guide", "link": "/en/userguide/api-flow/" },
 						{
 							label: "API Reference",
 							items: [
