@@ -7,4 +7,4 @@ This guide leads you through all the details of the CREDEBL Platform Architectur
 
 ## Platform Architecture
 
-![Example Image](./CREDEBL_OSS_Architecture-copy-sysArch.png)
+![Example Image](./CREDEBL_OSS_Architecture-copy-sysArch.jpg)
