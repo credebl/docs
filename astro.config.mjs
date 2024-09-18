@@ -85,11 +85,10 @@ export default defineConfig({
 										{ label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
 										{ label: "Keycloak", "link": "/en/contributorsguide/setup/prerequisites/keycloak/" },
 										{ label: "NATS", "link": "/en/contributorsguide/setup/prerequisites/nats/" },
-
+										{ label: "REDIS", "link": "/en/contributorsguide/setup/prerequisites/redis/" },
+										{ label: "PostgreSQL", "link": "/en/contributorsguide/setup/prerequisites/postgres/" },
 									]
 								},
-
-
 								{
 									label: "Platform",
 									items: [
@@ -106,7 +105,6 @@ export default defineConfig({
 
 									]
 								},
-
 								{
 									label: "Agent",
 									items: [
