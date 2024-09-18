@@ -34,29 +34,36 @@ You will see a details screen where you need to enter the following information:
 
 ## Create Wallet
 
-- Digital wallet’s purpose is the same as the real world wallet. It is mandatory to have a wallet to be created, before we proceed to the further process.
-- When you create a wallet, the dedicated storage space gets allocated to the organization.
-- Wallets can be created on different types of ledgers, each ledger has its own Methods and Network types. Indy, Polygon and No Ledger are the different types of ledgers.
-There are different procedures to move ahead using each ledger, now we will understand one by one.
+- A digital wallet serves as a secure storage space for managing credentials, just like a real-world wallet stores physical cards and cash. In this context, the wallet is essential for handling decentralized identity credentials.
+- The wallet you will be working with is the [Askar Aries Wallet](https://credo.js.org/guides/getting-started/set-up/aries-askar), a key component in SSI ecosystems. Before proceeding with further steps, it is mandatory to create a wallet, as it is crucial for managing verifiable credentials and facilitating interactions within the network.
+- When you create an Askar Aries wallet, a secure storage space is allocated for the organization, enabling it to hold and manage digital credentials.
+
 
 ## 1. Workflow with Indy Ledger
 
 - Now, we will understand the flow with the Indy ledger. There are multiple methods and networks that can be used. Once you select the required method and network within the Indy Ledger, the wallet gets created. You will see all the wallet details on the screen, including a generated QR code based on the details, which will also be displayed.
 - To get connected with the organization, you have to Install the Adeya wallet and scan the QR using the application's scanner.
 - You need to connect with the organization, to establish secure and seamless exchange of information.
-- Adeya wallet, this is the digital wallet application, which will be installed in the end user’s mobile for their use.
+- Adeya wallet, this is the digital wallet application, which will be installed in your mobile for your use.
 
 ## 1.1. Create Schema
 
-- Now, the next step is to provide the template in which we will be getting the information for the use. Schema is nothing but a template of the data, which the user is going to provide for the use. You can reach the Schema creation screen using two ways:
-
+- Now, the next step is to provide the template in which we will be getting the information for the use.
+- Schema serves as a template that specifies the data fields for credentials, which are stored on a distributed ledger. You can reach the Schema creation screen using two ways:
 1) One, You can click directly on the Schema’s tab on the dashboard and can reach the creation screen.
 2) Second, from the organization details screen, You can click on the Schema tab.
-- While creating the schema, you have to enter the Schema name, Version and attributes.
-Version means, if the schema is already created based on the certain attributes already, then that is version 1.
-- You can use already created attributes and modify schema as per choice, that can be called version 2.
-- You can use already created Schema’s from other organizations by simply switching from organization’s schema to All schema’s option on Schema List.
-- Version option is provided, if you want to slightly modify the already created schema. You can provide multiple attributes to the schema. Attributes means the information which you want as an input for the use. You have to provide the attribute details such as Attribute name, Data type and Display name. Amongst this, the Display Name is not mandatory but we have to provide at least one attribute to create the schema.
+While creating a schema, you must define the following:
+- **Schema Name**: A unique name for your schema
+- **Version**: This indicates the iteration of the schema. Version 1 will be the initial schema created with specific attributes. If you modify it later, the new version (e.g., version 2) will reflect those changes.
+- **Attributes**: These are the fields that will appear in the credential based on this schema. Each attribute requires:                   
+        i. Attribute Name: The specific name of the data field (e.g., "First Name").        
+        ii. Data Type: The type of data (e.g., text, number, date).            
+        iii. Display Name: An optional label for how the attribute will appear in the UI (not mandatory).
+- You can use existing attributes to create new schemas or modify them to create updated versions.
+- You can also utilize schemas created by other organizations by switching from your organization’s schema list to the All Schemas option.
+- Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
+
+
 
 ## 1.2. Create Credential Definition
 - Credential Definition can be defined as the entity which owns the schema. When you are using the Indy ledger, it is mandatory to provide the credential definition before issuance. You can create the credential definition, at the runtime as well while doing the issuance process.
@@ -107,7 +114,7 @@ On the mobile side, you will receive the Proof Request in the mobile application
 - After choosing this method for verification, first you have to select the schema for which you want to do the verification. Once you select the schema, the associated credential definitions to that schema will be displayed at the bottom. Then you have to select the credential definition of choice, using the checkbox at the and click on the Continue button.
 - Now, you will see the Attributes associated with that schema, here you have to select the attributes you want to verify. Once the selection is done, you have to click on the Continue button.
 - Here on the new screen, you will see the field of entering the email address. At least one email address is mandatory for the verification process to begin, you can add multiple addresses at the run time. After entering the email id, you have to click on the Request Proof button.
-- On the mobile side, User will receive the Proof Request in the application, the user has to view the request and choose the operations to perform. Operation is to either share the requested information or to decline the request.
+- On the mobile side, you will receive the Proof Request in the application, you have to view the request and choose the operations to perform. Operation is to either share the requested information or to decline the request.
 
 ## 2. Workflow with the W3C standards
 
@@ -132,12 +139,19 @@ You can proceed for the schema creation and other processes.
 - Once you select this method, then you have to enter the domain name in the visible text field. After submission, the wallet gets associated with the organization. Now, you can proceed for the schema creation and other processes.
 
 ## 2.1. Create Schema using W3C standards
-- Now, the next step is to provide the template in which we will be getting the information for the use. Schema is nothing but a template of the data, which the user is going to provide for the use. You can reach the Schema creation screen using two ways:
-
+- Now, the next step is to provide the template in which we will be getting the information for the use.
+- Schema serves as a template that specifies the data fields for credentials, which are stored on a distributed ledger. You can reach the Schema creation screen using two ways:
 1) One, You can click directly on the Schema’s tab on the dashboard and can reach the creation screen.
 2) Second, from the organization details screen, You can click on the Schema tab.
-- While creating the schema, you have to enter the Schema name and attributes.
-- You can use already created Schema’s from other organizations by simply switching from organization’s schema to All schema’s option on Schema List.
+While creating a schema with W3C standards, you must define the following:
+- **Schema Name**: A unique name for your schema
+- **Attributes**: These are the fields that will appear in the credential based on this schema. Each attribute requires:                   
+        i. Attribute Name: The specific name of the data field (e.g., "First Name").        
+        ii. Data Type: The type of data (e.g., text, number, date).            
+        iii. Display Name: An optional label for how the attribute will appear in the UI (not mandatory).
+- You can use existing attributes to create new schemas or modify them to create updated versions.
+- You can also utilize schemas created by other organizations by switching from your organization’s schema list to the All Schemas option.
+- Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
 
 ## 2.2. Issuance Using W3C standards
 - After the creation of the Organization and wallet, you will proceed to the issuance. Now they have to create the schema for the organization. Unlike the Indy ledger, we are not able to create the versions of the schema here.
