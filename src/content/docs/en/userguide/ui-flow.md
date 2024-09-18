@@ -59,6 +59,7 @@ While creating a schema, you must define the following:
         i. Attribute Name: The specific name of the data field (e.g., "First Name").        
         ii. Data Type: The type of data (e.g., text, number, date).            
         iii. Display Name: An optional label for how the attribute will appear in the UI (not mandatory).
+
 - You can use existing attributes to create new schemas or modify them to create updated versions.
 - You can also utilize schemas created by other organizations by switching from your organization’s schema list to the All Schemas option.
 - Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
@@ -99,7 +100,7 @@ While doing the issuance using this method, you need to select the Schema and Cr
 
 ## 1.4. Verification
 - Till now, we have seen how the issuance is done with the help of different methods using the ledger Indy. Now, we will see how the verification process takes place.  
--You can reach the verification screen by clicking on the Verify button under the Credentials tab. To Initiate the verification process by any method, you need to click on the Request button on the Verification screen. As we seen in the issuance process, for the verification also we have two methods:
+- You can reach the verification screen by clicking on the Verify button under the Credentials tab. To Initiate the verification process by any method, you need to click on the Request button on the Verification screen. As we seen in the issuance process, for the verification also we have two methods:
 
 #### i. **Using the Connection Method**
 
@@ -149,6 +150,7 @@ While creating a schema with W3C standards, you must define the following:
         i. Attribute Name: The specific name of the data field (e.g., "First Name").        
         ii. Data Type: The type of data (e.g., text, number, date).            
         iii. Display Name: An optional label for how the attribute will appear in the UI (not mandatory).
+
 - You can use existing attributes to create new schemas or modify them to create updated versions.
 - You can also utilize schemas created by other organizations by switching from your organization’s schema list to the All Schemas option.
 - Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
