@@ -332,9 +332,23 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/postgres.md": {
+	id: "en/contributorsguide/setup/prerequisites/postgres.md";
+  slug: "en/contributorsguide/setup/prerequisites/postgres";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
 "en/contributorsguide/setup/prerequisites/prerequisitesoftwares.md": {
 	id: "en/contributorsguide/setup/prerequisites/prerequisitesoftwares.md";
   slug: "en/contributorsguide/setup/prerequisites/prerequisitesoftwares";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/redis.md": {
+	id: "en/contributorsguide/setup/prerequisites/redis.md";
+  slug: "en/contributorsguide/setup/prerequisites/redis";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
