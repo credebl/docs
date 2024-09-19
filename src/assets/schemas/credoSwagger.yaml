@@ -1,0 +1,5410 @@
+openapi: 3.0.0
+components:
+  examples: {}
+  headers: {}
+  parameters: {}
+  requestBodies: {}
+  responses: {}
+  schemas:
+    Record_string.unknown_:
+      properties: {}
+      type: object
+      description: Construct a type with a set of properties K of type T
+    RecordId:
+      type: string
+      example: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+    ProofExchangeRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    ProofFormat:
+      properties:
+        formatKey:
+          type: string
+        proofFormats:
+          properties:
+            selectCredentialsForRequest:
+              properties:
+                output: {}
+                input: {}
+              required:
+                - output
+                - input
+              type: object
+            getCredentialsForRequest:
+              properties:
+                output: {}
+                input: {}
+              required:
+                - output
+                - input
+              type: object
+            acceptRequest: {}
+            createRequest: {}
+            acceptProposal: {}
+            createProposal: {}
+          required:
+            - selectCredentialsForRequest
+            - getCredentialsForRequest
+            - acceptRequest
+            - createRequest
+            - acceptProposal
+            - createProposal
+          type: object
+        formatData:
+          properties:
+            presentation: {}
+            request: {}
+            proposal: {}
+          required:
+            - presentation
+            - request
+            - proposal
+          type: object
+      required:
+        - formatKey
+        - proofFormats
+        - formatData
+      type: object
+      additionalProperties: false
+    AutoAcceptProof:
+      description: Typing of the state for auto acceptance
+      enum:
+        - always
+        - contentApproved
+        - never
+      type: string
+    RequestProofProposalOptions:
+      properties:
+        connectionId:
+          type: string
+        proofFormats:
+          properties:
+            action:
+              type: string
+              enum:
+                - createProposal
+              nullable: false
+            formats:
+              items:
+                $ref: '#/components/schemas/ProofFormat'
+              type: array
+          required:
+            - action
+            - formats
+          type: object
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        autoAcceptProof:
+          $ref: '#/components/schemas/AutoAcceptProof'
+        comment:
+          type: string
+      required:
+        - connectionId
+        - proofFormats
+      type: object
+      additionalProperties: false
+    AcceptProofProposal:
+      properties:
+        proofRecordId:
+          type: string
+        proofFormats:
+          properties:
+            action:
+              type: string
+              enum:
+                - acceptProposal
+              nullable: false
+            formats:
+              items:
+                $ref: '#/components/schemas/ProofFormat'
+              type: array
+          required:
+            - action
+            - formats
+          type: object
+        comment:
+          type: string
+        autoAcceptProof:
+          $ref: '#/components/schemas/AutoAcceptProof'
+        goalCode:
+          type: string
+        willConfirm:
+          type: boolean
+      required:
+        - proofRecordId
+        - proofFormats
+      type: object
+      additionalProperties: false
+    RequestProofOptions:
+      properties:
+        connectionId:
+          type: string
+        protocolVersion:
+          type: string
+        proofFormats: {}
+        comment:
+          type: string
+        autoAcceptProof:
+          $ref: '#/components/schemas/AutoAcceptProof'
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        willConfirm:
+          type: boolean
+      required:
+        - connectionId
+        - protocolVersion
+        - proofFormats
+        - comment
+        - autoAcceptProof
+      type: object
+      additionalProperties: false
+    PlaintextMessage:
+      properties:
+        '@type':
+          type: string
+        '@id':
+          type: string
+        ~thread:
+          properties:
+            pthid:
+              type: string
+            thid:
+              type: string
+          type: object
+        messageType:
+          type: string
+      required:
+        - '@type'
+        - '@id'
+        - messageType
+      type: object
+      additionalProperties: {}
+    CreateProofRequestOobOptions:
+      properties:
+        protocolVersion:
+          type: string
+        proofFormats: {}
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        willConfirm:
+          type: boolean
+        autoAcceptProof:
+          $ref: '#/components/schemas/AutoAcceptProof'
+        comment:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        recipientKey:
+          type: string
+        invitationDid:
+          type: string
+      required:
+        - protocolVersion
+        - proofFormats
+      type: object
+      additionalProperties: false
+    HandshakeProtocol:
+      description: |-
+        Enum values should be sorted based on order of preference. Values will be
+        included in this order when creating out of band invitations.
+      enum:
+        - https://didcomm.org/didexchange/1.x
+        - https://didcomm.org/connections/1.x
+      type: string
+    AgentMessage:
+      $ref: '#/components/schemas/PlaintextMessage'
+    KeyType:
+      enum:
+        - ed25519
+        - bls12381g1g2
+        - bls12381g1
+        - bls12381g2
+        - x25519
+        - p256
+        - p384
+        - p521
+        - k256
+      type: string
+    Key:
+      properties:
+        publicKey:
+          type: string
+          format: byte
+        keyType:
+          $ref: '#/components/schemas/KeyType'
+      required:
+        - publicKey
+        - keyType
+      type: object
+      additionalProperties: false
+    Routing:
+      properties:
+        endpoints:
+          items:
+            type: string
+          type: array
+        recipientKey:
+          $ref: '#/components/schemas/Key'
+        routingKeys:
+          items:
+            $ref: '#/components/schemas/Key'
+          type: array
+        mediatorId:
+          type: string
+      required:
+        - endpoints
+        - recipientKey
+        - routingKeys
+      type: object
+      additionalProperties: false
+    JsonValue:
+      anyOf:
+        - type: string
+        - type: number
+          format: double
+        - type: boolean
+        - $ref: '#/components/schemas/JsonObject'
+        - $ref: '#/components/schemas/JsonArray'
+      nullable: true
+    JsonObject:
+      properties: {}
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/JsonValue'
+    JsonArray:
+      items:
+        $ref: '#/components/schemas/JsonValue'
+      type: array
+    Pick_JwsGeneralFormat.Exclude_keyofJwsGeneralFormat.payload__:
+      properties:
+        header:
+          $ref: '#/components/schemas/Record_string.unknown_'
+          description: unprotected header
+        signature:
+          type: string
+          description: Base64url encoded signature
+        protected:
+          type: string
+          description: Base64url encoded protected header
+      required:
+        - header
+        - signature
+        - protected
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_JwsGeneralFormat.payload_:
+      $ref: '#/components/schemas/Pick_JwsGeneralFormat.Exclude_keyofJwsGeneralFormat.payload__'
+      description: Construct a type with the properties of T except for those in type K.
+    JwsDetachedFormat:
+      $ref: '#/components/schemas/Omit_JwsGeneralFormat.payload_'
+    JwsFlattenedDetachedFormat:
+      properties:
+        signatures:
+          items:
+            $ref: '#/components/schemas/JwsDetachedFormat'
+          type: array
+      required:
+        - signatures
+      type: object
+      additionalProperties: false
+    AttachmentData:
+      description: A JSON object that gives access to the actual content of the attachment
+      properties:
+        base64:
+          type: string
+          description: Base64-encoded data, when representing arbitrary content inline instead of via links. Optional.
+        json:
+          $ref: '#/components/schemas/JsonValue'
+          description: Directly embedded JSON data, when representing content inline instead of via links, and when the content is natively conveyable as JSON. Optional.
+        links:
+          items:
+            type: string
+          type: array
+          description: A list of zero or more locations at which the content may be fetched. Optional.
+        jws:
+          anyOf:
+            - $ref: '#/components/schemas/JwsDetachedFormat'
+            - $ref: '#/components/schemas/JwsFlattenedDetachedFormat'
+          description: A JSON Web Signature over the content of the attachment. Optional.
+        sha256:
+          type: string
+          description: The hash of the content. Optional.
+      type: object
+      additionalProperties: false
+    Attachment:
+      description: |-
+        Represents DIDComm attachment
+        https://github.com/hyperledger/aries-rfcs/blob/master/concepts/0017-attachments/README.md
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+          description: An optional human-readable description of the content.
+        filename:
+          type: string
+          description: A hint about the name that might be used if this attachment is persisted as a file. It is not required, and need not be unique. If this field is present and mime-type is not, the extension on the filename may be used to infer a MIME type.
+        mimeType:
+          type: string
+          description: Describes the MIME type of the attached content. Optional but recommended.
+        lastmodTime:
+          type: string
+          format: date-time
+          description: A hint about when the content in this attachment was last modified.
+        byteCount:
+          type: number
+          format: double
+          description: Optional, and mostly relevant when content is included by reference instead of by value. Lets the receiver guess how expensive it will be, in time, bandwidth, and storage, to fully fetch the attachment.
+        data:
+          $ref: '#/components/schemas/AttachmentData'
+      required:
+        - id
+        - data
+      type: object
+      additionalProperties: false
+    CreateInvitationOptions:
+      properties:
+        label:
+          type: string
+        alias:
+          type: string
+        imageUrl:
+          type: string
+        goalCode:
+          type: string
+        goal:
+          type: string
+        handshake:
+          type: boolean
+        handshakeProtocols:
+          items:
+            $ref: '#/components/schemas/HandshakeProtocol'
+          type: array
+        messages:
+          items:
+            $ref: '#/components/schemas/AgentMessage'
+          type: array
+        multiUseInvitation:
+          type: boolean
+        autoAcceptConnection:
+          type: boolean
+        routing:
+          $ref: '#/components/schemas/Routing'
+        appendedAttachments:
+          items: {}
+          type: array
+        invitationDid:
+          type: string
+      type: object
+      additionalProperties: false
+    RecipientKeyOption:
+      properties:
+        recipientKey:
+          type: string
+      type: object
+      additionalProperties: false
+    Pick_CreateLegacyInvitationConfig.Exclude_keyofCreateLegacyInvitationConfig.routing__:
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        multiUseInvitation:
+          type: boolean
+        autoAcceptConnection:
+          type: boolean
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_CreateLegacyInvitationConfig.routing_:
+      $ref: '#/components/schemas/Pick_CreateLegacyInvitationConfig.Exclude_keyofCreateLegacyInvitationConfig.routing__'
+      description: Construct a type with the properties of T except for those in type K.
+    OutOfBandRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    AgentMessageType:
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+      required:
+        - '@id'
+        - '@type'
+      type: object
+      additionalProperties: {}
+    CustomHandshakeProtocol:
+      enum:
+        - https://didcomm.org/didexchange/1.1
+        - https://didcomm.org/connections/1.0
+      type: string
+    OutOfBandDidCommService:
+      properties:
+        id:
+          type: string
+        serviceEndpoint:
+          type: string
+        type:
+          type: string
+        recipientKeys:
+          items:
+            type: string
+          type: array
+        routingKeys:
+          items:
+            type: string
+          type: array
+        accept:
+          items:
+            type: string
+          type: array
+      required:
+        - id
+        - serviceEndpoint
+        - type
+        - recipientKeys
+      type: object
+      additionalProperties: false
+    OutOfBandInvitationSchema:
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+        label:
+          type: string
+        goalCode:
+          type: string
+        goal:
+          type: string
+        accept:
+          items:
+            type: string
+          type: array
+        handshake_protocols:
+          items:
+            $ref: '#/components/schemas/CustomHandshakeProtocol'
+          type: array
+        services:
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OutOfBandDidCommService'
+              - type: string
+          type: array
+        imageUrl:
+          type: string
+      required:
+        - '@type'
+        - label
+        - services
+      type: object
+      additionalProperties: false
+    Pick_ReceiveOutOfBandInvitationConfig.Exclude_keyofReceiveOutOfBandInvitationConfig.routing__:
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptConnection:
+          type: boolean
+        autoAcceptInvitation:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        acceptInvitationTimeoutMs:
+          type: number
+          format: double
+        ourDid:
+          type: string
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_ReceiveOutOfBandInvitationConfig.routing_:
+      $ref: '#/components/schemas/Pick_ReceiveOutOfBandInvitationConfig.Exclude_keyofReceiveOutOfBandInvitationConfig.routing__'
+      description: Construct a type with the properties of T except for those in type K.
+    ReceiveInvitationProps:
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptConnection:
+          type: boolean
+        autoAcceptInvitation:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        acceptInvitationTimeoutMs:
+          type: number
+          format: double
+        ourDid:
+          type: string
+        invitation:
+          $ref: '#/components/schemas/OutOfBandInvitationSchema'
+      required:
+        - invitation
+      type: object
+      additionalProperties: false
+    ReceiveInvitationByUrlProps:
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptConnection:
+          type: boolean
+        autoAcceptInvitation:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        acceptInvitationTimeoutMs:
+          type: number
+          format: double
+        ourDid:
+          type: string
+        invitationUrl:
+          type: string
+      required:
+        - invitationUrl
+      type: object
+      additionalProperties: false
+    AcceptInvitationConfig:
+      properties:
+        autoAcceptConnection:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        label:
+          type: string
+        alias:
+          type: string
+        imageUrl:
+          type: string
+        mediatorId:
+          type: string
+      type: object
+      additionalProperties: false
+    TenantRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    Pick_TenantConfig.Exclude_keyofTenantConfig.walletConfig__:
+      properties:
+        label:
+          type: string
+        connectionImageUrl:
+          type: string
+      required:
+        - label
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_TenantConfig.walletConfig_:
+      $ref: '#/components/schemas/Pick_TenantConfig.Exclude_keyofTenantConfig.walletConfig__'
+      description: Construct a type with the properties of T except for those in type K.
+    CreateTenantOptions:
+      properties:
+        config:
+          $ref: '#/components/schemas/Omit_TenantConfig.walletConfig_'
+      required:
+        - config
+      type: object
+      additionalProperties: false
+    Record_string.any_:
+      properties: {}
+      additionalProperties: {}
+      type: object
+      description: Construct a type with a set of properties K of type T
+    DidDocument:
+      $ref: '#/components/schemas/Record_string.any_'
+    DidCreate:
+      properties:
+        keyType:
+          $ref: '#/components/schemas/KeyType'
+        seed:
+          type: string
+        domain:
+          type: string
+        method:
+          type: string
+        network:
+          type: string
+        did:
+          type: string
+        role:
+          type: string
+        endorserDid:
+          type: string
+        didDocument:
+          $ref: '#/components/schemas/DidDocument'
+        privatekey:
+          type: string
+        endpoint:
+          type: string
+      required:
+        - keyType
+        - method
+      type: object
+      additionalProperties: false
+    DidNymTransaction:
+      properties:
+        did:
+          type: string
+        nymRequest:
+          type: string
+      required:
+        - did
+        - nymRequest
+      type: object
+      additionalProperties: false
+    EndorserTransaction:
+      properties:
+        transaction:
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/Record_string.unknown_'
+        endorserDid:
+          type: string
+      required:
+        - transaction
+        - endorserDid
+      type: object
+      additionalProperties: false
+    Pick_CreateOutOfBandInvitationConfig.Exclude_keyofCreateOutOfBandInvitationConfig.routing__:
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        multiUseInvitation:
+          type: boolean
+        autoAcceptConnection:
+          type: boolean
+        goalCode:
+          type: string
+        goal:
+          type: string
+        handshake:
+          type: boolean
+        handshakeProtocols:
+          items:
+            $ref: '#/components/schemas/HandshakeProtocol'
+          type: array
+        messages:
+          items:
+            $ref: '#/components/schemas/AgentMessage'
+          type: array
+        appendedAttachments:
+          items: {}
+          type: array
+        invitationDid:
+          type: string
+          description: Did to use in the invitation. Cannot be used in combination with `routing`.
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_CreateOutOfBandInvitationConfig.routing_:
+      $ref: '#/components/schemas/Pick_CreateOutOfBandInvitationConfig.Exclude_keyofCreateOutOfBandInvitationConfig.routing__'
+      description: Construct a type with the properties of T except for those in type K.
+    Pick_CreateOutOfBandInvitationConfig.Exclude_keyofCreateOutOfBandInvitationConfig.routing-or-appendedAttachments-or-messages__:
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        multiUseInvitation:
+          type: boolean
+        autoAcceptConnection:
+          type: boolean
+        goalCode:
+          type: string
+        goal:
+          type: string
+        handshake:
+          type: boolean
+        handshakeProtocols:
+          items:
+            $ref: '#/components/schemas/HandshakeProtocol'
+          type: array
+        invitationDid:
+          type: string
+          description: Did to use in the invitation. Cannot be used in combination with `routing`.
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_CreateOutOfBandInvitationConfig.routing-or-appendedAttachments-or-messages_:
+      $ref: '#/components/schemas/Pick_CreateOutOfBandInvitationConfig.Exclude_keyofCreateOutOfBandInvitationConfig.routing-or-appendedAttachments-or-messages__'
+      description: Construct a type with the properties of T except for those in type K.
+    DidExchangeState:
+      description: Connection states as defined in RFC 0023.
+      enum:
+        - start
+        - invitation-sent
+        - invitation-received
+        - request-sent
+        - request-received
+        - response-sent
+        - response-received
+        - abandoned
+        - completed
+      type: string
+    Version:
+      type: string
+      example: 1.0.0
+    CreateSchemaInput:
+      properties:
+        issuerId:
+          type: string
+        name:
+          type: string
+        version:
+          $ref: '#/components/schemas/Version'
+        attributes:
+          items:
+            type: string
+          type: array
+        endorse:
+          type: boolean
+        endorserDid:
+          type: string
+      required:
+        - issuerId
+        - name
+        - version
+        - attributes
+      type: object
+      additionalProperties: false
+    SchemaMetadata:
+      properties:
+        did:
+          type: string
+        schemaId:
+          type: string
+        schemaTxnHash:
+          type: string
+        schemaUrl:
+          type: string
+      required:
+        - did
+        - schemaId
+      type: object
+      additionalProperties: false
+    WriteTransaction:
+      properties:
+        endorsedTransaction:
+          type: string
+        endorserDid:
+          type: string
+        schema:
+          properties:
+            attributes:
+              items:
+                type: string
+              type: array
+            version:
+              $ref: '#/components/schemas/Version'
+            name:
+              type: string
+            issuerId:
+              type: string
+          required:
+            - attributes
+            - version
+            - name
+            - issuerId
+          type: object
+        credentialDefinition:
+          properties:
+            type:
+              type: string
+            value: {}
+            tag:
+              type: string
+            issuerId:
+              type: string
+            schemaId:
+              type: string
+          required:
+            - type
+            - value
+            - tag
+            - issuerId
+            - schemaId
+          type: object
+      required:
+        - endorsedTransaction
+      type: object
+      additionalProperties: false
+    SchemaId:
+      type: string
+      example: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
+    CredentialDefinitionId:
+      type: string
+      example: WgWxqztrNooG92RXvxSTWv:3:CL:20:tag
+    ProtocolVersion:
+      enum:
+        - v1
+        - v2
+      type: string
+    CredentialPreviewAttributeOptions:
+      properties:
+        name:
+          type: string
+        mimeType:
+          type: string
+        value:
+          type: string
+      required:
+        - name
+        - value
+      type: object
+      additionalProperties: false
+    LinkedAttachment:
+      properties:
+        attributeName:
+          type: string
+          description: The name that will be used to generate the linked credential
+        attachment: {}
+      required:
+        - attributeName
+        - attachment
+      type: object
+      additionalProperties: false
+    AnonCredsOfferCredentialFormat:
+      description: |-
+        This defines the module payload for calling CredentialsApi.offerCredential
+        or CredentialsApi.negotiateProposal
+      properties:
+        credentialDefinitionId:
+          type: string
+        revocationRegistryDefinitionId:
+          type: string
+        revocationRegistryIndex:
+          type: number
+          format: double
+        attributes:
+          items:
+            $ref: '#/components/schemas/CredentialPreviewAttributeOptions'
+          type: array
+        linkedAttachments:
+          type: object
+      required:
+        - credentialDefinitionId
+        - attributes
+      type: object
+      additionalProperties: false
+    W3cIssuerOptions:
+      description: 'TODO: check how to support arbitrary data in class'
+      properties:
+        id:
+          type: string
+      required:
+        - id
+      type: object
+      additionalProperties: false
+    SingleOrArray_JsonObject_:
+      anyOf:
+        - $ref: '#/components/schemas/JsonObject'
+        - items:
+            $ref: '#/components/schemas/JsonObject'
+          type: array
+    JsonCredential:
+      properties:
+        '@context':
+          anyOf:
+            - items:
+                type: string
+              type: array
+            - $ref: '#/components/schemas/JsonObject'
+        id:
+          type: string
+        type:
+          items:
+            type: string
+          type: array
+        issuer:
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/W3cIssuerOptions'
+        issuanceDate:
+          type: string
+        expirationDate:
+          type: string
+        credentialSubject:
+          $ref: '#/components/schemas/SingleOrArray_JsonObject_'
+        prettyVc: {}
+      required:
+        - '@context'
+        - type
+        - issuer
+        - issuanceDate
+        - credentialSubject
+      type: object
+      additionalProperties: {}
+    JsonLdCredentialDetailFormat:
+      description: Format for creating a jsonld proposal, offer or request.
+      properties:
+        credential:
+          $ref: '#/components/schemas/JsonCredential'
+        options:
+          properties:
+            proofType:
+              type: string
+            proofPurpose:
+              type: string
+          required:
+            - proofType
+            - proofPurpose
+          type: object
+      required:
+        - credential
+        - options
+      type: object
+      additionalProperties: false
+    CredentialFormatPayload_CredentialFormats.createOffer_:
+      properties:
+        indy:
+          type: object
+          description: Indy object
+        jsonld:
+          type: object
+          description: jsonld object
+        anoncreds:
+          type: object
+          description: anoncreds object
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    AutoAcceptCredential:
+      description: Typing of the state for auto acceptance
+      enum:
+        - always
+        - contentApproved
+        - never
+      type: string
+    CreateOfferOptions:
+      properties:
+        protocolVersion:
+          $ref: '#/components/schemas/ProtocolVersion'
+        connectionId:
+          $ref: '#/components/schemas/RecordId'
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormats.createOffer_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+      required:
+        - protocolVersion
+        - connectionId
+        - credentialFormats
+      type: object
+      additionalProperties: false
+    CredentialFormatPayload_CredentialFormatType-Array.createOffer_:
+      properties:
+        indy:
+          type: object
+          description: Indy object
+        jsonld:
+          type: object
+          description: jsonld object
+        anoncreds:
+          type: object
+          description: anoncreds object
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    CreateOfferOobOptions:
+      properties:
+        protocolVersion:
+          type: string
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormatType-Array.createOffer_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        willConfirm:
+          type: boolean
+        label:
+          type: string
+        imageUrl:
+          type: string
+        recipientKey:
+          type: string
+        invitationDid:
+          type: string
+      required:
+        - protocolVersion
+        - credentialFormats
+      type: object
+      additionalProperties: false
+    CredentialFormatPayload_CredentialFormatsFromProtocols_CredentialProtocol-Array_.acceptOffer_:
+      properties: {}
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    AcceptCredentialOfferOptions:
+      description: |-
+        Interface for CredentialsApi.acceptOffer. Will send a request
+
+        credentialFormats is optional because this is an accept method
+      properties:
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+        credentialRecordId:
+          type: string
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormatsFromProtocols_CredentialProtocol-Array_.acceptOffer_'
+      required:
+        - credentialRecordId
+      type: object
+      additionalProperties: false
+    CredentialState:
+      description: Issue Credential states as defined in RFC 0036 and RFC 0453
+      enum:
+        - proposal-sent
+        - proposal-received
+        - offer-sent
+        - offer-received
+        - declined
+        - request-sent
+        - request-received
+        - credential-issued
+        - credential-received
+        - done
+        - abandoned
+      type: string
+    QuestionAnswerRole:
+      enum:
+        - questioner
+        - responder
+      type: string
+    QuestionAnswerState:
+      description: QuestionAnswer states inferred from RFC 0113.
+      enum:
+        - question-sent
+        - question-received
+        - answer-received
+        - answer-sent
+      type: string
+    ValidResponse:
+      properties:
+        text:
+          type: string
+      required:
+        - text
+      type: object
+      additionalProperties: false
+    Record_response.string_:
+      properties:
+        response:
+          type: string
+      required:
+        - response
+      type: object
+      description: Construct a type with a set of properties K of type T
+    Record_content.string_:
+      properties:
+        content:
+          type: string
+      required:
+        - content
+      type: object
+      description: Construct a type with a set of properties K of type T
+    DidRegistrationSecretOptions:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    DidOperationStateWait:
+      properties:
+        state:
+          type: string
+          enum:
+            - wait
+          nullable: false
+        did:
+          type: string
+        secret:
+          $ref: '#/components/schemas/DidRegistrationSecretOptions'
+        didDocument:
+          $ref: '#/components/schemas/DidDocument'
+      required:
+        - state
+      type: object
+      additionalProperties: false
+    DidOperationStateActionBase:
+      properties:
+        state:
+          type: string
+          enum:
+            - action
+          nullable: false
+        action:
+          type: string
+        did:
+          type: string
+        secret:
+          $ref: '#/components/schemas/DidRegistrationSecretOptions'
+        didDocument:
+          $ref: '#/components/schemas/DidDocument'
+      required:
+        - state
+        - action
+      type: object
+      additionalProperties: false
+    DidOperationStateFinished:
+      properties:
+        state:
+          type: string
+          enum:
+            - finished
+          nullable: false
+        did:
+          type: string
+        secret:
+          $ref: '#/components/schemas/DidRegistrationSecretOptions'
+        didDocument:
+          $ref: '#/components/schemas/DidDocument'
+      required:
+        - state
+        - did
+        - didDocument
+      type: object
+      additionalProperties: false
+    DidOperationStateFailed:
+      properties:
+        state:
+          type: string
+          enum:
+            - failed
+          nullable: false
+        did:
+          type: string
+        secret:
+          $ref: '#/components/schemas/DidRegistrationSecretOptions'
+        didDocument:
+          $ref: '#/components/schemas/DidDocument'
+        reason:
+          type: string
+      required:
+        - state
+        - reason
+      type: object
+      additionalProperties: false
+    DidRegistrationMetadata:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    DidResolutionMetadata:
+      properties:
+        contentType:
+          type: string
+        error:
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - invalidDid
+                - notFound
+                - representationNotSupported
+                - unsupportedDidMethod
+        message:
+          type: string
+        servedFromCache:
+          type: boolean
+      type: object
+      additionalProperties: false
+    DidCreateResult_DidOperationStateActionBase_:
+      properties:
+        jobId:
+          type: string
+        didState:
+          anyOf:
+            - $ref: '#/components/schemas/DidOperationStateWait'
+            - $ref: '#/components/schemas/DidOperationStateActionBase'
+            - $ref: '#/components/schemas/DidOperationStateFinished'
+            - $ref: '#/components/schemas/DidOperationStateFailed'
+        didRegistrationMetadata:
+          $ref: '#/components/schemas/DidRegistrationMetadata'
+        didDocumentMetadata:
+          $ref: '#/components/schemas/DidResolutionMetadata'
+      required:
+        - didState
+        - didRegistrationMetadata
+        - didDocumentMetadata
+      type: object
+      additionalProperties: false
+    DIDDocumentMetadata:
+      description: Represents metadata about the DID document resulting from a {@link Resolvable.resolve} operation.
+      properties:
+        created:
+          type: string
+        updated:
+          type: string
+        deactivated:
+          type: boolean
+        versionId:
+          type: string
+        nextUpdate:
+          type: string
+        nextVersionId:
+          type: string
+        equivalentId:
+          type: string
+        canonicalId:
+          type: string
+      type: object
+      additionalProperties: false
+    Did:
+      type: string
+      example: did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+    DidRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    AnonCredsSchema:
+      properties:
+        issuerId:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+        attrNames:
+          items:
+            type: string
+          type: array
+      required:
+        - issuerId
+        - name
+        - version
+        - attrNames
+      type: object
+      additionalProperties: false
+    AnonCredsResolutionMetadata:
+      properties:
+        error:
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - invalid
+                - notFound
+                - unsupportedAnonCredsMethod
+        message:
+          type: string
+      type: object
+      additionalProperties: false
+    CredoExtensible:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    GetSchemaReturn:
+      properties:
+        schema:
+          $ref: '#/components/schemas/AnonCredsSchema'
+        schemaId:
+          type: string
+        resolutionMetadata:
+          $ref: '#/components/schemas/AnonCredsResolutionMetadata'
+        schemaMetadata:
+          $ref: '#/components/schemas/CredoExtensible'
+      required:
+        - schemaId
+        - resolutionMetadata
+        - schemaMetadata
+      type: object
+      additionalProperties: false
+    RegisterSchemaReturnStateWait:
+      properties:
+        state:
+          type: string
+          enum:
+            - wait
+          nullable: false
+        schema:
+          $ref: '#/components/schemas/AnonCredsSchema'
+        schemaId:
+          type: string
+      required:
+        - state
+      type: object
+      additionalProperties: false
+    RegisterSchemaReturnStateAction:
+      properties:
+        state:
+          type: string
+          enum:
+            - action
+          nullable: false
+        action:
+          type: string
+        schema:
+          $ref: '#/components/schemas/AnonCredsSchema'
+        schemaId:
+          type: string
+      required:
+        - state
+        - action
+        - schema
+        - schemaId
+      type: object
+      additionalProperties: false
+    RegisterSchemaReturnStateFinished:
+      properties:
+        state:
+          type: string
+          enum:
+            - finished
+          nullable: false
+        schema:
+          $ref: '#/components/schemas/AnonCredsSchema'
+        schemaId:
+          type: string
+      required:
+        - state
+        - schema
+        - schemaId
+      type: object
+      additionalProperties: false
+    RegisterSchemaReturnStateFailed:
+      properties:
+        state:
+          type: string
+          enum:
+            - failed
+          nullable: false
+        reason:
+          type: string
+        schema:
+          $ref: '#/components/schemas/AnonCredsSchema'
+        schemaId:
+          type: string
+      required:
+        - state
+        - reason
+      type: object
+      additionalProperties: false
+    RegisterSchemaReturn:
+      properties:
+        jobId:
+          type: string
+        schemaState:
+          anyOf:
+            - $ref: '#/components/schemas/RegisterSchemaReturnStateWait'
+            - $ref: '#/components/schemas/RegisterSchemaReturnStateAction'
+            - $ref: '#/components/schemas/RegisterSchemaReturnStateFinished'
+            - $ref: '#/components/schemas/RegisterSchemaReturnStateFailed'
+        schemaMetadata:
+          $ref: '#/components/schemas/CredoExtensible'
+        registrationMetadata:
+          $ref: '#/components/schemas/CredoExtensible'
+      required:
+        - schemaState
+        - schemaMetadata
+        - registrationMetadata
+      type: object
+      additionalProperties: false
+    AnonCredsCredentialDefinition:
+      properties:
+        issuerId:
+          type: string
+        schemaId:
+          type: string
+        type:
+          type: string
+          enum:
+            - CL
+          nullable: false
+        tag:
+          type: string
+        value:
+          properties:
+            revocation: {}
+            primary:
+              $ref: '#/components/schemas/Record_string.unknown_'
+          required:
+            - primary
+          type: object
+      required:
+        - issuerId
+        - schemaId
+        - type
+        - tag
+        - value
+      type: object
+      additionalProperties: false
+    GetCredentialDefinitionReturn:
+      properties:
+        credentialDefinition:
+          $ref: '#/components/schemas/AnonCredsCredentialDefinition'
+        credentialDefinitionId:
+          type: string
+        resolutionMetadata:
+          $ref: '#/components/schemas/AnonCredsResolutionMetadata'
+        credentialDefinitionMetadata:
+          $ref: '#/components/schemas/CredoExtensible'
+      required:
+        - credentialDefinitionId
+        - resolutionMetadata
+        - credentialDefinitionMetadata
+      type: object
+      additionalProperties: false
+    RegisterCredentialDefinitionReturnStateWait:
+      properties:
+        state:
+          type: string
+          enum:
+            - wait
+          nullable: false
+        credentialDefinition:
+          $ref: '#/components/schemas/AnonCredsCredentialDefinition'
+        credentialDefinitionId:
+          type: string
+      required:
+        - state
+      type: object
+      additionalProperties: false
+    RegisterCredentialDefinitionReturnStateAction:
+      properties:
+        state:
+          type: string
+          enum:
+            - action
+          nullable: false
+        action:
+          type: string
+        credentialDefinitionId:
+          type: string
+        credentialDefinition:
+          $ref: '#/components/schemas/AnonCredsCredentialDefinition'
+      required:
+        - state
+        - action
+        - credentialDefinitionId
+        - credentialDefinition
+      type: object
+      additionalProperties: false
+    RegisterCredentialDefinitionReturnStateFinished:
+      properties:
+        state:
+          type: string
+          enum:
+            - finished
+          nullable: false
+        credentialDefinition:
+          $ref: '#/components/schemas/AnonCredsCredentialDefinition'
+        credentialDefinitionId:
+          type: string
+      required:
+        - state
+        - credentialDefinition
+        - credentialDefinitionId
+      type: object
+      additionalProperties: false
+    RegisterCredentialDefinitionReturnStateFailed:
+      properties:
+        state:
+          type: string
+          enum:
+            - failed
+          nullable: false
+        reason:
+          type: string
+        credentialDefinition:
+          $ref: '#/components/schemas/AnonCredsCredentialDefinition'
+        credentialDefinitionId:
+          type: string
+      required:
+        - state
+        - reason
+      type: object
+      additionalProperties: false
+    RegisterCredentialDefinitionReturn:
+      properties:
+        jobId:
+          type: string
+        credentialDefinitionState:
+          anyOf:
+            - $ref: '#/components/schemas/RegisterCredentialDefinitionReturnStateWait'
+            - $ref: '#/components/schemas/RegisterCredentialDefinitionReturnStateAction'
+            - $ref: '#/components/schemas/RegisterCredentialDefinitionReturnStateFinished'
+            - $ref: '#/components/schemas/RegisterCredentialDefinitionReturnStateFailed'
+        credentialDefinitionMetadata:
+          $ref: '#/components/schemas/CredoExtensible'
+        registrationMetadata:
+          $ref: '#/components/schemas/CredoExtensible'
+      required:
+        - credentialDefinitionState
+        - credentialDefinitionMetadata
+        - registrationMetadata
+      type: object
+      additionalProperties: false
+    ThreadId:
+      type: string
+      example: ea4e5e69-fc04-465a-90d2-9f8ff78aa71d
+    CredentialRole:
+      enum:
+        - issuer
+        - holder
+      type: string
+    W3cCredentialRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    CredentialExchangeRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    Pick_AnonCredsProposeCredentialFormat.Exclude_keyofAnonCredsProposeCredentialFormat.schemaIssuerId-or-issuerId__:
+      properties:
+        schemaId:
+          type: string
+        schemaName:
+          type: string
+        schemaVersion:
+          type: string
+        credentialDefinitionId:
+          type: string
+        attributes:
+          items:
+            $ref: '#/components/schemas/CredentialPreviewAttributeOptions'
+          type: array
+        linkedAttachments:
+          items:
+            $ref: '#/components/schemas/LinkedAttachment'
+          type: array
+        schemaIssuerDid:
+          type: string
+        issuerDid:
+          type: string
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_AnonCredsProposeCredentialFormat.schemaIssuerId-or-issuerId_:
+      $ref: '#/components/schemas/Pick_AnonCredsProposeCredentialFormat.Exclude_keyofAnonCredsProposeCredentialFormat.schemaIssuerId-or-issuerId__'
+      description: Construct a type with the properties of T except for those in type K.
+    LegacyIndyProposeCredentialFormat:
+      $ref: '#/components/schemas/Omit_AnonCredsProposeCredentialFormat.schemaIssuerId-or-issuerId_'
+      description: |-
+        This defines the module payload for calling CredentialsApi.createProposal
+        or CredentialsApi.negotiateOffer
+
+        NOTE: This doesn't include the `issuerId` and `schemaIssuerId` properties that are present in the newer format.
+    AnonCredsProposeCredentialFormat:
+      description: |-
+        This defines the module payload for calling CredentialsApi.createProposal
+        or CredentialsApi.negotiateOffer
+      properties:
+        schemaIssuerId:
+          type: string
+        schemaId:
+          type: string
+        schemaName:
+          type: string
+        schemaVersion:
+          type: string
+        credentialDefinitionId:
+          type: string
+        issuerId:
+          type: string
+        attributes:
+          items:
+            $ref: '#/components/schemas/CredentialPreviewAttributeOptions'
+          type: array
+        linkedAttachments:
+          items:
+            $ref: '#/components/schemas/LinkedAttachment'
+          type: array
+        schemaIssuerDid:
+          type: string
+        issuerDid:
+          type: string
+      type: object
+      additionalProperties: false
+    CredentialFormatPayload_CredentialFormatType-Array.createProposal_:
+      properties:
+        indy:
+          type: object
+          description: Indy object
+        jsonld:
+          type: object
+          description: jsonld object
+        anoncreds:
+          type: object
+          description: anoncreds object
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    ProposeCredentialOptions:
+      properties:
+        protocolVersion:
+          $ref: '#/components/schemas/ProtocolVersion'
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormatType-Array.createProposal_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+        connectionId:
+          $ref: '#/components/schemas/RecordId'
+      required:
+        - protocolVersion
+        - credentialFormats
+        - connectionId
+      type: object
+      additionalProperties: false
+    AnonCredsAcceptProposalFormat:
+      description: This defines the module payload for calling CredentialsApi.acceptProposal
+      properties:
+        credentialDefinitionId:
+          type: string
+        revocationRegistryDefinitionId:
+          type: string
+        revocationRegistryIndex:
+          type: number
+          format: double
+        attributes:
+          items:
+            $ref: '#/components/schemas/CredentialPreviewAttributeOptions'
+          type: array
+        linkedAttachments:
+          items:
+            $ref: '#/components/schemas/LinkedAttachment'
+          type: array
+      type: object
+      additionalProperties: false
+    Record_string.never_:
+      properties: {}
+      type: object
+      description: Construct a type with a set of properties K of type T
+    EmptyObject:
+      $ref: '#/components/schemas/Record_string.never_'
+    CredentialFormatPayload_CredentialFormats.acceptProposal_:
+      properties:
+        indy:
+          type: object
+          description: Indy object
+        jsonld:
+          type: object
+          description: jsonld object
+        anoncreds:
+          type: object
+          description: anoncreds object
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    AcceptCredentialProposalOptions:
+      properties:
+        credentialRecordId:
+          type: string
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormats.acceptProposal_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+      required:
+        - credentialRecordId
+      type: object
+      additionalProperties: false
+    AnonCredsAcceptOfferFormat:
+      description: |-
+        This defines the module payload for calling CredentialsApi.acceptOffer. No options are available for this
+        method, so it's an empty object
+      properties:
+        linkSecretId:
+          type: string
+      type: object
+      additionalProperties: false
+    CredentialFormatPayload_CredentialFormats.acceptOffer_:
+      properties:
+        indy:
+          type: object
+          description: Indy object
+        jsonld:
+          type: object
+          description: jsonld object
+        anoncreds:
+          type: object
+          description: anoncreds object
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    CredentialOfferOptions:
+      properties:
+        credentialRecordId:
+          $ref: '#/components/schemas/RecordId'
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormats.acceptOffer_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+      required:
+        - credentialRecordId
+      type: object
+      additionalProperties: false
+    NegotiateCredentialOfferOptions:
+      properties:
+        protocolVersion:
+          $ref: '#/components/schemas/ProtocolVersion'
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormatType-Array.createProposal_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+        credentialRecordId:
+          $ref: '#/components/schemas/RecordId'
+        connectionId:
+          $ref: '#/components/schemas/RecordId'
+      required:
+        - protocolVersion
+        - credentialFormats
+        - credentialRecordId
+        - connectionId
+      type: object
+      additionalProperties: false
+    AnonCredsAcceptRequestFormat:
+      $ref: '#/components/schemas/Record_string.never_'
+      description: |-
+        This defines the module payload for calling CredentialsApi.acceptRequest. No options are available for this
+        method, so it's an empty object
+    JsonLdAcceptRequestFormat:
+      description: |-
+        Format for accepting a jsonld credential request. Optionally allows the verification
+        method to use to sign the credential.
+      properties:
+        verificationMethod:
+          type: string
+      type: object
+      additionalProperties: false
+    CredentialFormatPayload_CredentialFormats.acceptRequest_:
+      properties:
+        indy:
+          type: object
+          description: Indy object
+        jsonld:
+          type: object
+          description: jsonld object
+        anoncreds:
+          type: object
+          description: anoncreds object
+      type: object
+      description: Get the payload for a specific method from a list of CredentialFormat interfaces and a method
+    AcceptCredentialRequestOptions:
+      properties:
+        credentialRecordId:
+          $ref: '#/components/schemas/RecordId'
+        credentialFormats:
+          $ref: '#/components/schemas/CredentialFormatPayload_CredentialFormats.acceptRequest_'
+        autoAcceptCredential:
+          $ref: '#/components/schemas/AutoAcceptCredential'
+        comment:
+          type: string
+      required:
+        - credentialRecordId
+      type: object
+      additionalProperties: false
+    AcceptCredential:
+      properties:
+        credentialRecordId:
+          $ref: '#/components/schemas/RecordId'
+      required:
+        - credentialRecordId
+      type: object
+      additionalProperties: false
+    BasicMessageRecord:
+      $ref: '#/components/schemas/Record_string.unknown_'
+    AgentInfo:
+      properties:
+        label:
+          type: string
+        endpoints:
+          items:
+            type: string
+          type: array
+        isInitialized:
+          type: boolean
+        publicDid: {}
+      required:
+        - label
+        - endpoints
+        - isInitialized
+        - publicDid
+      type: object
+      additionalProperties: false
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      name: Authorization
+      in: header
+info:
+  title: credo-controller
+  version: 0.9.4
+  description: Rest endpoint wrapper for using your agent over HTTP
+  license:
+    name: Apache-2.0
+  contact: {}
+paths:
+  /proofs:
+    get:
+      operationId: GetAllProofs
+      responses:
+        '200':
+          description: ProofRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+              examples:
+                Example 1:
+                  value:
+                    - metadata: {}
+                      id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                      threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                      protocolVersion: v1
+      description: Retrieve all proof records
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters:
+        - in: query
+          name: threadId
+          required: false
+          schema:
+            type: string
+  /proofs/{proofRecordId}:
+    get:
+      operationId: GetProofById
+      responses:
+        '200':
+          description: ProofRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: Retrieve proof record by proof record id
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /proofs/propose-proof:
+    post:
+      operationId: ProposeProof
+      responses:
+        '200':
+          description: ProofRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: |-
+        Initiate a new presentation exchange as prover by sending a presentation proposal request
+        to the connection with the specified connection id.
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestProofProposalOptions'
+  /proofs/{proofRecordId}/accept-proposal:
+    post:
+      operationId: proof-AcceptProposal
+      responses:
+        '200':
+          description: ProofRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: |-
+        Accept a presentation proposal as verifier by sending an accept proposal message
+        to the connection associated with the proof record.
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptProofProposal'
+  /proofs/request-proof:
+    post:
+      operationId: RequestProof
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: Creates a presentation request bound to existing connection
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestProofOptions'
+  /proofs/create-request-oob:
+    post:
+      operationId: CreateRequest
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  invitationDid:
+                    type: string
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  invitation:
+                    $ref: '#/components/schemas/PlaintextMessage'
+                  invitationUrl:
+                    type: string
+                required:
+                  - invitationDid
+                  - outOfBandRecord
+                  - invitation
+                  - invitationUrl
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: Creates a presentation request not bound to any proposal or existing connection
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProofRequestOobOptions'
+  /proofs/{proofRecordId}/accept-request:
+    post:
+      operationId: proof-AcceptRequest
+      responses:
+        '200':
+          description: ProofRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: |-
+        Accept a presentation request as prover by sending an accept request message
+        to the connection associated with the proof record.
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                comment:
+                  type: string
+                filterByNonRevocationRequirements:
+                  type: boolean
+                filterByPresentationPreview:
+                  type: boolean
+              type: object
+  /proofs/{proofRecordId}/accept-presentation:
+    post:
+      operationId: AcceptPresentation
+      responses:
+        '200':
+          description: ProofRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProofExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: |-
+        Accept a presentation as prover by sending an accept presentation message
+        to the connection associated with the proof record.
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            type: string
+  /proofs/{proofRecordId}/form-data:
+    get:
+      operationId: ProofFormData
+      responses:
+        '200':
+          description: ProofRecord
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      description: Return proofRecord
+      tags:
+        - Proofs
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            type: string
+  /polygon/create-keys:
+    post:
+      operationId: CreateKeyPair
+      responses:
+        '200':
+          description: Secp256k1KeyPair
+          content:
+            application/json:
+              schema:
+                properties:
+                  address:
+                    type: string
+                  publicKeyBase58:
+                    type: string
+                  privateKey:
+                    type: string
+                required:
+                  - address
+                  - publicKeyBase58
+                  - privateKey
+                type: object
+      description: Create Secp256k1 key pair for polygon DID
+      tags:
+        - Polygon
+      security:
+        - apiKey: []
+      parameters: []
+  /polygon/create-schema:
+    post:
+      operationId: polygon-CreateSchema
+      responses:
+        '200':
+          description: Schema JSON
+          content:
+            application/json:
+              schema: {}
+      description: Create polygon based W3C schema
+      tags:
+        - Polygon
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                schema:
+                  properties: {}
+                  additionalProperties: {}
+                  type: object
+                schemaName:
+                  type: string
+                did:
+                  type: string
+              required:
+                - schema
+                - schemaName
+                - did
+              type: object
+  /polygon/estimate-transaction:
+    post:
+      operationId: EstimateTransaction
+      responses:
+        '200':
+          description: Transaction Object
+          content:
+            application/json:
+              schema: {}
+      description: Estimate transaction
+      tags:
+        - Polygon
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                transaction: {}
+                operation: {}
+              required:
+                - transaction
+                - operation
+              type: object
+  /polygon/{did}/{schemaId}:
+    get:
+      operationId: polygon-GetSchemaById
+      responses:
+        '200':
+          description: Schema Object
+          content:
+            application/json:
+              schema: {}
+      description: Fetch schema details
+      tags:
+        - Polygon
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: did
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: schemaId
+          required: true
+          schema:
+            type: string
+  /oob:
+    get:
+      operationId: GetAllOutOfBandRecords
+      responses:
+        '200':
+          description: OutOfBandRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+              examples:
+                Example 1:
+                  value:
+                    - _tags:
+                        invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                        state: await-response
+                        role: sender
+                        recipientKeyFingerprints:
+                          - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                      outOfBandInvitation:
+                        '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                        '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                        label: Aries Test Agent
+                        accept:
+                          - didcomm/aip1
+                          - didcomm/aip2;env=rfc19
+                        handshake_protocols:
+                          - https://didcomm.org/didexchange/1.0
+                          - https://didcomm.org/connections/1.0
+                        services:
+                          - id: '#inline-0'
+                            serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                            type: did-communication
+                            recipientKeys:
+                              - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                            routingKeys: []
+                      metadata: {}
+                      id: 42a95528-0e30-4f86-a462-0efb02178b53
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      reusable: false
+      description: Retrieve all out of band records
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters:
+        - description: invitation identifier
+          in: query
+          name: invitationId
+          required: false
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /oob/{outOfBandId}:
+    get:
+      operationId: GetOutOfBandRecordById
+      responses:
+        '200':
+          description: OutOfBandRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                      state: await-response
+                      role: sender
+                      recipientKeyFingerprints:
+                        - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                    outOfBandInvitation:
+                      '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                      '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                      label: Aries Test Agent
+                      accept:
+                        - didcomm/aip1
+                        - didcomm/aip2;env=rfc19
+                      handshake_protocols:
+                        - https://didcomm.org/didexchange/1.0
+                        - https://didcomm.org/connections/1.0
+                      services:
+                        - id: '#inline-0'
+                          serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                          type: did-communication
+                          recipientKeys:
+                            - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                          routingKeys: []
+                    metadata: {}
+                    id: 42a95528-0e30-4f86-a462-0efb02178b53
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    reusable: false
+      description: Retrieve an out of band record by id
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: outOfBandId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+    delete:
+      operationId: DeleteOutOfBandRecord
+      responses:
+        '204':
+          description: No content
+      description: Deletes an out of band record from the repository.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters:
+        - description: Record identifier
+          in: path
+          name: outOfBandId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /oob/create-invitation:
+    post:
+      operationId: CreateInvitation
+      responses:
+        '200':
+          description: Out of band record
+          content:
+            application/json:
+              schema:
+                properties:
+                  invitationDid:
+                    type: string
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  invitation:
+                    $ref: '#/components/schemas/PlaintextMessage'
+                  invitationUrl:
+                    type: string
+                required:
+                  - invitationDid
+                  - outOfBandRecord
+                  - invitation
+                  - invitationUrl
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    invitationUrl: string
+                    invitation:
+                      '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                      '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                      label: Aries Test Agent
+                      accept:
+                        - didcomm/aip1
+                        - didcomm/aip2;env=rfc19
+                      handshake_protocols:
+                        - https://didcomm.org/didexchange/1.0
+                        - https://didcomm.org/connections/1.0
+                      services:
+                        - id: '#inline-0'
+                          serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                          type: did-communication
+                          recipientKeys:
+                            - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                          routingKeys: []
+                    outOfBandRecord:
+                      _tags:
+                        invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                        state: await-response
+                        role: sender
+                        recipientKeyFingerprints:
+                          - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                      outOfBandInvitation:
+                        '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                        '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                        label: Aries Test Agent
+                        accept:
+                          - didcomm/aip1
+                          - didcomm/aip2;env=rfc19
+                        handshake_protocols:
+                          - https://didcomm.org/didexchange/1.0
+                          - https://didcomm.org/connections/1.0
+                        services:
+                          - id: '#inline-0'
+                            serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                            type: did-communication
+                            recipientKeys:
+                              - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                            routingKeys: []
+                      metadata: {}
+                      id: 42a95528-0e30-4f86-a462-0efb02178b53
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      reusable: false
+      description: |-
+        Creates an outbound out-of-band record containing out-of-band invitation message defined in
+        Aries RFC 0434: Out-of-Band Protocol 1.1.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        description: configuration of how out-of-band invitation should be created
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateInvitationOptions'
+                - $ref: '#/components/schemas/RecipientKeyOption'
+              description: configuration of how out-of-band invitation should be created
+  /oob/create-legacy-invitation:
+    post:
+      operationId: CreateLegacyInvitation
+      responses:
+        '200':
+          description: out-of-band record and invitation
+          content:
+            application/json:
+              schema:
+                properties:
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  invitation:
+                    $ref: '#/components/schemas/PlaintextMessage'
+                  invitationUrl:
+                    type: string
+                  recipientKey:
+                    type: string
+                required:
+                  - outOfBandRecord
+                  - invitation
+                  - invitationUrl
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    invitation:
+                      '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                      '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                      label: Aries Test Agent
+                      accept:
+                        - didcomm/aip1
+                        - didcomm/aip2;env=rfc19
+                      handshake_protocols:
+                        - https://didcomm.org/didexchange/1.0
+                        - https://didcomm.org/connections/1.0
+                      services:
+                        - id: '#inline-0'
+                          serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                          type: did-communication
+                          recipientKeys:
+                            - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                          routingKeys: []
+                    outOfBandRecord:
+                      _tags:
+                        invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                        state: await-response
+                        role: sender
+                        recipientKeyFingerprints:
+                          - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                      outOfBandInvitation:
+                        '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                        '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                        label: Aries Test Agent
+                        accept:
+                          - didcomm/aip1
+                          - didcomm/aip2;env=rfc19
+                        handshake_protocols:
+                          - https://didcomm.org/didexchange/1.0
+                          - https://didcomm.org/connections/1.0
+                        services:
+                          - id: '#inline-0'
+                            serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                            type: did-communication
+                            recipientKeys:
+                              - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                            routingKeys: []
+                      metadata: {}
+                      id: 42a95528-0e30-4f86-a462-0efb02178b53
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      reusable: false
+      description: |-
+        Creates an outbound out-of-band record in the same way how `createInvitation` method does it,
+        but it also converts out-of-band invitation message to an "legacy" invitation message defined
+        in RFC 0160: Connection Protocol and returns it together with out-of-band record.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        description: configuration of how a invitation should be created
+        required: false
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Omit_CreateLegacyInvitationConfig.routing_'
+                - $ref: '#/components/schemas/RecipientKeyOption'
+              description: configuration of how a invitation should be created
+  /oob/create-legacy-connectionless-invitation:
+    post:
+      operationId: CreateLegacyConnectionlessInvitation
+      responses:
+        '200':
+          description: a message and a invitationUrl
+          content:
+            application/json:
+              schema:
+                properties:
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/OutOfBandRecord'
+                  invitationUrl:
+                    type: string
+                  message:
+                    $ref: '#/components/schemas/AgentMessage'
+                required:
+                  - outOfBandRecord
+                  - invitationUrl
+                  - message
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    message:
+                      '@id': eac4ff4e-b4fb-4c1d-aef3-b29c89d1cc00
+                      '@type': https://didcomm.org/connections/1.0/invitation
+                    invitationUrl: http://example.com/invitation_url
+      description: Creates a new connectionless legacy invitation.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        description: configuration of how a connection invitation should be created
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                domain:
+                  type: string
+                message:
+                  $ref: '#/components/schemas/AgentMessageType'
+                recordId:
+                  type: string
+              required:
+                - domain
+                - message
+                - recordId
+              type: object
+              description: configuration of how a connection invitation should be created
+  /oob/receive-invitation:
+    post:
+      operationId: ReceiveInvitation
+      responses:
+        '200':
+          description: out-of-band record and connection record if one has been created.
+          content:
+            application/json:
+              schema:
+                properties:
+                  connectionRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                required:
+                  - connectionRecord
+                  - outOfBandRecord
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    outOfBandRecord:
+                      _tags:
+                        invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                        state: await-response
+                        role: sender
+                        recipientKeyFingerprints:
+                          - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                      outOfBandInvitation:
+                        '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                        '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                        label: Aries Test Agent
+                        accept:
+                          - didcomm/aip1
+                          - didcomm/aip2;env=rfc19
+                        handshake_protocols:
+                          - https://didcomm.org/didexchange/1.0
+                          - https://didcomm.org/connections/1.0
+                        services:
+                          - id: '#inline-0'
+                            serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                            type: did-communication
+                            recipientKeys:
+                              - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                            routingKeys: []
+                      metadata: {}
+                      id: 42a95528-0e30-4f86-a462-0efb02178b53
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      reusable: false
+                    connectionRecord:
+                      _tags:
+                        invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                        did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                        invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                        outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                        verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      metadata: {}
+                      id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: |-
+        Creates inbound out-of-band record and assigns out-of-band invitation message to it if the
+        message is valid.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationProps'
+  /oob/receive-invitation-url:
+    post:
+      operationId: ReceiveInvitationFromUrl
+      responses:
+        '200':
+          description: out-of-band record and connection record if one has been created.
+          content:
+            application/json:
+              schema:
+                properties:
+                  connectionRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                required:
+                  - connectionRecord
+                  - outOfBandRecord
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    outOfBandRecord:
+                      _tags:
+                        invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                        state: await-response
+                        role: sender
+                        recipientKeyFingerprints:
+                          - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                      outOfBandInvitation:
+                        '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                        '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                        label: Aries Test Agent
+                        accept:
+                          - didcomm/aip1
+                          - didcomm/aip2;env=rfc19
+                        handshake_protocols:
+                          - https://didcomm.org/didexchange/1.0
+                          - https://didcomm.org/connections/1.0
+                        services:
+                          - id: '#inline-0'
+                            serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                            type: did-communication
+                            recipientKeys:
+                              - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                            routingKeys: []
+                      metadata: {}
+                      id: 42a95528-0e30-4f86-a462-0efb02178b53
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      reusable: false
+                    connectionRecord:
+                      _tags:
+                        invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                        did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                        invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                        outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                        verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      metadata: {}
+                      id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: |-
+        Creates inbound out-of-band record and assigns out-of-band invitation message to it if the
+        message is valid.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationByUrlProps'
+  /oob/{outOfBandId}/accept-invitation:
+    post:
+      operationId: AcceptInvitation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  connectionRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                required:
+                  - connectionRecord
+                  - outOfBandRecord
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    outOfBandRecord:
+                      _tags:
+                        invitationId: 1cbd22e4-1906-41e9-8807-83d84437f978
+                        state: await-response
+                        role: sender
+                        recipientKeyFingerprints:
+                          - z6MktUCPZjfRJXD4GMcYuXiqX2qZ8vBw6UAYpDFiHEUfwuLj
+                      outOfBandInvitation:
+                        '@type': did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/out-of-band/1.1/invitation
+                        '@id': d6472943-e5d0-4d95-8b48-790ed5a41931
+                        label: Aries Test Agent
+                        accept:
+                          - didcomm/aip1
+                          - didcomm/aip2;env=rfc19
+                        handshake_protocols:
+                          - https://didcomm.org/didexchange/1.0
+                          - https://didcomm.org/connections/1.0
+                        services:
+                          - id: '#inline-0'
+                            serviceEndpoint: https://6b77-89-20-162-146.ngrok.io
+                            type: did-communication
+                            recipientKeys:
+                              - did:key:z6MkmTBHTWrvLPN8pBmUj7Ye5ww9GiacXCYMNVvpScSpf1DM
+                            routingKeys: []
+                      metadata: {}
+                      id: 42a95528-0e30-4f86-a462-0efb02178b53
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      reusable: false
+                    connectionRecord:
+                      _tags:
+                        invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                        did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                        invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                        outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                        verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      metadata: {}
+                      id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: |-
+        Accept a connection invitation as invitee (by sending a connection request message) for the connection with the specified connection id.
+        This is not needed when auto accepting of connections is enabled.
+      tags:
+        - Out Of Band
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: outOfBandId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptInvitationConfig'
+  /multi-tenancy/create-tenant:
+    post:
+      operationId: CreateTenant
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantRecord'
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantOptions'
+  /multi-tenancy/create-did/{tenantId}:
+    post:
+      operationId: tenant_CreateDid
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidCreate'
+  /multi-tenancy/dids/{tenantId}:
+    get:
+      operationId: tenant_GetDids
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/transactions/set-endorser-role/{tenantId}:
+    post:
+      operationId: tenant_DidNymTransaction
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidNymTransaction'
+  /multi-tenancy/transactions/endorse/{tenantId}:
+    post:
+      operationId: tenant_EndorserTransaction
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  signedTransaction: {}
+                required:
+                  - signedTransaction
+                type: object
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndorserTransaction'
+  /multi-tenancy/connections/{connectionId}/{tenantId}:
+    get:
+      operationId: tenant_GetConnectionById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                      verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                    invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                    outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /multi-tenancy/create-invitation/{tenantId}:
+    post:
+      operationId: tenant_CreateInvitation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  invitationDid:
+                    type: string
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  invitation:
+                    $ref: '#/components/schemas/PlaintextMessage'
+                  invitationUrl:
+                    type: string
+                required:
+                  - invitationDid
+                  - outOfBandRecord
+                  - invitation
+                  - invitationUrl
+                type: object
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+          # Changed schema to object because of build filure
+            schema: 
+              allOf:
+                - $ref: '#/components/schemas/Omit_CreateOutOfBandInvitationConfig.routing_'
+                - $ref: '#/components/schemas/RecipientKeyOption'
+  /multi-tenancy/create-legacy-invitation/{tenantId}:
+    post:
+      operationId: tenant_CreateLegacyInvitation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/Omit_CreateOutOfBandInvitationConfig.routing-or-appendedAttachments-or-messages_'
+                - $ref: '#/components/schemas/RecipientKeyOption'
+  /multi-tenancy/receive-invitation/{tenantId}:
+    post:
+      operationId: tenant_ReceiveInvitation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationProps'
+  /multi-tenancy/receive-invitation-url/{tenantId}:
+    post:
+      operationId: tenant_ReceiveInvitationFromUrl
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationByUrlProps'
+  /multi-tenancy/oob/{invitationId}/{tenantId}:
+    get:
+      operationId: tenant_GetAllOutOfBandRecords
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: invitationId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/connections/{tenantId}:
+    get:
+      operationId: tenant_GetAllConnections
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: outOfBandId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: alias
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: state
+          required: false
+          schema:
+            $ref: '#/components/schemas/DidExchangeState'
+        - in: query
+          name: myDid
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: theirDid
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: theirLabel
+          required: false
+          schema:
+            type: string
+  /multi-tenancy/url/{tenantId}/{invitationId}:
+    get:
+      operationId: tenant_GetInvitation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security: []
+      parameters:
+        - in: path
+          name: invitationId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/schema/{tenantId}:
+    post:
+      operationId: tenant_CreateSchema
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSchemaInput'
+  /multi-tenancy/polygon-wc3/schema/{tenantId}:
+    post:
+      operationId: CreatePolygonW3CSchema
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchemaMetadata'
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                schema:
+                  properties: {}
+                  additionalProperties: {}
+                  type: object
+                schemaName:
+                  type: string
+                did:
+                  type: string
+              required:
+                - schema
+                - schemaName
+                - did
+              type: object
+  /multi-tenancy/polygon-wc3/schema/{did}/{schemaId}/{tenantId}:
+    get:
+      operationId: GetPolygonW3CSchemaById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: did
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: schemaId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/transactions/write/{tenantId}:
+    post:
+      operationId: tenant_WriteSchemaAndCredDefOnLedger
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteTransaction'
+  /multi-tenancy/schema/{schemaId}/{tenantId}:
+    get:
+      operationId: tenant_GetSchemaById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: schemaId
+          required: true
+          schema:
+            $ref: '#/components/schemas/SchemaId'
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/credential-definition/{tenantId}:
+    post:
+      operationId: tenant_CreateCredentialDefinition
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+        '202':
+          description: Wait for action to complete
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                endorserDid:
+                  type: string
+                endorse:
+                  type: boolean
+                tag:
+                  type: string
+                schemaId:
+                  type: string
+                issuerId:
+                  type: string
+              required:
+                - tag
+                - schemaId
+                - issuerId
+              type: object
+  /multi-tenancy/credential-definition/{credentialDefinitionId}/{tenantId}:
+    get:
+      operationId: tenant_GetCredentialDefinitionById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: credentialDefinitionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/CredentialDefinitionId'
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/credentials/create-offer/{tenantId}:
+    post:
+      operationId: tenant_CreateOffer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOfferOptions'
+  /multi-tenancy/credentials/create-offer-oob/{tenantId}:
+    post:
+      operationId: tenant_CreateOfferOob
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOfferOobOptions'
+  /multi-tenancy/credentials/accept-offer/{tenantId}:
+    post:
+      operationId: tenant_AcceptOffer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptCredentialOfferOptions'
+  /multi-tenancy/credentials/{credentialRecordId}/{tenantId}:
+    get:
+      operationId: tenant_GetCredentialById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: credentialRecordId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/credentials/{tenantId}:
+    get:
+      operationId: tenant_GetAllCredentials
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: threadId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: connectionId
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: state
+          required: false
+          schema:
+            $ref: '#/components/schemas/CredentialState'
+  /multi-tenancy/proofs/{tenantId}:
+    get:
+      operationId: tenant_GetAllProofs
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: threadId
+          required: false
+          schema:
+            type: string
+  /multi-tenancy/form-data/{tenantId}/{proofRecordId}:
+    get:
+      operationId: tenant_ProofFormData
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/proofs/request-proof/{tenantId}:
+    post:
+      operationId: tenant_RequestProof
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestProofOptions'
+  /multi-tenancy/proofs/create-request-oob/{tenantId}:
+    post:
+      operationId: tenant_CreateRequest
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProofRequestOobOptions'
+  /multi-tenancy/proofs/{proofRecordId}/accept-request/{tenantId}:
+    post:
+      operationId: tenant_proof_AcceptRequest
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                comment:
+                  type: string
+                filterByNonRevocationRequirements:
+                  type: boolean
+                filterByPresentationPreview:
+                  type: boolean
+              type: object
+  /multi-tenancy/proofs/{proofRecordId}/accept-presentation/{tenantId}:
+    post:
+      operationId: tenant_AcceptPresentation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/proofs/{proofRecordId}/{tenantId}:
+    get:
+      operationId: tenant_GetProofById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    threadId: 0019d466-5eea-4269-8c40-031b4896c5b7
+                    protocolVersion: v1
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: proofRecordId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /multi-tenancy/{tenantId}:
+    delete:
+      operationId: tenant_DeleteTenantById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.any_'
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/did/web/{tenantId}:
+    post:
+      operationId: CreateDidWeb
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidCreate'
+  /multi-tenancy/did/key{tenantId}:
+    post:
+      operationId: CreateDidKey
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidCreate'
+  /multi-tenancy/question-answer/{tenantId}:
+    get:
+      operationId: tenant_GetQuestionAnswerRecords
+      responses:
+        '200':
+          description: QuestionAnswerRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+      description: Retrieve question and answer records by query
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - description: Tenant identifier
+          in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+        - description: Connection identifier
+          in: query
+          name: connectionId
+          required: false
+          schema:
+            type: string
+        - description: Role of the question
+          in: query
+          name: role
+          required: false
+          schema:
+            $ref: '#/components/schemas/QuestionAnswerRole'
+        - description: State of the question
+          in: query
+          name: state
+          required: false
+          schema:
+            $ref: '#/components/schemas/QuestionAnswerState'
+        - description: Thread identifier
+          in: query
+          name: threadId
+          required: false
+          schema:
+            type: string
+  /multi-tenancy/question-answer/question/{connectionId}/{tenantId}:
+    post:
+      operationId: tenant_SendQuestion
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      description: Send a question to a connection
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - description: Tenant identifier
+          in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                detail:
+                  type: string
+                validResponses:
+                  items:
+                    $ref: '#/components/schemas/ValidResponse'
+                  type: array
+                question:
+                  type: string
+              required:
+                - validResponses
+                - question
+              type: object
+  /multi-tenancy/question-answer/answer/{id}/{tenantId}:
+    post:
+      operationId: tenant_SendAnswer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      description: Send a answer to question
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - description: Question Answer Record identifier
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - description: Tenant identifier
+          in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record_response.string_'
+  /multi-tenancy/question-answer/{id}/{tenantId}:
+    get:
+      operationId: tenant_GetQuestionAnswerRecordById
+      responses:
+        '200':
+          description: ConnectionRecord
+          content:
+            application/json:
+              schema: {}
+      description: Retrieve question answer record by id
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - description: Question Answer Record identifier
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - description: Tenant identifier
+          in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+  /multi-tenancy/basic-messages/{connectionId}/{tenantId}:
+    get:
+      operationId: tenant_GetBasicMessages
+      responses:
+        '200':
+          description: BasicMessageRecord[]
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    - _tags:
+                        role: sender
+                        connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                      metadata: {}
+                      id: 74bcf865-1fdc-45b4-b517-9def02dfd25f
+                      createdAt: '2022-08-18T08:38:40.216Z'
+                      content: string
+                      sentTime: '2022-08-18T08:38:40.216Z'
+                      connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+      description: Retrieve basic messages by connection id
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+    post:
+      operationId: tenant_SendMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      role: sender
+                      connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    metadata: {}
+                    id: 74bcf865-1fdc-45b4-b517-9def02dfd25f
+                    createdAt: '2022-08-18T08:38:40.216Z'
+                    content: string
+                    sentTime: '2022-08-18T08:38:40.216Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+      description: Send a basic message to a connection
+      tags:
+        - MultiTenancy
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - in: path
+          name: tenantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record_content.string_'
+  /transactions/endorse:
+    post:
+      operationId: EndorserTransaction
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  signedTransaction: {}
+                required:
+                  - signedTransaction
+                type: object
+      tags:
+        - EndorserTransaction
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EndorserTransaction'
+  /transactions/set-endorser-role:
+    post:
+      operationId: DidNymTransaction
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DidCreateResult_DidOperationStateActionBase_'
+      tags:
+        - EndorserTransaction
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidNymTransaction'
+  /transactions/write:
+    post:
+      operationId: WriteSchemaAndCredDefOnLedger
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema: {}
+      tags:
+        - EndorserTransaction
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WriteTransaction'
+  /dids/{did}:
+    get:
+      operationId: GetDidRecordByDid
+      responses:
+        '200':
+          description: DidResolutionResult
+          content:
+            application/json:
+              schema:
+                properties:
+                  didDocumentMetadata:
+                    $ref: '#/components/schemas/DIDDocumentMetadata'
+                  didResolutionMetadata:
+                    $ref: '#/components/schemas/DidResolutionMetadata'
+                  didDocument:
+                    $ref: '#/components/schemas/Record_string.any_'
+                required:
+                  - didDocumentMetadata
+                  - didResolutionMetadata
+                  - didDocument
+                type: object
+              examples:
+                Example 1:
+                  value:
+                    didDocument:
+                      '@context':
+                        - https://w3id.org/did/v1
+                        - https://w3id.org/security/suites/ed25519-2018/v1
+                        - https://w3id.org/security/suites/x25519-2019/v1
+                      id: did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                      verificationMethod:
+                        - id: did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL#z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                          type: Ed25519VerificationKey2018
+                          controller: did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                          publicKeyBase58: 6fioC1zcDPyPEL19pXRS2E4iJ46zH7xP6uSgAaPdwDrx
+                      authentication:
+                        - did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL#z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                      assertionMethod:
+                        - did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL#z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                      capabilityInvocation:
+                        - did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL#z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                      capabilityDelegation:
+                        - did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL#z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                      keyAgreement:
+                        - id: did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL#z6LSrdqo4M24WRDJj1h2hXxgtDTyzjjKCiyapYVgrhwZAySn
+                          type: X25519KeyAgreementKey2019
+                          controller: did:key:z6Mkk7yqnGF3YwTrLpqrW6PGsKci7dNqh1CjnvMbzrMerSeL
+                          publicKeyBase58: FxfdY3DCQxVZddKGAtSjZdFW9bCCW7oRwZn1NFJ2Tbg2
+                    didDocumentMetadata: {}
+                    didResolutionMetadata:
+                      contentType: application/did+ld+json
+      description: Resolves did and returns did resolution result
+      tags:
+        - Dids
+      security:
+        - apiKey: []
+      parameters:
+        - description: Decentralized Identifier
+          in: path
+          name: did
+          required: true
+          schema:
+            $ref: '#/components/schemas/Did'
+  /dids/write:
+    post:
+      operationId: WriteDid
+      responses:
+        '200':
+          description: DidResolutionResult
+          content:
+            application/json:
+              schema: {}
+              examples:
+                Example 1:
+                  value:
+                    did: did:indy:bcovrin:testnet:LRCUFcizUL74AGgLqdJHK7
+                    didDocument:
+                      '@context':
+                        - https://w3id.org/did/v1
+                        - https://w3id.org/security/suites/ed25519-2018/v1
+                      id: did:indy:bcovrin:testnet:LRCUFcizUL74AGgLqdJHK7
+                      verificationMethod:
+                        - id: did:indy:bcovrin:testnet:LRCUFcizUL74AGgLqdJHK7#verkey
+                          type: Ed25519VerificationKey2018
+                          controller: did:indy:bcovrin:testnet:LRCUFcizUL74AGgLqdJHK7
+                          publicKeyBase58: BapLDK4dEY88vWcQgNbpAPVVP4r3CHs4MvShmmhqkxXM
+                      authentication:
+                        - did:indy:bcovrin:testnet:LRCUFcizUL74AGgLqdJHK7#verkey
+      description: Did nym registration
+      tags:
+        - Dids
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DidCreate'
+  /dids:
+    get:
+      operationId: GetDids
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/DidRecord'
+                type: array
+      tags:
+        - Dids
+      security:
+        - apiKey: []
+      parameters: []
+  /schemas/{schemaId}:
+    get:
+      operationId: GetSchemaById
+      responses:
+        '200':
+          description: get schema by Id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaReturn'
+              examples:
+                Example 1:
+                  value:
+                    ver: '1.0'
+                    id: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
+                    name: schema
+                    version: '1.0'
+                    attrNames:
+                      - string
+                    seqNo: 351936
+      description: Get schema by schemaId
+      tags:
+        - Schemas
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: schemaId
+          required: true
+          schema:
+            type: string
+  /schemas:
+    post:
+      operationId: CreateSchema
+      responses:
+        '200':
+          description: get schema
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/RegisterSchemaReturn'
+                  - $ref: '#/components/schemas/RegisterSchemaReturnStateFinished'
+              examples:
+                Example 1:
+                  value:
+                    state: finished
+                    schema:
+                      issuerId: did:indy:bcovrin:testnet:LRCUFcizUL74AGgLqdJHK7
+                      name: Test Schema
+                      version: 1.0.0
+                      attrNames:
+                        - Name
+                        - Age
+                    schemaId: LRCUFcizUL74AGgLqdJHK7:2:Test Schema:1.0.0
+      description: Create schema
+      tags:
+        - Schemas
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSchemaInput'
+  /credential-definitions/{credentialDefinitionId}:
+    get:
+      operationId: GetCredentialDefinitionById
+      responses:
+        '200':
+          description: CredDef
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCredentialDefinitionReturn'
+              examples:
+                Example 1:
+                  value:
+                    ver: '1.0'
+                    id: WgWxqztrNooG92RXvxSTWv:3:CL:20:tag
+                    schemaId: '351936'
+                    type: CL
+                    tag: definition
+                    value:
+                      primary:
+                        'n': string
+                        s: string
+                        r:
+                          master_secret: string
+                          string: string
+                        rctxt: string
+                        z: string
+                      revocation:
+                        g: 1 string
+                        g_dash: string
+                        h: string
+                        h0: string
+                        h1: string
+                        h2: string
+                        htilde: string
+                        h_cap: string
+                        u: string
+                        pk: string
+                        'y': string
+      description: Retrieve credential definition by credential definition id
+      tags:
+        - Credential Definitions
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: credentialDefinitionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/CredentialDefinitionId'
+  /credential-definitions:
+    post:
+      operationId: CreateCredentialDefinition
+      responses:
+        '200':
+          description: CredDef
+          content:
+            application/json:
+              schema:
+                anyOf:
+                  - $ref: '#/components/schemas/RegisterCredentialDefinitionReturn'
+                  - $ref: '#/components/schemas/RegisterCredentialDefinitionReturnStateFinished'
+              examples:
+                Example 1:
+                  value:
+                    ver: '1.0'
+                    id: WgWxqztrNooG92RXvxSTWv:3:CL:20:tag
+                    schemaId: '351936'
+                    type: CL
+                    tag: definition
+                    value:
+                      primary:
+                        'n': string
+                        s: string
+                        r:
+                          master_secret: string
+                          string: string
+                        rctxt: string
+                        z: string
+                      revocation:
+                        g: 1 string
+                        g_dash: string
+                        h: string
+                        h0: string
+                        h1: string
+                        h2: string
+                        htilde: string
+                        h_cap: string
+                        u: string
+                        pk: string
+                        'y': string
+        '202':
+          description: Wait for action to complete
+      description: Creates a new credential definition.
+      tags:
+        - Credential Definitions
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                endorserDid:
+                  type: string
+                endorse:
+                  type: boolean
+                tag:
+                  type: string
+                schemaId:
+                  $ref: '#/components/schemas/SchemaId'
+                issuerId:
+                  type: string
+              required:
+                - tag
+                - schemaId
+                - issuerId
+              type: object
+  /credentials:
+    get:
+      operationId: GetAllCredentials
+      responses:
+        '200':
+          description: CredentialExchangeRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+              examples:
+                Example 1:
+                  value:
+                    - _tags:
+                        state: offer-sent
+                        threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                        connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                      metadata:
+                        _internal/indyCredential:
+                          credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                          schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                      credentials: []
+                      id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      credentialAttributes: []
+                      protocolVersion: v1
+      description: Retrieve all credential exchange records
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters:
+        - in: query
+          name: threadId
+          required: false
+          schema:
+            $ref: '#/components/schemas/ThreadId'
+        - in: query
+          name: parentThreadId
+          required: false
+          schema:
+            $ref: '#/components/schemas/ThreadId'
+        - in: query
+          name: connectionId
+          required: false
+          schema:
+            $ref: '#/components/schemas/RecordId'
+        - in: query
+          name: state
+          required: false
+          schema:
+            $ref: '#/components/schemas/CredentialState'
+        - in: query
+          name: role
+          required: false
+          schema:
+            $ref: '#/components/schemas/CredentialRole'
+  /credentials/w3c:
+    get:
+      operationId: GetAllW3c
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/W3cCredentialRecord'
+                type: array
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+  /credentials/w3c/{id}:
+    get:
+      operationId: GetW3cById
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/W3cCredentialRecord'
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+  /credentials/{credentialRecordId}:
+    get:
+      operationId: GetCredentialById
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: Retrieve credential exchange record by credential record id
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: credentialRecordId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /credentials/propose-credential:
+    post:
+      operationId: ProposeCredential
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Initiate a new credential exchange as holder by sending a propose credential message
+        to the connection with a specified connection id.
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProposeCredentialOptions'
+  /credentials/accept-proposal:
+    post:
+      operationId: credential_AcceptProposal
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Accept a credential proposal as issuer by sending an accept proposal message
+        to the connection associated with the credential exchange record.
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptCredentialProposalOptions'
+  /credentials/create-offer:
+    post:
+      operationId: CreateOffer
+      responses:
+        '200':
+          description: AgentMessage, CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Initiate a new credential exchange as issuer by creating a credential offer
+        without specifying a connection id
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOfferOptions'
+  /credentials/create-offer-oob:
+    post:
+      operationId: CreateOfferOob
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  invitationDid:
+                    type: string
+                  outOfBandRecord:
+                    $ref: '#/components/schemas/Record_string.unknown_'
+                  invitation:
+                    $ref: '#/components/schemas/PlaintextMessage'
+                  invitationUrl:
+                    type: string
+                required:
+                  - invitationDid
+                  - outOfBandRecord
+                  - invitation
+                  - invitationUrl
+                type: object
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOfferOobOptions'
+  /credentials/accept-offer:
+    post:
+      operationId: AcceptOffer
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Accept a credential offer as holder by sending an accept offer message
+        to the connection associated with the credential exchange record.
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CredentialOfferOptions'
+  /credentials/negotiate-offer:
+    post:
+      operationId: NegotiateOffer
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Accept a credential offer as holder by sending an accept offer message
+        to the connection associated with the credential exchange record.
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NegotiateCredentialOfferOptions'
+  /credentials/accept-request:
+    post:
+      operationId: credential-AcceptRequest
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Accept a credential request as issuer by sending an accept request message
+        to the connection associated with the credential exchange record.
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptCredentialRequestOptions'
+  /credentials/accept-credential:
+    post:
+      operationId: AcceptCredential
+      responses:
+        '200':
+          description: CredentialExchangeRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CredentialExchangeRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      state: offer-sent
+                      threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                      connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    metadata:
+                      _internal/indyCredential:
+                        credentialDefinitionId: q7ATwTYbQDgiigVijUAej:3:CL:318187:latest
+                        schemaId: q7ATwTYbQDgiigVijUAej:2:Employee Badge:1.0
+                    credentials: []
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    connectionId: ac6d0fdd-0db8-4f52-8a3d-de7ff8ddc14b
+                    threadId: 82701488-b43c-4d7b-9244-4bb204a7ae26
+                    credentialAttributes: []
+                    protocolVersion: v1
+      description: |-
+        Accept a credential as holder by sending an accept credential message
+        to the connection associated with the credential exchange record.
+      tags:
+        - Credentials
+      security:
+        - apiKey: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptCredential'
+  /connections:
+    get:
+      operationId: GetAllConnections
+      responses:
+        '200':
+          description: ConnectionRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+              examples:
+                Example 1:
+                  value:
+                    - _tags:
+                        invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                        did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                        invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                        outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                        verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      metadata: {}
+                      id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                      createdAt: '2022-01-01T00:00:00.000Z'
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: Retrieve all connections records
+      tags:
+        - Connections
+      security:
+        - apiKey: []
+      parameters:
+        - in: query
+          name: outOfBandId
+          required: false
+          schema:
+            type: string
+        - description: Alias
+          in: query
+          name: alias
+          required: false
+          schema:
+            type: string
+        - description: Connection state
+          in: query
+          name: state
+          required: false
+          schema:
+            $ref: '#/components/schemas/DidExchangeState'
+        - description: My DID
+          in: query
+          name: myDid
+          required: false
+          schema:
+            type: string
+        - description: Their DID
+          in: query
+          name: theirDid
+          required: false
+          schema:
+            type: string
+        - description: Their label
+          in: query
+          name: theirLabel
+          required: false
+          schema:
+            type: string
+  /connections/{connectionId}:
+    get:
+      operationId: GetConnectionById
+      responses:
+        '200':
+          description: ConnectionRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                      verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                    invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                    outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: Retrieve connection record by connection id
+      tags:
+        - Connections
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+    delete:
+      operationId: DeleteConnection
+      responses:
+        '204':
+          description: No content
+      description: Deletes a connection record from the connection repository.
+      tags:
+        - Connections
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /connections/{connectionId}/accept-request:
+    post:
+      operationId: connection-AcceptRequest
+      responses:
+        '200':
+          description: ConnectionRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                      verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                    invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                    outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: |-
+        Accept a connection request as inviter by sending a connection response message
+        for the connection with the specified connection id.
+
+        This is not needed when auto accepting of connection is enabled.
+      tags:
+        - Connections
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /connections/{connectionId}/accept-response:
+    post:
+      operationId: AcceptResponse
+      responses:
+        '200':
+          description: ConnectionRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                      did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                      invitationKey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                      outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+                      verkey: 9HG4rJFpLiWf56MWxHj9rgdpErFzim2zEpHuxy1dw7oz
+                    metadata: {}
+                    id: 821f9b26-ad04-4f56-89b6-e2ef9c72b36e
+                    createdAt: '2022-01-01T00:00:00.000Z'
+                    did: did:peer:1zQmfQh1T3rSqarP2FZ37uKjdQHPKFdVyo2mGiAPHZ8Ep7hv
+                    invitationDid: did:peer:2.SeyJzIjoiaHR0cHM6Ly9kYTIzLTg5LTIwLTE2Mi0xNDYubmdyb2suaW8iLCJ0IjoiZGlkLWNvbW11bmljYXRpb24iLCJwcmlvcml0eSI6MCwicmVjaXBpZW50S2V5cyI6WyJkaWQ6a2V5Ono2TWtualg3U1lXRmdHMThCYkNEZHJnemhuQnA0UlhyOGVITHZxQ3FvRXllckxiTiN6Nk1rbmpYN1NZV0ZnRzE4QmJDRGRyZ3pobkJwNFJYcjhlSEx2cUNxb0V5ZXJMYk4iXSwiciI6W119
+                    outOfBandId: edbc89fe-785f-4774-a288-46012486881d
+      description: |-
+        Accept a connection response as invitee by sending a trust ping message
+        for the connection with the specified connection id.
+
+        This is not needed when auto accepting of connection is enabled.
+      tags:
+        - Connections
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+  /url/{invitationId}:
+    get:
+      operationId: GetInvitation
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaintextMessage'
+      tags:
+        - Connections
+      security: []
+      parameters:
+        - in: path
+          name: invitationId
+          required: true
+          schema:
+            type: string
+  /basic-messages/{connectionId}:
+    get:
+      operationId: GetBasicMessages
+      responses:
+        '200':
+          description: BasicMessageRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BasicMessageRecord'
+                type: array
+              examples:
+                Example 1:
+                  value:
+                    - _tags:
+                        role: sender
+                        connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                      metadata: {}
+                      id: 74bcf865-1fdc-45b4-b517-9def02dfd25f
+                      createdAt: '2022-08-18T08:38:40.216Z'
+                      content: string
+                      sentTime: '2022-08-18T08:38:40.216Z'
+                      connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+      description: Retrieve basic messages by connection id
+      tags:
+        - Basic Messages
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+    post:
+      operationId: SendMessage
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicMessageRecord'
+              examples:
+                Example 1:
+                  value:
+                    _tags:
+                      role: sender
+                      connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+                    metadata: {}
+                    id: 74bcf865-1fdc-45b4-b517-9def02dfd25f
+                    createdAt: '2022-08-18T08:38:40.216Z'
+                    content: string
+                    sentTime: '2022-08-18T08:38:40.216Z'
+                    connectionId: 2aecf74c-3073-4f98-9acb-92415d096834
+      description: Send a basic message to a connection
+      tags:
+        - Basic Messages
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record_content.string_'
+  /agent:
+    get:
+      operationId: GetAgentInfo
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentInfo'
+      description: Retrieve basic agent information
+      tags:
+        - Agent
+      security: []
+      parameters: []
+  /agent/wallet:
+    delete:
+      operationId: DeleteWallet
+      responses:
+        '204':
+          description: No content
+      description: Delete wallet
+      tags:
+        - Agent
+      security:
+        - apiKey: []
+      parameters: []
+  /question-answer:
+    get:
+      operationId: GetQuestionAnswerRecords
+      responses:
+        '200':
+          description: QuestionAnswerRecord[]
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Record_string.unknown_'
+                type: array
+      description: Retrieve question and answer records by query
+      tags:
+        - Question Answer
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: query
+          name: connectionId
+          required: false
+          schema:
+            type: string
+        - description: Role of the question
+          in: query
+          name: role
+          required: false
+          schema:
+            $ref: '#/components/schemas/QuestionAnswerRole'
+        - description: State of the question
+          in: query
+          name: state
+          required: false
+          schema:
+            $ref: '#/components/schemas/QuestionAnswerState'
+        - description: Thread identifier
+          in: query
+          name: threadId
+          required: false
+          schema:
+            type: string
+  /question-answer/question/{connectionId}:
+    post:
+      operationId: SendQuestion
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+      description: Send a question to a connection
+      tags:
+        - Question Answer
+      security:
+        - apiKey: []
+      parameters:
+        - description: Connection identifier
+          in: path
+          name: connectionId
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                detail:
+                  type: string
+                validResponses:
+                  items:
+                    $ref: '#/components/schemas/ValidResponse'
+                  type: array
+                question:
+                  type: string
+              required:
+                - validResponses
+                - question
+              type: object
+  /question-answer/answer/{id}:
+    post:
+      operationId: SendAnswer
+      responses:
+        '200':
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+      description: Send a answer to question
+      tags:
+        - Question Answer
+      security:
+        - apiKey: []
+      parameters:
+        - description: The id of the question answer record
+          in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record_response.string_'
+  /question-answer/{id}:
+    get:
+      operationId: GetQuestionAnswerRecordById
+      responses:
+        '200':
+          description: ConnectionRecord
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Record_string.unknown_'
+      description: Retrieve question answer record by id
+      tags:
+        - Question Answer
+      security:
+        - apiKey: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            $ref: '#/components/schemas/RecordId'
+servers:
+  - url: /
