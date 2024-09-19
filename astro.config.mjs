@@ -1,6 +1,7 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import deno from "@deno/astro-adapter";
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,6 +38,21 @@ export default defineConfig({
 				discord: 'https://discord.gg/w4hnQT7NJG',
 				youtube: 'https://www.youtube.com/@blocksterlabs5489',
 			},
+			plugins: [
+				// Generate the OpenAPI documentation pages.
+				starlightOpenAPI([
+					{
+					 base: 'credo-api',
+					 label: 'Credo Agent',
+					 schema: './src/assets/schemas/credoSwagger.yaml',
+					},
+					{
+					 base: 'platform-api',
+					 label: 'Credebl Platform API',
+					 schema: './src/assets/schemas/platformSwagger.yaml',
+					},
+				]),
+			],
 			sidebar: [
 				{
 					label: 'Intro',
@@ -58,8 +74,7 @@ export default defineConfig({
 						{
 							label: "API Reference",
 							items: [
-								{ label: "Platform API reference", "link": "/en/userguide/api-reference/platform-api-reference/" },
-								{ label: "Credo API reference", "link": "/en/userguide/api-reference/credo-api-reference/" }
+        				...openAPISidebarGroups,
 							]
 						}
 					]
