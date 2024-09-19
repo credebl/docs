@@ -78,7 +78,7 @@ KEYCLOAK_MANAGEMENT_CLIENT_SECRET=
 KEYCLOAK_REALM=credebl-platform
 ```
 
-To set the env variable ***KEYCLOAK_MANAGEMENT_CLIENT_SECRET***, go to **clients >> Credentials** tab and copy the client secret
+To set the env variable ***KEYCLOAK_MANAGEMENT_CLIENT_SECRET***, in **credebl-platform** realm, go to **clients >> adminClient**. Now in the **Credentials** tab, copy the **client secret**
 
 ## Add users manually (Optional):
 
