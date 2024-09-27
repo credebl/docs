@@ -1,5 +1,5 @@
 ---
-title: .env setup
+title: Environment Variables
 description: A guide to setting up environment variables for the CREDEBL platform.
 ---
 

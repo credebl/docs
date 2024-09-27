@@ -26,7 +26,7 @@ Before you begin with the project, make sure the following software's are instal
 
 The CREDEBL Platform, being open source , mandates user authentication and utilizes a database for storing agent wallets and platform data. Keycloak is used as a database service.
 
-To set up keycloak for authentication follow the [Keycloak Setup using Docker](/en/guides/keycloak) section. Learn more about keycloak from their [official website](https://www.keycloak.org/).
+To set up keycloak for authentication follow the [Keycloak Installation using Docker](/en/guides/keycloak) section. Learn more about keycloak from their [official website](https://www.keycloak.org/).
 
 **SendGrid** 
 
