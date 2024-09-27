@@ -126,17 +126,17 @@ On the mobile side, you will receive the Proof Request in the mobile application
 - Here on the new screen, you will see the field of entering the email address. At least one email address is mandatory for the verification process to begin, you can add multiple addresses at the run time. After entering the email id, you have to click on the Request Proof button.
 - On the mobile side, you will receive the Proof Request in the application, you have to view the request and choose the operations to perform. Operation is to either share the requested information or to decline the request.
 
-## 2. Workflow with the W3C standards
+## 2. Overview with the W3C standards
 
 W3C (World Wide Web Consortium) sets global standards for how digital identities and credentials should work. It defines how digital credentials are structured and how identities are verified.
 
-- #### Workflow with Polygon Ledger
+- #### Overview with Polygon Ledger
 - Before we start with the issuance using Polygon Ledger. It is important to create an organization which we saw earlier ( Refer: [Create Organization](https://docs.google.com/document/d/1W5GcUOELbmM7d12bsPFNLkB2Db6qlPTHW40VxujT_SI/edit#heading=h.rilblg99kjuh)). Once you have created the organization, the next step is the creation of the wallet.
 - Here, you'll need to choose the method and network you plan to use. Make sure your private key has at least 1 MATIC for smooth transactions. You can get testnet(amoy) MATIC from the faucet by [clicking here]('https://faucet.polygon.technology/').
 - You can generate the new key, by clicking on the Generate button.
 If you already have a private key, then you can mark the check box of already existed and paste the Private Key in the text box. Once done, the wallet gets created for the organization. Now, you can proceed with the schema creation and other processes.
 
-- #### Workflow with NoLedger
+- #### Overview with NoLedger
 - Before we start with the issuance using NoLedger. It is important to create an organization which we saw earlier ( Refer: [Create Organization](https://docs.google.com/document/d/1W5GcUOELbmM7d12bsPFNLkB2Db6qlPTHW40VxujT_SI/edit#heading=h.rilblg99kjuh)). 
 - Once you have created the organization, the next step is the creation of the wallet. Assume that you have already created the organization. Now, we have to create the wallet for the organization.
 We can do that by using two methods, did : key and did : web.

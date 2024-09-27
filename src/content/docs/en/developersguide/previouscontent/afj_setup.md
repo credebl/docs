@@ -1,5 +1,5 @@
 ---
-title: Agent Setup
+title: Agent Installation
 description: Describe the CREDEBL Platform Architecture
 ---
 Docker image build in this process is used to start the agents for new organizations in CREDEBL platform.
