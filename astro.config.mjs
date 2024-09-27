@@ -1,6 +1,7 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import deno from "@deno/astro-adapter";
+import starlightOpenAPI, { openAPISidebarGroups } from 'starlight-openapi'
 
 // https://astro.build/config
 export default defineConfig({
@@ -37,8 +38,24 @@ export default defineConfig({
 				discord: 'https://discord.gg/w4hnQT7NJG',
 				youtube: 'https://www.youtube.com/@blocksterlabs5489',
 			},
+			plugins: [
+				// Generate the OpenAPI documentation pages.
+				starlightOpenAPI([
+					{
+					 base: 'credo-api',
+					 label: 'Credo Agent',
+					 schema: './src/assets/schemas/credoSwagger.yaml',
+					},
+					{
+					 base: 'platform-api',
+					 label: 'Credebl Platform API',
+					 schema: './src/assets/schemas/platformSwagger.yaml',
+					},
+				]),
+			],
 			sidebar: [
 				{
+					collapsed: true,
 					label: 'Intro',
 					items: [
 						// Each item here is one entry in the navigation menu.
@@ -50,92 +67,91 @@ export default defineConfig({
 					],
 				},
 				{
+					collapsed: true,
 					label: "User Guide",
 					items: [
+						
 						{ label: "Getting started", "link": "/en/userguide/getting-started" },
-						{ label: "UI flow", "link": "/en/userguide/ui-flow/" },
-						{ label: "CREDEBL APIs flow", "link": "/en/userguide/api-flow/" },
+						{ label: "Studio UI overview", "link": "/en/userguide/ui-flow/" },
+						{ label: "CREDEBL APIs guide", "link": "/en/userguide/api-flow/" },
 						{
+					collapsed: true,
 							label: "API Reference",
 							items: [
-								{ label: "Platform API reference", "link": "/en/userguide/api-reference/platform-api-reference/" },
-								{ label: "Credo API reference", "link": "/en/userguide/api-reference/credo-api-reference/" }
+        				...openAPISidebarGroups,
 							]
 						}
 					]
 				},
 				{
-					label: 'Contributors Guide',
+					collapsed: true,
+					label: 'Developers Guide',
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{
-							label: "Getting started",
+							collapsed: true,
+							label: "Installation",
 							items: [
-								{ label: "Basic info", "link": "/en/contributorsguide/gettingstarted/basic-info/" },
-								{ label: "Architecture", "link": "/en/contributorsguide/gettingstarted/architecture/" },
-							]
-						},
-						{
-							label: "Setup",
-							items: [
-								//   { label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
 								{
+									collapsed: true,
 									label: "Prerequisites",
 									items: [
-										{ label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
-										{ label: "Keycloak", "link": "/en/contributorsguide/setup/prerequisites/keycloak/" },
-										{ label: "NATS", "link": "/en/contributorsguide/setup/prerequisites/nats/" },
-
+										{ label: "Prerequisites", "link": "/en/developersguide/setup/prerequisites/prerequisitesoftwares/" },
+										{ label: "Keycloak", "link": "/en/developersguide/setup/prerequisites/keycloak/" },
+										{ label: "NATS", "link": "/en/developersguide/setup/prerequisites/nats/" },
+										{ label: "REDIS", "link": "/en/developersguide/setup/prerequisites/redis/" },
+										{ label: "PostgreSQL", "link": "/en/developersguide/setup/prerequisites/postgres/" },
 									]
 								},
-
-
 								{
+									collapsed: true,
 									label: "Platform",
 									items: [
-										{ label: "Intro", "link": "/en/contributorsguide/setup/platform/intro/" },
 										{
-											label: "Basic setup",
+											collapsed: true,
+											label: "Installation",
 											items: [
-												{ label: "Using NPM", "link": "/en/contributorsguide/setup/platform/basicsetup/npm/" },
-												{ label: "Using Docker", "link": "/en/contributorsguide/setup/platform/basicsetup/docker/" },
+												{ label: "Using NPM", "link": "/en/developersguide/setup/platform/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/developersguide/setup/platform/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/contributorsguide/setup/platform/envsetup/" },
-										{ label: "References", "link": "/en/contributorsguide/setup/platform/references/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/platform/envsetup/" },
+										{ label: "References", "link": "/en/developersguide/setup/platform/references/" },
 
 									]
 								},
-
 								{
+									collapsed: true,
 									label: "Agent",
 									items: [
-										{ label: "Intro", "link": "/en/contributorsguide/setup/agent/intro/" },
+										{ label: "Overview", "link": "/en/developersguide/setup/agent/overview/" },
 										{
-											label: "Basic setup",
+									collapsed: true,
+											label: "Installation",
 											items: [
-												{ label: "Using NPM", "link": "/en/contributorsguide/setup/agent/basicsetup/npm/" },
-												{ label: "Using Docker", "link": "/en/contributorsguide/setup/agent/basicsetup/docker/" },
+												{ label: "Using NPM", "link": "/en/developersguide/setup/agent/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/developersguide/setup/agent/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/contributorsguide/setup/agent/envsetup/" },
-										{ label: "References", "link": "/en/contributorsguide/setup/agent/references/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/agent/envsetup/" },
+										{ label: "References", "link": "/en/developersguide/setup/agent/references/" },
 
 									]
 								},
 								{
+									collapsed: true,
 									label: "Studio",
 									items: [
-										{ label: "Intro", "link": "/en/contributorsguide/setup/studio/intro/" },
 										{
-											label: "Basic setup",
+									collapsed: true,
+											label: "Installation",
 											items: [
-												{ label: "Using NPM", "link": "/en/contributorsguide/setup/studio/basicsetup/npm/" },
-												{ label: "Using Docker", "link": "/en/contributorsguide/setup/studio/basicsetup/docker/" },
+												{ label: "Using NPM", "link": "/en/developersguide/setup/studio/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/developersguide/setup/studio/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/contributorsguide/setup/studio/envsetup/" },
-										{ label: "References", "link": "/en/contributorsguide/setup/studio/references/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/studio/envsetup/" },
+										{ label: "References", "link": "/en/developersguide/setup/studio/references/" },
 
 									]
 								},
@@ -143,12 +159,14 @@ export default defineConfig({
 
 							]
 						},
-						{ label: "Troubleshooting", "link": "/en/contributorsguide/troubleshooting/" },
+						{ label: "Troubleshooting", "link": "/en/developersguide/troubleshooting/" },
 
 
 					],
 				},
 				{ label: "Support", "link": "/en/support/" },
+				{ label: "FAQ", "link": "/en/faq" },
+
 				{ label: "License", "link": "/en/copyright-and-license/" },
 
 			],

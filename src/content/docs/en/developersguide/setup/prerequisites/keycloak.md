@@ -1,5 +1,5 @@
 ---
-title: Keycloak Setup using Docker
+title: Keycloak Installation using Docker
 description: A reference page in my new CREDEBL docs site.
 ---
 
@@ -10,7 +10,7 @@ This guide aims to walk you through the setup of Keycloak using Docker, facilita
 To set up Keycloak as a Docker image, follow these steps:
 
 ```bash
-docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
+docker run -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
 ```
 
 This command installs and starts Keycloak at the specified endpoints, locally accessible at http://localhost:8080.
@@ -78,7 +78,7 @@ KEYCLOAK_MANAGEMENT_CLIENT_SECRET=
 KEYCLOAK_REALM=credebl-platform
 ```
 
-To set the env variable ***KEYCLOAK_MANAGEMENT_CLIENT_SECRET***, go to **clients >> Credentials** tab and copy the client secret
+To set the env variable ***KEYCLOAK_MANAGEMENT_CLIENT_SECRET***, in **credebl-platform** realm, go to **clients >> adminClient**. Now in the **Credentials** tab, copy the **client secret**
 
 ## Add users manually (Optional):
 

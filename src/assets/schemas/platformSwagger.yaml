@@ -1,0 +1,6412 @@
+openapi: 3.0.0
+paths:
+  /orgs/{orgId}/agents/health:
+    get:
+      operationId: AgentController_getAgentHealth
+      summary: Get the agent health details
+      description: Get the agent health details
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+        '401': &ref_0
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_1
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_2
+        - agents
+      security: &ref_3
+        - bearer: []
+  /orgs/agents/ledgerConfig:
+    get:
+      operationId: AgentController_getLedgerDetails
+      summary: Get the ledger config details
+      description: Get the ledger config details
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /orgs/{orgId}/agents/spinup:
+    post:
+      operationId: AgentController_agentSpinup
+      summary: Agent spinup
+      description: Create a new agent spin up.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentSpinupDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /orgs/{orgId}/agents/wallet:
+    post:
+      operationId: AgentController_createTenant
+      summary: Shared Agent
+      description: Create a shared agent.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTenantDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+    delete:
+      operationId: AgentController_deleteWallet
+      summary: Delete wallet
+      description: Delete agent wallet by organization.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /orgs/{orgId}/agents/createWallet:
+    post:
+      operationId: AgentController_createWallet
+      summary: Create wallet
+      description: Create wallet
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWalletDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /orgs/{orgId}/agents/did:
+    post:
+      operationId: AgentController_createDid
+      summary: Create new did
+      description: Create new did for an organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNewDidDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /orgs/{orgId}/agents/polygon/create-keys:
+    post:
+      operationId: AgentController_createSecp256k1KeyPair
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /orgs/{orgId}/agents/configure:
+    post:
+      operationId: AgentController_agentConfigure
+      summary: Agent configure
+      description: Create a new agent configure.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentConfigureDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_0
+        '403': *ref_1
+      tags: *ref_2
+      security: *ref_3
+  /platform/schemas:
+    get:
+      operationId: PlatformController_getAllSchema
+      summary: Get all schemas from platform.
+      description: Get all schemas from platform.
+      parameters:
+        - name: ledgerId
+          required: false
+          in: query
+          example: 1a7eac11-ff05-40d7-8351-4d7467687cad
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: sorting
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortByValue
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: schemaType
+          required: false
+          in: query
+          schema:
+            enum:
+              - indy
+              - w3c
+            type: string
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - id
+              - createDateTime
+              - name
+              - version
+              - schemaLedgerId
+              - publisherDid
+              - issuerId
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      security:
+        - bearer: []
+      tags:
+        - schemas
+  /platform/cred-defs:
+    get:
+      operationId: PlatformController_getAllCredDefs
+      summary: Get all credential-definitions from platform.
+      description: Get all credential-definitions list from platform.
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: ledgerId
+          required: false
+          in: query
+          example: 1a7eac11-ff05-40d7-8351-4d7467687cad
+          schema:
+            type: string
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - createDateTime
+              - tag
+              - schemaLedgerId
+              - credentialDefinitionId
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      security:
+        - bearer: []
+      tags:
+        - credential-definitions
+  /platform/ledgers:
+    get:
+      operationId: PlatformController_getAllLedgers
+      summary: Get all ledgers from platform.
+      description: Get all ledgers from platform.
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      security:
+        - bearer: []
+      tags:
+        - ledgers
+  /platform/network/url/{indyNamespace}:
+    get:
+      operationId: PlatformController_getNetwrkUrl
+      summary: Get network url from platform.
+      description: Get network url from platform.
+      parameters:
+        - name: indyNamespace
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      security:
+        - bearer: []
+      tags:
+        - ledgers
+  /auth/verify:
+    get:
+      operationId: AuthzController_verifyEmail
+      summary: Verify user’s email
+      description: Verify user’s email
+      parameters:
+        - name: email
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: verificationCode
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: &ref_4
+        - auth
+  /auth/verification-mail:
+    post:
+      operationId: AuthzController_create
+      summary: Send verification email
+      description: Send verification email to new user
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEmailVerificationDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_4
+  /auth/signup:
+    post:
+      operationId: AuthzController_addUserDetails
+      summary: Register new user to platform
+      description: Register new user to platform
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddUserDetailsDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_4
+  /auth/signin:
+    post:
+      operationId: AuthzController_login
+      summary: Authenticate the user for the access
+      description: Authenticate the user for the access
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthTokenResponse'
+      tags: *ref_4
+  /auth/reset-password:
+    post:
+      operationId: AuthzController_resetPassword
+      summary: Reset password
+      description: Reset Password of the user
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_4
+  /auth/forgot-password:
+    post:
+      operationId: AuthzController_forgotPassword
+      summary: Forgot password
+      description: Forgot Password of the user
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_4
+  /auth/password-reset/{email}:
+    post:
+      operationId: AuthzController_resetNewPassword
+      summary: Reset password with token
+      description: Reset Password of the user using token
+      parameters:
+        - name: email
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetTokenPasswordDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_4
+  /auth/refresh-token:
+    post:
+      operationId: AuthzController_refreshToken
+      summary: Token from refresh token
+      description: Get a new token from a refresh token
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_4
+  /users/profile:
+    get:
+      operationId: UserController_getProfile
+      summary: Fetch login user details
+      description: Fetch login user details
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '401': &ref_5
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_6
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_7
+        - users
+      security:
+        - bearer: []
+  /users/platform-settings:
+    get:
+      operationId: UserController_getPlatformSettings
+      summary: Get all platform and ecosystem settings
+      description: Get all platform and ecosystem settings
+      parameters: []
+      responses:
+        '200':
+          description: ''
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+      security:
+        - bearer: []
+    put:
+      operationId: UserController_updatePlatformSettings
+      summary: Update platform and ecosystem settings
+      description: Update platform and ecosystem settings
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePlatformSettingsDto'
+      responses:
+        '200':
+          description: ''
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+      security:
+        - bearer: []
+  /users/activity:
+    get:
+      operationId: UserController_getUserActivities
+      summary: users activity
+      description: Fetch users activity
+      parameters:
+        - name: limit
+          required: true
+          in: query
+          schema:
+            type: number
+      responses:
+        '200':
+          description: ''
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+      security:
+        - bearer: []
+  /users/org-invitations:
+    get:
+      operationId: UserController_invitations
+      summary: organization invitations
+      description: Fetch organization invitations
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: status
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+      security:
+        - bearer: []
+  /users/{email}:
+    get:
+      operationId: UserController_checkUserExist
+      summary: Check if user exist
+      description: check user existence
+      parameters:
+        - name: email
+          required: true
+          in: path
+          example: awqx@getnada.com
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+  /users/user-credentials/{credentialId}:
+    get:
+      operationId: UserController_getUserCredentialsById
+      summary: Get user credentials by Id
+      description: Get user credentials by Id
+      parameters:
+        - name: credentialId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+  /users/org-invitations/{invitationId}:
+    post:
+      operationId: UserController_acceptRejectInvitaion
+      summary: accept/reject organization invitation
+      description: Accept or Reject organization invitations
+      parameters:
+        - name: invitationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptRejectInvitationDto'
+      responses:
+        '201':
+          description: ''
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+      security:
+        - bearer: []
+  /users/certificate:
+    post:
+      operationId: UserController_shareUserCertificate
+      summary: Share user certificate
+      description: Share user certificate
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCertificateDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+  /users:
+    put:
+      operationId: UserController_updateUserProfile
+      summary: Update user profile
+      description: Update user profile
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserProfileDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_5
+        '403': *ref_6
+      tags: *ref_7
+      security:
+        - bearer: []
+  /orgs/{orgId}/cred-defs/{credDefId}:
+    get:
+      operationId: CredentialDefinitionController_getCredentialDefinitionById
+      summary: Get credential definition by credential definition Id
+      description: Get credential definition details by credential definition Id
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: credDefId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_8
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_9
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_10
+        - credential-definitions
+      security: &ref_11
+        - bearer: []
+  /verifiation/cred-defs/{schemaId}:
+    get:
+      operationId: CredentialDefinitionController_getCredentialDefinitionBySchemaId
+      summary: Get all credential definitions by schema Id
+      description: Get all credential definitions by schema Id for verification
+      parameters:
+        - name: schemaId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_8
+        '403': *ref_9
+      tags: *ref_10
+      security: *ref_11
+  /orgs/{orgId}/cred-defs:
+    get:
+      operationId: CredentialDefinitionController_getAllCredDefs
+      summary: Fetch all credential definitions by organization Id
+      description: >-
+        Fetch all credential definitions of provided organization Id with
+        pagination
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: sorting
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortByValue
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: revocable
+          required: false
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: ''
+        '401': *ref_8
+        '403': *ref_9
+      tags: *ref_10
+      security: *ref_11
+    post:
+      operationId: CredentialDefinitionController_createCredentialDefinition
+      summary: Sends a credential definition to ledger
+      description: Sends a credential definition to ledger
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCredentialDefinitionDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_8
+        '403': *ref_9
+      tags: *ref_10
+      security: *ref_11
+  /orgs/{orgId}/schemas/{schemaId}:
+    get:
+      operationId: SchemaController_getSchemaById
+      summary: Get schema information from the ledger using its schema ID.
+      description: Get schema information from the ledger using its schema ID.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: schemaId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_12
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_13
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_14
+        - schemas
+      security: &ref_15
+        - bearer: []
+  /orgs/{orgId}/schemas/{schemaId}/cred-defs:
+    get:
+      operationId: SchemaController_getcredDeffListBySchemaId
+      summary: Credential definitions by schema Id
+      description: Get credential definition list by schema Id
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: schemaId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - createDateTime
+              - tag
+              - schemaLedgerId
+              - credentialDefinitionId
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_12
+        '403': *ref_13
+      tags: *ref_14
+      security: *ref_15
+  /orgs/{orgId}/schemas:
+    get:
+      operationId: SchemaController_getSchemas
+      summary: Schemas by org id.
+      description: Get all schemas by org id.
+      parameters:
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - id
+              - createDateTime
+              - name
+              - version
+              - schemaLedgerId
+              - publisherDid
+              - issuerId
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_12
+        '403': *ref_13
+      tags: *ref_14
+      security: *ref_15
+    post:
+      operationId: SchemaController_createSchema
+      summary: Create and register various types of schemas.
+      description: >-
+        Enables the creation and registration of schemas across different
+        systems: the Indy ledger, the Polygon blockchain network, and W3C
+        ledger-less standards.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericSchemaDTO'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_12
+        '403': *ref_13
+      tags: *ref_14
+      security: *ref_15
+  /orgs/{orgId}/verified-proofs/{proofId}:
+    get:
+      operationId: VerificationController_getVerifiedProofDetails
+      summary: Get verified proof details
+      description: Get verified proof details
+      parameters:
+        - name: proofId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_16
+        - verifications
+      security:
+        - bearer: []
+  /orgs/{orgId}/proofs/{proofId}:
+    get:
+      operationId: VerificationController_getProofPresentationById
+      summary: Get proof presentation by proof Id
+      description: Get proof presentation by proof Id
+      parameters:
+        - name: proofId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_16
+      security:
+        - bearer: []
+  /orgs/{orgId}/proofs:
+    get:
+      operationId: VerificationController_getProofPresentations
+      summary: Get all proof presentations by orgId
+      description: Get all proof presentations by orgId
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - createDateTime
+              - state
+              - connectionId
+              - presentationId
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_16
+      security:
+        - bearer: []
+    post:
+      operationId: VerificationController_sendPresentationRequest
+      summary: Sends a proof request
+      description: Sends a proof request
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: requestType
+          required: true
+          in: query
+          schema:
+            enum:
+              - indy
+              - presentationExchange
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestProofDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_16
+      security:
+        - bearer: []
+  /orgs/{orgId}/proofs/{proofId}/verify:
+    post:
+      operationId: VerificationController_verifyPresentation
+      summary: Verify presentation
+      description: Verify presentation
+      parameters:
+        - name: proofId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_16
+      security:
+        - bearer: []
+  /orgs/{orgId}/proofs/oob:
+    post:
+      operationId: VerificationController_sendOutOfBandPresentationRequest
+      summary: Sends a out-of-band proof request
+      description: Sends a out-of-band proof request
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: requestType
+          required: true
+          in: query
+          schema:
+            enum:
+              - indy
+              - presentationExchange
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendProofRequestPayload'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_16
+      security:
+        - bearer: []
+  /orgs/{orgId}/verification-records:
+    delete:
+      operationId: VerificationController_deleteVerificationRecordsByOrgId
+      summary: Delete verification record
+      description: Delete verification records by orgId
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_16
+      security:
+        - bearer: []
+  /auth/passkey/{email}:
+    get:
+      operationId: FidoController_fetchFidoUserDetails
+      summary: Fetch fido user details
+      parameters:
+        - name: email
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorDto'
+      tags: &ref_17
+        - fido
+      security:
+        - bearer: []
+  /auth/passkey/generate-registration/{email}:
+    post:
+      operationId: FidoController_generateRegistrationOption
+      summary: Generate registration option
+      parameters:
+        - name: email
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRegistrationDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '400': &ref_18
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestErrorDto'
+        '401': &ref_19
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_20
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_17
+  /auth/passkey/verify-registration/{email}:
+    post:
+      operationId: FidoController_verifyRegistration
+      summary: Verify registration
+      parameters:
+        - name: email
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyRegistrationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '400': *ref_18
+        '401': *ref_19
+        '403': *ref_20
+      tags: *ref_17
+  /auth/passkey/authentication-options:
+    post:
+      operationId: FidoController_generateAuthenticationOption
+      summary: Generate authentication option
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateAuthenticationDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '400': *ref_18
+        '401': *ref_19
+        '403': *ref_20
+      tags: *ref_17
+  /auth/passkey/verify-authentication/{email}:
+    post:
+      operationId: FidoController_verifyAuthentication
+      summary: Verify authentication
+      parameters:
+        - name: email
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyAuthenticationDto'
+      responses:
+        '201':
+          description: ''
+        '400': *ref_18
+        '401': *ref_19
+        '403': *ref_20
+      tags: *ref_17
+  /auth/passkey/{credentialId}:
+    put:
+      operationId: FidoController_updateFidoUserDeviceName
+      summary: Update fido user device name
+      parameters:
+        - name: credentialId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: deviceName
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '400': *ref_18
+        '401': *ref_19
+        '403': *ref_20
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorDto'
+      tags: *ref_17
+      security:
+        - bearer: []
+    delete:
+      operationId: FidoController_deleteFidoUserDevice
+      summary: Delete fido user device
+      parameters:
+        - name: credentialId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '400': *ref_18
+        '401': *ref_19
+        '403': *ref_20
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorDto'
+      tags: *ref_17
+      security:
+        - bearer: []
+  /orgs/public-profile:
+    get:
+      operationId: OrganizationController_get
+      summary: Get all public profile organizations
+      description: Get all public profile organizations.
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_21
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_22
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_23
+        - organizations
+  /orgs/{orgId}/roles:
+    get:
+      operationId: OrganizationController_getOrgRoles
+      summary: Fetch org-roles details
+      description: Fetch org-roles details
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/public-profiles/{orgSlug}:
+    get:
+      operationId: OrganizationController_getPublicProfile
+      summary: Fetch organization details
+      description: Fetch organization details
+      parameters:
+        - name: orgSlug
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+  /orgs/dashboard/{orgId}:
+    get:
+      operationId: OrganizationController_getOrganizationDashboard
+      summary: Get dashboard details
+      description: Get organization dashboard details
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/activity-count/{orgId}:
+    get:
+      operationId: OrganizationController_getOrganizationActivityCount
+      summary: Get organization references count
+      description: Get organization references count by org Id
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/invitations:
+    get:
+      operationId: OrganizationController_getInvitationsByOrgId
+      summary: Get all invitations
+      description: Get all invitations
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+    post:
+      operationId: OrganizationController_createInvitation
+      summary: Create organization invitation
+      description: Create organization invitation
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkSendInvitationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs:
+    get:
+      operationId: OrganizationController_getOrganizations
+      summary: Get all organizations
+      description: Get all organizations
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: role
+          required: false
+          in: query
+          schema:
+            enum:
+              - owner
+              - super_admin
+              - admin
+              - issuer
+              - verifier
+              - holder
+              - member
+              - platform_admin
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+    post:
+      operationId: OrganizationController_createOrganization
+      summary: Create a new Organization
+      description: Create an organization
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}:
+    get:
+      operationId: OrganizationController_getOrganization
+      summary: Get an organization
+      description: Get an organization by id
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+    put:
+      operationId: OrganizationController_updateOrganization
+      summary: Update Organization
+      description: Update an organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+    delete:
+      operationId: OrganizationController_deleteOrganization
+      summary: Delete Organization
+      description: Delete an organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/client_credentials:
+    get:
+      operationId: OrganizationController_fetchOrgCredentials
+      summary: Fetch client credentials for an organization
+      description: Fetch client id and secret for an organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+    post:
+      operationId: OrganizationController_createOrgCredentials
+      summary: Create credentials for an organization
+      description: Create client id and secret for an organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/users:
+    get:
+      operationId: OrganizationController_getOrganizationUsers
+      summary: Get organization users list
+      description: Get organization users list.
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/dids:
+    get:
+      operationId: OrganizationController_getAllDidByOrgId
+      summary: Fetch organization DIDs
+      description: Get all DIDs from organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/primary-did:
+    put:
+      operationId: OrganizationController_setPrimaryDid
+      summary: Set primary DID
+      description: Set primary DID for an organization
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrimaryDid'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{clientId}/token:
+    post:
+      operationId: OrganizationController_clientLoginCredentials
+      summary: Authenticate client for credentials
+      description: Authenticate client for credentials
+      parameters:
+        - name: clientId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientCredentialsDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+  /orgs/register-org-map-users:
+    post:
+      operationId: OrganizationController_registerOrgsMapUsers
+      summary: Register client and map users
+      description: Register client and map users
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/user-roles/{userId}:
+    put:
+      operationId: OrganizationController_updateUserRoles
+      summary: Update user roles
+      description: update user roles
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: userId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRolesDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/invitations/{invitationId}:
+    delete:
+      operationId: OrganizationController_deleteOrganizationInvitation
+      summary: Delete organization invitation
+      description: Delete organization invitation
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: invitationId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_21
+        '403': *ref_22
+      tags: *ref_23
+      security:
+        - bearer: []
+  /orgs/{orgId}/connections/{connectionId}:
+    get:
+      operationId: ConnectionController_getConnectionsById
+      summary: Get connections by connection Id
+      description: Get connections by connection Id
+      parameters:
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_24
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_25
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_26
+        - connections
+      security: &ref_27
+        - &ref_28
+          bearer: []
+  /orgs/{orgId}/connections:
+    get:
+      operationId: ConnectionController_getConnections
+      summary: Fetch all connections by orgId
+      description: Fetch all connections by orgId
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          example: '1'
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          example: '10'
+          schema:
+            type: number
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - createDateTime
+              - theirLabel
+              - connectionId
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+    post:
+      operationId: ConnectionController_createConnectionInvitation
+      summary: Create outbound out-of-band connection invitation
+      description: Create outbound out-of-band connection invitation
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOutOfBandConnectionInvitation'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+    delete:
+      operationId: ConnectionController_deleteConnectionsByOrgId
+      summary: Delete connection record
+      description: Delete connections by orgId
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security:
+        - *ref_28
+        - bearer: []
+  /orgs/{orgId}/agent/connections:
+    get:
+      operationId: ConnectionController_getConnectionListFromAgent
+      summary: Fetch all connections from agent by orgId
+      description: Fetch all connections from agent by orgId
+      parameters:
+        - name: outOfBandId
+          required: false
+          in: query
+          example: e315f30d-9beb-4068-aea4-abb5fe5eecb1
+          schema:
+            type: string
+        - name: alias
+          required: false
+          in: query
+          example: Test
+          schema:
+            type: string
+        - name: myDid
+          required: false
+          in: query
+          example: did:example:e315f30d-9beb-4068-aea4-abb5fe5eecb1
+          schema:
+            type: string
+        - name: theirDid
+          required: false
+          in: query
+          example: did:example:e315f30d-9beb-4068-aea4-abb5fe5eecb1
+          schema:
+            type: string
+        - name: theirLabel
+          required: false
+          in: query
+          example: Bob
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+  /orgs/{orgId}/question-answer/question:
+    get:
+      operationId: ConnectionController_getQuestionAnswersRecord
+      summary: Get question-answer record
+      description: Get question-answer record
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+  /orgs/{orgId}/question-answer/question/{connectionId}:
+    post:
+      operationId: ConnectionController_sendQuestion
+      summary: ''
+      description: send question
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+  /orgs/{orgId}/receive-invitation-url:
+    post:
+      operationId: ConnectionController_receiveInvitationUrl
+      summary: Receive Invitation URL
+      description: Receive Invitation URL
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationUrlDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+  /orgs/{orgId}/receive-invitation:
+    post:
+      operationId: ConnectionController_receiveInvitation
+      summary: Receive Invitation
+      description: Receive Invitation
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+  /orgs/{orgId}/basic-message/{connectionId}:
+    post:
+      operationId: ConnectionController_sendBasicMessage
+      summary: Send basic message
+      description: Send basic message
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasicMessageDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_24
+        '403': *ref_25
+      tags: *ref_26
+      security: *ref_27
+  /orgs/{orgId}/credentials:
+    get:
+      operationId: IssuanceController_getIssueCredentials
+      summary: Get all issued credentials for a specific organization
+      description: Get all issued credentials for a specific organization
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - createDateTime
+              - schemaId
+              - connectionId
+              - state
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - asc
+              - desc
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_29
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_30
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_31
+        - credentials
+      security:
+        - bearer: []
+        - bearer: []
+  /orgs/{orgId}/credentials/{credentialRecordId}:
+    get:
+      operationId: IssuanceController_getIssueCredentialsbyCredentialRecordId
+      summary: Fetch credentials by credentialRecordId
+      description: Fetch credentials credentialRecordId
+      parameters:
+        - name: credentialRecordId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_29
+        '403': *ref_30
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/credentials/bulk/template:
+    get:
+      operationId: IssuanceController_getAllCredentialTemplates
+      summary: Fetch all templates for bulk opeartion
+      description: Retrieve all templates for bulk operation
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: schemaType
+          required: true
+          in: query
+          schema:
+            enum:
+              - indy
+              - w3c
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_29
+        '403': *ref_30
+      tags: *ref_31
+      security:
+        - bearer: []
+    post:
+      operationId: IssuanceController_downloadBulkIssuanceCSVTemplate
+      summary: Download csv template for bulk-issuance
+      description: Download csv template for bulk-issuance
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateDetails'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/bulk/upload:
+    post:
+      operationId: IssuanceController_uploadCSVTemplate
+      summary: Upload file for bulk issuance
+      description: Upload file for bulk issuance.
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: templateId
+          required: true
+          in: query
+          example: R2Wh9dJmnvkPnzKaiiBptR:2:BulkCredentials:0.1
+          schema:
+            type: string
+        - name: schemaType
+          required: true
+          in: query
+          description: The type of schema to be used
+          schema:
+            enum:
+              - indy
+              - w3c
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              nullable: false
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/{requestId}/preview:
+    get:
+      operationId: IssuanceController_previewFileDataForIssuance
+      summary: Preview uploded file details
+      description: Preview uploded file details
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: requestId
+          required: false
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          example: '1'
+          schema:
+            type: number
+        - name: pageSize
+          required: false
+          in: query
+          example: '10'
+          schema:
+            type: number
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/{requestId}/bulk:
+    post:
+      operationId: IssuanceController_issueBulkCredentials
+      summary: bulk issue credential
+      description: bulk issue credential
+      parameters:
+        - name: requestId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: credDefId
+          required: false
+          in: query
+          example: R2Wh9dJmnvkPnzKaiiBptR:2:BulkCredentials:0.1
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              nullable: false
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/bulk/files:
+    get:
+      operationId: IssuanceController_issuedFileDetails
+      summary: Get all file list uploaded for bulk operation
+      description: Get all file list uploaded for bulk operation
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          example: '10'
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          example: '1'
+          schema:
+            type: number
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/{fileId}/bulk/file-data:
+    get:
+      operationId: IssuanceController_getFileDetailsByFileId
+      summary: Get uploaded file details by file id
+      description: Get uploaded file details by file id
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: fileId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          example: '10'
+          schema:
+            type: number
+        - name: pageNumber
+          required: false
+          in: query
+          example: '1'
+          schema:
+            type: number
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+        - name: searchByText
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/{fileId}/retry/bulk:
+    post:
+      operationId: IssuanceController_retryBulkCredentials
+      summary: Retry bulk issue credential
+      description: Retry bulk issue credential
+      parameters:
+        - name: fileId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientDetails'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/credentials/offer:
+    post:
+      operationId: IssuanceController_sendCredential
+      summary: Issuer create a credential offer
+      description: Issuer creates a credential offer and sends it to the holder
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: credentialType
+          required: true
+          in: query
+          schema:
+            enum:
+              - jsonld
+              - indy
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueCredentialDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_29
+        '403': *ref_30
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/credentials/oob/email:
+    post:
+      operationId: IssuanceController_outOfBandCredentialOffer
+      summary: Creates a out-of-band credential offer and sends them via emails
+      description: >-
+        Issuer creates a out-of-band credential offers and sends them to holders
+        via emails
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: credentialType
+          required: true
+          in: query
+          schema:
+            enum:
+              - jsonld
+              - indy
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OOBCredentialDtoWithEmail'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_29
+        '403': *ref_30
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/credentials/oob/offer:
+    post:
+      operationId: IssuanceController_createOOBCredentialOffer
+      summary: Create out-of-band credential offer
+      description: Creates an out-of-band credential offer
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: credentialType
+          required: true
+          in: query
+          schema:
+            enum:
+              - jsonld
+              - indy
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OOBIssueCredentialDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_29
+        '403': *ref_30
+      tags: *ref_31
+      security:
+        - bearer: []
+  /orgs/{orgId}/issuance-records:
+    delete:
+      operationId: IssuanceController_deleteIssuanceRecordsByOrgId
+      summary: Delete issuance record
+      description: Delete issuance records by orgId
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_29
+        '403': *ref_30
+      tags: *ref_31
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/endorsement-transactions:
+    get:
+      operationId: EcosystemController_getEndorsementTranasactions
+      summary: Get all endorsement transactions
+      description: Get all endorsement transactions
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            type: number
+        - name: type
+          required: true
+          in: query
+          schema:
+            enum:
+              - schema
+              - credential-definition
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_32
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_33
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_34
+        - ecosystem
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/schemas:
+    get:
+      operationId: EcosystemController_getAllEcosystemSchemas
+      summary: Get all ecosystem schemas
+      description: Get all ecosystem schemas
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{orgId}:
+    get:
+      operationId: EcosystemController_getEcosystem
+      summary: Get all organization ecosystems
+      description: Get all existing ecosystems of an specific organization
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+    post:
+      operationId: EcosystemController_createNewEcosystem
+      summary: Create a new ecosystem
+      description: Create a new ecosystem
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEcosystemDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/dashboard:
+    get:
+      operationId: EcosystemController_getEcosystemDashboardDetails
+      summary: Get ecosystem dashboard details
+      description: Get ecosystem dashboard details
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{orgId}/users/invitations:
+    get:
+      operationId: EcosystemController_getEcosystemInvitations
+      summary: Get received ecosystem invitations
+      description: Get received ecosystem invitations
+      parameters:
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: status
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/invitations:
+    get:
+      operationId: EcosystemController_getInvitationsByEcosystemId
+      summary: Get all sent invitations
+      description: Get all sent invitations
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+    post:
+      operationId: EcosystemController_createInvitation
+      summary: Send ecosystem invitation
+      description: Send ecosystem invitation
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkEcosystemInvitationDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/members:
+    get:
+      operationId: EcosystemController_getEcosystemMembers
+      summary: Get ecosystem members list
+      description: Get ecosystem members list.
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: pageNumber
+          required: false
+          in: query
+          schema:
+            default: 1
+            type: number
+        - name: search
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: pageSize
+          required: false
+          in: query
+          schema:
+            default: 10
+            type: number
+        - name: sortField
+          required: false
+          in: query
+          schema:
+            enum:
+              - createDateTime
+              - id
+              - organization
+              - status
+            type: string
+        - name: sortBy
+          required: false
+          in: query
+          schema:
+            enum:
+              - desc
+              - asc
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/transaction/schema:
+    post:
+      operationId: EcosystemController_requestSchemaTransaction
+      summary: Request new schema
+      description: Create request for new schema
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestSchemaDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/transaction/cred-def:
+    post:
+      operationId: EcosystemController_requestCredDefTransaction
+      summary: Request new credential-definition
+      description: Request new credential-definition
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCredDefDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/transaction/sign/{endorsementId}:
+    post:
+      operationId: EcosystemController_SignEndorsementRequests
+      summary: Sign transaction
+      description: Sign transaction
+      parameters:
+        - name: endorsementId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/transaction/submit/{endorsementId}:
+    post:
+      operationId: EcosystemController_SubmitEndorsementRequests
+      summary: Submit transaction
+      description: Submit transaction
+      parameters:
+        - name: endorsementId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/orgs:
+    post:
+      operationId: EcosystemController_addOrganizationsInEcosystem
+      summary: Add multiple organizations of ecosystem owner in ecosystem
+      description: Add multiple organizations of ecosystem owner under the same ecosystem
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOrganizationsDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{orgId}/invitations/{invitationId}:
+    put:
+      operationId: EcosystemController_acceptRejectEcosystemInvitaion
+      summary: Accept or reject ecosystem invitation
+      description: Accept or Reject ecosystem invitations
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: invitationId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptRejectEcosystemInvitationDto'
+      responses:
+        '200':
+          description: ''
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}:
+    put:
+      operationId: EcosystemController_editEcosystem
+      summary: Edit ecosystem
+      description: Edit ecosystem
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditEcosystemDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/transactions/{endorsementId}:
+    put:
+      operationId: EcosystemController_declineEndorsementRequestByLead
+      summary: Decline Endorsement Request By Lead
+      description: Decline Endorsement Request By Lead
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: endorsementId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{orgId}/member-org:
+    delete:
+      operationId: EcosystemController_deleteOrgFromEcosystem
+      summary: Delete organization from ecosystem as a ecosystem member
+      description: Delete organization from ecosystem as a ecosystem member
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /ecosystem/{ecosystemId}/{orgId}/invitations/{invitationId}:
+    delete:
+      operationId: EcosystemController_deleteEcosystemInvitations
+      summary: Delete ecosystem pending invitations
+      description: Delete ecosystem pending invitations
+      parameters:
+        - name: ecosystemId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: invitationId
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_32
+        '403': *ref_33
+      tags: *ref_34
+      security:
+        - bearer: []
+  /utilities:
+    post:
+      operationId: UtilitiesController_createShorteningUrl
+      summary: Create a shorteningurl
+      description: Create a shortening url
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UtilitiesDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_35
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_36
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_37
+        - utilities
+  /utilities/store-object/{persist}:
+    post:
+      operationId: UtilitiesController_storeObject
+      summary: Store an object and return a short url to it
+      description: Create a short url representing the object
+      parameters:
+        - name: persist
+          required: true
+          in: path
+          schema:
+            type: boolean
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreObjectDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_35
+        '403': *ref_36
+      tags: *ref_37
+      security:
+        - bearer: []
+  /webhooks/orgs/{orgId}/register:
+    post:
+      operationId: WebhookController_registerWebhook
+      summary: Register Webhook
+      description: Register a webhook url
+      parameters:
+        - name: orgId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterWebhookDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_38
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_39
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_40
+        - webhooks
+      security:
+        - bearer: []
+  /webhooks/orgs/webhookurl:
+    get:
+      operationId: WebhookController_getWebhookUrl
+      summary: Get the webhookurl details
+      description: Get the webhookurl details
+      parameters:
+        - name: orgId
+          required: false
+          in: query
+          example: 2a041d6e-d24c-4ed9-b011-1cfc371a8b8e
+          schema:
+            type: string
+        - name: tenantId
+          required: false
+          in: query
+          example: 3a041d6e-d24c-4ed9-b011-1cfc371a8b8e
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+        '401': *ref_38
+        '403': *ref_39
+      tags: *ref_40
+      security:
+        - bearer: []
+  /notification/register/webhook-endpoint:
+    post:
+      operationId: NotificationController_registerOrgWebhookEndpoint
+      summary: Register organization webhook endpoint for notification
+      description: Register organization webhook endpoint for notification
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterOrgWebhhookEndpointDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_41
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_42
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_43
+        - notification
+  /notification:
+    post:
+      operationId: NotificationController_sendNotification
+      summary: Send notification for holder
+      description: Send notification for holder
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendNotificationDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_41
+        '403': *ref_42
+      tags: *ref_43
+  /countries:
+    get:
+      operationId: GeoLocationController_getAllCountries
+      summary: Retrieve a list of all countries
+      description: Fetches and returns the details of all available countries.
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: &ref_44
+        - geolocation
+  /countries/{countryId}/states:
+    get:
+      operationId: GeoLocationController_getStatesByCountryId
+      summary: Retrieve a list of all states within a specified country
+      description: >-
+        Fetches and returns the details of all states associated with a given
+        countryId. 
+      parameters:
+        - name: countryId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_44
+  /countries/{countryId}/states/{stateId}/cities:
+    get:
+      operationId: GeoLocationController_getCitiesByStateAndCountry
+      summary: Retrieve a list of all cities within a specified state and country
+      description: >-
+        Fetches and returns the details of all cities associated with a given
+        countryId and stateId
+      parameters:
+        - name: countryId
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: stateId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+      tags: *ref_44
+  /configure/base-wallet:
+    post:
+      operationId: CloudWalletController_configureBaseWallet
+      summary: Configure base wallet
+      description: Configure base wallet
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudBaseWalletConfigureDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': &ref_45
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+        '403': &ref_46
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorDto'
+      tags: &ref_47
+        - cloud-wallet
+      security: &ref_49
+        - &ref_48
+          bearer: []
+  /create-wallet:
+    post:
+      operationId: CloudWalletController_createCloudWallet
+      summary: Create cloud wallet
+      description: Create cloud wallet
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCloudWalletDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security:
+        - *ref_48
+        - bearer: []
+  /proofs/accept-request:
+    post:
+      operationId: CloudWalletController_acceptProofRequest
+      summary: Accept proof request
+      description: Accept proof request
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptProofRequestDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /proofs/{proofRecordId}:
+    get:
+      operationId: CloudWalletController_getProofById
+      summary: Get proof presentation by Id
+      description: Get proof presentation by Id
+      parameters:
+        - name: proofRecordId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /proofs:
+    get:
+      operationId: CloudWalletController_getProofPresentation
+      summary: Get proof presentation
+      description: Get proof presentation
+      parameters:
+        - name: threadId
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /receive-invitation-url:
+    post:
+      operationId: CloudWalletController_receiveInvitationByUrl
+      summary: Receive inviation using URL
+      description: Receive inviation using URL
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReceiveInvitationUrlDTO'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security:
+        - *ref_48
+        - bearer: []
+  /accept-offer:
+    post:
+      operationId: CloudWalletController_acceptOffer
+      summary: Accept credential offer
+      description: Accept credential offer
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptOfferDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security:
+        - *ref_48
+        - bearer: []
+  /did:
+    post:
+      operationId: CloudWalletController_createDid
+      summary: Create new did
+      description: Create new did for cloud wallet
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCloudWalletDidDto'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security:
+        - *ref_48
+        - bearer: []
+    get:
+      operationId: CloudWalletController_getDidList
+      summary: Get DID list from wallet
+      description: Get DID list from wallet
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /connections/invitation:
+    post:
+      operationId: CloudWalletController_createConnection
+      summary: Create connection invitation for cloud wallet
+      description: Create connection invitation
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /connection/{connectionId}:
+    get:
+      operationId: CloudWalletController_getconnectionById
+      summary: Get connection by connection Id
+      description: Get connection by connection Id
+      parameters:
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /connections:
+    get:
+      operationId: CloudWalletController_getAllconnectionById
+      summary: Get all wallet connections
+      description: Get all wallet connections
+      parameters:
+        - name: outOfBandId
+          required: false
+          in: query
+          example: e315f30d-9beb-4068-aea4-abb5fe5eecb1
+          schema:
+            type: string
+        - name: alias
+          required: false
+          in: query
+          example: Test
+          schema:
+            type: string
+        - name: myDid
+          required: false
+          in: query
+          example: did:example:e315f30d-9beb-4068-aea4-abb5fe5eecb1
+          schema:
+            type: string
+        - name: theirDid
+          required: false
+          in: query
+          example: did:example:e315f30d-9beb-4068-aea4-abb5fe5eecb1
+          schema:
+            type: string
+        - name: theirLabel
+          required: false
+          in: query
+          example: Bob
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /credential:
+    get:
+      operationId: CloudWalletController_getCredentialList
+      summary: Get credential list from cloud wallet
+      description: Get credential list from cloud wallet
+      parameters:
+        - name: threadId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: connectionId
+          required: false
+          in: query
+          schema:
+            type: string
+        - name: state
+          required: false
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /credential/{credentialRecordId}:
+    get:
+      operationId: CloudWalletController_getCredentialByCredentialRecordId
+      summary: Get credential by credential record Id
+      description: Get credential by credential record Id
+      parameters:
+        - name: credentialRecordId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+  /basic-message/{connectionId}:
+    get:
+      operationId: CloudWalletController_getBasicMessageByConnectionId
+      summary: Get basic message by connection id
+      description: Get basic message by connection id
+      parameters:
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+    post:
+      operationId: CloudWalletController_sendBasicMessage
+      summary: send question
+      description: send question
+      parameters:
+        - name: connectionId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasicMessageDTO'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseDto'
+        '401': *ref_45
+        '403': *ref_46
+      tags: *ref_47
+      security: *ref_49
+info:
+  title: CREDEBL
+  description: CREDEBL Platform APIs
+  version: '1.0'
+  contact: {}
+tags: []
+servers:
+  - url: undefined
+  - url: undefined
+  - url: undefined
+  - url: undefined
+  - url: undefined
+  - url: http://192.168.1.97:5000
+  - url: http://192.168.1.97
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    UnauthorizedErrorDto:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 401
+        error:
+          type: string
+          example: Unauthorized
+      required:
+        - statusCode
+        - error
+    ForbiddenErrorDto:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 403
+        error:
+          type: string
+          example: Forbidden
+      required:
+        - statusCode
+        - error
+    AgentSpinupDto:
+      type: object
+      properties:
+        seed:
+          type: string
+          example: 000000000000000000000000000Seed1
+        keyType:
+          type: string
+          example: ed25519
+        method:
+          type: string
+          example: indy
+        network:
+          type: string
+          example: bcovrin:testnet
+        domain:
+          type: string
+          example: www.github.com
+        role:
+          type: string
+          example: endorser
+        privatekey:
+          type: string
+          example: ''
+        endpoint:
+          type: string
+          example: http://localhost:6006/docs
+        did:
+          type: string
+          example: XzFjo1RTZ2h9UVFCnPUyaQ
+        endorserDid:
+          type: string
+          example: did:indy:bcovrin:testnet:UEeW111G1tYo1nEkPwMcF
+        walletName:
+          type: string
+        walletPassword:
+          type: string
+        clientSocketId:
+          type: string
+          example: ojIckSD2jqNzOqIrAGzL
+        tenant:
+          type: boolean
+          example: true
+      required:
+        - keyType
+        - method
+        - walletName
+        - walletPassword
+    ApiResponseDto:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Success
+        success:
+          type: boolean
+        data:
+          type: object
+        statusCode:
+          type: number
+          example: 200
+      required:
+        - message
+        - success
+        - data
+        - statusCode
+    CreateTenantDto:
+      type: object
+      properties:
+        seed:
+          type: string
+          example: 000000000000000000000000000Seed1
+        keyType:
+          type: string
+          example: ed25519
+        method:
+          type: string
+          example: indy
+        network:
+          type: string
+          example: bcovrin:testnet
+        domain:
+          type: string
+          example: www.github.com
+        role:
+          type: string
+          example: endorser
+        privatekey:
+          type: string
+          example: ''
+        endpoint:
+          type: string
+          example: http://localhost:6006/docs
+        did:
+          type: string
+          example: XzFjo1RTZ2h9UVFCnPUyaQ
+        endorserDid:
+          type: string
+          example: did:indy:bcovrin:testnet:UEeW111G1tYo1nEkPwMcF
+        label:
+          type: string
+        clientSocketId:
+          type: string
+          example: ojIckSD2jqNzOqIrAGzL
+      required:
+        - keyType
+        - method
+        - label
+    CreateWalletDto:
+      type: object
+      properties:
+        label:
+          type: string
+        did:
+          type: string
+          example: XzFjo1RTZ2h9UVFCnPUyaQ
+        clientSocketId:
+          type: string
+          example: ojIckSD2jqNzOqIrAGzL
+      required:
+        - label
+    CreateNewDidDto:
+      type: object
+      properties:
+        seed:
+          type: string
+          example: 000000000000000000000000000Seed1
+        keyType:
+          type: string
+          example: ed25519
+        method:
+          type: string
+          example: indy
+        network:
+          type: string
+          example: bcovrin:testnet
+        domain:
+          type: string
+          example: www.github.com
+        role:
+          type: string
+          example: endorser
+        privatekey:
+          type: string
+          example: ''
+        endpoint:
+          type: string
+          example: http://localhost:6006/docs
+        did:
+          type: string
+          example: XzFjo1RTZ2h9UVFCnPUyaQ
+        endorserDid:
+          type: string
+          example: did:indy:bcovrin:testnet:UEeW111G1tYo1nEkPwMcF
+        isPrimaryDid:
+          type: boolean
+          example: false
+      required:
+        - keyType
+        - method
+    AgentConfigureDto:
+      type: object
+      properties:
+        walletName:
+          type: string
+        agentEndpoint:
+          type: string
+          example: https://example.com
+        apiKey:
+          type: string
+      required:
+        - walletName
+        - agentEndpoint
+        - apiKey
+    UserEmailVerificationDto:
+      type: object
+      properties:
+        email:
+          type: string
+        clientId:
+          type: string
+          example: xxxx-xxxx-xxxx
+        clientSecret:
+          type: string
+          example: xxxx-xxxxx-xxxxx
+        brandLogoUrl:
+          type: string
+          example: https://example.com/logo.png
+        platformName:
+          type: string
+          example: MyPlatform
+      required:
+        - email
+        - clientId
+        - clientSecret
+    AddUserDetailsDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: awqx@getnada.com
+        firstName:
+          type: string
+          example: Alen
+        lastName:
+          type: string
+          example: Harvey
+        password:
+          type: string
+        isPasskey:
+          type: boolean
+          example: 'false'
+        isHolder:
+          type: boolean
+          example: false
+      required:
+        - email
+        - firstName
+        - lastName
+        - password
+        - isPasskey
+    LoginUserDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: awqx@getnada.com
+        password:
+          type: string
+        isPasskey:
+          type: boolean
+          example: 'false'
+      required:
+        - email
+        - password
+        - isPasskey
+    AuthTokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          readOnly: true
+          example: >-
+            eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4aExRb0lqeHRvTDBFVk9kNTJiZzNpbWt5cEt5SnNHSU5rTEd3VmQzWkdvIn0.eyJleHAiOjE2MTU1NDE1NzcsImlhdCI6MTYxNTU0MTI3NywianRpIjoiMjczOTJiYzctODNmNC00Yzg0LWJiODQtOTA0NjJmMTMyMWVkIiwiaXNzIjoiaHR0cDovLzM1LjE4OC44MC4zMjo4MDgwL2F1dGgvcmVhbG1zL2NyZWRlYmwtcGxhdGZvcm0iLCJhdWQiOlsiYWRtaW4tQ2FiaW0iLCJhZG1pbi1DZWxsbyIsImFkbWluLXp1bnV4ZSIsImFkbWluLUF5YW5Xb3JrcyBUZWNobm9sb2d5IFNvbHV0aW9ucyBQdnQuIEx0ZC4iLCJhZG1pbi1zZXJvcGFzcyIsImFkbWluLUhQRUMiLCJhZG1pbi1WeXZpYyIsImFkbWluLVNoaW5jaGFuIFRlY2hub2xvZ2llcyIsImFkbWluLVJva293eXIiLCJhZG1pbi1heWFud29ya3MiLCJhZG1pbi1UeXJvY2FyZSIsImFkbWluLVRlbmFudEJhbmsiLCJhZG1pbi1jZWZvcyIsImFkbWluLWNlbG90b3MiLCJhY2NvdW50IiwiYWRtaW4tY2Fub24iXSwic3ViIjoiZDhiOWI4MWItNzIzMi00YTdmLWI5ZDMtNGY3MjI2MTI5Njc3IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWRleWFDbGllbnQiLCJhY3IiOiIxIiwicmVzb3VyY2VfYWNjZXNzIjp7ImFkbWluLUNhYmltIjp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19LCJhZG1pbi1DZWxsbyI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tenVudXhlIjp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19LCJhZG1pbi1BeWFuV29ya3MgVGVjaG5vbG9neSBTb2x1dGlvbnMgUHZ0LiBMdGQuIjp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19LCJhZG1pbi1zZXJvcGFzcyI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tSFBFQyI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tVnl2aWMiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LXByb2ZpbGUiXX0sImFkbWluLVNoaW5jaGFuIFRlY2hub2xvZ2llcyI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tUm9rb3d5ciI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tYXlhbndvcmtzIjp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50Iiwidmlldy1wcm9maWxlIl19LCJhZG1pbi1UeXJvY2FyZSI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tVGVuYW50QmFuayI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfSwiYWRtaW4tY2Vmb3MiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LXByb2ZpbGUiXX0sImFkbWluLWNlbG90b3MiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJ2aWV3LXByb2ZpbGUiXX0sImFjY291bnQiOnsicm9sZXMiOlsidmlldy1wcm9maWxlIl19LCJhZG1pbi1jYW5vbiI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoiZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiY2xpZW50SWQiOiJhZGV5YUNsaWVudCIsImNsaWVudEhvc3QiOiIxMjQuNjYuMTcwLjExMCIsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1hZGV5YWNsaWVudCIsImNsaWVudEFkZHJlc3MiOiIxMjQuNjYuMTcwLjExMCJ9.XY_m5rZuqK6AvIhuz6VDjVgTz4iC6SadEj-BmfhiEWQxhMyOcvRosZGIPOv4ywE_5Xzs0FUygJ0NMGjSddHYAY-jNMicWa6mw7bqZzit-5VZK7ClEpU_8QMqWy9bkobXwmNJpQc4pdbqPK8oKXak7U95LkvCNil1j3SFSVfVzctIAjA9Pw0jSdcamNlHQE4EQ1gTv6G3VdJEsZ4mrghR13oODUf80yqogsoXv5BRs9-FZhORAhzzSD5Qn6q7ZgEE8N7jXXmtg4dPCzu5mCCgDbLEd3T-IBqP7DlzlAmE_TS2U7jbaz83R8Xvg3iMAvJt9ETXgG9373b2QM0xHwLRsQ
+        scope:
+          type: string
+          readOnly: true
+          example: email profile
+        expires_in:
+          type: number
+          readOnly: true
+          example: 86400
+        token_type:
+          type: string
+          readOnly: true
+          example: Bearer
+      required:
+        - access_token
+        - scope
+        - expires_in
+        - token_type
+    ResetPasswordDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: awqx@getnada.com
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+      required:
+        - email
+        - oldPassword
+        - newPassword
+    ForgotPasswordDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: awqx@getnada.com
+      required:
+        - email
+    ResetTokenPasswordDto:
+      type: object
+      properties:
+        password:
+          type: string
+        token:
+          type: string
+      required:
+        - password
+        - token
+    RefreshTokenDto:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+      required:
+        - refreshToken
+    AcceptRejectInvitationDto:
+      type: object
+      properties:
+        orgId:
+          type: string
+          example: 1
+        status:
+          type: string
+          enum:
+            - accepted
+            - rejected
+      required:
+        - orgId
+        - status
+    CreateCertificateDto:
+      type: object
+      properties:
+        credentialId:
+          type: string
+        schemaId:
+          type: string
+          example: schemaId
+        attributes:
+          example:
+            - name: name
+              value: value
+          type: array
+          items:
+            type: string
+      required:
+        - credentialId
+        - schemaId
+        - attributes
+    UpdateUserProfileDto:
+      type: object
+      properties:
+        profileImg:
+          type: string
+        firstName:
+          type: string
+          example: Alen
+        lastName:
+          type: string
+          example: Harvey
+        isPublic:
+          type: boolean
+          example: true
+      required:
+        - firstName
+        - lastName
+    UpdatePlatformSettingsDto:
+      type: object
+      properties:
+        externalIp:
+          type: string
+          example: 127.0.0.1
+        inboundEndpoint:
+          type: string
+          example: 127.0.0.1
+        sgApiKey:
+          type: string
+        emailFrom:
+          type: string
+          example: abc13@yopmail.com
+        apiEndPoint:
+          type: string
+          example: localhost:5000
+        enableEcosystem:
+          type: boolean
+          example: 'true'
+        multiEcosystemSupport:
+          type: boolean
+          example: 'true'
+      required:
+        - externalIp
+        - inboundEndpoint
+        - sgApiKey
+        - emailFrom
+        - apiEndPoint
+        - enableEcosystem
+        - multiEcosystemSupport
+    CreateCredentialDefinitionDto:
+      type: object
+      properties:
+        tag:
+          type: string
+          example: default
+        schemaLedgerId:
+          type: string
+          example: WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0
+        orgDid:
+          type: string
+        revocable:
+          type: boolean
+          default: false
+      required:
+        - tag
+        - schemaLedgerId
+        - revocable
+    AttributeValue:
+      type: object
+      properties:
+        attributeName:
+          type: string
+        schemaDataType:
+          type: string
+        displayName:
+          type: string
+        isRequired:
+          type: boolean
+      required:
+        - attributeName
+        - schemaDataType
+        - displayName
+        - isRequired
+    CreateSchemaDto:
+      type: object
+      properties:
+        schemaVersion:
+          type: string
+        schemaName:
+          type: string
+        attributes:
+          example:
+            - attributeName: name
+              schemaDataType: string
+              displayName: Name
+              isRequired: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+        orgDid:
+          type: string
+      required:
+        - schemaVersion
+        - schemaName
+        - attributes
+    W3CAttributeValue:
+      type: object
+      properties:
+        attributeName:
+          type: string
+        displayName:
+          type: string
+        schemaDataType:
+          type: string
+          description: The type of the schema
+          enum:
+            - number
+            - integer
+            - string
+            - datetime-local
+          example: string
+        isRequired:
+          type: boolean
+      required:
+        - attributeName
+        - displayName
+        - schemaDataType
+        - isRequired
+    CreateW3CSchemaDto:
+      type: object
+      properties:
+        attributes:
+          example:
+            - attributeName: name
+              schemaDataType: string
+              displayName: Name
+              isRequired: true
+          type: array
+          items:
+            $ref: '#/components/schemas/W3CAttributeValue'
+        schemaName:
+          type: string
+        description:
+          type: string
+        schemaType:
+          type: string
+          description: The type of the schema
+          enum:
+            - polygon
+            - no_ledger
+          example: polygon
+      required:
+        - attributes
+        - schemaName
+        - description
+        - schemaType
+    GenericSchemaDTO:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the schema
+          enum:
+            - json
+            - indy
+          example: indy
+        schemaPayload:
+          oneOf:
+            - $ref: '#/components/schemas/CreateSchemaDto'
+            - $ref: '#/components/schemas/CreateW3CSchemaDto'
+      required:
+        - type
+        - schemaPayload
+    ProofRequestAttribute:
+      type: object
+      properties:
+        schemaId:
+          type: string
+        condition:
+          type: string
+        value:
+          type: string
+        credDefId:
+          type: string
+    ProofRequestAttributeDto:
+      type: object
+      properties:
+        attributes:
+          example:
+            - attributeName: attributeName
+              condition: '>='
+              value: predicates
+              credDefId: string
+              schemaId: string
+          type: array
+          items:
+            $ref: '#/components/schemas/ProofRequestAttribute'
+      required:
+        - attributes
+    IndyDto:
+      type: object
+      properties:
+        indy:
+          example:
+            attributes:
+              - attributeName: attributeName
+                condition: '>='
+                value: predicates
+                credDefId: string
+                schemaId: string
+          type: array
+          items:
+            $ref: '#/components/schemas/ProofRequestAttributeDto'
+      required:
+        - indy
+    Schema:
+      type: object
+      properties:
+        uri:
+          type: string
+      required:
+        - uri
+    Fields:
+      type: object
+      properties:
+        path:
+          type: array
+          items:
+            type: string
+      required:
+        - path
+    Constraints:
+      type: object
+      properties:
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Fields'
+      required:
+        - fields
+    InputDescriptors:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        purpose:
+          type: string
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schema'
+        constraints:
+          $ref: '#/components/schemas/Constraints'
+      required:
+        - id
+        - name
+        - purpose
+        - schema
+        - constraints
+    ProofRequestPresentationDefinition:
+      type: object
+      properties:
+        input_descriptors:
+          type: array
+          items:
+            $ref: '#/components/schemas/InputDescriptors'
+      required:
+        - input_descriptors
+    RequestProofDto:
+      type: object
+      properties:
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        willConfirm:
+          type: boolean
+        protocolVersion:
+          type: string
+        connectionId:
+          type: string
+        proofFormats:
+          example:
+            indy:
+              attributes:
+                - attributeName: attributeName
+                  condition: '>='
+                  value: predicates
+                  credDefId: string
+                  schemaId: string
+          type: array
+          items:
+            $ref: '#/components/schemas/IndyDto'
+        presentationDefinition:
+          example:
+            id: 32f54163-7166-48f1-93d8-ff217bdb0653
+            inputDescriptors:
+              - id: healthcare_input_1
+                name: Medical History
+                schema:
+                  - uri: https://health-schemas.org/1.0.1/medical_history.json
+                constraints:
+                  fields:
+                    - path:
+                        - $.PatientID
+          type: array
+          items:
+            $ref: '#/components/schemas/ProofRequestPresentationDefinition'
+        comment:
+          type: string
+        autoAcceptProof:
+          type: object
+      required:
+        - connectionId
+        - proofFormats
+        - presentationDefinition
+    SendProofRequestPayload:
+      type: object
+      properties:
+        goalCode:
+          type: string
+        protocolVersion:
+          type: string
+        comment:
+          type: string
+        proofFormats:
+          type: object
+          example:
+            indy:
+              name: Verify national identity
+              version: '1.0'
+              requested_attributes:
+                verifynameAddress:
+                  names:
+                    - name
+                    - address
+                  restrictions:
+                    - schema_id: KU583UbI4yAKfaBTSz1rqG:2:National ID:1.0.0
+                verifyBirthPlace:
+                  name: Place
+                  restrictions:
+                    - schema_id: KU583UbI4yAKfaBTSz1rqG:2:Birth Certificate:1.0.0
+              requested_predicates: {}
+        presentationDefinition:
+          example:
+            id: 32f54163-7166-48f1-93d8-ff217bdb0653
+            inputDescriptors:
+              - id: banking_input_1
+                name: Bank Account Information
+                schema:
+                  - uri: https://bank-schemas.org/1.0.0/accounts.json
+                constraints:
+                  fields:
+                    - path:
+                        - $.issuer
+          type: array
+          items:
+            $ref: '#/components/schemas/ProofRequestPresentationDefinition'
+        autoAcceptProof:
+          type: object
+        label:
+          type: string
+        parentThreadId:
+          type: string
+        isShortenUrl:
+          type: boolean
+          example: true
+        emailId:
+          type: array
+          items:
+            type: string
+        reuseConnection:
+          type: boolean
+          default: true
+      required:
+        - proofFormats
+        - presentationDefinition
+        - isShortenUrl
+    BadRequestErrorDto:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 400
+        message:
+          type: string
+          example: Please provide valid data
+        error:
+          type: string
+          example: Bad Request
+      required:
+        - statusCode
+        - message
+        - error
+    InternalServerErrorDto:
+      type: object
+      properties:
+        statusCode:
+          type: number
+          example: 500
+        error:
+          type: string
+          example: Internal server error
+      required:
+        - statusCode
+        - error
+    GenerateRegistrationDto:
+      type: object
+      properties:
+        deviceFlag:
+          type: boolean
+          example: 'false'
+      required:
+        - deviceFlag
+    ResponseDto:
+      type: object
+      properties:
+        attestationObject:
+          type: string
+        clientDataJSON:
+          type: string
+        transports:
+          type: array
+          items:
+            type: string
+      required:
+        - attestationObject
+        - clientDataJSON
+        - transports
+    ClientExtensionResultsDto:
+      type: object
+      properties: {}
+    VerifyRegistrationDto:
+      type: object
+      properties:
+        id:
+          type: string
+        rawId:
+          type: string
+        response:
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ResponseDto'
+        type:
+          type: string
+        clientExtensionResults:
+          $ref: '#/components/schemas/ClientExtensionResultsDto'
+        authenticatorAttachment:
+          type: string
+        challangeId:
+          type: string
+      required:
+        - id
+        - rawId
+        - response
+        - type
+        - clientExtensionResults
+        - authenticatorAttachment
+        - challangeId
+    GenerateAuthenticationDto:
+      type: object
+      properties:
+        userName:
+          type: string
+          example: abc@vomoto.com
+      required:
+        - userName
+    VerifyAuthenticationResponseDto:
+      type: object
+      properties:
+        authenticatorData:
+          type: string
+        clientDataJSON:
+          type: string
+        signature:
+          type: string
+        userHandle:
+          type: string
+      required:
+        - authenticatorData
+        - clientDataJSON
+        - signature
+        - userHandle
+    VerifyAuthenticationDto:
+      type: object
+      properties:
+        id:
+          type: string
+        rawId:
+          type: string
+        response:
+          $ref: '#/components/schemas/VerifyAuthenticationResponseDto'
+        type:
+          type: string
+        clientExtensionResults:
+          $ref: '#/components/schemas/ClientExtensionResultsDto'
+        authenticatorAttachment:
+          type: string
+        challangeId:
+          type: string
+      required:
+        - id
+        - rawId
+        - response
+        - type
+        - clientExtensionResults
+        - authenticatorAttachment
+        - challangeId
+    CreateOrganizationDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        website:
+          type: string
+        notificationWebhook:
+          type: string
+        logo:
+          type: string
+        registrationNumber:
+          type: string
+        countryId:
+          type: number
+          example: 101
+        stateId:
+          type: number
+          example: 4008
+        cityId:
+          type: number
+          example: 1000
+      required:
+        - name
+        - description
+    PrimaryDid:
+      type: object
+      properties:
+        did:
+          type: string
+        id:
+          type: string
+    ClientCredentialsDto:
+      type: object
+      properties:
+        clientSecret:
+          type: string
+      required:
+        - clientSecret
+    BulkSendInvitationDto:
+      type: object
+      properties:
+        invitations:
+          example:
+            - email: awqx@getnada.com
+              orgRoleId:
+                - 1a7eac11-ff05-40d7-8351-4d7467687cad
+          type: array
+          items:
+            type: string
+      required:
+        - invitations
+    UpdateUserRolesDto:
+      type: object
+      properties:
+        orgRoleId:
+          example:
+            - '2'
+            - '1'
+            - '3'
+          type: array
+          items:
+            type: string
+      required:
+        - orgRoleId
+    UpdateOrganizationDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        logo:
+          type: string
+        website:
+          type: string
+        isPublic:
+          type: boolean
+          example: true
+    CreateOutOfBandConnectionInvitation:
+      type: object
+      properties:
+        label:
+          type: string
+        alias:
+          type: string
+        imageUrl:
+          type: string
+        goalCode:
+          type: string
+        goal:
+          type: string
+        handshake:
+          type: boolean
+        handshakeProtocols:
+          type: array
+          items:
+            type: string
+        messages:
+          type: array
+          items:
+            type: string
+        multiUseInvitation:
+          type: boolean
+        IsReuseConnection:
+          type: boolean
+        autoAcceptConnection:
+          type: boolean
+        routing:
+          type: object
+        appendedAttachments:
+          type: array
+          items:
+            type: string
+        recipientKey:
+          type: string
+        invitationDid:
+          type: string
+    QuestionDto:
+      type: object
+      properties:
+        detail:
+          type: string
+        validResponses:
+          example:
+            - text: Emma
+            - text: Kiva
+          type: array
+          items:
+            type: string
+        question:
+          type: string
+          example: What is your name
+      required:
+        - validResponses
+        - question
+    ReceiveInvitationUrlDto:
+      type: object
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptConnection:
+          type: boolean
+        autoAcceptInvitation:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        acceptInvitationTimeoutMs:
+          type: number
+        invitationUrl:
+          type: string
+      required:
+        - invitationUrl
+    InvitationDto:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          type: string
+        label:
+          type: string
+        goalCode:
+          type: string
+        goal:
+          type: string
+        accept:
+          type: array
+          items:
+            type: string
+        handshake_protocols:
+          type: array
+          items:
+            type: string
+        services:
+          type: array
+          items:
+            type: string
+        imageUrl:
+          type: string
+      required:
+        - '@type'
+        - label
+        - services
+    ReceiveInvitationDto:
+      type: object
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptConnection:
+          type: boolean
+        autoAcceptInvitation:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        acceptInvitationTimeoutMs:
+          type: number
+        invitation:
+          $ref: '#/components/schemas/InvitationDto'
+      required:
+        - invitation
+    BasicMessageDto:
+      type: object
+      properties:
+        content:
+          type: string
+    TemplateDetails:
+      type: object
+      properties:
+        templateId:
+          type: string
+          example: R2Wh9dJmnvkPnzKaiiBptR:2:BulkCredentials:0.1
+        schemaType:
+          type: string
+          enum:
+            - indy
+            - w3c
+      required:
+        - templateId
+        - schemaType
+    ClientDetails:
+      type: object
+      properties:
+        clientId:
+          type: object
+          example: 68y647ayAv79879
+        fileName:
+          type: object
+          example: issue-data.csv
+        isSelectiveIssuance:
+          type: boolean
+        organizationLogoUrl:
+          type: string
+          example: https://example.com/logo.png
+        platformName:
+          type: string
+          example: MyPlatform
+        certificate:
+          type: string
+        size:
+          type: string
+          example: a4
+        orientation:
+          type: string
+          example: landscape
+    IssueCredentialDto:
+      type: object
+      properties:
+        credentialDefinitionId:
+          type: string
+          example: string
+        comment:
+          type: string
+          example: string
+        protocolVersion:
+          type: string
+          example: v1
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        willConfirm:
+          type: boolean
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptCredential:
+          type: string
+        credentialType:
+          type: object
+          example: jsonld
+        reuseConnection:
+          type: boolean
+          default: true
+        credentialData:
+          example:
+            - connectionId: string
+              attributes:
+                - value: string
+                  name: string
+              credential:
+                '@context':
+                  - https://www.w3.org/2018/credentials/v1
+                  - https://www.w3.org/2018/credentials/examples/v1
+                type:
+                  - VerifiableCredential
+                  - UniversityDegreeCredential
+                issuer:
+                  id: did:key:z6Mkn72LVp3mq1fWSefkSMh5V7qrmGfCV4KH3K6SoTM21ouM
+                issuanceDate: '2019-10-12T07:20:50.52Z'
+                credentialSubject:
+                  id: did:key:z6Mkn72LVp3mq1fWSefkSMh5V7qrmGfCV4KH3K6SoTM21ouM
+                  degree:
+                    type: BachelorDegree
+                    name: Bachelor of Science and Arts
+              options:
+                proofType: Ed25519Signature2018
+                proofPurpose: assertionMethod
+          type: array
+          items:
+            type: string
+        isShortenUrl:
+          type: boolean
+          example: false
+      required:
+        - credentialDefinitionId
+        - comment
+        - credentialType
+        - credentialData
+        - isShortenUrl
+    OOBCredentialDtoWithEmail:
+      type: object
+      properties:
+        credentialOffer:
+          example:
+            - emailId: xyz@example.com
+              credential:
+                '@context':
+                  - https://www.w3.org/2018/credentials/v1
+                  - https://www.w3.org/2018/credentials/examples/v1
+                type:
+                  - VerifiableCredential
+                  - UniversityDegreeCredential
+                issuer:
+                  id: did:key:z6Mkn72LVp3mq1fWSefkSMh5V7qrmGfCV4KH3K6SoTM21ouM
+                issuanceDate: '2019-10-12T07:20:50.52Z'
+                credentialSubject:
+                  id: did:key:z6Mkn72LVp3mq1fWSefkSMh5V7qrmGfCV4KH3K6SoTM21ouM
+                  degree:
+                    type: BachelorDegree
+                    name: Bachelor of Science and Arts
+              options:
+                proofType: Ed25519Signature2018
+                proofPurpose: assertionMethod
+          type: array
+          items:
+            type: string
+        credentialDefinitionId:
+          type: string
+          example: string
+        comment:
+          type: string
+          example: string
+        protocolVersion:
+          type: string
+          example: v1
+        credentialType:
+          type: object
+          example: jsonld
+        isReuseConnection:
+          type: boolean
+          default: true
+      required:
+        - credentialOffer
+        - credentialDefinitionId
+        - comment
+        - protocolVersion
+        - credentialType
+    Issuer:
+      type: object
+      properties:
+        id:
+          type: object
+      required:
+        - id
+    PrettyVc:
+      type: object
+      properties:
+        certificate:
+          type: string
+        size:
+          type: string
+          example: a4
+        orientation:
+          type: string
+          example: landscape
+    Credential:
+      type: object
+      properties:
+        '@context':
+          type: array
+          items:
+            type: string
+        type:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        issuer:
+          $ref: '#/components/schemas/Issuer'
+        issuanceDate:
+          type: string
+        prettyVc:
+          $ref: '#/components/schemas/PrettyVc'
+        expirationDate:
+          type: string
+        credentialSubject:
+          type: object
+      required:
+        - '@context'
+        - type
+        - id
+        - issuer
+        - issuanceDate
+        - expirationDate
+        - credentialSubject
+    JsonLdCredentialDetailOptions:
+      type: object
+      properties: {}
+    OOBIssueCredentialDto:
+      type: object
+      properties:
+        credentialDefinitionId:
+          type: string
+          example: string
+        comment:
+          type: string
+          example: string
+        protocolVersion:
+          type: string
+          example: v1
+        goalCode:
+          type: string
+        parentThreadId:
+          type: string
+        willConfirm:
+          type: boolean
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptCredential:
+          type: string
+        credentialType:
+          type: object
+          example: jsonld
+        reuseConnection:
+          type: boolean
+          default: true
+        attributes:
+          example:
+            - value: string
+              name: string
+          type: array
+          items:
+            type: string
+        isShortenUrl:
+          type: boolean
+          example: false
+        credential:
+          $ref: '#/components/schemas/Credential'
+        options:
+          $ref: '#/components/schemas/JsonLdCredentialDetailOptions'
+      required:
+        - credentialDefinitionId
+        - comment
+        - credentialType
+        - attributes
+        - isShortenUrl
+        - credential
+        - options
+    AttributeValues:
+      type: object
+      properties:
+        attributeName:
+          type: string
+        displayName:
+          type: string
+        isRequired:
+          type: boolean
+        schemaDataType:
+          type: string
+      required:
+        - attributeName
+        - displayName
+        - isRequired
+        - schemaDataType
+    RequestIndySchemaDto:
+      type: object
+      properties:
+        schemaName:
+          type: string
+        schemaVersion:
+          type: string
+        attributes:
+          example:
+            - attributeName: name
+              schemaDataType: string
+              displayName: Name
+              isRequired: true
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValues'
+      required:
+        - schemaName
+        - schemaVersion
+        - attributes
+    W3CSchemaAttributesValue:
+      type: object
+      properties:
+        attributeName:
+          type: string
+        schemaDataType:
+          type: string
+          description: The type of the schema
+          enum:
+            - number
+            - integer
+            - string
+            - datetime-local
+          example: string
+        displayName:
+          type: string
+        isRequired:
+          type: boolean
+      required:
+        - attributeName
+        - schemaDataType
+        - displayName
+        - isRequired
+    RequestW3CSchemaDto:
+      type: object
+      properties:
+        schemaName:
+          type: string
+        description:
+          type: string
+        attributes:
+          example:
+            - attributeName: name
+              schemaDataType: string
+              displayName: Name
+              isRequired: true
+          type: array
+          items:
+            $ref: '#/components/schemas/W3CSchemaAttributesValue'
+        schemaType:
+          type: string
+          description: The type of the schema
+          enum:
+            - polygon
+            - no_ledger
+          example: polygon
+      required:
+        - schemaName
+        - description
+        - attributes
+        - schemaType
+    RequestSchemaDto:
+      type: object
+      properties:
+        endorse:
+          type: boolean
+        type:
+          type: string
+          description: The type of the schema
+          enum:
+            - json
+            - indy
+          example: indy
+        schemaPayload:
+          oneOf:
+            - $ref: '#/components/schemas/RequestIndySchemaDto'
+            - $ref: '#/components/schemas/RequestW3CSchemaDto'
+      required:
+        - endorse
+        - type
+        - schemaPayload
+    CreateEcosystemDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        tags:
+          type: string
+        logo:
+          type: string
+        autoEndorsement:
+          type: object
+          example: 'false'
+      required:
+        - name
+        - description
+    SchemaDetails:
+      type: object
+      properties:
+        name:
+          type: string
+        version:
+          type: string
+        attributes:
+          example:
+            - name
+            - id
+          type: array
+          items:
+            type: string
+      required:
+        - name
+        - version
+        - attributes
+    RequestCredDefDto:
+      type: object
+      properties:
+        endorse:
+          type: boolean
+        tag:
+          type: string
+        schemaId:
+          type: string
+        schemaDetails:
+          $ref: '#/components/schemas/SchemaDetails'
+      required:
+        - endorse
+        - tag
+        - schemaId
+        - schemaDetails
+    EcosystemInvitationDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: awqx@getnada.com
+      required:
+        - email
+    BulkEcosystemInvitationDto:
+      type: object
+      properties:
+        invitations:
+          type: array
+          items:
+            $ref: '#/components/schemas/EcosystemInvitationDto'
+      required:
+        - invitations
+    AddOrganizationsDto:
+      type: object
+      properties:
+        organizationIds:
+          example:
+            - 32f54163-7166-48f1-93d8-ff217bdb0653
+          type: array
+          items:
+            type: string
+      required:
+        - organizationIds
+    AcceptRejectEcosystemInvitationDto:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+            - accepted
+            - rejected
+      required:
+        - status
+    EditEcosystemDto:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        tags:
+          type: object
+        logo:
+          type: string
+        autoEndorsement:
+          type: object
+          example: 'false'
+    UtilitiesDto:
+      type: object
+      properties:
+        credentialId:
+          type: string
+        schemaId:
+          type: string
+        credDefId:
+          type: string
+        invitationUrl:
+          type: string
+        attributes:
+          example:
+            - name: name
+              value: value
+          type: array
+          items:
+            type: string
+      required:
+        - credentialId
+        - schemaId
+        - credDefId
+        - invitationUrl
+        - attributes
+    StoreObjectDto:
+      type: object
+      properties:
+        data:
+          type: object
+      required:
+        - data
+    RegisterWebhookDto:
+      type: object
+      properties:
+        webhookUrl:
+          type: string
+      required:
+        - webhookUrl
+    RegisterOrgWebhhookEndpointDto:
+      type: object
+      properties:
+        orgId:
+          type: string
+        notificationWebhook:
+          type: string
+      required:
+        - orgId
+        - notificationWebhook
+    SendNotificationDto:
+      type: object
+      properties:
+        fcmToken:
+          type: string
+        messageType:
+          type: string
+        clientCode:
+          type: string
+      required:
+        - fcmToken
+        - messageType
+        - clientCode
+    CloudBaseWalletConfigureDto:
+      type: object
+      properties:
+        walletKey:
+          type: string
+          example: xxx-xxxx-xxxx
+        apiKey:
+          type: string
+          example: xxx-xxxx-xxxx
+        agentEndpoint:
+          type: string
+          example: http://0.0.0.0:4001
+      required:
+        - walletKey
+        - apiKey
+        - agentEndpoint
+    CreateCloudWalletDto:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Credential Wallet
+          description: Cloud wallet label
+        connectionImageUrl:
+          type: string
+          example: https://picsum.photos/200
+          description: Connection image URL
+      required:
+        - label
+        - connectionImageUrl
+    AcceptProofRequestDto:
+      type: object
+      properties:
+        proofRecordId:
+          type: string
+          example: 4e687079-273b-447b-b9dd-9589c84dc6dd
+        filterByPresentationPreview:
+          type: boolean
+          example: false
+        filterByNonRevocationRequirements:
+          type: boolean
+          example: false
+        comment:
+          type: string
+          example: ''
+      required:
+        - proofRecordId
+    ReceiveInvitationUrlDTO:
+      type: object
+      properties:
+        alias:
+          type: string
+        label:
+          type: string
+        imageUrl:
+          type: string
+        autoAcceptConnection:
+          type: boolean
+        autoAcceptInvitation:
+          type: boolean
+        reuseConnection:
+          type: boolean
+        acceptInvitationTimeoutMs:
+          type: number
+        ourDid:
+          type: string
+        invitationUrl:
+          type: string
+      required:
+        - invitationUrl
+    AcceptOfferDto:
+      type: object
+      properties:
+        autoAcceptCredential:
+          type: string
+          example: string
+          description: autoAcceptCredential
+        comment:
+          type: string
+          example: string
+          description: Comment
+        credentialRecordId:
+          type: string
+          example: string
+          description: Credential record ID
+        credentialFormats:
+          type: object
+          description: Credential formats
+      required:
+        - credentialRecordId
+        - credentialFormats
+    CreateCloudWalletDidDto:
+      type: object
+      properties:
+        seed:
+          type: string
+          example: 000000000000000000000000000Seed1
+        keyType:
+          type: string
+          example: ed25519
+        method:
+          type: string
+          example: indy
+        network:
+          type: string
+          example: bcovrin:testnet
+        domain:
+          type: string
+          example: www.github.com
+        role:
+          type: string
+          example: endorser
+        privatekey:
+          type: string
+          example: ''
+        endpoint:
+          type: string
+          example: http://localhost:6006/docs
+        did:
+          type: string
+          example: XzFjo1RTZ2h9UVFCnPUyaQ
+        endorserDid:
+          type: string
+          example: did:indy:bcovrin:testnet:UEeW111G1tYo1nEkPwMcF
+      required:
+        - keyType
+        - method
+    CreateConnectionDto:
+      type: object
+      properties:
+        label:
+          type: string
+        alias:
+          type: string
+        imageUrl:
+          type: string
+        multiUseInvitation:
+          type: boolean
+          example: true
+        autoAcceptConnection:
+          type: boolean
+          example: true
+        goalCode:
+          type: string
+        goal:
+          type: string
+        handshake:
+          type: boolean
+          example: true
+        handshakeProtocols:
+          example:
+            - https://didcomm.org/didexchange/1.x
+          type: array
+          items:
+            type: string
+        messages:
+          example:
+            - '@type': string
+              '@id': string
+              ~thread:
+                pthid: string
+                thid: string
+              messageType: string
+              additionalProp1: string
+              additionalProp2: string
+              additionalProp3: string
+          type: array
+          items:
+            type: string
+        appendedAttachments:
+          example:
+            - id: string
+              description: string
+              filename: string
+              mimeType: string
+              lastmodTime: '2024-07-19T13:24:42.255Z'
+              byteCount: 0
+              data:
+                base64: string
+                json: string
+                links:
+                  - string
+                jws:
+                  header: {}
+                  signature: string
+                  protected: string
+                sha256: string
+          type: array
+          items:
+            type: string
+        invitationDid:
+          type: string
+        recipientKey:
+          type: string
+    BasicMessageDTO:
+      type: object
+      properties:
+        content:
+          type: string
+          example: Message
+      required:
+        - content

@@ -332,9 +332,23 @@ declare module 'astro:content' {
   collection: "docs";
   data: InferEntrySchema<"docs">
 } & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/postgres.md": {
+	id: "en/contributorsguide/setup/prerequisites/postgres.md";
+  slug: "en/contributorsguide/setup/prerequisites/postgres";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
 "en/contributorsguide/setup/prerequisites/prerequisitesoftwares.md": {
 	id: "en/contributorsguide/setup/prerequisites/prerequisitesoftwares.md";
   slug: "en/contributorsguide/setup/prerequisites/prerequisitesoftwares";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/contributorsguide/setup/prerequisites/redis.md": {
+	id: "en/contributorsguide/setup/prerequisites/redis.md";
+  slug: "en/contributorsguide/setup/prerequisites/redis";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
@@ -384,6 +398,13 @@ declare module 'astro:content' {
 "en/copyright-and-license.md": {
 	id: "en/copyright-and-license.md";
   slug: "en/copyright-and-license";
+  body: string;
+  collection: "docs";
+  data: InferEntrySchema<"docs">
+} & { render(): Render[".md"] };
+"en/faq.md": {
+	id: "en/faq.md";
+  slug: "en/faq";
   body: string;
   collection: "docs";
   data: InferEntrySchema<"docs">
