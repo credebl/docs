@@ -56,7 +56,7 @@ You will see a details screen where you need to enter the following information:
 - You need to connect with the organization, to establish secure and seamless exchange of information and to connect with the organization, you need to Install the digital wallet - Adeya wallet and scan the QR using the application's scanner.
 
 
-## 1.1. Create Schema
+#### 1.1. Create Schema
 
 - Now, the next step is to provide the template in which we will be getting the information for the use.
 - Schema serves as a template that specifies the data fields for credentials, which are stored on a distributed ledger. You can reach the Schema creation screen using two ways:
@@ -76,15 +76,15 @@ Fields for the Schema creation:
 - Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
 
 
-## 1.2. Create Credential Definition
+#### 1.2. Create Credential Definition
 - Credential Definition can be defined as the entity which owns the schema. When you are using the Indy ledger, it is mandatory to provide the credential definition before issuance. You can also create the credential definition, at the runtime while doing the issuance process.
 
-## 1.3. Issuance
+#### 1.3. Issuance
 - Till now, we have done all the prerequisites which we will need to initiate the issuance process. You can reach the issuance screen, by clicking “Issue” under the Credential Tab on the dashboard. Alternative way to reach the issuance screen is from the Schema Tab under the organization details.
 
 There are three types of methods by which issuance can be done.
 
-#### i. **Using the Connection**
+##### i. **Using the Connection**
 
 - If you choose the Connection method for issuance and move forward,
 You need to select the Schema, for which you want to issue the credentials for, 
@@ -93,7 +93,7 @@ You will be able to see the already created credential definitions against that 
 - Now, you will see the connection list, the list will contain the list of the devices to which your organization is connected. You can select the one from the list, and fill in the attribute details for the selected one and click on the Issue button.
 - You will get the notification inside the wallet on the smartphone, to accept or reject the credential. If you accept the credential, you will see the credential under the credentials tab on your smartphone.
 
-#### ii. **Using the Email**
+##### ii. **Using the Email**
 
 - If you choose the Email, you will see the list of already created credential definitions.
 After selecting the schema as well as credential definition, you have to fill in the attribute details with the email id, on which you want to issue credential for.
@@ -101,17 +101,17 @@ After selecting the schema as well as credential definition, you have to fill in
 You have to scan the QR at the bottom of the email with the Adeya wallet QR scanner.  
 - Now, you will get the notification inside the wallet on the smartphone, to accept or reject the credential. If you accept the credential, the credential will get stored under the credentials tab in your smartphone. 
 
-#### iii. **Using Bulk Issuance**
+##### iii. **Using Bulk Issuance**
 
 - Now, we will see how the issuance is done using the Bulk Issuance method.
 While doing the issuance using this method, you need to select the Schema and Credential Definition from the drop-down.
 - You can create the new schema and new Credential Definition at run time as well. Once you select the schema and the credential definition, you can proceed to download the .CSV file. This file will have the columns in which you have to fill the respective associated values. After finishing the data fill-up process, you have to upload the .CSV file. Once the upload is successful, you will see the data in the window at downside. If the data appears correct, you can click the Issue button and the issuance process will begin.
 
-## 1.4. Verification
+#### 1.4. Verification
 - Till now, we have seen how the issuance is done with the help of different methods using the ledger Indy. Now, we will see how the verification process takes place.  
 - You can reach the verification screen by clicking on the Verify button under the Credentials tab. To Initiate the verification process by any method, you need to click on the Request button on the Verification screen. As we seen in the issuance process, for the verification also we have two methods:
 
-#### i. **Using the Connection Method**
+##### i. **Using the Connection Method**
 
 - After choosing the Connection method for verification, first you have to select the schema for which you want to do the verification. Once you select the schema, the associated credential definitions to that schema will be displayed at the bottom.
 - You have to select the credential definition of choice, using the checkbox at the right end and click on the Continue button. Connection List will appear, this list shows you, the devices connected to your organization.
@@ -119,7 +119,7 @@ While doing the issuance using this method, you need to select the Schema and Cr
 - Once the selection is done, you have to click on the Request Proof button.
 On the mobile side, you will receive the Proof Request in the mobile application, you have to view the request and choose the action to perform. Action is to either share the requested information or to decline the request.
 
-#### ii. **Using the Email Method**
+##### ii. **Using the Email Method**
 
 - After choosing this method for verification, first you have to select the schema for which you want to do the verification. Once you select the schema, the associated credential definitions to that schema will be displayed at the bottom. Then you have to select the credential definition of choice, using the checkbox at the and click on the Continue button.
 - Now, you will see the Attributes associated with that schema, here you have to select the attributes you want to verify. Once the selection is done, you have to click on the Continue button.
@@ -149,7 +149,7 @@ You can proceed for the schema creation and other processes.
 2. Using did : key
 - Once you select this method, then you have to enter the domain name in the visible text field. After submission, the wallet gets associated with the organization. Now, you can proceed for the schema creation and other processes.
 
-## 2.1. Create Schema using W3C standards
+#### 2.1. Create Schema using W3C standards
 - Now, the next step is to provide the template in which we will be getting the information for the use.
 - Schema serves as a template that specifies the data fields for credentials, which are stored on a distributed ledger. You can reach the Schema creation screen using two ways:
 1) One, You can click directly on the Schema’s tab on the dashboard and can reach the creation screen.
@@ -165,43 +165,43 @@ While creating a schema with W3C standards, you must define the following:
 - You can also utilize schemas created by other organizations by switching from your organization’s schema list to the All Schemas option.
 - Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
 
-## 2.2. Issuance Using W3C standards
+#### 2.2. Issuance Using W3C standards
 - After the creation of the Organization and wallet, you will proceed to the issuance. Now they have to create the schema for the organization. Unlike the Indy ledger, we are not able to create the versions of the schema here.
 - Once a schema is created, we can see the standard by which it has been created.
 You can also select the schema from the existing ones.  
 - Once you have the schema, you can proceed to issuance by any of the three issuing methods which are, Connection, Email and Bulk issuance.
 
-#### i. Using Connection Method
+##### i. Using Connection Method
 
 - You have already selected the Schema, one for which you want to issue the credential. If you choose the connection method for issuance and move forward. Now, you will see the connection list, the list will contain the devices list to which your organization is connected.
 - You can select the one from the list, and fill in the attribute details for the selected one. Now, you will get the notification inside the wallet on the smartphone, to accept or reject the credential.
 - If you accept the credential, you will see the credential under the credentials tab in your smartphone. 
 
-#### ii. Using Email Method
+##### ii. Using Email Method
 
 - Once you have the schema, either created or selected from the drop-down and select the email method for issuance. After this process, you have to fill in the attribute details with the email id, to which you want to issue credentials for.
 - Next, you have to click on the Issue button, and give the confirmation to proceed. After this process, you will receive an email for issuing credentials.
 - Then, you have to scan the QR at the bottom of the email with the Adeya wallet. Now, you will get the notification inside the wallet on their smartphone, to accept or reject the credential.
 - If you accept the credential, the credential will get stored under the credentials tab in your smartphone.  
 
-#### iii. Using Bulk Issuance
+##### iii. Using Bulk Issuance
 
 - When you choose issuance using this method, you need to select the Schema from the drop-down. You can create the new schema at run time as well.
 Once you select the schema, the next step is to download the .CSV file.
 - .CSV file will have the columns in which they have to fill the respective associated values. After finishing the data fill-up process, you have to upload the .CSV file.
 - Once the upload is successful, you will see the data in the window at downside. If the data appears correct, you can click the Issue button and the issuance process will begin.
 
-## 2.3. Verification Using W3C standards
+#### 2.3. Verification Using W3C standards
 - You can reach the Verification Screen by clicking on the Verify button under the Credentials tab on the dashboard. Verification is done using two methods, one is using the Connection method and other is using the Email.
 - You can reach the verification screen by clicking on the Verify button under the Credentials tab. To Initiate the verification process by any method, you need to click on the Request button on the Verification screen. As we seen in the issuance process, for the verification also we have two methods:
 
-#### i. Using the Connection Method
+##### i. Using the Connection Method
 
 - After choosing this method for verification, first you have to select the schema for which you want to do the verification. Once you select the schema, connection List will appear, this list shows them the devices connected to the organization.
 - Once you have selected the connection which they want to verify, and then click on the Continue button. Now, you will see the Attributes associated with that schema, here they have to select the attributes you want to verify. Once the selection is done, you have to click on the Request Proof button.
 - On the mobile side, You will receive the Proof Request in the application, you have to view the request and choose the action to perform. Action is to either share the requested information or to decline the request.
 
-#### ii. Using the Email Method
+##### ii. Using the Email Method
 
 - After choosing this method for verification, first you have to select the schema for which they want to do the verification. Once you select the schema, you will see the Attributes associated with that schema, here you have to select the attributes they want to verify
 - Once the selection is done, you have to click on the Continue button. Here on the new screen, you will see the field of entering the email address. At least one email address is mandatory for the verification process to begin, you can add multiple addresses at the run time. After entering the email id, you have to click on the Request Proof button.
