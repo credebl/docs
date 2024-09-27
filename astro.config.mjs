@@ -55,6 +55,7 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
+					collapsed: true,
 					label: 'Intro',
 					items: [
 						// Each item here is one entry in the navigation menu.
@@ -66,12 +67,15 @@ export default defineConfig({
 					],
 				},
 				{
+					collapsed: true,
 					label: "User Guide",
 					items: [
+						
 						{ label: "Getting started", "link": "/en/userguide/getting-started" },
-						{ label: "Studio UI workflow", "link": "/en/userguide/ui-flow/" },
+						{ label: "Studio UI overview", "link": "/en/userguide/ui-flow/" },
 						{ label: "CREDEBL APIs guide", "link": "/en/userguide/api-flow/" },
 						{
+					collapsed: true,
 							label: "API Reference",
 							items: [
         				...openAPISidebarGroups,
@@ -80,75 +84,74 @@ export default defineConfig({
 					]
 				},
 				{
-					label: 'Contributors Guide',
+					collapsed: true,
+					label: 'Developers Guide',
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{
-							label: "Getting started",
+							collapsed: true,
+							label: "Installation",
 							items: [
-								{ label: "Basic info", "link": "/en/contributorsguide/gettingstarted/basic-info/" },
-								{ label: "Architecture", "link": "/en/contributorsguide/gettingstarted/architecture/" },
-							]
-						},
-						{
-							label: "Setup",
-							items: [
-								//   { label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
 								{
+									collapsed: true,
 									label: "Prerequisites",
 									items: [
-										{ label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
-										{ label: "Keycloak", "link": "/en/contributorsguide/setup/prerequisites/keycloak/" },
-										{ label: "NATS", "link": "/en/contributorsguide/setup/prerequisites/nats/" },
-										{ label: "REDIS", "link": "/en/contributorsguide/setup/prerequisites/redis/" },
-										{ label: "PostgreSQL", "link": "/en/contributorsguide/setup/prerequisites/postgres/" },
+										{ label: "Prerequisites", "link": "/en/developersguide/setup/prerequisites/prerequisitesoftwares/" },
+										{ label: "Keycloak", "link": "/en/developersguide/setup/prerequisites/keycloak/" },
+										{ label: "NATS", "link": "/en/developersguide/setup/prerequisites/nats/" },
+										{ label: "REDIS", "link": "/en/developersguide/setup/prerequisites/redis/" },
+										{ label: "PostgreSQL", "link": "/en/developersguide/setup/prerequisites/postgres/" },
 									]
 								},
 								{
+									collapsed: true,
 									label: "Platform",
 									items: [
-										{ label: "Intro", "link": "/en/contributorsguide/setup/platform/intro/" },
 										{
-											label: "Basic setup",
+											collapsed: true,
+											label: "Installation",
 											items: [
-												{ label: "Using NPM", "link": "/en/contributorsguide/setup/platform/basicsetup/npm/" },
-												{ label: "Using Docker", "link": "/en/contributorsguide/setup/platform/basicsetup/docker/" },
+												{ label: "Using NPM", "link": "/en/developersguide/setup/platform/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/developersguide/setup/platform/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/contributorsguide/setup/platform/envsetup/" },
-										{ label: "References", "link": "/en/contributorsguide/setup/platform/references/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/platform/envsetup/" },
+										{ label: "References", "link": "/en/developersguide/setup/platform/references/" },
 
 									]
 								},
 								{
+									collapsed: true,
 									label: "Agent",
 									items: [
-										{ label: "Intro", "link": "/en/contributorsguide/setup/agent/intro/" },
+										{ label: "Overview", "link": "/en/developersguide/setup/agent/overview/" },
 										{
-											label: "Basic setup",
+									collapsed: true,
+											label: "Installation",
 											items: [
-												{ label: "Using NPM", "link": "/en/contributorsguide/setup/agent/basicsetup/npm/" },
-												{ label: "Using Docker", "link": "/en/contributorsguide/setup/agent/basicsetup/docker/" },
+												{ label: "Using NPM", "link": "/en/developersguide/setup/agent/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/developersguide/setup/agent/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/contributorsguide/setup/agent/envsetup/" },
-										{ label: "References", "link": "/en/contributorsguide/setup/agent/references/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/agent/envsetup/" },
+										{ label: "References", "link": "/en/developersguide/setup/agent/references/" },
 
 									]
 								},
 								{
+									collapsed: true,
 									label: "Studio",
 									items: [
-										{ label: "Intro", "link": "/en/contributorsguide/setup/studio/intro/" },
 										{
-											label: "Basic setup",
+									collapsed: true,
+											label: "Installation",
 											items: [
-												{ label: "Using NPM", "link": "/en/contributorsguide/setup/studio/basicsetup/npm/" },
-												{ label: "Using Docker", "link": "/en/contributorsguide/setup/studio/basicsetup/docker/" },
+												{ label: "Using NPM", "link": "/en/developersguide/setup/studio/basicsetup/npm/" },
+												{ label: "Using Docker", "link": "/en/developersguide/setup/studio/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/contributorsguide/setup/studio/envsetup/" },
-										{ label: "References", "link": "/en/contributorsguide/setup/studio/references/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/studio/envsetup/" },
+										{ label: "References", "link": "/en/developersguide/setup/studio/references/" },
 
 									]
 								},
@@ -156,7 +159,7 @@ export default defineConfig({
 
 							]
 						},
-						{ label: "Troubleshooting", "link": "/en/contributorsguide/troubleshooting/" },
+						{ label: "Troubleshooting", "link": "/en/developersguide/troubleshooting/" },
 
 
 					],
