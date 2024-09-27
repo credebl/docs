@@ -55,6 +55,7 @@ export default defineConfig({
 			],
 			sidebar: [
 				{
+					collapsed: true,
 					label: 'Intro',
 					items: [
 						// Each item here is one entry in the navigation menu.
@@ -66,12 +67,15 @@ export default defineConfig({
 					],
 				},
 				{
+					collapsed: true,
 					label: "User Guide",
 					items: [
+						
 						{ label: "Getting started", "link": "/en/userguide/getting-started" },
 						{ label: "Studio UI workflow", "link": "/en/userguide/ui-flow/" },
 						{ label: "CREDEBL APIs guide", "link": "/en/userguide/api-flow/" },
 						{
+					collapsed: true,
 							label: "API Reference",
 							items: [
         				...openAPISidebarGroups,
@@ -80,10 +84,12 @@ export default defineConfig({
 					]
 				},
 				{
+					collapsed: true,
 					label: 'Contributors Guide',
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{
+							collapsed: true,
 							label: "Getting started",
 							items: [
 								{ label: "Basic info", "link": "/en/contributorsguide/gettingstarted/basic-info/" },
@@ -91,10 +97,12 @@ export default defineConfig({
 							]
 						},
 						{
+							collapsed: true,
 							label: "Setup",
 							items: [
 								//   { label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
 								{
+									collapsed: true,
 									label: "Prerequisites",
 									items: [
 										{ label: "Prerequisites", "link": "/en/contributorsguide/setup/prerequisites/prerequisitesoftwares/" },
@@ -105,10 +113,12 @@ export default defineConfig({
 									]
 								},
 								{
+									collapsed: true,
 									label: "Platform",
 									items: [
 										{ label: "Intro", "link": "/en/contributorsguide/setup/platform/intro/" },
 										{
+											collapsed: true,
 											label: "Basic setup",
 											items: [
 												{ label: "Using NPM", "link": "/en/contributorsguide/setup/platform/basicsetup/npm/" },
@@ -121,10 +131,12 @@ export default defineConfig({
 									]
 								},
 								{
+									collapsed: true,
 									label: "Agent",
 									items: [
 										{ label: "Intro", "link": "/en/contributorsguide/setup/agent/intro/" },
 										{
+									collapsed: true,
 											label: "Basic setup",
 											items: [
 												{ label: "Using NPM", "link": "/en/contributorsguide/setup/agent/basicsetup/npm/" },
@@ -137,10 +149,12 @@ export default defineConfig({
 									]
 								},
 								{
+									collapsed: true,
 									label: "Studio",
 									items: [
 										{ label: "Intro", "link": "/en/contributorsguide/setup/studio/intro/" },
 										{
+									collapsed: true,
 											label: "Basic setup",
 											items: [
 												{ label: "Using NPM", "link": "/en/contributorsguide/setup/studio/basicsetup/npm/" },
