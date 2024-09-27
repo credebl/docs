@@ -25,8 +25,11 @@ You will come across the Sign-Up button from where you can start the process of 
 This concludes the successful creation of your account. Now, you are all set to login to the application.
 
 ## Create Organization
-An organization plays an important role in the SSI world, as it is very important to associate all the operations related to one entity at one place, and organization does that work.    
-As soon as you get log in, the first step is to set up the organization.     
+Once you logged in, the first step is to set up the organization. An organization can be a business, institution, or group that issues and verifies digital credentials, helps to build trust in the digital ecosystem. Each organization has a unique DID (Decentralized Identifier) that can be publicly verified to increase trust.
+
+After creating the organization, you need to set up a decentralized digital wallet. This wallet stores verifiable credentials and it is required to be in place before you proceed further to  create schemas or issue credentials or verify credentials.
+
+     
 You will see a details screen where you need to enter the following information:
 1. Logo: You can provide a unique identification image for their organization.
 2. Name: You must provide the name of the organization (this is mandatory).
@@ -34,25 +37,33 @@ You will see a details screen where you need to enter the following information:
 
 ## Create Wallet
 
-- A digital wallet serves as a secure storage space for managing credentials, just like a real-world wallet stores physical cards and cash. In this context, the wallet is essential for handling decentralized identity credentials.
+- A **digital wallet** serves as a secure storage space for managing credentials, just like a real-world wallet stores physical cards and cash. In this context, the wallet is essential for handling decentralized identity credentials.
 - The wallet you will be working with is the [Askar Aries Wallet](https://credo.js.org/guides/getting-started/set-up/aries-askar), a key component in SSI ecosystems. Before proceeding with further steps, it is mandatory to create a wallet, as it is crucial for managing verifiable credentials and facilitating interactions within the network.
 - When you create an Askar Aries wallet, a secure storage space is allocated for the organization, enabling it to hold and manage digital credentials.
 
+#### Wallet types:
+- CREDEBL supports below wallet types:
+1. indy
+2. polygon
+3. no-ledger
 
-## 1. Workflow with Indy Ledger
 
-- Now, we will understand the flow with the Indy ledger. There are multiple methods and networks that can be used. Once you select the required method and network within the Indy Ledger, the wallet gets created. You will see all the wallet details on the screen, including a generated QR code based on the details, which will also be displayed.
-- To get connected with the organization, you have to Install the Adeya wallet and scan the QR using the application's scanner.
-- You need to connect with the organization, to establish secure and seamless exchange of information.
-- Adeya wallet, this is the digital wallet application, which will be installed in your mobile for your use.
+## 1. Indy Ledger
+
+- The Indy Ledger is a decentralized system used to manage digital identities. It stores important information, like DIDs (Decentralized Identifiers) and credential schemas, allowing credentials to be verified irrespective of a central authority to be in place.
+- It’s important because it ensures that digital credentials are trustworthy, secure, and private by using a system that everyone can check but no one can tamper with.
+- There are multiple methods and networks which you can use to create the wallet. Once you select the method and network, the wallet gets created and all the details of the wallet will be displayed along with the generated QR code.
+- You need to connect with the organization, to establish secure and seamless exchange of information and to connect with the organization, you need to Install the digital wallet - Adeya wallet and scan the QR using the application's scanner.
+
 
 ## 1.1. Create Schema
 
 - Now, the next step is to provide the template in which we will be getting the information for the use.
 - Schema serves as a template that specifies the data fields for credentials, which are stored on a distributed ledger. You can reach the Schema creation screen using two ways:
-1) One, You can click directly on the Schema’s tab on the dashboard and can reach the creation screen.
-2) Second, from the organization details screen, You can click on the Schema tab.
-While creating a schema, you must define the following:
+1) Dashboard => Schema card
+2) Organization dashboard = > Schema card  
+
+Fields for the Schema creation:
 - **Schema Name**: A unique name for your schema
 - **Version**: This indicates the iteration of the schema. Version 1 will be the initial schema created with specific attributes. If you modify it later, the new version (e.g., version 2) will reflect those changes.
 - **Attributes**: These are the fields that will appear in the credential based on this schema. Each attribute requires:                   
@@ -60,33 +71,31 @@ While creating a schema, you must define the following:
         ii. Data Type: The type of data (e.g., text, number, date).            
         iii. Display Name: An optional label for how the attribute will appear in the UI (not mandatory).
 
-- You can use existing attributes to create new schemas or modify them to create updated versions.
-- You can also utilize schemas created by other organizations by switching from your organization’s schema list to the All Schemas option.
+- You can use existing attributes to create a new schema or you can modify the schema by creating the same schema with different versions.
+- You can also utilize schemas created by other organizations by switching from your organization’s schema list to the **All Schemas** option.
 - Once the schema is created, it will be registered on the distributed ledger, making it available for use in issuing verifiable credentials within the SSI framework. The ledger ensures the schema's immutability and accessibility for future credential issuance.
 
 
-
 ## 1.2. Create Credential Definition
-- Credential Definition can be defined as the entity which owns the schema. When you are using the Indy ledger, it is mandatory to provide the credential definition before issuance. You can create the credential definition, at the runtime as well while doing the issuance process.
+- Credential Definition can be defined as the entity which owns the schema. When you are using the Indy ledger, it is mandatory to provide the credential definition before issuance. You can also create the credential definition, at the runtime while doing the issuance process.
 
 ## 1.3. Issuance
-- Till now, we have done all the prerequisites which we will need to begin with the issuance process. You can reach the issuance screen, by clicking “Issue” under the Credential Tab on the dashboard. Alternative way to reach the issuance screen is from the Schema Tab under the organization details.
+- Till now, we have done all the prerequisites which we will need to initiate the issuance process. You can reach the issuance screen, by clicking “Issue” under the Credential Tab on the dashboard. Alternative way to reach the issuance screen is from the Schema Tab under the organization details.
 
 There are three types of methods by which issuance can be done.
 
 #### i. **Using the Connection**
 
-- If you choose the Connection method for issuance and move forward.
-You have to select the Schema, for which you want to issue the credential for, 
+- If you choose the Connection method for issuance and move forward,
+You need to select the Schema, for which you want to issue the credentials for, 
 Once the schema is selected, the next step is to create the credential definition.
-You will be able to see the already created credential definitions against that particular schema. Once you select the schema and credential definition of choice they can proceed to the next step.
+You will be able to see the already created credential definitions against that particular schema. Once you select the schema and credential definition of choice you can proceed to the next step.
 - Now, you will see the connection list, the list will contain the list of the devices to which your organization is connected. You can select the one from the list, and fill in the attribute details for the selected one and click on the Issue button.
-- You will get the notification inside the wallet on the smartphone, to accept or reject the credential. If You accept the credential, you will see the credential under the credentials tab on your smartphone.
+- You will get the notification inside the wallet on the smartphone, to accept or reject the credential. If you accept the credential, you will see the credential under the credentials tab on your smartphone.
 
 #### ii. **Using the Email**
 
-- If you choose the Email method for issuance and move forward.
-You will see the list of already created credential definitions.
+- If you choose the Email, you will see the list of already created credential definitions.
 After selecting the schema as well as credential definition, you have to fill in the attribute details with the email id, on which you want to issue credential for.
 - Next, you have to click on the Issue button, and give the confirmation to proceed. After this process, you will receive an email for issuing credentials.
 You have to scan the QR at the bottom of the email with the Adeya wallet QR scanner.  
@@ -119,10 +128,11 @@ On the mobile side, you will receive the Proof Request in the mobile application
 
 ## 2. Workflow with the W3C standards
 
+W3C (World Wide Web Consortium) sets global standards for how digital identities and credentials should work. It defines how digital credentials are structured and how identities are verified.
+
 - #### Workflow with Polygon Ledger
 - Before we start with the issuance using Polygon Ledger. It is important to create an organization which we saw earlier ( Refer: [Create Organization](https://docs.google.com/document/d/1W5GcUOELbmM7d12bsPFNLkB2Db6qlPTHW40VxujT_SI/edit#heading=h.rilblg99kjuh)). Once you have created the organization, the next step is the creation of the wallet.
-- Here, you have to select the method and the network which you are going to use.
-After selecting the method and the network, you will also need the private Key while using the polygon.
+- Here, you'll need to choose the method and network you plan to use. Make sure your private key has at least 1 MATIC for smooth transactions. You can get testnet MATIC from the faucet by [clicking here]('https://faucet.polygon.technology/').
 - You can generate the new key, by clicking on the Generate button.
 If you already have a private key, then you can mark the check box of already existed and paste the Private Key in the text box. Once done, the wallet gets created for the organization. Now, you can proceed with the schema creation and other processes.
 
