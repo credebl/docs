@@ -16,11 +16,11 @@ Before you begin with the project, make sure the following software's are instal
 
 **Docker Compose:**  Install the **latest version** of [Docker-Compose](https://docs.docker.com/compose/install).
 
-**NATS:** Download and install [NATS](/en/contributorsguide/setup/prerequisites/nats/).
+**NATS:** Download and install [NATS](/en/developersguide/setup/prerequisites/nats/).
 
-**REDIS:** Download and install [REDIS](/en/contributorsguide/setup/prerequisites/redis/).
+**REDIS:** Download and install [REDIS](/en/developersguide/setup/prerequisites/redis/).
 
-**PostgreSQL:** Download and install [PostgreSQL](/en/contributorsguide/setup/prerequisites/postgres/).
+**PostgreSQL:** Download and install [PostgreSQL](/en/developersguide/setup/prerequisites/postgres/).
 
 #### Authentication and Database 
 
