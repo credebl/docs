@@ -72,7 +72,7 @@ export default defineConfig({
 					items: [
 						
 						{ label: "Getting started", "link": "/en/userguide/getting-started" },
-						{ label: "Studio UI workflow", "link": "/en/userguide/ui-flow/" },
+						{ label: "Studio UI overview", "link": "/en/userguide/ui-flow/" },
 						{ label: "CREDEBL APIs guide", "link": "/en/userguide/api-flow/" },
 						{
 					collapsed: true,
@@ -90,17 +90,8 @@ export default defineConfig({
 						// Each item here is one entry in the navigation menu.
 						{
 							collapsed: true,
-							label: "Getting started",
+							label: "Installation",
 							items: [
-								{ label: "Basic info", "link": "/en/developersguide/gettingstarted/basic-info/" },
-								{ label: "Architecture", "link": "/en/developersguide/gettingstarted/architecture/" },
-							]
-						},
-						{
-							collapsed: true,
-							label: "Setup",
-							items: [
-								//   { label: "Prerequisites", "link": "/en/developersguide/setup/prerequisites/prerequisitesoftwares/" },
 								{
 									collapsed: true,
 									label: "Prerequisites",
@@ -116,16 +107,15 @@ export default defineConfig({
 									collapsed: true,
 									label: "Platform",
 									items: [
-										{ label: "Intro", "link": "/en/developersguide/setup/platform/intro/" },
 										{
 											collapsed: true,
-											label: "Basic setup",
+											label: "Installation",
 											items: [
 												{ label: "Using NPM", "link": "/en/developersguide/setup/platform/basicsetup/npm/" },
 												{ label: "Using Docker", "link": "/en/developersguide/setup/platform/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/developersguide/setup/platform/envsetup/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/platform/envsetup/" },
 										{ label: "References", "link": "/en/developersguide/setup/platform/references/" },
 
 									]
@@ -134,16 +124,16 @@ export default defineConfig({
 									collapsed: true,
 									label: "Agent",
 									items: [
-										{ label: "Intro", "link": "/en/developersguide/setup/agent/intro/" },
+										{ label: "Overview", "link": "/en/developersguide/setup/agent/overview/" },
 										{
 									collapsed: true,
-											label: "Basic setup",
+											label: "Installation",
 											items: [
 												{ label: "Using NPM", "link": "/en/developersguide/setup/agent/basicsetup/npm/" },
 												{ label: "Using Docker", "link": "/en/developersguide/setup/agent/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/developersguide/setup/agent/envsetup/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/agent/envsetup/" },
 										{ label: "References", "link": "/en/developersguide/setup/agent/references/" },
 
 									]
@@ -152,16 +142,15 @@ export default defineConfig({
 									collapsed: true,
 									label: "Studio",
 									items: [
-										{ label: "Intro", "link": "/en/developersguide/setup/studio/intro/" },
 										{
 									collapsed: true,
-											label: "Basic setup",
+											label: "Installation",
 											items: [
 												{ label: "Using NPM", "link": "/en/developersguide/setup/studio/basicsetup/npm/" },
 												{ label: "Using Docker", "link": "/en/developersguide/setup/studio/basicsetup/docker/" },
 											]
 										},
-										{ label: ".env setup", "link": "/en/developersguide/setup/studio/envsetup/" },
+										{ label: "Environment Variables", "link": "/en/developersguide/setup/studio/envsetup/" },
 										{ label: "References", "link": "/en/developersguide/setup/studio/references/" },
 
 									]
