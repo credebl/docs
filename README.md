@@ -1,11 +1,11 @@
 ---
 icon: clipboard-question
-cover: https://gitbookio.github.io/onboarding-template-images/header.png
+cover: .gitbook/assets/4.png
 coverY: 0
 layout:
   cover:
     visible: true
-    size: full
+    size: hero
   title:
     visible: true
   description:
@@ -44,9 +44,9 @@ A steadfast commitment to data privacy underscores CREDEBL’s design philosophy
 
 CREDEBL platform is an Open source, Open standards based Decentralised Identity & Verifiable Credentials Platform. The CREDEBL platform is an open-source, decentralized identity and verifiable credentials (VC) system that adheres to global standards such as W3C’s Decentralized Identifiers (DID) and Verifiable Credentials. It enables developers to build Self-Sovereign Identity (SSI) solutions that provide enhanced privacy and security. Designed for scalability, the platform supports multiple ledger options (like Indy and Polygon) and ledger-less credential issuance using methods like did:web, did:key and did:peer.
 
-CREDEBL offers tools for digital credential management and verification, enabling organizations to issue and manage credentials easily. It also includes components such as the ADEYA wallet for storing and selectively sharing verifiable credentials. This platform is suitable for large-scale enterprise applications, using a microservices architecture to handle complex, distributed digital ecosystems ​[CREDEBL platform GitHub Repo](https://github.com/credebl/platform)​ and [CREDEBL Platform API link](https://api.credebl.id/api).
+CREDEBL offers tools for digital credential management and verification, enabling organizations to issue and manage credentials easily. It also includes components such as the ADEYA wallet for storing and selectively sharing verifiable credentials. This platform is suitable for large-scale enterprise applications, using a micro-services architecture to handle complex, distributed digital ecosystems ​[CREDEBL platform GitHub Repo](https://github.com/credebl/platform)​ and [CREDEBL Platform API link](https://api.credebl.id/api).
 
 ### CREDEBL STUDIO <a href="#studio" id="studio"></a>
 
-Studion is UI for CREDEBL Platform, Built using Astro, React.js, Flowbite, and Tailwind CSS, this frontend repository requires specific setup steps. In this section, you will find instructions for cloning the Studio repository, installing dependencies, and running the frontend application. These steps will help you get the UI up and running, allowing you to contribute to its development effectively.
+Studio is front-end for the CREDEBL Platform, built using Astro, React, Flowbite, and Tailwind CSS, this front-end requires specific setup. In this section, you will find instructions for cloning the Studio repository, installing dependencies, and running the frontend application. These steps will help you get the UI up and running, allowing you to contribute to its development effectively.
 
