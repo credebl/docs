@@ -1,17 +1,16 @@
 ---
 icon: clipboard-question
-cover: .gitbook/assets/Gitbook Cover Image.png
 coverY: 0
 layout:
   cover:
     visible: true
-    size: hero
+    size: full
   title:
     visible: true
   description:
-    visible: false
-  tableOfContents:
     visible: true
+  tableOfContents:
+    visible: false
   outline:
     visible: true
   pagination:
