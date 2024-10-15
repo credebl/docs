@@ -1,5 +1,6 @@
 ---
 icon: clipboard-question
+cover: .gitbook/assets/Gitbook Cover Image.png
 coverY: 0
 layout:
   cover:
