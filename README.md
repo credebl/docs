@@ -1,6 +1,5 @@
 ---
 icon: clipboard-question
-cover: .gitbook/assets/4.png
 coverY: 0
 layout:
   cover:
