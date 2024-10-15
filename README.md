@@ -1,16 +1,17 @@
 ---
 icon: clipboard-question
+cover: .gitbook/assets/Gitbook CREDEBL Cover Image.png
 coverY: 0
 layout:
   cover:
     visible: true
-    size: full
+    size: hero
   title:
     visible: true
   description:
-    visible: true
-  tableOfContents:
     visible: false
+  tableOfContents:
+    visible: true
   outline:
     visible: true
   pagination:
