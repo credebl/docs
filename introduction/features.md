@@ -4,34 +4,34 @@ icon: bird
 
 # Features
 
-With CREDEBL, end-to-end credential management can be enabled with these features.
+CREDEBL enables end-to-end verifiable credential management with following key features.
 
-* [User Registration](broken-reference)
-* [Organization onboarding](broken-reference)
-* [Team onboarding](broken-reference)
-* [Web Wallet for Organizations](broken-reference)
-* [ADEYA Mobile Wallet for Holders](broken-reference)
-* [Credential Schema](broken-reference)
-* [Credential Definition](broken-reference)
-* [Issuance and Verification](broken-reference)
+* [User Registration](features.md#user-registration)
+* [Organization onboarding](features.md#organization-onboarding)
+* [Team Onboarding](features.md#team-onboarding)
+* [Cloud Wallet for Organizations](features.md#cloud-wallet-for-organizations)
+* [ADEYA Mobile Wallet for Holders](features.md#adeya-mobile-wallet-for-holders)
+* [Credential Schema](features.md#credential-schema)
+* [Credential Definition](features.md#credential-definition)
+* [Issuance and Verification](features.md#issuance-and-verification)
 
-### **User Registration**
+## **User Registration**
 
 The platform provides an efficient user registration process through email-based verification. Furthermore, the platform offers modern & highly secure authentication mechanisms such as FIDO Passkey for phishing-resistent user verification. These measures establish a multi-layered approach to user authentication, mitigating the potential for unauthorized access and preserving the security of sensitive user data. Platform also provides highly secure mechanisms such as ClientId and ClientSecret for API authentication.
 
-## **Organization onboarding**
+## **Organization Onboarding**
 
-Facilitates smooth enrollment of organizations into the decentralized identity platform, enabling them to establish a reliable presence and engage in secure digital interactions. This expedites the process for organizations to join the platform.
+Facilitates smooth enrolment of organizations into the decentralized identity platform, enabling them to establish a reliable presence and engage in secure digital interactions. This expedites the process for organizations to join the platform.
 
-**Team onboarding**
+## **Team Onboarding**
 
 Provides an efficient way to onboard team members for the organization through an email-based invitation. An organization owner can send invitation email to team members to join the platform & the organization.
 
-**Web Wallet for Organizations**
+## **Cloud Wallet for Organizations**
 
 Organizations can setup their own SSI Web Wallet based on a shared \[multi-tenant] Aries agent and on-prem \[dedicated] Hyperledger Aries agent. For multi-tenant agent platform handles all the processes. For dedicated agent currently platform supports on-prem agent. To know more about \[dedicated] on-prem agent please click here.
 
-**ADEYA Mobile Wallet for Holders**
+## **ADEYA Mobile Wallet for Holders**
 
 ADEYA wallet is a user-friendly mobile wallet app designed to store and manage digital identities. It also facilitates secure data sharing among trusted connections, all while ensuring privacy, security & selective disclosure. It harnesses the capabilities of decentralized identity components developed using DIDComm protocols and cutting-edge features from Hyperledger Aries Bifold project.
 
@@ -43,11 +43,11 @@ Here are some of the key features of using an ADEYA wallet:
 * **Multi-language Support**: Easy customization and multi-lingual support through localization and internationalization implementation.
 * **DIDComm Messaging**: Communicate securely and privately while conducting various trust tasks.
 
-**Credential Schema**
+## **Credential Schema**
 
 A credential schema serves as a machine-readable template outlining a collection of attributes, data types and formats. These attributes are utilized for the claims within a credential. For instance, envision a schema tailored for generating passport credentials. It would encompass definitions of attributes like _given name_, _family name_, _date of birth_, _passport number_, and more. The versatility of a schema definition allows multiple credential issuers to utilize it, promoting standardization across various issuers.
 
-**Credential Definition**
+## **Credential Definition**
 
 Once a schema has been authored and added to the ledger, it becomes accessible for use by a diverse range of credential issuers, such as banks, passport offices, universities, employers, and more. These issuers can then formulate issuer-specific credential definitions, which are also registered on the ledger. Each of these credential definitions constitutes an instance of the underlying schema, supplemented by attribute-specific public verification keys that are securely linked to the corresponding private signing keys of the respective issuer. This approach enables an issuer to re-use an existing schema, and enables a verifier who receives a proof containing data from the issuer to look up the issuer’s credential definition on ledger, obtain their verification key(s) and verify the origin and integrity of that data.
 
@@ -63,6 +63,6 @@ Verification credential Stake-holders:
 * Holder: The entity that possesses the verifiable credential in their digital wallet.
 * Verifier: The entity that gets and verifies instantly the shared information.
 
-**Issuance and Verification**
+## **Issuance and Verification**
 
 The platform implements a secure and consistent procedure for creating and distributing VCs, upholding the credibility and confidentiality of the credentials. It empowers trusted entities (like universities, employers, or government agencies) to issue VCs to individuals.Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to authenticate and confirm the legitimacy of VCs provided by individuals. These entities could be employers, educational institutions, or any entity requiring validation of someone’s qualifications or attributes.
