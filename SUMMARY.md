@@ -5,15 +5,13 @@
 * [Overview](README.md)
 * [Features](introduction/features.md)
 * [Concepts](introduction/concepts.md)
-* [Platform](introduction/platform.md)
-* [Studio](introduction/studio.md)
-* [ADEYA Wallet SDK](introduction/adeya-wallet-sdk.md)
 
 ## Getting Started
 
 * [Getting Started](getting-started/getting-started.md)
 * [Local Deployment](getting-started/local-deployment/README.md)
-  * [Platform](getting-started/local-deployment/platform.md)
+  * [Platform](getting-started/local-deployment/platform/README.md)
+    * [Page 1](getting-started/local-deployment/platform/page-1.md)
   * [Studio](getting-started/local-deployment/studio.md)
   * [ADEYA Wallet SDK](getting-started/local-deployment/adeya-wallet-sdk.md)
 * [Cloud Deployment](getting-started/cloud-deployment/README.md)

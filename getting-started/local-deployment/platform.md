@@ -1,6 +1,0 @@
----
-icon: layer-group
----
-
-# Platform
-
