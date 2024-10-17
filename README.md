@@ -50,3 +50,12 @@ CREDEBL offers tools for digital credential management and verification, enablin
 
 Studio is front-end for the CREDEBL Platform, built using Astro, React, Flowbite, and Tailwind CSS, this front-end requires specific setup. In this section, you will find instructions for cloning the Studio repository, installing dependencies, and running the frontend application. These steps will help you get the UI up and running, allowing you to contribute to its development effectively.
 
+### CREDEBL AGENT
+
+In the context of blockchain, particularly within decentralized identity systems or distributed ledger technology, an agent generally refers to a software component or service that facilitates interactions and operations between various entities in the system
+
+There are two main types of agents that organizations can use, each serving different needs based on the deployment model and use case: Shared Agents and Dedicated Agents.
+
+A shared agent refers to an agent that is used by multiple entities or tenants, rather than being dedicated to a single entity. If the tenancy is set to true, it typically means that the system or agent supports multi-tenancy, or if the tenancy is set to false, it means that the agent does not support the multi-tenancy.\
+
+
