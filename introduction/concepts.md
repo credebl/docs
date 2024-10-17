@@ -28,9 +28,9 @@ Verifiable Credentials (VCs) are digital proofs that securely verify information
 
 A DID (Decentralized Identifier) is a unique identifier that doesn't rely on a central authority for registration. It is usually created and secured using cryptography. The standard format for a DID is outlined in the DID Syntax, and each DID system follows a specific method defined in a DID method specification. Many, though not all, DID methods use distributed ledger technology (DLT) or other decentralized networks.
 
-## **Trust-triangle**
+## **Trust-Triangle**
 
-<figure><img src="../.gitbook/assets/trustTriangle02.png" alt=""><figcaption><p>Trust-triangle diagram</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/trustTriangle02.png" alt=""><figcaption><p>Trust-Triangle diagram</p></figcaption></figure>
 
 ### **Issuer**
 
@@ -48,8 +48,8 @@ A verifier is anyone who needs to check the proof of information from one or mor
 
 An agent is a software tool that helps manage and exchange verifiable credentials in a secure and trustworthy way. It acts as an intermediary, handling communication between parties while following specific protocols to ensure the integrity of the credentials. It operates within key layers of the Trust Over IP framework to support various credential formats and processes. CREDEBL works with these agents :
 
-[CREDO](https://credo.js.org/)\
-[ACA-PY](https://github.com/openwallet-foundation/acapy) (Coming soon)
+* [CREDO](https://credo.js.org/)
+* [ACA-PY](https://github.com/openwallet-foundation/acapy) (Coming soon)
 
 ### Types
 
@@ -60,7 +60,7 @@ An agent is a software tool that helps manage and exchange verifiable credential
 
 ## Schema
 
-A schema is a structured framework that defines the types of data and formats used in verifiable credentials. It specifies the attributes, properties, and relationships of the data, ensuring consistency and clarity across systems. By providing a common understanding of how identity information is organized and exchanged, schemas enhance interoperability, enabling effective communication among issuers, holders, and verifiers within the SSI ecosystem. CREDEBL supports [anoncreds](https://hyperledger.github.io/anoncreds-spec/#schema-publisher-publish-schema-object) and [`JOSN-LD`](https://www.w3.org/TR/vc-json-schema/) schemas.
+A schema is a structured framework that defines the types of data and formats used in verifiable credentials. It specifies the attributes, properties, and relationships of the data, ensuring consistency and clarity across systems. By providing a common understanding of how identity information is organized and exchanged, schemas enhance interoperability, enabling effective communication among issuers, holders, and verifiers within the SSI ecosystem. CREDEBL supports [anoncreds](https://hyperledger.github.io/anoncreds-spec/#schema-publisher-publish-schema-object) and [`JSON-LD`](https://www.w3.org/TR/vc-json-schema/) schemas.
 
 ### Credential-definition
 
