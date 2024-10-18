@@ -1,42 +1,76 @@
 ---
 icon: sign-posts-wrench
+description: This is a guide for local deployment and common prerequisites
 ---
 
 # Local Deployment
 
-Before you begin with the project, make sure the following software’s on your machine.
+## Local Deployment Overview
 
-#### **Docker:** Install the latest version of [Docker](https://docs.docker.com/engine/install)
+Welcome to the Local Deployment guide for the CREDEBL platform! This section provides step-by-step instructions to help you set up the complete CREDEBL environment on your local machine. Deploying CREDEBL locally allows you to test and explore the platform's capabilities, ensuring that all components work seamlessly together in a controlled setting before moving on to larger-scale environments.
 
-#### **Docker Compose:** Install the **latest version** of [Docker-Compose](https://docs.docker.com/compose/install).
+Before diving into the installation process, it is important to understand the main components that make up the CREDEBL ecosystem. The local deployment will include the following parts:
 
-#### **NATS:** Download and install NATS.
+* **Prerequisites:** Essential software, dependencies, and system configurations that must be set up before starting the installation process.
+* **Platform:** The core of CREDEBL, responsible for managing identities, transactions, and data flow within the system.
+* **Studio:** A user-friendly interface that enables interaction with the CREDEBL platform, providing tools for administration and data visualization.
+* **Agent:** The service that handles secure communications and interactions with the platform, acting as the middleware between the user and the platform's core functionalities.
+* **Adeya Wallet:** A secure digital wallet that integrates with CREDEBL, allowing users to manage their digital identities, credentials, and transactions in a safe and controlled manner.
 
-The configuration file defines how the NATS server operates, including port assignments and WebSocket support.
+## Purpose of Local Deployment
 
-{% code lineNumbers="true" %}
-```yaml
-port: 4222
-max_payload: 4194304  # 4 MB in bytes
-websocket {
-  port: 443
-  no_tls: true
-}
+Deploying CREDEBL locally provides a development-friendly environment that you can use to familiarize yourself with the platform's features and perform tests before deploying to a production environment. It's ideal for developers, testers, and evaluators who want to experience the full potential of CREDEBL on their own machines.
+
+Once your environment is prepared, you can move on to installing each component in the following order:
+
+1. **Platform**: The heart of CREDEBL's functionality.
+2. **Studio**: For managing and visualizing data.
+3. **Agent**: Ensures secure interactions with the platform.
+4. **Adeya Wallet**: Facilitates identity and credential management.
+
+Now that you understand the overall process, let's get started with the installation steps, beginning with the prerequisites.
+
+## Common Prerequisites
+
+Before you begin the installation process, make sure that your system has the following common prerequisites installed. These tools are essential for running and managing the CREDEBL platform components locally:
+
+* Node.js and npm
+  * Ensure that you have Node.js installed with a version greater than 18.&#x20;
+  * npm (Node Package Manager) comes bundled with Node.js, and it will be used to install and manage JavaScript packages required for the CREDEBL platform.
+
+{% code title="To verify the installation, run:" %}
+```sh
+node -v
+npm -v
 ```
 {% endcode %}
 
-Install NATS via docker from [here](https://docs.nats.io/running-a-nats-service/introduction/running#docker).
+* Git
+  * Git is required for version control and to clone repositories for the CREDEBL platform.
+  * You can install Git by following the instructions on [Git's official website](https://git-scm.com/).
 
-#### **REDIS:** Download and install REDIS from [here](https://redis.io/docs/latest/operate/oss\_and\_stack/install/install-stack/docker/)
+{% code title="To check if Git is installed, use:" %}
+```sh
+git --version
+```
+{% endcode %}
 
-#### **PostgreSQL:** Download and install PostgreSQL from here
+* Docker
+  * Docker is a containerization tool used to deploy the CREDEBL platform services in a consistent and isolated environment.&#x20;
+  * Install Docker by following the instructions for your operating system on Docker's official website.
 
-### **Authentication and Database**
+{% code title="Verify the Docker installation:" %}
+```sh
+docker --version
+```
+{% endcode %}
 
-The CREDEBL Platform, being open source , mandates user authentication and utilizes a database for storing agent wallets and platform data. Keycloak iyams used as a database service.
+* Docker Compose
+  * Docker Compose is a tool for defining and running multi-container Docker applications. It's used to manage the various services that make up the CREDEBL platform.
+  * Docker Compose typically comes with Docker Desktop installations, but if you're using Docker on a Linux machine, you might need to install it separately.
 
-To set up keycloak for authentication follow the Keycloak Installation using Docker section. Learn more about keycloak from their [official website](https://www.keycloak.org/).
-
-### **SendGrid**
-
-Create a [SendGrid account](https://sendgrid.com/), generate an API key, and grant necessary permissions for sending emails.
+{% code title="Check Docker Compose version:" %}
+```sh
+docker-compose --version
+```
+{% endcode %}
