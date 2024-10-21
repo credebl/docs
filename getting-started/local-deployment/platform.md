@@ -43,7 +43,7 @@ PostgreSQL is a powerful, open-source object-relational database system known fo
 **Initially we'll need to install postures on the host or on docker**
 
 {% tabs %}
-{% tab title="ubuntu" %}
+{% tab title="Ubuntu" %}
 {% code overflow="wrap" fullWidth="false" %}
 ```shell
 sudo apt install postgresql
@@ -55,7 +55,7 @@ sudo systemctl status postgresql
 {% endcode %}
 {% endtab %}
 
-{% tab title="docker" %}
+{% tab title="Docker" %}
 ```sh
 # Pull the PostgreSQL Docker image:
 docker pull postgres
@@ -69,7 +69,7 @@ docker volume create CREDEBL
 Access the PostgreSQL and create user and database
 
 {% tabs %}
-{% tab title="ubuntu" %}
+{% tab title="Ubuntu" %}
 ```sh
 # Access the PostgreSQL command line interface:
 sudo -u postgres psql
@@ -85,7 +85,7 @@ GRANT ALL PRIVILEGES ON DATABASE credebl TO postgres;
 ```
 {% endtab %}
 
-{% tab title="docker" %}
+{% tab title="Docker" %}
 ```sh
 # Run the PostgreSQL Docker container:
 docker run --name CREDEBL -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 -v CREDEBL:/var/lib/postgresql/data postgres
@@ -224,7 +224,7 @@ volumes:
 {% endcode %}
 
 2. **Start REDIS Server**\
-   Once the docker-compose.yml file is in place, start the Redis service by running the following command:
+   Once the `docker-compose.yml` file is in place, start the Redis service by running the following command:
 
 ```sh
 docker-compose up -d
@@ -234,7 +234,7 @@ docker-compose up -d
 
 Keycloak is an open source identity and access management solution
 
-1. **Initially, to set up Keycloak as a Docker image**, follow these steps:
+1. **Run Keycloak using docker:**
 
 {% code overflow="wrap" %}
 ```sh
@@ -277,16 +277,16 @@ This command installs and starts Keycloak at the specified endpoints, locally ac
        * Query-users
        * View-clients
        * View-users
-4.  Realm Roles Settings:
+4.  **Realm Roles Settings:**
 
     This section covers the configuration of realm role settings within Keycloak.
 
     1. Under the **credebl-platform** realm, from the menu select **realm-roles**.
     2. In **realm-roles**, click on **Create Role** and create a role with **Role name**=**“holder”**, as when a new user registers on the platform we are assigning him a **“holder”** role from the realm.
-5.  SSO Session Settings:
+5.  **SSO Session Settings:**
 
     Set SSO Session Idle to 2 days. This is the expiration time of the refresh token if the user is idle on the platform. We can configure this as per our need.
-6.  Update the .env
+6.  **Update the `.env`**
 
     This section covers the setup of environment variables for seamless integration with your application
 
@@ -311,7 +311,7 @@ To set the env variable KEYCLOAK\_MANAGEMENT\_CLIENT\_SECRET, in credebl-platfor
 Below is an optional step to add users and can be skipped
 {% endhint %}
 
-7.  Add users manually (Optional):
+7.  **Add users manually (Optional):**
 
     This section provides guidance on adding users manually to the Keycloak realm.
 
