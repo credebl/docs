@@ -10,7 +10,7 @@ CREDEBL enables end-to-end verifiable credential management with following key f
 * [Organization onboarding](features.md#organization-onboarding)
 * [Team Onboarding](features.md#team-onboarding)
 * [Cloud Wallet for Organizations](features.md#cloud-wallet-for-organizations)
-* [ADEYA Mobile Wallet for Holders](features.md#adeya-mobile-wallet-for-holders)
+* [ADEYA ](features.md#adeya-mobile-wallet-for-holders)[SDKs](features.md#adeya-sdks)
 * [Credential Schema](features.md#credential-schema)
 * [Credential Definition](features.md#credential-definition)
 * [Issuance and Verification](features.md#issuance-and-verification)
@@ -31,17 +31,41 @@ Provides an efficient way to onboard team members for the organization through a
 
 Organizations can setup their own SSI Web Wallet based on a shared \[multi-tenant] Aries agent and on-prem \[dedicated] Hyperledger Aries agent. For multi-tenant agent platform handles all the processes. For dedicated agent currently platform supports on-prem agent. To know more about \[dedicated] on-prem agent please click here.
 
-## **ADEYA Mobile Wallet for Holders**
+## **ADEYA SDKs**
 
-ADEYA wallet is a user-friendly mobile wallet app designed to store and manage digital identities. It also facilitates secure data sharing among trusted connections, all while ensuring privacy, security & selective disclosure. It harnesses the capabilities of decentralized identity components developed using DIDComm protocols and cutting-edge features from Hyperledger Aries Bifold project.
+Built on the strong foundation of Credo and open W3C standards for Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs), our ADEYA SSI SDK enables you to easily integrate with existing applications or build new ones, achieving[^1] global interoperability and seamless connectivity.
 
-Here are some of the key features of using an ADEYA wallet:
+{% hint style="info" %}
+**ADEYA SDK** enables rapid development of applications for secure, peer-to-peer credentials and message sharing across various sectors, including public administration, healthcare, finance, services, mobility, education, and more.
+{% endhint %}
 
-* **Open Standards**: ADEYA wallet is built entirely on open standards, such as Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs).
-* **Interoperable**: Built on open standards and technologies such as DIDs, VCs, Aries, W3C JSON-LD VCs, AnonCreds and more. Ensures that you won’t face vendor lock-in and will interoperate with global players.
-* **Privacy-by-design**: The holders consent to what information they share with the verifying parties. Leverage privacy-preserving data exchanges using compounding, predicates, selective disclosure, restrictions, connection-less and more.
-* **Multi-language Support**: Easy customization and multi-lingual support through localization and internationalization implementation.
-* **DIDComm Messaging**: Communicate securely and privately while conducting various trust tasks.
+### Key features
+
+#### Built using Open Standards
+
+Designed with user's **data privacy** and **user control** in mind to store and share verifiable credential
+
+#### Multi ledger & Multi network Support
+
+Our SSI SDK supports **multi-ledger** functionality, allowing you to interact with and utilize more than one blockchain or distributed ledger, including Indy and Polygon. Additionally, it offers **multi-network** capabilities, enabling operate seamlessly across different network types, such as Sovrin, Indicio, and BCovrin.
+
+#### Multiple DID method VC format Support
+
+supports multiple **DID methods**, including **did:indy**, **did:polygon**, **did:web**, **did:key** ensuring flexibility across various decentralized identity systems.
+
+It also accommodates different **Verifiable Credential (VC) formats**, such as **AnonCreds** and **W3C**, ensuring broad compatibility for secure and verifiable digital credentials
+
+#### Backup and restore
+
+Regularly **backup data** on your preferred storage media and **restore as needed**
+
+#### Interoperable
+
+Interoperable with other wallets and SSI providers / platforms that follow open standards
+
+#### Open Source (Apache 2.0)
+
+**Open source** and licensed under **Apache 2.0**, offering a flexible and permissive framework for developers to build and integrate decentralized identity solutions
 
 ## **Credential Schema**
 
@@ -66,3 +90,5 @@ Verification credential Stake-holders:
 ## **Issuance and Verification**
 
 The platform implements a secure and consistent procedure for creating and distributing VCs, upholding the credibility and confidentiality of the credentials. It empowers trusted entities (like universities, employers, or government agencies) to issue VCs to individuals.Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to authenticate and confirm the legitimacy of VCs provided by individuals. These entities could be employers, educational institutions, or any entity requiring validation of someone’s qualifications or attributes.
+
+[^1]: 
