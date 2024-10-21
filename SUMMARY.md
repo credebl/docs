@@ -28,6 +28,7 @@
 * [Platform APIs](references/platform-apis.md)
 * [FAQs](references/faqs.md)
 * [Glossary](references/glossary.md)
+* [Copyright & License](references/copyright-and-license.md)
 
 ## Contribute
 

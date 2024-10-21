@@ -5,7 +5,7 @@ description: This is a guide for local deployment and common prerequisites
 
 # Local Deployment
 
-## Local Deployment Overview
+## Overview
 
 Welcome to the Local Deployment guide for the CREDEBL platform! This section provides step-by-step instructions to help you set up the complete CREDEBL environment on your local machine. Deploying CREDEBL locally allows you to test and explore the platform's capabilities, ensuring that all components work seamlessly together in a controlled setting before moving on to larger-scale environments.
 
@@ -19,7 +19,7 @@ Before diving into the installation process, it is important to understand the m
 
 ## Purpose of Local Deployment
 
-Deploying CREDEBL locally provides a development-friendly environment that you can use to familiarize yourself with the platform's features and perform tests before deploying to a production environment. It's ideal for developers, testers, and evaluators who want to experience the full potential of CREDEBL on their own machines.
+Deploying CREDEBL locally offers a development-friendly environment, perfect for exploring features and testing before moving to production, ideal for developers, testers, and evaluators.
 
 Once your environment is prepared, you can move on to installing each component in the following order:
 
@@ -30,7 +30,7 @@ Once your environment is prepared, you can move on to installing each component 
 
 Now that you understand the overall process, let's get started with the installation steps, beginning with the prerequisites.
 
-## Common Prerequisites
+## Prerequisites
 
 Before you begin the installation process, make sure that your system has the following common prerequisites installed. These tools are essential for running and managing the CREDEBL platform components locally:
 

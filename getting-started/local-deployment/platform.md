@@ -9,12 +9,12 @@ Before installing the CREDEBL Platform services, it is essential to ensure that 
 
 ## System requirements
 
-Here is the list of softwares needed to get started:&#x20;
+Here is the list of software needed to get started:&#x20;
 
-* [Node.js](https://nodejs.org/en) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (node version > 18)
-* [Git](https://git-scm.com/)
-* [Docker](https://docs.docker.com/engine/install/)
-* [Docker Compose](https://docs.docker.com/compose/install/)
+* [Node.js](https://nodejs.org/en) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (>= 18)
+* [Git](https://git-scm.com/) (>= 2.34.1)
+* [Docker](https://docs.docker.com/engine/install/) (>= 24.0.5)
+* [Docker Compose](https://docs.docker.com/compose/install/) (>= 2.20.3)
 
 {% hint style="success" %}
 The above can directly be installed from their respective docs or [from common prerequisites](./#common-prerequisites)
@@ -26,19 +26,21 @@ The above can directly be installed from their respective docs or [from common p
 
 Here is the list of prerequisites software we will need for CREDEBL:
 
-* PostgreSQL
-* NATS
-* REDIS
-* Keycloak
-* Sendgrid (registration)
-* Environment Files
-* Schema file server (optional)
+* [PostgreSQL](platform.md#postgresql) (>= 14)
+* [NATS](platform.md#nats) (>= 2.6.4)
+* [REDIS](platform.md#redis) (>= 7.4)
+* [Keycloak](platform.md#top) (>= 25.0.6)
+* [Sendgrid](platform.md#sendgrid)
+* [AWS S3](platform.md#aws-s3)
+* [Schema file server](platform.md#schema-file-server-optional) (optional)
+* [Agent Setup](platform.md#agent-setup)
+* [Environment Variables](platform.md#environment-variables)
 
 ### Postgresql
 
 PostgreSQL is a powerful, open-source object-relational database system known for its robustness and advanced features. This guide provides instructions for installing and configuring PostgreSQL both natively and using Docker. Installing PostgreSQL
 
-#### Initially we'll need to install postgress on the host or on docker
+**Initially we'll need to install postures on the host or on docker**
 
 {% tabs %}
 {% tab title="ubuntu" %}
@@ -175,7 +177,7 @@ To start the NATS server, run the following command from the directory containin
 docker-compose up -d
 ```
 
-REDIS
+### REDIS
 
 {% hint style="warning" %}
 You can skip REDIS setup if you are installing Platform services using docker. [Continue here](platform.md#top)
@@ -309,7 +311,7 @@ This is an optional step to add users and can be skipped
 Create a [SendGrid account](https://sendgrid.com/), generate an API key, and grant necessary permissions for sending emails.
 
 {% hint style="info" %}
-Make a note of the API-key as well as the email used, as this will be later used in our `.env`&#x20;
+Make a note of the API-key as well as the email used, as this will be [later](platform.md#environment-variables) used in our `.env` and during [Installation](platform.md#installations)
 {% endhint %}
 
 * Add the send grid key in the `.env`
@@ -332,7 +334,7 @@ To utilize all functionalities of CREDEBL, total of 3 S3 buckets are required fo
 From the above mentioned, 1 and 2 can be skipped, if the respective functionality of adding organization logo and Bulk issuance is unused
 {% endhint %}
 
-<pre><code># 1. Used for Adding org-logo during org creation and update 
+<pre data-title=".env"><code># 1. Used for Adding org-logo during org creation and update 
 # Optional (Can be skipped if no image is added during org creation and updation)
 AWS_PUBLIC_ACCESS_KEY=
 AWS_PUBLIC_SECRET_KEY=
