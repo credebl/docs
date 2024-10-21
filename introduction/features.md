@@ -1,6 +1,6 @@
 ---
 icon: bird
-description: Walk though of all CREDEBL and ADEYA features
+description: Walk though of all CREDEBL and ADEYA Mobile SDK features
 ---
 
 # Features
@@ -57,9 +57,9 @@ Verification credential Stake-holders:
 
 The platform implements a secure and consistent procedure for creating and distributing VCs, upholding the credibility and confidentiality of the credentials. It empowers trusted entities (like universities, employers, or government agencies) to issue VCs to individuals.Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to authenticate and confirm the legitimacy of VCs provided by individuals. These entities could be employers, educational institutions, or any entity requiring validation of someone’s qualifications or attributes.
 
-## ADEYA SDK features
+## ADEYA Mobile SDK features
 
-ADEYA SDK enables holders to store credentials and present proof with following features:
+ADEYA Mobile SDK enables holders to store credentials and present proof with following features:
 
 * [Built using Open Standards](features.md#built-using-open-standards)
 * [Multi ledger & Multi network Support](features.md#multi-ledger-and-multi-network-support)
@@ -75,16 +75,16 @@ Designed with user's **data privacy** and **user control** in mind to store and 
 
 Our SSI SDK supports **multi-ledger** functionality, allowing you to interact with and utilize more than one blockchain or distributed ledger, including Indy and Polygon. Additionally, it offers **multi-network** capabilities, enabling operate seamlessly across different network types, such as Sovrin, Indicio, and BCovrin.
 
-### Multiple DID method VC format Support
+### Multiple DID Methods VC formats support
 
-supports multiple **DID methods**, including **did:indy**, **did:polygon**, **did:web**, **did:key** ensuring flexibility across various decentralized identity systems.
+Supports multiple **DID methods**, including **did:indy**, **did:polygon**, **did:web**, **did:key** ensuring flexibility across various decentralized identity systems.
 
 It also accommodates different **Verifiable Credential (VC) formats**, such as **AnonCreds** and **W3C**, ensuring broad compatibility for secure and verifiable digital credentials
 
-### Backup and restore
+### Backup and Restore
 
 Regularly **backup data** on your preferred storage media and **restore as needed**
 
 ### Interoperable
 
-Interoperable with other wallets and SSI providers / platforms that follow open standards
+Interoperable with other wallets and SSI providers/platforms that follow open standards

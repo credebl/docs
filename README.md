@@ -58,12 +58,12 @@ There are two main types of agents that organizations can use, each serving diff
 
 A shared agent refers to an agent that is used by multiple entities or tenants, rather than being dedicated to a single entity. If the tenancy is set to true, it typically means that the system or agent supports multi-tenancy, or if the tenancy is set to false, it means that the agent does not support the multi-tenancy.
 
-### **ADEYA WALLET SDKs**
+### **ADEYA Mobile SDK**
 
-Built on the strong foundation of Credo and open W3C standards for Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs), our ADEYA SSI SDK for Mobile Wallets enable you to easily integrate with existing applications or build new ones, achieving[^1] global interoperability and seamless connectivity.
+Built on the strong foundation of Credo and open W3C standards for Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs), our ADEYA Mobile SDK for Mobile Wallets enable you to easily integrate with existing applications or build new ones, achieving[^1] global interoperability and seamless connectivity.
 
 {% hint style="info" %}
-**ADEYA WALLET SDK** enables rapid development of applications for secure, peer-to-peer credentials and message sharing across various sectors, including public administration, healthcare, finance, services, mobility, education, and more.
+**ADEYA Mobile SDK** enables rapid development of applications for secure, peer-to-peer credentials and message sharing across various sectors, including public administration, healthcare, finance, services, mobility, education, and more.
 {% endhint %}
 
 
