@@ -6,7 +6,7 @@ icon: book-open
 
 ### AnonCreds:
 
-See [Anonymous Credentials](https://hyperledger.github.io/anoncreds-spec/#introduction)
+Refer [Anonymous Credentials](https://hyperledger.github.io/anoncreds-spec/#introduction)
 
 ### **Aries**:&#x20;
 
@@ -14,7 +14,7 @@ The tool that helps humans, organizations, and things consume and emit bytes, st
 
 ### Dedicated Agent:
 
-See [Dedicated Agents](../introduction/concepts.md#agent)
+Refer [Dedicated Agents](../introduction/concepts.md#agent)
 
 ### DIDComm:&#x20;
 
@@ -22,23 +22,23 @@ DIDComm is an open protocol for decentralized communication. It uses DIDs (Decen
 
 ### DIDs:
 
-View [Decentralized Identifiers](../introduction/concepts.md#dids).
+Refer [Decentralized Identifiers](../introduction/concepts.md#dids).
 
 ### FIDO:
 
-View [FIDO](https://fidoalliance.org/how-fido-works/)
+Refer [FIDO](https://fidoalliance.org/how-fido-works/)
 
 ### Holder:
 
-View [Holder](../introduction/concepts.md#holder)
+Refer [Holder](../introduction/concepts.md#holder)
 
 ### Issuer:
 
-View [Issuer](../introduction/concepts.md#issuer)
+Refer [Issuer](../introduction/concepts.md#issuer)
 
 ### JSON-LD schemas:
 
-View [JSON-LD schemas](https://www.w3.org/TR/vc-json-schema/)
+Refer [JSON-LD schemas](https://www.w3.org/TR/vc-json-schema/)
 
 ### Ledger:&#x20;
 
@@ -46,15 +46,15 @@ A blockchain ledger is a digital record of transactions that is shared across a 
 
 ### Mediator:
 
-View [Mediator](../introduction/concepts.md#mediator)
+Refer [Mediator](../introduction/concepts.md#mediator)
 
 ### Schema:
 
-&#x20;View [Schema](../introduction/concepts.md#schema)
+&#x20;Refer [Schema](../introduction/concepts.md#schema)
 
 ### Shared Agent:
 
-View [Shared Agent](../introduction/concepts.md#agent)
+Refer [Shared Agent](../introduction/concepts.md#agent)
 
 ### SSI:
 
@@ -66,19 +66,19 @@ A tenant is a group of users that share access to a node in a business network. 
 
 ### VCs:&#x20;
 
-View [Verifiable Credentials](../introduction/concepts.md#verifiable-credentials)
+Refer [Verifiable Credentials](../introduction/concepts.md#verifiable-credentials)
 
 ### Verifier:
 
-View [Verifier](../introduction/concepts.md#verifier)
+Refer [Verifier](../introduction/concepts.md#verifier)
 
 ### W3C:
 
-See [W3C](https://www.w3.org/)
+Refer [W3C](https://www.w3.org/)
 
 ### Wallet:
 
-See [Edge Wallet](../introduction/concepts.md#edge-wallet) and [Cloud Wallet](../introduction/concepts.md#cloud-wallet)
+Refer [Edge Wallet](../introduction/concepts.md#edge-wallet) and [Cloud Wallet](../introduction/concepts.md#cloud-wallet)
 
 ### Zero-knowledge proof:
 
