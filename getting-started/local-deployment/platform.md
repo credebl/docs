@@ -1,6 +1,6 @@
 ---
-description: Installation guide for CREDEBL Platform Services
 icon: layer-group
+description: Installation guide for CREDEBL Platform Services
 ---
 
 # Platform
@@ -370,6 +370,12 @@ AFJ_VERSION=credo-controller-0.5.3:latest
 ### Environment Variables
 
 To help you quick start, a `.env.demo` is already present at the root of the platform repository. To getting started, rename `.env.demo` to `.env`
+
+Please find `your-ip` in the `.env` file, and replace it with your machine's Ip address.
+
+{% hint style="info" %}
+If you want to know more about the environment variables, please refer to `.env.sample` file which is given at root of the repository.
+{% endhint %}
 
 Apart from the already present variables, you need to add few variables generated from the above prerequisites like the [keycloak](platform.md#top), [sendgrid](platform.md#sendgrid), [Credo version](platform.md#agent-setup), etc
 
