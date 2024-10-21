@@ -105,6 +105,21 @@ CREATE DATABASE credebl;
 {% endtab %}
 {% endtabs %}
 
+Now, add the postgres environment variable to the `.env` file
+
+{% code title=".env" overflow="wrap" %}
+```sh
+WALLET_STORAGE_HOST=your-ip
+WALLET_STORAGE_PORT=5432
+WALLET_STORAGE_USER='postgres'
+WALLET_STORAGE_PASSWORD='postgres'
+
+# The format for below is as follows: postgresql://{postgres.user}:{postgres.password}@{your-ip}:{postgres.port}/{database-name}
+POOL_DATABASE_URL="postgresql://postgres:postgres@your-ip:5432/credebl"
+DATABASE_URL="postgresql://postgres:postgres@your-ip:5432/credebl"
+```
+{% endcode %}
+
 ### NATS
 
 The CREDEBL platform utilizes NATS for message-driven data exchange between its microservices.&#x20;
@@ -223,7 +238,7 @@ Keycloak is an open source identity and access management solution
 
 {% code overflow="wrap" %}
 ```sh
-docker run -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:latest start-dev
+docker run -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:25.0.6 start-dev
 ```
 {% endcode %}
 
@@ -277,7 +292,8 @@ This command installs and starts Keycloak at the specified endpoints, locally ac
 
     Update the .env file for the Keycloak details:
 
-```
+{% code title=".env" %}
+```sh
 KEYCLOAK_DOMAIN=http://localhost:8080/
 KEYCLOAK_ADMIN_URL=http://localhost:8080
 KEYCLOAK_MASTER_REALM=master
@@ -285,13 +301,14 @@ KEYCLOAK_MANAGEMENT_CLIENT_ID=adminClient
 KEYCLOAK_MANAGEMENT_CLIENT_SECRET=
 KEYCLOAK_REALM=credebl-platform
 ```
+{% endcode %}
 
 {% hint style="info" %}
 To set the env variable KEYCLOAK\_MANAGEMENT\_CLIENT\_SECRET, in credebl-platform realm, go to clients >> adminClient. Now in the Credentials tab, copy the client secret
 {% endhint %}
 
-{% hint style="info" %}
-This is an optional step to add users and can be skipped
+{% hint style="warning" %}
+Below is an optional step to add users and can be skipped
 {% endhint %}
 
 7.  Add users manually (Optional):
@@ -358,6 +375,18 @@ AWS_S3_STOREOBJECT_BUCKET=
 
 According to the `AWS_S3_STOREOBJECT_BUCKET` name, as per the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access), add domain to access objects from the bucket and save it, as it is utilized for the another .env variable &#x20;
 
+{% code title=".env" overflow="wrap" %}
+```sh
+# Please refere AWS to determine your bucket url
+# https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access 
+SHORTENED_URL_DOMAIN='https://AWS_S3_STOREOBJECT_REGION.amazonaws.com/AWS_S3_STOREOBJECT_BUCKET'
+```
+{% endcode %}
+
+{% hint style="info" %}
+Note: Usually, `SHORTENED_URL_DOMAIN` for bucket names with dot ( . ) in it comes after '/': `https://AWS_S3_STOREOBJECT_REGION.amazonaws.com/`**`bucket-name`**. And others are often referred as a subdomain: `https://`**`bucket-name`**`.AWS_S3_STOREOBJECT_REGION.amazonaws.com`
+{% endhint %}
+
 ### Schema File Server (Optional)
 
 {% hint style="info" %}
@@ -423,7 +452,7 @@ Please find `your-ip` in the `.env` file, and replace it with your machine's Ip 
 If you want to know more about the environment variables, please refer to `.env.sample` file which is given at root of the repository.
 {% endhint %}
 
-Apart from the already present variables, you need to add few variables generated from the above prerequisites like the [keycloak](platform.md#top), [sendgrid](platform.md#sendgrid), [Credo version](platform.md#agent-setup), etc
+Apart from the already present variables, you need to add few variables generated from the above prerequisites like the [postgresql](platform.md#postgresql), [keycloak](platform.md#top), [sendgrid](platform.md#sendgrid), [AWS S3](platform.md#aws-s3), [Credo version](platform.md#agent-setup), etc
 
 ## Installations
 
@@ -436,7 +465,7 @@ cd platform
 
 Make sure the `.env` file is set with all the required environment variables as per the .env.sample file and the [env guide](platform.md#environment-variables) give above.
 
-Before you start the services make sure to update the `credebl-master-table.json` present at location, `lib/prisma-service/prisma/data` ke sure to
+Before you start the services make sure to update the `credebl-master-table.json` present at location, `lib/prisma-service/prisma/data`&#x20;
 
 <pre class="language-json" data-title="credebl-master-table.json" data-line-numbers><code class="lang-json">{
   "platformConfigData": {
