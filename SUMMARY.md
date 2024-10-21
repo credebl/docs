@@ -5,7 +5,6 @@
 * [Overview](README.md)
 * [Features](introduction/features.md)
 * [Concepts](introduction/concepts.md)
-* [ADEYA Wallet SDK](introduction/adeya-wallet-sdk.md)
 
 ## Getting Started
 

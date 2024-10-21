@@ -133,6 +133,14 @@ You can skip further NATS  and REDIS setup if you are installing services using 
 
 The docker-compose.yml file will define the NATS service, map the necessary ports, and bind the configuration file.
 
+{% hint style="warning" %}
+Currently the [_.env.demo_](platform.md#environment-variables) already contains NATS keys and the local setup skips authorization for NATS messaging between services. Refer [here](https://docs.nats.io/running-a-nats-service/configuration/securing\_nats/auth\_intro/nkey\_auth) to know more about NATS authorization
+{% endhint %}
+
+{% hint style="info" %}
+To create your Nkeys, you can refer NATS tool nk as per their [official documentation](https://docs.nats.io/using-nats/nats-tools/nk)
+{% endhint %}
+
 {% code title="docker-compose.yml" %}
 ```yaml
 version: '3'
@@ -311,6 +319,42 @@ Make a note of the API-key as well as the email used, as this will be later used
 SENDGRID_API_KEY=your-API-key
 ```
 {% endcode %}
+
+### AWS S3
+
+To utilize all functionalities of CREDEBL, total of 3 S3 buckets are required for;&#x20;
+
+1. Storing Organization logo during creating and updating an organization
+2. Bulk issuance of credentials
+3. Storing connection URL generated from [Agent](../../introduction/concepts.md#agent) and creating shortened URL
+
+{% hint style="info" %}
+From the above mentioned, 1 and 2 can be skipped, if the respective functionality of adding organization logo and Bulk issuance is unused
+{% endhint %}
+
+<pre><code># 1. Used for Adding org-logo during org creation and update 
+# Optional (Can be skipped if no image is added during org creation and updation)
+AWS_PUBLIC_ACCESS_KEY=
+AWS_PUBLIC_SECRET_KEY=
+AWS_PUBLIC_REGION=
+AWS_ORG_LOGO_BUCKET_NAME=
+
+<strong># 2. Used for Bulk issuance of credential
+</strong># Optional (Can be skipped if Bulk issuance is not used)
+AWS_ACCESS_KEY=
+AWS_SECRET_KEY=
+AWS_REGION=
+AWS_BUCKET=
+
+# 3. Used for storing connection URL generated from Agent and creating shortened URL
+# Required (As connecting to org requires Shortened url)
+AWS_S3_STOREOBJECT_ACCESS_KEY=
+AWS_S3_STOREOBJECT_SECRET_KEY=
+AWS_S3_STOREOBJECT_REGION= 
+AWS_S3_STOREOBJECT_BUCKET=
+</code></pre>
+
+According to the `AWS_S3_STOREOBJECT_BUCKET` name, as per the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access), add domain to access objects from the bucket and save it, as it is utilized for the another .env variable &#x20;
 
 ### Schema File Server (Optional)
 
