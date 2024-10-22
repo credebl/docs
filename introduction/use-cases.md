@@ -6,28 +6,28 @@ description: >-
 
 # 🏯 Use Cases
 
-## National Digital Identity
+### National Digital Identity
 
-* Foundation Digital ID
-* Functional ID such as: Permanent Address, Phone Number, Driving License, Passport
+* Foundational ID
+* Functional IDs e.g. - Permanent Address, Phone Number, Driving License, Passport, Tax ID
 
-## Digital Travel Credentials
+### Digital Travel Credentials
 
 * Boarding Pass, Passport, Visa, Work Authorization
 
-## Academic Digital Credentials
+### Academic Digital Credentials
 
-* Degree, Diploma, Transcripts, Bonifide, Transfer Certificate
+* Student ID, Degree, Diploma, Transcripts, Bonafide, Transfer Certificate
 
-## Employee / HR Credentials
+### Employee / HR Credentials
 
-* Employment Credential, Awards & Recognitions, Payslips
+* Employment Credential, Awards & Recognitions, Training Credentials
 
-## Health Credentials
+### Health Credentials
 
 * Vaccine Credentials, Test Reports, e-Prescriptions
 
-## Digital Credential for Life Events
+### Digital Credentials for Life Events
 
 * Birth Certificate, Death Certificate, Marriage Certificate, etc.
 
