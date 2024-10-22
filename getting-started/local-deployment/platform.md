@@ -26,6 +26,7 @@ The above can directly be installed from their respective docs or [from common p
 
 Here is the list of prerequisites software we will need for CREDEBL:
 
+* [Clone Repo](platform.md#clone-repository)
 * [PostgreSQL](platform.md#postgresql) (>= 14)
 * [NATS](platform.md#nats) (>= 2.6.4)
 * [REDIS](platform.md#redis) (>= 7.4)
@@ -35,6 +36,15 @@ Here is the list of prerequisites software we will need for CREDEBL:
 * [Schema file server](platform.md#schema-file-server-optional) (optional)
 * [Agent Setup](platform.md#agent-setup)
 * [Environment Variables](platform.md#environment-variables)
+
+### Clone Repository
+
+Clone the platform repository from GitHub:
+
+```sh
+git clone https://github.com/credebl/platform.git
+cd platform
+```
 
 ### Postgresql
 
@@ -285,7 +295,8 @@ This command installs and starts Keycloak at the specified endpoints, locally ac
     2. In **realm-roles**, click on **Create Role** and create a role with **Role name**=**“holder”**, as when a new user registers on the platform we are assigning him a **“holder”** role from the realm.
 5.  **SSO Session Settings:**
 
-    Set SSO Session Idle to 2 days. This is the expiration time of the refresh token if the user is idle on the platform. We can configure this as per our need.
+    Set SSO Session Idle to 2 days. This is the expiration time of the refresh token if the user is idle on the platform. We can configure this as per our need.\
+    To navigate to SSO Session, go to  `Realm settings` option on left sidebar under `configure,`  now under the `Sessions` tab you can see `SSO Session Idle`
 6.  **Update the `.env`**
 
     This section covers the setup of environment variables for seamless integration with your application
@@ -456,16 +467,9 @@ Apart from the already present variables, you need to add few variables generate
 
 ## Installations
 
-Clone the platform repository from GitHub:
-
-```sh
-git clone https://github.com/credebl/platform.git
-cd platform
-```
-
 Make sure the `.env` file is set with all the required environment variables as per the .env.sample file and the [env guide](platform.md#environment-variables) give above.
 
-Before you start the services make sure to update the `credebl-master-table.json` present at location, `lib/prisma-service/prisma/data`&#x20;
+Before you start the services make sure to update the `credebl-master-table.json` present at location, `libs/prisma-service/prisma/data`&#x20;
 
 <pre class="language-json" data-title="credebl-master-table.json" data-line-numbers><code class="lang-json">{
   "platformConfigData": {
@@ -479,15 +483,28 @@ Before you start the services make sure to update the `credebl-master-table.json
   },
 </code></pre>
 
+At the root of the [platfrom repo](platform.md#clone-repository):
+
+```sh
+cd libs/prisma-service
+npx prisma generate
+npx prisma migrate deploy
+```
+
 Now seed the db, before starting the services using the following:
 
 ```sh
 npx prisma db seed
 ```
 
+Since, you are in the '/prisma-service', move back to the root
+
+<pre class="language-sh"><code class="lang-sh"><strong>cd ../..
+</strong></code></pre>
+
 Start the services:
 
-```sh
+```
 docker-compose up -d
 ```
 
