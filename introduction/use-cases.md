@@ -6,7 +6,7 @@ description: >-
 
 # 🏯 Use Cases
 
-### National Digital Identity
+### [National Digital Identity](implementations.md#national-digital-identity-for-royal-government-of-bhutan)
 
 * Foundational ID
 * Functional IDs e.g. - Permanent Address, Phone Number, Driving License, Passport, Tax ID
@@ -15,7 +15,7 @@ description: >-
 
 * Boarding Pass, Passport, Visa, Work Authorization
 
-### Academic Digital Credentials
+### [Academic Digital Credentials](implementations.md#credebl-saas)
 
 * Student ID, Degree, Diploma, Transcripts, Bonafide, Transfer Certificate
 
@@ -27,7 +27,7 @@ description: >-
 
 * Vaccine Credentials, Test Reports, e-Prescriptions
 
-### Digital Credentials for Life Events
+### Life Events
 
 * Birth Certificate, Death Certificate, Marriage Certificate, etc.
 
