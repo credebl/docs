@@ -1,5 +1,17 @@
 ---
 icon: wallet
+description: React-Native Mobile SDK to build SSI powered identity apps & edge wallets
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # ADEYA Wallet SDK
