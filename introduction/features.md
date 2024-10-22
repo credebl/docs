@@ -29,9 +29,9 @@ Facilitates smooth enrolment of organizations into the decentralized identity pl
 
 Provides an efficient way to onboard team members for the organization through an email-based invitation. An organization owner can send invitation email to team members to join the platform & the organization.
 
-### **Cloud Wallet for Organizations**
+### **Wallet for Organizations**
 
-Organizations can setup their own SSI Web Wallet based on a shared \[multi-tenant] Aries agent and on-prem \[dedicated] Hyperledger Aries agent. For multi-tenant agent platform handles all the processes. For dedicated agent currently platform supports on-prem agent. To know more about \[dedicated] on-prem agent please click here.
+Organizations can setup their own SSI Web Wallet based on a shared \[multi-tenant] Aries agent or on-prem \[dedicated] Aries agent. For multi-tenant agent, platform handles all the processes. For dedicated agent, platform supports on-prem agent.
 
 ### **Credential Schema**
 
