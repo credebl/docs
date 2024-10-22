@@ -5,6 +5,7 @@
 * [Overview](README.md)
 * [Features](introduction/features.md)
 * [Concepts](introduction/concepts.md)
+* [🏯 Use Cases](introduction/use-cases.md)
 
 ## Getting Started
 
