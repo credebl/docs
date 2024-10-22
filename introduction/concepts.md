@@ -1,5 +1,5 @@
 ---
-icon: arrows-to-circle
+icon: nfc-directional
 description: key concepts of the CREDEBL
 ---
 

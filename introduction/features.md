@@ -1,6 +1,6 @@
 ---
-icon: bird
-description: Walk though of all CREDEBL and ADEYA Mobile SDK features
+icon: gem
+description: Platform, Studio and ADEYA Mobile SDK features
 ---
 
 # Features
@@ -12,7 +12,7 @@ CREDEBL enables end-to-end verifiable credential management with following key f
 * [User Registration](features.md#user-registration)
 * [Organization onboarding](features.md#organization-onboarding)
 * [Team Onboarding](features.md#team-onboarding)
-* [Cloud Wallet for Organizations](features.md#cloud-wallet-for-organizations)
+* [Cloud Wallet for Organizations](features.md#wallet-for-organizations)
 * [Credential Schema](features.md#credential-schema)
 * [Credential Definition](features.md#credential-definition)
 * [Issuance and Verification](features.md#issuance-and-verification)
@@ -59,11 +59,11 @@ The platform implements a secure and consistent procedure for creating and distr
 
 ## ADEYA Mobile SDK features
 
-ADEYA Mobile SDK enables holders to store credentials and present proof with following features:
+ADEYA Mobile SDK enables developers to build a mobile app for holders to store credentials and present proof to verifiers:
 
 * [Built using Open Standards](features.md#built-using-open-standards)
 * [Multi ledger & Multi network Support](features.md#multi-ledger-and-multi-network-support)
-* [Multiple DID method VC format](features.md#multiple-did-method-vc-format-support)
+* [Multiple DID method VC format](features.md#multiple-did-methods-and-vc-formats)
 * [Backup and restore](features.md#backup-and-restore)
 * [Interoperable](features.md#interoperable)
 
@@ -71,11 +71,11 @@ ADEYA Mobile SDK enables holders to store credentials and present proof with fol
 
 Designed with user's **data privacy** and **user control** in mind to store and share verifiable credential
 
-### Multi ledger & Multi network Support
+### Multi-ledger & Multi-network Support
 
-Our SSI SDK supports **multi-ledger** functionality, allowing you to interact with and utilize more than one blockchain or distributed ledger, including Indy and Polygon. Additionally, it offers **multi-network** capabilities, enabling operate seamlessly across different network types, such as Sovrin, Indicio, and BCovrin.
+Our SSI SDK supports **multi-ledger** functionality, allowing you to interact with and utilize more than one blockchain or distributed ledger, including Indy and Polygon. Additionally, it offers **multi-network** capabilities, enabling operate seamlessly across different network types, such as Sovrin, Indicio, and BCovrin, Polygon TestNet, MainNet.
 
-### Multiple DID Methods VC formats support
+### Multiple DID methods & VC formats
 
 Supports multiple **DID methods**, including **did:indy**, **did:polygon**, **did:web**, **did:key** ensuring flexibility across various decentralized identity systems.
 
@@ -83,7 +83,7 @@ It also accommodates different **Verifiable Credential (VC) formats**, such as *
 
 ### Backup and Restore
 
-Regularly **backup data** on your preferred storage media and **restore as needed**
+Regularly **backup wallets** on your preferred storage media and **restore as needed**
 
 ### Interoperable
 

@@ -1,5 +1,5 @@
 ---
-icon: sign-posts-wrench
+icon: code-fork
 description: This is a guide for local deployment and common prerequisites
 ---
 
