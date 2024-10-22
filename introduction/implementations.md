@@ -12,7 +12,7 @@ description: >-
 
 {% embed url="https://www.bhutanndi.com/article/press-release-dhi-announces-bhutan-ndi-s-migration-to-the-polygon-blockchain-for-enhanced-user-experience-and-scalability_82080061-7100-468b-803e-7fde59205f6b" fullWidth="false" %}
 
-## **SevisPass Digital ID Pilot for Papua New Guinea**
+## _**SevisPass**_** Digital ID Pilot for **_**Papua New Guinea**_
 
 <figure><img src="../.gitbook/assets/SevisPortal.jpeg" alt="" width="563"><figcaption><p>SevisPass &#x26; SevisWallet Digital ID Pilot</p></figcaption></figure>
 
@@ -20,8 +20,7 @@ description: >-
 
 ## CREDEBL SaaS
 
-[CREDEBL Platform](https://credebl.id) is hosted & made available by AYANWORKS as a SaaS offering for various Digital Credential Solutions&#x20;
+[**credebl.id**](https://credebl.id) is hosted & made available by AYANWORKS as a SaaS offering for building various sector-specific Digital Credential solutions, while keeping away the complexity of Decentralized Identity technology/protocol stack, and focus on the specific business use case.
 
 * **EduCreds** (Academic Credentials)
-* **Sports Awards**
-
+* **Sports Awards** (Micro Credentials) - World Memory Championship
