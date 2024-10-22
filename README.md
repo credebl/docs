@@ -1,6 +1,6 @@
 ---
 icon: clipboard-question
-cover: .gitbook/assets/Gitbook CREDEBL Cover Image.png
+cover: .gitbook/assets/Gitbook Cover Image.png
 coverY: 0
 layout:
   cover:
@@ -20,9 +20,9 @@ layout:
 
 # Overview
 
-CREDEBL is an industry-leading Verifiable Credential & Decentralised Identity management platform which builds secure and user-centric SSI solutions. This multi-tenant platform offers straightforward interactions, enabling rapid configuration of your solution.
+CREDEBL is an industry-leading Verifiable Credential & Decentralised Identity management platform which builds scalable, secure and user-centric SSI solutions. The multi-tenant platform offers straightforward interactions, enabling rapid configuration & deployment of your DID/VC solution.
 
-### Key Features <a href="#key-features" id="key-features"></a>
+### Highlights <a href="#key-features" id="key-features"></a>
 
 #### **Open Standards, Open Source**
 
@@ -52,7 +52,7 @@ Platform supports multiple ledger options (like Indy and Polygon) and also ledge
 
 [Studio](https://github.com/credebl/studio) is web front-end for the entire Platform, built using Astro, React, Flowbite, and Tailwind CSS, allowing administrators & users to easily access & manage all the Platform features using a simple web interface.
 
-### AGENT
+### ARIES AGENT
 
 In the context of decentralized identity systems, an agent generally refers to a software component or service that facilitates peer-to-peer interactions and data exchange operations between various entities in the system.
 
@@ -69,4 +69,3 @@ Built on the strong foundation of Credo, the ADEYA Mobile Wallet SDK is a React-
 {% hint style="info" %}
 **ADEYA Mobile SDK** enables rapid development of applications for secure, peer-to-peer credentials and message sharing across various sectors, including public administration, healthcare, finance, services, mobility, education, and more.
 {% endhint %}
-
