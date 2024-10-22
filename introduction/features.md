@@ -12,10 +12,10 @@ CREDEBL enables end-to-end verifiable credential management with following key f
 * [User Registration](features.md#user-registration)
 * [Organization onboarding](features.md#organization-onboarding)
 * [Team Onboarding](features.md#team-onboarding)
-* [Cloud Wallet for Organizations](features.md#wallet-for-organizations)
-* [Credential Schema](features.md#credential-schema)
-* [Credential Definition](features.md#credential-definition)
-* [Issuance and Verification](features.md#issuance-and-verification)
+* [Wallet for Organizations](features.md#wallet-for-organizations)
+* [Multi-ledger / network support](features.md#multi-ledger-and-multi-network-support)
+* [Credential Schema & Definition](features.md#credential-schemas)
+* [Credential Lifecycle Management](features.md#credential-lifecycle-management)
 
 ### **User Registration**
 
@@ -33,7 +33,13 @@ Provides an efficient way to onboard team members for the organization through a
 
 Organizations can setup their own SSI Web Wallet based on a shared \[multi-tenant] Aries agent or on-prem \[dedicated] Aries agent. For multi-tenant agent, platform handles all the processes. For dedicated agent, platform supports on-prem agent.
 
-### **Credential Schema**
+### Multi-ledger & Multi-network Support
+
+Our SSI SDK supports **multi-ledger** functionality, allowing you to interact with and utilize more than one blockchain or distributed ledger, including **Indy** and **Polygon**. **Cheqd** support is coming soon.
+
+Additionally, it offers **multi-network** capabilities, enabling operations on different Indy networks, such as Sovrin, Indicio, and BCovrin and Polygon TestNet, MainNet.
+
+### **Credential Schemas**
 
 A credential schema serves as a machine-readable template outlining a collection of attributes, data types and formats. These attributes are utilized for the claims within a credential. For instance, envision a schema tailored for generating passport credentials. It would encompass definitions of attributes like _given name_, _family name_, _date of birth_, _passport number_, and more. The versatility of a schema definition allows multiple credential issuers to utilize it, promoting standardization across various issuers.
 
@@ -53,37 +59,36 @@ Verification credential Stake-holders:
 * Holder: The entity that possesses the verifiable credential in their digital wallet.
 * Verifier: The entity that gets and verifies instantly the shared information.
 
-### **Issuance and Verification**
+### **Credential Lifecycle Management**&#x20;
 
-The platform implements a secure and consistent procedure for creating and distributing VCs, upholding the credibility and confidentiality of the credentials. It empowers trusted entities (like universities, employers, or government agencies) to issue VCs to individuals.Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to authenticate and confirm the legitimacy of VCs provided by individuals. These entities could be employers, educational institutions, or any entity requiring validation of someone’s qualifications or attributes.
+#### **Issuance, Verification & Revocation**
+
+The platform provides a consistent process for creating and managing the VC lifecycle. It empowers the trusted issuers (like Universities, Employers, or Government Agencies) to seamlessly issue or revoke digital credentials to individuals.&#x20;
+
+Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to cryptographically verify and confirm the legitimacy of the credential provided by individuals. These entities are typically Employers, Educational Institutions, or any other entity requiring validation of someone’s qualifications or other identity claims.
 
 ## ADEYA Mobile SDK features
 
 ADEYA Mobile SDK enables developers to build a mobile app for holders to store credentials and present proof to verifiers:
 
-* [Built using Open Standards](features.md#built-using-open-standards)
-* [Multi ledger & Multi network Support](features.md#multi-ledger-and-multi-network-support)
+* [Privacy & User Control](features.md#privacy-and-user-control)
 * [Multiple DID method VC format](features.md#multiple-did-methods-and-vc-formats)
 * [Backup and restore](features.md#backup-and-restore)
 * [Interoperable](features.md#interoperable)
 
-### Built using Open Standards
+### Privacy & User Control
 
-Designed with user's **data privacy** and **user control** in mind to store and share verifiable credential
-
-### Multi-ledger & Multi-network Support
-
-Our SSI SDK supports **multi-ledger** functionality, allowing you to interact with and utilize more than one blockchain or distributed ledger, including Indy and Polygon. Additionally, it offers **multi-network** capabilities, enabling operate seamlessly across different network types, such as Sovrin, Indicio, and BCovrin, Polygon TestNet, MainNet.
+Designed with user's **data privacy** and **control** in mind to securely store and share verifiable credentials.
 
 ### Multiple DID methods & VC formats
 
-Supports multiple **DID methods**, including **did:indy**, **did:polygon**, **did:web**, **did:key** ensuring flexibility across various decentralized identity systems.
+Support multiple **DID methods**, including **did:indy**, **did:polygon**, **did:web**, **did:key** ensuring flexibility across various decentralized identity systems.
 
-It also accommodates different **Verifiable Credential (VC) formats**, such as **AnonCreds** and **W3C**, ensuring broad compatibility for secure and verifiable digital credentials
+Support storage of multiple **VC formats**, such as **AnonCreds** and **W3C JSON-LD**, ensuring broader compatibility.
 
 ### Backup and Restore
 
-Regularly **backup wallets** on your preferred storage media and **restore as needed**
+Regularly **backup wallets** on your preferred storage location and **restore as needed**
 
 ### Interoperable
 
