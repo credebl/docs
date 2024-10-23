@@ -137,7 +137,7 @@ The CREDEBL platform utilizes NATS for message-driven data exchange between its 
 1. **Create the NATS Configuration File** (nats-server.conf)\
    The configuration file defines how the NATS server operates, including port assignments and WebSocket support.
 
-{% code title="nats.conf" %}
+{% code title="nats-server.conf" %}
 ```editorconfig
 port: 4222
 max_payload: 4194304  # 4 MB in bytes
