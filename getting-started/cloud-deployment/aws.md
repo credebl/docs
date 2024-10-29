@@ -32,8 +32,8 @@ You can easily deploy the required infrastructure by following the steps below.
 1.  **Clone the Repository**: First, get the Terraform code from the repository:
 
     ```bash
-    git clone <your-github-repo-url>
-    cd <your-repo-directory>
+    git clone https://github.com/credebl/terraform-scripts.git
+    cd terraform-scripts
     ```
 2.  **Configure AWS**: Ensure that your AWS credentials are set up. Run the following command to configure the AWS CLI if not done already:
 
