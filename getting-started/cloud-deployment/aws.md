@@ -4,15 +4,15 @@ icon: aws
 
 # AWS
 
-## Setting Up Infrastructure with Terraform
+## Setting Up Infrastructure with OpenTofu
 
-To automate and streamline the deployment of infrastructure for CREDEBL, we use **Terraform**.&#x20;
+To automate and streamline the deployment of infrastructure for CREDEBL, we use **OpenTofu**.&#x20;
 
 You can easily deploy the required infrastructure by following the steps below.
 
 #### Prerequisites
 
-* **Terraform** installed on your local machine. You can download it from the official [Terraform website.](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+* OpenTofu installed on your local machine. You can download it from the official [**OpenTofu** **website**](https://opentofu.org/docs/intro/install/).
 *   An **AWS account** with the appropriate permissions to create and manage resources.
 
     The following AWS permissions are required for this deployment:
@@ -29,7 +29,7 @@ You can easily deploy the required infrastructure by following the steps below.
 
 ### Steps to Deploy
 
-1.  **Clone the Repository**: First, get the Terraform code from the repository:
+1.  **Clone the Repository**: First, get the code from the repository:
 
     ```bash
     git clone https://github.com/credebl/terraform-scripts.git
@@ -54,20 +54,20 @@ You can easily deploy the required infrastructure by following the steps below.
 
 Ensure all required variables are set before proceeding.
 
-1.  **Initialise Terraform**: Initialise the directory containing Terraform files to install the required AWS provider:
+1.  **Initialise OpenTofu**: Initialise the directory containing OpenTofu files to install the required AWS provider:
 
     ```bash
-    terraform init
+    tofu init
     ```
-2.  **Preview the Infrastructure Changes**: Run the following command to preview the changes that Terraform will make to your AWS infrastructure:
+2.  **Preview the Infrastructure Changes**: Run the following command to preview the changes that OpenTofu will make to your AWS infrastructure:
 
     ```bash
-    terraform plan
+    tofu plan
     ```
 3.  **Deploy the Infrastructure**: When ready, deploy the resources using the following command:
 
     ```bash
-    terraform apply
+    tofu apply
     ```
 4. **Confirm the Deployment**: Type `yes` when prompted to confirm and proceed with creating the AWS resources.
 
@@ -84,28 +84,22 @@ Ensure all required variables are set before proceeding.
 
     Ensure all required variables are added and saved before proceeding.
 8. **Upload the `.env` File to S3**:\
-   Once you've configured the `.env` file, you’ll need to upload it to the S3 bucket that was created during the Terraform deployment.
+   Once you've configured the `.env` file, you’ll need to upload it to the S3 bucket that was created during the deployment.
 9.  **Update ECS Service**:\
-    Navigate to the **ECS (Elastic Container Service)** in the AWS Console. Go to the **Cluster** that was created by Terraform. Inside the cluster, locate the **Services** and set the **Desired Task Count** to `1` (or your desired number of tasks) to launch the container.
+    Navigate to the **ECS (Elastic Container Service)** in the AWS Console. Go to the **Cluster** that was created. Inside the cluster, locate the **Services** and set the **Desired Task Count** to `1` (or your desired number of tasks) to launch the container.
 
     This step will start your application as defined in the ECS service.
 
-### Access the Terraform Code
-
-The full Terraform configuration for this deployment is available in the following GitHub repository:
-
-* Terraform Code for AWS Deployment
-
 #### Tearing Down AWS Resources
 
-To delete the AWS resources created by Terraform, run the following command:
+To delete the AWS resources created by OpenTofu, run the following command:
 
 ```bash
-terraform destroy
+tofu destroy
 ```
 
 #### Notes
 
 * For setting up NATS keys for authorization, please refer to the documentation on [NATS](https://docs.nats.io/running-a-nats-service/configuration/securing\_nats/auth\_intro/nkey\_auth) authorization for more details.
 * Ensure that the required **AWS IAM roles** and permissions are in place before deploying.
-* For additional details or troubleshooting, refer to the Terraform AWS Provider documentation and the Terraform documentation.
+* For additional details or troubleshooting, refer to the Terraform AWS Provider documentation and the OpenTofu documentation.
