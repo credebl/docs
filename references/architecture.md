@@ -1,9 +1,12 @@
 ---
 icon: sitemap
+description: >-
+  This guide leads you through all the details of the CREDEBL Platform
+  Architecture.
 ---
 
 # Architecture
 
-This guide leads you through all the details of the CREDEBL Platform Architecture.
+Overview of the System Architecture.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/CREDEBL_OSS_Architecture.png" alt="CREDEBL System Architecture"><figcaption></figcaption></figure>
