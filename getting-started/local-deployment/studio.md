@@ -30,13 +30,13 @@ Please find `your-ip` in the `.env` file, and replace it with your machine's Ip 
 * Build docker image:
 
 ```
- docker build -t UI .
+docker build -t ui .
 ```
 
 * Start Studio UI
 
 ```
-docker run -d -p 8085:8085 --env-file .env --name UI-App UI
+docker run -d -p 8085:8085 --env-file .env --name UI-App ui
 ```
 
 * Access the dockerized Studio UI by navigating to:
