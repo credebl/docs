@@ -161,7 +161,7 @@ You can skip further NATS  and REDIS setup if you are installing services using 
 The docker-compose.yml file will define the NATS service, map the necessary ports, and bind the configuration file.
 
 {% hint style="warning" %}
-Currently the [_.env.demo_](platform.md#environment-variables) already contains NATS keys and the local setup skips authorization for NATS messaging between services. Refer [here](https://docs.nats.io/running-a-nats-service/configuration/securing\_nats/auth\_intro/nkey\_auth) to know more about NATS authorization
+Currently the [_.env.demo_](platform.md#environment-variables) already contains NATS keys and the local setup skips authorization for NATS messaging between services. Refer [here](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth) to know more about NATS authorization
 {% endhint %}
 
 {% hint style="info" %}
@@ -438,7 +438,7 @@ yarn build
 * Create Docker Image using following command :
 
 ```sh
-docker build . -t credo-controller-0.5.3:latest
+docker build . -t credo-0.5.3:latest
 ```
 
 {% hint style="info" %}
