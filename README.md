@@ -20,7 +20,9 @@ layout:
 
 # Overview
 
-CREDEBL is an industry-leading Verifiable Credential & Decentralised Identity management platform which builds scalable, secure and user-centric SSI solutions. The multi-tenant platform offers straightforward interactions, enabling rapid configuration & deployment of your DID/VC solution.
+Welcome to CREDEBL, a Linux Foundation Decentralized Trust project. CREDEBL, an open-source Decentralized Identity & Verifiable Credentials Management Platform, is used to build the Decentralized National Digital ID for [Royal Government of Bhutan](https://www.bhutanndi.com) & [Papua New Guinea](https://www.biometricupdate.com/202410/papua-new-guinea-advances-digital-id-wallet-and-govt-platform-to-pilot), and [Sovio.id](https://sovio.id) Platform by AYANWORKS. You can find more information at our [website](https://credebl.id).
+
+CREDEBL is a Digital Public Good (DPG) approved by the UN-endorsed DPG Alliance. Visit the [CREDEBL DPG Page](https://www.digitalpublicgoods.net/r/credebl) in the DPG registry.
 
 ### Highlights <a href="#key-features" id="key-features"></a>
 
