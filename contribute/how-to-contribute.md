@@ -8,7 +8,7 @@ Thanks for your interest in CREDEBL docs and for wanting to contribute! There ar
 
 * **Contribute Code:** Submit a pull request to any of our product repositories to share your contributions and improvements.
 * Report an Issue: Found something not working? Let us know by creating an issue in the relevant repository to help us improve.
-* **Support the Community:** Brighten someone’s day by helping them resolve their challenges in our [discord help channel](https://discord.com/channels/1128718023939850250/1128722619731017741)
+* **Support the Community:** Brighten someone’s day by helping them resolve their challenges in LFDT [discord help channel](https://discord.com/channels/905194001349627914/1331657363161219082) for CREDEBL
 
 You are encouraged to contribute to the repository by forking and submitting a pull request.
 
