@@ -1,6 +1,6 @@
 ---
-icon: layer-group
 description: Installation guide for CREDEBL Platform Services
+icon: layer-group
 ---
 
 # Platform
@@ -438,7 +438,7 @@ yarn build
 * Create Docker Image using following command :
 
 ```sh
-docker build . -t credo-0.5.3:latest
+docker build . -t credo-controller-0.5.3:latest
 ```
 
 {% hint style="info" %}
