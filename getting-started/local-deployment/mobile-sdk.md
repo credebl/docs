@@ -76,10 +76,10 @@ const { agent } = useAdeyaAgent()
 import { initializeAgent } from '@credebl/ssi-mobile'
 
 const config: InitConfig = {
-  label: 'ADEYA Wallet',
+  label: 'Alice Wallet',
   walletConfig: {
-    id: 'adeya-wallet',
-    key: 'adeya-wallet-key'
+    id: 'alice-wallet',
+    key: 'alice-wallet-key'
   },
   logger: new ConsoleLogger(LogLevel.debug),
   autoUpdateStorageOnStartup: true

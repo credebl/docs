@@ -1,6 +1,6 @@
 ---
+description: Platform, Studio and Mobile SDK features
 icon: gem
-description: Platform, Studio and ADEYA Mobile SDK features
 ---
 
 # Features
@@ -67,9 +67,9 @@ The platform provides a consistent process for creating and managing the VC life
 
 Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to cryptographically verify and confirm the legitimacy of the credential provided by individuals. These entities are typically Employers, Educational Institutions, or any other entity requiring validation of someone’s qualifications or other identity claims.
 
-## ADEYA Mobile SDK features
+## CREDEBL Mobile SDK features
 
-ADEYA Mobile SDK enables developers to build a mobile app for holders to store credentials and present proof to verifiers:
+CREDEBL Mobile SDK enables developers to build a mobile app for holders to store credentials and present proof to verifiers:
 
 * [Privacy & User Control](features.md#privacy-and-user-control)
 * [Multiple DID method VC format](features.md#multiple-did-methods-and-vc-formats)

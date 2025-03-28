@@ -1,6 +1,6 @@
 ---
-icon: code-fork
 description: This is a guide for local deployment and common prerequisites
+icon: code-fork
 ---
 
 # Local Deployment
@@ -15,7 +15,7 @@ Before diving into the installation process, it is important to understand the m
 * **Platform:** The core of CREDEBL, responsible for managing identities, transactions, and data flow within the system.
 * **Studio:** A user-friendly interface that enables interaction with the CREDEBL platform, providing tools for administration and data visualization.
 * **Agent:** The service that handles secure communications and interactions with the platform, acting as the middleware between the user and the platform's core functionalities.
-* **Adeya Wallet:** A secure digital wallet that integrates with CREDEBL, allowing users to manage their digital identities, credentials, and transactions in a safe and controlled manner.
+* **Mobile Wallet:** A secure digital wallet that integrates with CREDEBL Platform, allowing users to manage their digital identities, credentials, and transactions in a safe and controlled manner.
 
 ## Purpose of Local Deployment
 
@@ -26,7 +26,7 @@ Once your environment is prepared, you can move on to installing each component 
 1. **Platform**: The heart of CREDEBL's functionality.
 2. **Studio**: For managing and visualizing data.
 3. **Agent**: Ensures secure interactions with the platform.
-4. **Adeya Wallet**: Facilitates identity and credential management.
+4. **Mobile Wallet**: Facilitates identity and credential management.
 
 Now that you understand the overall process, let's get started with the installation steps, beginning with the prerequisites.
 

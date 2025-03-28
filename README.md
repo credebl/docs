@@ -64,10 +64,10 @@ There are two types of agents that organizations can use, each serving different
 
 A shared agent refers to an agent that is used by multiple entities or tenants, rather than being dedicated to a single entity. If the tenancy is set to true, it typically means that the system or agent supports multi-tenancy, or if the tenancy is set to false, it means that the agent does not support the multi-tenancy.
 
-### **ADEYA Mobile SDK**
+### **CREDEBL Mobile SDK**
 
-Built on the strong foundation of Credo, the ADEYA Mobile Wallet SDK is a React-Native SDK helps mobile developers to easily build SSI features with into existing mobile apps or a new one, enables interoperability and seamless connectivity for secure data exchange.
+Built on the strong foundation of Credo, the CREDEBL Mobile Wallet SDK is a React-Native SDK helps mobile developers to easily build SSI features with into existing mobile apps or a new one, enables interoperability and seamless connectivity for secure data exchange.
 
 {% hint style="info" %}
-**ADEYA Mobile SDK** enables rapid development of applications for secure, peer-to-peer credentials and message sharing across various sectors, including public administration, healthcare, finance, services, mobility, education, and more.
+**CREDEBL Mobile SDK** enables rapid development of applications for secure, peer-to-peer credentials and message sharing across various sectors, including public administration, healthcare, finance, services, mobility, education, and more.
 {% endhint %}

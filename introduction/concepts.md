@@ -1,6 +1,6 @@
 ---
-icon: nfc-directional
 description: key concepts of the CREDEBL
+icon: nfc-directional
 ---
 
 # Concepts
@@ -72,7 +72,7 @@ wallet is a digital application that securely stores and manages a user's verifi
 
 ### Edge Wallet
 
-An edge wallet is a digital wallet that functions directly on a user's device, allowing individuals to store, manage, and control their verifiable credentials and decentralized identifiers (DIDs) locally. This decentralized approach enhances privacy and security by keeping sensitive identity data close to the user and reducing reliance on cloud storage or third-party services. Edge wallets facilitate seamless interactions with various services, enabling users to selectively share their credentials while retaining full control over their personal information. Check the [ADEYA](https://github.com/credebl/adeya-wallet) wallet.
+An edge wallet is a digital wallet that functions directly on a user's device, allowing individuals to store, manage, and control their verifiable credentials and decentralized identifiers (DIDs) locally. This decentralized approach enhances privacy and security by keeping sensitive identity data close to the user and reducing reliance on cloud storage or third-party services. Edge wallets facilitate seamless interactions with various services, enabling users to selectively share their credentials while retaining full control over their personal information. Check the CREDEBL Mobile wallet.
 
 ### Cloud Wallet
 
