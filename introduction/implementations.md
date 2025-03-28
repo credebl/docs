@@ -12,7 +12,7 @@ description: >-
 
 {% embed url="https://www.bhutanndi.com/article/press-release-dhi-announces-bhutan-ndi-s-migration-to-the-polygon-blockchain-for-enhanced-user-experience-and-scalability_82080061-7100-468b-803e-7fde59205f6b" fullWidth="false" %}
 
-## _**SevisPass**_** Digital ID Pilot for **_**Papua New Guinea**_
+## _**SevisPass**_**&#x20;Digital ID Pilot for&#x20;**_**Papua New Guinea**_
 
 <figure><img src="../.gitbook/assets/SevisPortal.jpeg" alt="" width="563"><figcaption><p>SevisPass &#x26; SevisWallet Digital ID Pilot</p></figcaption></figure>
 

@@ -1,6 +1,6 @@
 ---
-icon: wallet
 description: React-Native Mobile SDK to build SSI powered identity apps & edge wallets
+icon: wallet
 layout:
   title:
     visible: true
@@ -14,35 +14,35 @@ layout:
     visible: true
 ---
 
-# ADEYA Wallet SDK
+# Mobile SDK
 
-[![npm](https://img.shields.io/npm/v/@adeya/ssi.svg)](https://www.npmjs.com/package/@adeya/ssi) [![npm](https://img.shields.io/npm/v/@adeya/ssi/alpha.svg)](https://www.npmjs.com/package/@adeya/ssi)
+[![npm](https://img.shields.io/npm/v/@credebl/ssi-mobile.svg)](https://www.npmjs.com/package/@credebl/ssi-mobile)
 
-* [Installing](adeya-wallet-sdk.md#installing)
-* [Peer Dependencies](adeya-wallet-sdk.md#peer-dependencies)
-* [Usage](adeya-wallet-sdk.md#usage)
-* [API](adeya-wallet-sdk.md#api)
-  * [Agent](adeya-wallet-sdk.md#agent)
-  * [Wallet](adeya-wallet-sdk.md#wallet)
-  * [Connections](adeya-wallet-sdk.md#connections)
-  * [Credentials](adeya-wallet-sdk.md#credentials)
-  * [Proofs](adeya-wallet-sdk.md#proofs)
-  * [BasicMessages](adeya-wallet-sdk.md#basicmessages)
-  * [PushNotifications](adeya-wallet-sdk.md#pushnotifications)
-  * [Hooks](adeya-wallet-sdk.md#hooks)
+* [Installing](mobile-sdk.md#installing)
+* [Peer Dependencies](mobile-sdk.md#peer-dependencies)
+* [Usage](mobile-sdk.md#usage)
+* [API](mobile-sdk.md#api)
+  * [Agent](mobile-sdk.md#agent)
+  * [Wallet](mobile-sdk.md#wallet)
+  * [Connections](mobile-sdk.md#connections)
+  * [Credentials](mobile-sdk.md#credentials)
+  * [Proofs](mobile-sdk.md#proofs)
+  * [BasicMessages](mobile-sdk.md#basicmessages)
+  * [PushNotifications](mobile-sdk.md#pushnotifications)
+  * [Hooks](mobile-sdk.md#hooks)
 
 ## Installing
 
 ```sh
-npm install @adeya/ssi
+npm install @credebl/ssi-mobile
 
 # or
 
-yarn add @adeya/ssi
+yarn add @credebl/ssi-mobile
 
 # or
 
-pnpm add @adeya/ssi
+pnpm add @credebl/ssi-mobile
 ```
 
 ## Peer Dependencies
@@ -61,7 +61,7 @@ pnpm add @adeya/ssi
 ## Usage
 
 ```ts
-import { useAdeyaAgent } from '@adeya/ssi'
+import { useAdeyaAgent } from '@credebl/ssi-mobile'
 
 const { agent } = useAdeyaAgent()
 ```
@@ -73,7 +73,7 @@ const { agent } = useAdeyaAgent()
 * **initializeAgent** - Initialize the agent with the given `Config` and `Agent Modules` . This includes all the config related to the wallet details and label.
 
 ```ts
-import { initializeAgent } from '@adeya/ssi'
+import { initializeAgent } from '@credebl/ssi-mobile'
 
 const config: InitConfig = {
   label: 'ADEYA Wallet',
@@ -94,7 +94,7 @@ const agent = await initializeAgent({
 * **getAgentModules** - Get the default agent modules which requires `mediatorURL` and `indyLedgers`
 
 ```ts
-import { getAgentModules } from '@adeya/ssi'
+import { getAgentModules } from '@credebl/ssi-mobile'
 
 const modules = getAgentModules(mediatorUrl, indyLedgers)
 ```
@@ -102,7 +102,7 @@ const modules = getAgentModules(mediatorUrl, indyLedgers)
 * **AdeyaAgent** - The agent instance type which helps in typing our agent object.
 
 ```ts
-import { AdeyaAgent } from '@adeya/ssi'
+import { AdeyaAgent } from '@credebl/ssi-mobile'
 ```
 
 ### Wallet
@@ -110,7 +110,7 @@ import { AdeyaAgent } from '@adeya/ssi'
 * **isWalletPinCorrect** - Check if the wallet pin is correct.
 
 ```ts
-import { isWalletPinCorrect } from '@adeya/ssi'
+import { isWalletPinCorrect } from '@credebl/ssi-mobile'
 
 const isCorrect = await isWalletPinCorrect(walletConfig)
 ```
@@ -118,7 +118,7 @@ const isCorrect = await isWalletPinCorrect(walletConfig)
 * **exportWallet** - Export the wallet and pass export config which includes `backupKey` and `path` where we want to export our wallet.
 
 ```ts
-import { exportWallet } from '@adeya/ssi'
+import { exportWallet } from '@credebl/ssi-mobile'
 
 await exportWallet(agent, exportConfig)
 ```
@@ -126,7 +126,7 @@ await exportWallet(agent, exportConfig)
 * **importWalletWithAgent** - Import the wallet and start the agent with `importConfig` which includes `key` and `path` from where wallet can be imported&#x20;
 
 ```ts
-import { importWalletWithAgent } from '@adeya/ssi'
+import { importWalletWithAgent } from '@credebl/ssi-mobile'
 
 const agent = await importWalletWithAgent({
   importConfig,
@@ -140,7 +140,7 @@ const agent = await importWalletWithAgent({
 * **createLegacyInvitation** - Create a legacy invitation which use the connection v1 protocol.
 
 ```ts
-import { createLegacyInvitation } from '@adeya/ssi'
+import { createLegacyInvitation } from '@credebl/ssi-mobile'
 
 const connection = await createLegacyInvitation(agent, domain, config)
 ```
@@ -148,7 +148,7 @@ const connection = await createLegacyInvitation(agent, domain, config)
 * **createLegacyConnectionlessInvitation** - Create a legacy connectionless invitation.
 
 ```ts
-import { createLegacyConnectionlessInvitation } from '@adeya/ssi'
+import { createLegacyConnectionlessInvitation } from '@credebl/ssi-mobile'
 
 const connection = await createLegacyConnectionlessInvitation(agent, config)
 ```
@@ -156,7 +156,7 @@ const connection = await createLegacyConnectionlessInvitation(agent, config)
 * **createInvitation** - Create an Out-of-band invitation.
 
 ```ts
-import { createInvitation } from '@adeya/ssi'
+import { createInvitation } from '@credebl/ssi-mobile'
 
 const connection = await createInvitation(agent, domain, config)
 ```
@@ -164,7 +164,7 @@ const connection = await createInvitation(agent, domain, config)
 * **acceptInvitation** - Accept an invitation.
 
 ```ts
-import { acceptInvitation } from '@adeya/ssi'
+import { acceptInvitation } from '@credebl/ssi-mobile'
 
 const connection = await acceptInvitation(agent, invitation, config)
 ```
@@ -172,7 +172,7 @@ const connection = await acceptInvitation(agent, invitation, config)
 * **parseInvitationFromUrl** - Parse an invitation from a url.
 
 ```ts
-import { parseInvitationFromUrl } from '@adeya/ssi'
+import { parseInvitationFromUrl } from '@credebl/ssi-mobile'
 
 const invitation = await parseInvitationFromUrl(agent, invitationUrl)
 ```
@@ -180,7 +180,7 @@ const invitation = await parseInvitationFromUrl(agent, invitationUrl)
 * **acceptInvitationFromUrl** - Accept an invitation from a url.
 
 ```ts
-import { acceptInvitationFromUrl } from '@adeya/ssi'
+import { acceptInvitationFromUrl } from '@credebl/ssi-mobile'
 
 const connection = await acceptInvitationFromUrl(agent, invitationUrl, config)
 ```
@@ -188,7 +188,7 @@ const connection = await acceptInvitationFromUrl(agent, invitationUrl, config)
 * **getAllConnections** - Get all connections.
 
 ```ts
-import { getAllConnections } from '@adeya/ssi'
+import { getAllConnections } from '@credebl/ssi-mobile'
 
 const connections = await getAllConnections(agent)
 ```
@@ -196,7 +196,7 @@ const connections = await getAllConnections(agent)
 * **getConnectionById** - Get a connection by id.
 
 ```ts
-import { getConnectionById } from '@adeya/ssi'
+import { getConnectionById } from '@credebl/ssi-mobile'
 
 const connection = await getConnectionById(agent, connectionId)
 ```
@@ -204,7 +204,7 @@ const connection = await getConnectionById(agent, connectionId)
 * **findConnectionById** - Find a connection by id.
 
 ```ts
-import { findConnectionById } from '@adeya/ssi'
+import { findConnectionById } from '@credebl/ssi-mobile'
 
 const connection = await findConnectionById(agent, connectionId)
 ```
@@ -212,7 +212,7 @@ const connection = await findConnectionById(agent, connectionId)
 * **findOutOfBandRecordById** - Find an out of band record by id.
 
 ```ts
-import { findOutOfBandRecordById } from '@adeya/ssi'
+import { findOutOfBandRecordById } from '@credebl/ssi-mobile'
 
 const record = await findOutOfBandRecordById(agent, recordId)
 ```
@@ -220,7 +220,7 @@ const record = await findOutOfBandRecordById(agent, recordId)
 * **findByReceivedInvitationId** - Find an out of band record by  invitation id.
 
 ```ts
-import { findByReceivedInvitationId } from '@adeya/ssi'
+import { findByReceivedInvitationId } from '@credebl/ssi-mobile'
 
 const record = await findByReceivedInvitationId(agent, receivedInvitationId)
 ```
@@ -228,7 +228,7 @@ const record = await findByReceivedInvitationId(agent, receivedInvitationId)
 * **deleteConnectionRecordById** - Delete a connection record by id.
 
 ```ts
-import { deleteConnectionRecordById } from '@adeya/ssi'
+import { deleteConnectionRecordById } from '@credebl/ssi-mobile'
 
 await deleteConnectionRecordById(agent, connectionId)
 ```
@@ -236,7 +236,7 @@ await deleteConnectionRecordById(agent, connectionId)
 * **deleteOobRecordById** - Delete a out-of-band record by id.
 
 ```ts
-import { deleteOobRecordById } from '@adeya/ssi'
+import { deleteOobRecordById } from '@credebl/ssi-mobile'
 
 await deleteOobRecordById(agent, outOfBandId)
 ```
@@ -246,7 +246,7 @@ await deleteOobRecordById(agent, outOfBandId)
 * **getAllCredentialExchangeRecords** - Get all credential exchange records.
 
 ```ts
-import { getAllCredentialExchangeRecords } from '@adeya/ssi'
+import { getAllCredentialExchangeRecords } from '@credebl/ssi-mobile'
 
 const records = await getAllCredentialExchangeRecords(agent)
 ```
@@ -254,7 +254,7 @@ const records = await getAllCredentialExchangeRecords(agent)
 * **getFormattedCredentialData** - Retrieves the formatted data for a given credential record ID.
 
 ```ts
-import { getFormattedCredentialData } from '@adeya/ssi'
+import { getFormattedCredentialData } from '@credebl/ssi-mobile'
 
 const formattedData = await getFormattedCredentialData(agent, credentialRecordId)
 ```
@@ -262,7 +262,7 @@ const formattedData = await getFormattedCredentialData(agent, credentialRecordId
 * **acceptCredentialOffer** - Accept a credential offer.
 
 ```ts
-import { acceptCredentialOffer } from '@adeya/ssi'
+import { acceptCredentialOffer } from '@credebl/ssi-mobile'
 
 const credential = await acceptCredentialOffer(agent, options)
 ```
@@ -270,7 +270,7 @@ const credential = await acceptCredentialOffer(agent, options)
 * **updateCredentialExchangeRecord** - Update a credential exchange record. This can be used to add or update the metadata of credential exchange record.
 
 ```ts
-import { updateCredentialExchangeRecord } from '@adeya/ssi'
+import { updateCredentialExchangeRecord } from '@credebl/ssi-mobile'
 
 await updateCredentialExchangeRecord(agent, credentialRecord)
 ```
@@ -278,7 +278,7 @@ await updateCredentialExchangeRecord(agent, credentialRecord)
 * **declineCredentialOffer** - Decline a credential offer.
 
 ```ts
-import { declineCredentialOffer } from '@adeya/ssi'
+import { declineCredentialOffer } from '@credebl/ssi-mobile'
 
 const record = await declineCredentialOffer(agent, credentialRecordId)
 ```
@@ -286,7 +286,7 @@ const record = await declineCredentialOffer(agent, credentialRecordId)
 * **deleteCredentialExchangeRecordById** - Delete a credential exchange record by id.
 
 ```ts
-import { deleteCredentialExchangeRecordById } from '@adeya/ssi'
+import { deleteCredentialExchangeRecordById } from '@credebl/ssi-mobile'
 
 await deleteCredentialExchangeRecordById(agent, credentialRecordId, options)
 ```
@@ -294,7 +294,7 @@ await deleteCredentialExchangeRecordById(agent, credentialRecordId, options)
 * **sendCredentialProblemReport** - Send a credential problem report.
 
 ```ts
-import { sendCredentialProblemReport } from '@adeya/ssi'
+import { sendCredentialProblemReport } from '@credebl/ssi-mobile'
 
 const record = await sendCredentialProblemReport(agent, options)
 ```
@@ -302,7 +302,7 @@ const record = await sendCredentialProblemReport(agent, options)
 * **getW3cCredentialRecordById** - Get a W3C credential record by id.
 
 ```ts
-import { getW3cCredentialRecordById } from '@adeya/ssi'
+import { getW3cCredentialRecordById } from '@credebl/ssi-mobile'
 
 const record = await getW3cCredentialRecordById(agent, credentialRecordId)
 ```
@@ -310,7 +310,7 @@ const record = await getW3cCredentialRecordById(agent, credentialRecordId)
 * **getAllW3cCredentialRecords** - Get all W3C credential records.
 
 ```ts
-import { getAllW3cCredentialRecords } from '@adeya/ssi'
+import { getAllW3cCredentialRecords } from '@credebl/ssi-mobile'
 
 const records = await getAllW3cCredentialRecords(agent)
 ```
@@ -320,7 +320,7 @@ const records = await getAllW3cCredentialRecords(agent)
 * **getProofFormatData** - Get proof format data.
 
 ```ts
-import { getProofFormatData } from '@adeya/ssi'
+import { getProofFormatData } from '@credebl/ssi-mobile'
 
 const data = await getProofFormatData(agent, proofRecordId)
 ```
@@ -328,7 +328,7 @@ const data = await getProofFormatData(agent, proofRecordId)
 * **getCredentialsForProofRequest** - Get credentials for a proof request.
 
 ```ts
-import { getCredentialsForProofRequest } from '@adeya/ssi'
+import { getCredentialsForProofRequest } from '@credebl/ssi-mobile'
 
 const credentials = await getCredentialsForProofRequest(agent, options)
 ```
@@ -336,7 +336,7 @@ const credentials = await getCredentialsForProofRequest(agent, options)
 * **selectCredentialsForProofRequest** - Select credentials for a proof request.
 
 ```ts
-import { selectCredentialsForProofRequest } from '@adeya/ssi'
+import { selectCredentialsForProofRequest } from '@credebl/ssi-mobile'
 
 const credentials = await selectCredentialsForProofRequest(agent, options)
 ```
@@ -344,7 +344,7 @@ const credentials = await selectCredentialsForProofRequest(agent, options)
 * **getProofRequestAgentMessage** - Get a proof request agent message.
 
 ```ts
-import { getProofRequestAgentMessage } from '@adeya/ssi'
+import { getProofRequestAgentMessage } from '@credebl/ssi-mobile'
 
 const message = await getProofRequestAgentMessage(agent, proofRecordId)
 ```
@@ -352,7 +352,7 @@ const message = await getProofRequestAgentMessage(agent, proofRecordId)
 * **createProofRequest** - Create a proof request.
 
 ```ts
-import { createProofRequest } from '@adeya/ssi'
+import { createProofRequest } from '@credebl/ssi-mobile'
 
 const proofRequest = await createProofRequest(agent, options)
 ```
@@ -360,7 +360,7 @@ const proofRequest = await createProofRequest(agent, options)
 * **requestProof** - Request a proof.
 
 ```ts
-import { requestProof } from '@adeya/ssi'
+import { requestProof } from '@credebl/ssi-mobile'
 
 const proof = await requestProof(agent, options)
 ```
@@ -368,7 +368,7 @@ const proof = await requestProof(agent, options)
 * **updateProofRecord** - Update a proof record.
 
 ```ts
-import { updateProofRecord } from '@adeya/ssi'
+import { updateProofRecord } from '@credebl/ssi-mobile'
 
 await updateProofRecord(agent, proofRecord)
 ```
@@ -376,7 +376,7 @@ await updateProofRecord(agent, proofRecord)
 * **acceptProofRequest** - Accept a proof request.
 
 ```ts
-import { acceptProofRequest } from '@adeya/ssi'
+import { acceptProofRequest } from '@credebl/ssi-mobile'
 
 const proof = await acceptProofRequest(agent, options)
 ```
@@ -384,7 +384,7 @@ const proof = await acceptProofRequest(agent, options)
 * **declineProofRequest** - Decline a proof request.
 
 ```ts
-import { declineProofRequest } from '@adeya/ssi'
+import { declineProofRequest } from '@credebl/ssi-mobile'
 
 const proof = await declineProofRequest(agent, options)
 ```
@@ -392,7 +392,7 @@ const proof = await declineProofRequest(agent, options)
 * **sendProofProblemReport** - Send a proof problem report.
 
 ```ts
-import { sendProofProblemReport } from '@adeya/ssi'
+import { sendProofProblemReport } from '@credebl/ssi-mobile'
 
 const proof = await sendProofProblemReport(agent, options)
 ```
@@ -402,7 +402,7 @@ const proof = await sendProofProblemReport(agent, options)
 * **sendBasicMessage** - Send a basic message.
 
 ```ts
-import { sendBasicMessage } from '@adeya/ssi'
+import { sendBasicMessage } from '@credebl/ssi-mobile'
 
 const record = await sendBasicMessage(agent, options)
 ```
@@ -412,7 +412,7 @@ const record = await sendBasicMessage(agent, options)
 * **setPushNotificationDeviceInfo** - Set the push notification device info.
 
 ```ts
-import { setPushNotificationDeviceInfo } from '@adeya/ssi'
+import { setPushNotificationDeviceInfo } from '@credebl/ssi-mobile'
 
 await setPushNotificationDeviceInfo(agent, options)
 ```
@@ -422,7 +422,7 @@ await setPushNotificationDeviceInfo(agent, options)
 * **useAdeyaAgent** - React hooks to get the agent instance.
 
 ```ts
-import { useAdeyaAgent } from '@adeya/ssi'
+import { useAdeyaAgent } from '@credebl/ssi-mobile'
 
 const { agent } = useAdeyaAgent()
 ```
