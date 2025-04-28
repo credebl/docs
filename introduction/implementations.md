@@ -18,9 +18,11 @@ description: >-
 
 {% embed url="https://www.biometricupdate.com/202410/papua-new-guinea-advances-digital-id-wallet-and-govt-platform-to-pilot" %}
 
-## CREDEBL SaaS
+## Sovio.id
 
-[**credebl.id**](https://credebl.id) is hosted & made available by AYANWORKS as a SaaS offering for building various sector-specific Digital Credential solutions, while keeping away the complexity of Decentralized Identity technology/protocol stack, and focus on the specific business use case.
+[**sovio.id**](https://sovio.id/) is a SaaS platform offered by AYANWORKS which helps building various sector-specific Digital Credential solutions, while keeping away the complexity of Decentralized Identity technology/protocol stack, and allows innovators to  focus on the specific business use case.
 
-* **EduCreds** (Academic Credentials)
-* **Sports Awards** (Micro Credentials) - World Memory Championship
+* **EduCreds** (Academic Digital Credentials)
+* **Non-Academic Awards, Badges, Micro-credentials**
+* **Employment Credentials**
+* **Digital Travel Credentials**
