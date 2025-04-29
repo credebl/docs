@@ -118,9 +118,30 @@ After installation, verify that all components are running correctly.
 
 <details>
 
-<summary></summary>
+<summary>Show all containers</summary>
 
-
+<pre data-title="Services" data-line-numbers><code>Credo-Controller
+Agent-Service
+Agent-Provisioning-Service
+Verification-Service
+Organization-Service
+Ledger-Service
+Issuance-Service
+Connection-Service
+User-Service
+Cloud-Wallet-Service
+Utility-Service
+Webhook-Service
+Geolocation-Service
+Notification-Service
+API-Gateway
+Seed-Service
+Postgres
+Redis
+Schema-File-Server
+NATS
+<strong>Keycloak
+</strong></code></pre>
 
 </details>
 
