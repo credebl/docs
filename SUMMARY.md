@@ -14,7 +14,6 @@
 * [Local Deployment](getting-started/local-deployment/README.md)
   * [Platform](getting-started/local-deployment/platform.md)
   * [Studio](getting-started/local-deployment/studio.md)
-  * [Agent](getting-started/local-deployment/agent.md)
   * [Mobile SDK](getting-started/local-deployment/mobile-sdk.md)
 * [Cloud Deployment](getting-started/cloud-deployment/README.md)
   * [AWS](getting-started/cloud-deployment/aws.md)
