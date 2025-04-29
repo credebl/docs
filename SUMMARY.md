@@ -34,3 +34,7 @@
 ## Contribute
 
 * [How to contribute](contribute/how-to-contribute.md)
+* [Setup](contribute/setup/README.md)
+  * [Service setup](contribute/setup/service-setup.md)
+  * [Studio](contribute/setup/studio.md)
+  * [(Optional) Agent](contribute/setup/optional-agent.md)

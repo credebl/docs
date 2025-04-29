@@ -120,7 +120,9 @@ After installation, verify that all components are running correctly.
 
 <summary>Show all containers</summary>
 
-<pre data-title="Services" data-line-numbers><code>Credo-Controller
+{% code title="Services" %}
+```
+Credo-Controller
 Agent-Service
 Agent-Provisioning-Service
 Verification-Service
@@ -140,8 +142,9 @@ Postgres
 Redis
 Schema-File-Server
 NATS
-<strong>Keycloak
-</strong></code></pre>
+Keycloak
+```
+{% endcode %}
 
 </details>
 
