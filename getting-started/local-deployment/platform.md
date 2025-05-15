@@ -37,16 +37,74 @@ Ensure these ports are not blocked by your firewall or occupied by other applica
 
 ## Prerequisites
 
-Here is the list of prerequisites software we will need for CREDEBL:
+Here is the list of prerequisites we will need for CREDEBL:
 
-* [Sendgrid](platform.md#sendgrid)&#x20;
+* [AWS S3 Configuration Requirements](https://aws.amazon.com/)
+  * **IAM User Setup**
+    * **Step 1: Create Dedicated IAM User**
+    * **Step 2: Set Permissions**\
+      Attach policy to user with these permissions:
+      * `s3:PutObject`
+      * `s3:GetObject`
+      * `s3:ListBucket`
+    * **Step 3: Generate Credentials**\
+      After user creation, download:
+      * Access Key ID
+      * Secret Access Key\
+        &#xNAN;_(Store securely for CREDEBL installation)_
+  *   **S3 Bucket Folder Requirements**
+
+      Please ensure the following folder structure is created in the respective S3 buckets:
+
+      | Bucket Type                 | Required Folders                                      | Access Level |
+      | --------------------------- | ----------------------------------------------------- | ------------ |
+      | **Connection URLs Storage** | <p><code>default/</code><br><code>persist/</code></p> | Public       |
+      | **Organization Logos**      | `orgLogos/`                                           | Public       |
+      | **Bulk Issuance**           | (root level)                                          | Private      |
+* [Sendgrid](https://sendgrid.com/en-us)&#x20;
   * SendGrid is used for sending email. You must obtain an API key from your SendGrid account.
-* [AWS S3 Credentials](platform.md#system-requirements)
-  * The platform uses Amazon S3 for secure file storage. Prepare your:
-    * AWS Access Key ID
-    * AWS Secret Access Key
-    * S3 Bucket Name
-    * AWS Region
+
+<details>
+
+<summary>Sendgrid API key setup steps</summary>
+
+* Log in to your SendGrid account:
+  * Go to [https://app.sendgrid.com](https://login.sendgrid.com/login/password) and sign in with your credentials.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdmnR2ZTjWIr9ORfRzVmvYHLrLKN0HSc2Wc1h6K-cLQ4FQJfdTEBlrotNpG2Q851P2OCqSd7U1ezy67E2tHUa7RfnYL9S20bBAYmS42COLpTm8xfXZIOdjS8hOEX1WZCbQCS7gjCg?key=d_qWtjEes9qiiyogS_A3bw)
+
+* Navigate to API Key Settings:-
+  * On the left-hand navigation panel, click on "Settings".
+  * Under Settings, select "API Keys".
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfy-IUcY6_BTto_2Glo7JSXnmXZVLrR2X8Oudv1F_Tf1CSzQ85Re0RxaSgyWGIgnLCqQsu1x2SRpkCLpfz-jRkDwBlgyz45Pp3Cuyhuf11a-K5NF5dC2LFhK7DdMEMFk0bMfq1hXg?key=d_qWtjEes9qiiyogS_A3bw)
+
+* Create a New API Key:
+  * Click on the "Create API Key" button.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeKwFhpTjxrbEOEfo0ndl8bSfBpS1sPnGQgMQWOiU9Sv8qxseMDbVAyW3w5sjh23Ca6g6RK2LHVHHJREEDoT4xBZi_og7i8r5VPhR_f36NY4WTieqOaYW9ETGP7Y0h13-m3WyXN5A?key=d_qWtjEes9qiiyogS_A3bw)
+
+* Choose one of the following access levels:
+  * Enter a meaningful name for your API key to help you identify its purpose later.
+  * Full Access – Grants complete access to all endpoints.
+  * Restricted Access – Allows you to configure fine-grained permissions for each API category.
+  * Billing Access – Provides access only to billing-related endpoints.
+  * Click the "Create & View" button.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeCZQrz4sNPFaqjeUWQn7ZT8LirX49yNxW4keyaRlM14cFOG_XOR22LfvHTl8SFfDRyrNmvYOb5r751LGS8XfX0jLU-vel7gve-USCNRySOwBG8HDfkDETbJlxkJaszgwT0qFNUkw?key=d_qWtjEes9qiiyogS_A3bw)
+
+* Secure Your API Key:
+  * Your API key will be displayed only once, make sure to copy and save this key securely in a password manager or secure vault.
+
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfaxBTAD_RmN_r_uqStSpLpkId7A89_amkJuAOFv96TSB56tJ0mF7DGKwxfQqoOFN-FYaG0_MK12_nSWLnHUjCNsWT2rt9qT-l5GYNvFDJbX9TnoSn1ySlH6_FbEEeFLDyCq5SR?key=d_qWtjEes9qiiyogS_A3bw)
+
+\
+Note:-&#x20;
+
+* Do not hard-code the key in your application code.
+* Avoid committing the key to any public repositories (e.g., GitHub)
+
+</details>
 
 ### CREDEBL **Installation Steps**
 
@@ -150,8 +208,8 @@ Keycloak
 
 * #### **Access the CREDEBL API**
 
-Once all containers are running, you can access the CREDEBL API at:\
-[http://localhost:5000/api](http://localhost:5000/api)
+Once all containers are running, you can access the CREDEBL API\
+
 
 ### **Tearing Down the Infrastructure**
 
