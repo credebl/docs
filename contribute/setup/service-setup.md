@@ -639,8 +639,8 @@ utility\
 connection\
 ledger\
 organization\
-agent-service\
 agent-provisioning (Only required once when provisioning base-wallet)\
+agent-service\
 issuance\
 verification\
 (Below are optional services)\
