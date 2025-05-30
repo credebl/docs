@@ -415,23 +415,6 @@ SENDGRID_API_KEY=your-API-key
 ```
 {% endcode %}
 
-* Update the sendgrid details in the `libs/prisma-service/prisma/data/credebl-master-table.json` file as follows:
-
-{% code title="credebl-master-table.json" lineNumbers="true" %}
-```json
-{
-  "platformConfigData": {
-    "externalIp": "192.168.x.x",
-    "inboundEndpoint": "192.168.x.x",
-    "username": "credebl",
-    "sgApiKey": "###Sendgrid Key###", // Enter the Sendgrid API key
-    "emailFrom": "abc@abc.com", // Enter the Sendgrid email
-    "apiEndpoint": "http://192.168.x.x:5000",
-    "tailsFileServer": "http://192.168.x.x:5000"
-  },
-```
-{% endcode %}
-
 ### AWS S3
 
 To utilize all functionalities of CREDEBL, total of 3 S3 buckets are required for;&#x20;
@@ -472,21 +455,73 @@ According to the `AWS_S3_STOREOBJECT_BUCKET` name, as per the [AWS S3 path style
 ```sh
 # Please refere AWS to determine your bucket url
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access 
-SHORTENED_URL_DOMAIN='https://AWS_S3_STOREOBJECT_REGION.amazonaws.com/AWS_S3_STOREOBJECT_BUCKET'
+SHORTENED_URL_DOMAIN='https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/AWS_S3_STOREOBJECT_BUCKET'
 ```
 {% endcode %}
 
 {% hint style="info" %}
-Note: Usually, `SHORTENED_URL_DOMAIN` for bucket names with dot ( . ) in it comes after '/': `https://AWS_S3_STOREOBJECT_REGION.amazonaws.com/bucket-name`. While others without a dot(.) are often referred as a subdomain: `https://`**`bucket-name`**`.AWS_S3_STOREOBJECT_REGION.amazonaws.com`
+Note: Usually, `SHORTENED_URL_DOMAIN` for bucket names with dot ( . ) in it comes after '/': `https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/bucket-name`. While others without a dot(.) are often referred as a subdomain: `https://`**`bucket-name`**`.AWS_S3_STOREOBJECT_REGION.amazonaws.com`
 {% endhint %}
 
-### Schema File Server (Optional)
+### Schema File Server
+
+#### Clone Repository
+
+Clone the platform repository from GitHub:
+
+```sh
+git clone https://github.com/ayanworks/schema-file-server.git
+cd schema-file-server
+```
+
+#### Environment Variables
+
+To help you quick start, a `.env.demo` is already present at the root of the platform repository. To getting started, rename `.env.demo` to `.env`  \
+\
+Please find `JWT_TOKEN_SECRET` in the `.env` file and replace its value with a base64-encoded JWT token.
 
 {% hint style="info" %}
-This is an optional setup required for using w3c credentials, you can skip this if you want to use AnonCreds credentials
+Note: You can create JWT Token using the following command:\
+**node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"**
 {% endhint %}
 
-Coming Soon
+#### Service Setup
+
+1.  **Build the Docker Image**
+
+    ```bash
+    docker build -t schema-file-server .
+    ```
+2.  **Run the Docker Container**
+
+    ```bash
+    docker run -d --env-file .env -p 4000:4000 -v "$PWD/app/schemas:/app/schemas" --name schema-file-server schema-file-server
+    ```
+
+    * `-d`: Run container in detached mode
+    * `--env-file .env`: Load environment variables from the `.env` file
+    * `-p 4000:4000`: Map host port 4000 to container port 4000
+    * `-v "$PWD/app/schemas:/app/schemas"`: Mount the local `app/schemas` directory into the container
+    * `--name schema-file-server`: Assign a name to the container
+    * `schema-file-server`: The name of the Docker image
+
+#### Update .env and agent.env
+
+* Update the schema file server token and URL in both the .env and agent.env files.
+
+{% code title=".env" %}
+```
+SCHEMA_FILE_SERVER_URL='http://localhost:4000/schemas/'
+SCHEMA_FILE_SERVER_TOKEN=
+```
+{% endcode %}
+
+{% code title="agent.env" %}
+```
+SERVER_URL='http://localhost:4000'
+FILE_SERVER_TOKEN=
+```
+{% endcode %}
 
 ### Agent Setup
 

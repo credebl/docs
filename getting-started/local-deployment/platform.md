@@ -39,29 +39,48 @@ Ensure these ports are not blocked by your firewall or occupied by other applica
 
 Here is the list of prerequisites we will need for CREDEBL:
 
+* [Docker / Docker compose](https://docs.docker.com/compose/install/standalone/)​
+* [PostgreSQL](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/postgresql) (>= 14)
+* ​[NATS](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/nats) (>= 2.6.4)
+* ​[REDIS](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/redis) (>= 7.4)
+* ​[Keycloak](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/top) (>= 25.0.6)
 * [AWS S3 Configuration Requirements](https://aws.amazon.com/)
-  * **IAM User Setup**
-    * **Step 1: Create Dedicated IAM User**
-    * **Step 2: Set Permissions**\
-      Attach policy to user with these permissions:
-      * `s3:PutObject`
-      * `s3:GetObject`
-      * `s3:ListBucket`
-    * **Step 3: Generate Credentials**\
-      After user creation, download:
-      * Access Key ID
-      * Secret Access Key\
-        &#xNAN;_(Store securely for CREDEBL installation)_
-  *   **S3 Bucket Folder Requirements**
+  * The platform uses Amazon S3 for secure file storage. Prepare your:
+    * AWS Access Key ID
+    * AWS Secret Access Key
+    * S3 Bucket Name
+    * AWS Region
 
-      Please ensure the following folder structure is created in the respective S3 buckets:
+<details>
 
-      | Bucket Type                 | Required Folders                                      | Access Level |
-      | --------------------------- | ----------------------------------------------------- | ------------ |
-      | **Connection URLs Storage** | <p><code>default/</code><br><code>persist/</code></p> | Public       |
-      | **Organization Logos**      | `orgLogos/`                                           | Public       |
-      | **Bulk Issuance**           | (root level)                                          | Private      |
-* [Sendgrid](https://sendgrid.com/en-us)&#x20;
+<summary>AWS S3 configuration setup </summary>
+
+* **IAM User Setup**
+  * **Step 1: Create Dedicated IAM User**
+  * **Step 2: Set Permissions**\
+    Attach policy to user with these permissions:
+    * `s3:PutObject`
+    * `s3:GetObject`
+    * `s3:ListBucket`
+  * **Step 3: Generate Credentials**\
+    After user creation, download:
+    * Access Key ID
+    * Secret Access Key\
+      &#xNAN;_(Store securely for CREDEBL installation)_
+
+-   **S3 Bucket Folder Requirements**
+
+    Please ensure the following folder structure is created in the respective S3 buckets:
+
+    | Bucket Type                 | Required Folders                                      | Access Level |
+    | --------------------------- | ----------------------------------------------------- | ------------ |
+    | **Connection URLs Storage** | <p><code>default/</code><br><code>persist/</code></p> | Public       |
+    | **Organization Logos**      | `orgLogos/`                                           | Public       |
+    | **Bulk Issuance**           | (root level)                                          | Private      |
+
+</details>
+
+* [Sendgrid](https://sendgrid.com/en-us)
   * SendGrid is used for sending email. You must obtain an API key from your SendGrid account.
 
 <details>
@@ -105,6 +124,11 @@ Note:-&#x20;
 * Avoid committing the key to any public repositories (e.g., GitHub)
 
 </details>
+
+{% hint style="info" %}
+**Note:** PostgreSQL, NATS, Redis, and Keycloak will be automatically installed when you run the setup script, so there's no need to install or configure them manually beforehand.\
+However, you must have your **AWS credentials** and **SendGrid API key** ready before executing the script.
+{% endhint %}
 
 ### CREDEBL **Installation Steps**
 
