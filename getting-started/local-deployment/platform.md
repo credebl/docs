@@ -168,7 +168,7 @@ This script will:
 * Launch all required services in separate terminal tabs (each tab will be automatically named for its service, and new services will start a few seconds apart)
 
 After the script completes, the backend and agent services will be running.\
-You will need to start the frontend separately by following the instructions [here](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/changes/96/contribute/setup/studio).
+You will need to start the frontend separately by following the instructions [here](https://docs.credebl.id/docs/contribute/setup/studio).
 
 #### Dockerized Deployment
 
