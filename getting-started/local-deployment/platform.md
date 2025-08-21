@@ -134,13 +134,49 @@ However, you must have your **AWS credentials** and **SendGrid API key** ready b
 
 To setup, use the provided script which automatically checks your environment, installs Docker Engine, Docker Compose and Terraform on Linux, and runs the `docker compose up` command. This helps ensure all dependencies are met and streamlines the startup process for CREDEBL.
 
-
+#### Local deployment&#x20;
 
 1.  **Clone the Repository**\
     Begin by cloning the CREDEBL installation repository from GitHub. This repository contains all necessary scripts and configurations.
 
     ```
     git clone -b main https://github.com/credebl/install.git && cd install/local-deployment
+    ```
+2.  **Grant Execution Permissions**
+
+    The installation script requires executable permissions to run.
+
+    ```
+    chmod +x setup.sh
+    ```
+
+    This command makes the `setup.sh` script executable.
+3.  **Execute the Setup Script**
+
+    Run the setup script to begin the automated installation process.
+
+    ```
+    ./setup.sh
+    ```
+
+This script will:
+
+* Create and configure the database
+* Install and configure Keycloak
+* Set up the schema file server
+* Seed the database with initial data
+* Launch all required services in separate terminal tabs (each tab will be automatically named for its service, and new services will start a few seconds apart)
+
+After the script completes, the backend and agent services will be running.\
+You will need to start the frontend separately by following the instructions [here](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/changes/96/contribute/setup/studio).
+
+#### Dockerized Deployment
+
+1.  **Clone the Repository**\
+    Begin by cloning the CREDEBL installation repository from GitHub. This repository contains all necessary scripts and configurations.
+
+    ```
+    git clone -b main https://github.com/credebl/install.git && cd install/docker-deployment
     ```
 
 
