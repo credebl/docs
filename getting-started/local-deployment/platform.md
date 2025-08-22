@@ -134,7 +134,7 @@ However, you must have your **AWS credentials** and **SendGrid API key** ready b
 
 To setup, use the provided script which automatically checks your environment, installs Docker Engine, Docker Compose and Terraform on Linux, and runs the `docker compose up` command. This helps ensure all dependencies are met and streamlines the startup process for CREDEBL.
 
-#### Local deployment&#x20;
+#### Option 1: Local deployment&#x20;
 
 1.  **Clone the Repository**\
     Begin by cloning the CREDEBL installation repository from GitHub. This repository contains all necessary scripts and configurations.
@@ -170,7 +170,7 @@ This script will:
 After the script completes, the backend and agent services will be running.\
 You will need to start the frontend separately by following the instructions [here](https://docs.credebl.id/docs/contribute/setup/studio).
 
-#### Dockerized Deployment
+#### Option 2: Docker Deployment
 
 1.  **Clone the Repository**\
     Begin by cloning the CREDEBL installation repository from GitHub. This repository contains all necessary scripts and configurations.
