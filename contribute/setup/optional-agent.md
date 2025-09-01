@@ -125,6 +125,7 @@ _**Description of Fields in cliConfig.json**_
 * **rpcUrl:** URL for the Remote Procedure Call (RPC) service.
 * **fileServerUrl:** You can create your own file server by referring to the [schema file server](https://github.com/ayanworks/schema-file-server)
 * **fileServerToken:** Authentication token for accessing the file server
+* **apiKey:** This is the authentication key required to obtain the access token needed for base wallet operations. (Required in **v.2.1.0** and above)
 
 Build Agent controller using the following command:
 

@@ -30,6 +30,8 @@
 * [FAQs](references/faqs.md)
 * [Glossary](references/glossary.md)
 * [Copyright & License](references/copyright-and-license.md)
+* [Releases](references/releases/README.md)
+  * [v.2.1.0](references/releases/v.2.1.0.md)
 
 ## Contribute
 
