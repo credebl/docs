@@ -11,13 +11,16 @@ Before installing the CREDEBL Platform services, it is essential to ensure that 
 
 Here is the list of software needed to get started:&#x20;
 
-* **Operating System**: The platform supports Linux and macOS systems.&#x20;
+* **Operating System**:&#x20;
+  *   **Supported Architectures:** ARM and AMD (x86)
+
+      > **Note:** Support for ARM and AMD servers is available starting from **v2.1.0**. Versions prior to v2.1.0 only support AMD (x86) architecture.
 * **Git**: Ensure you have Git installed (version **2.34.1 or higher**)
 * **Docker Engine**: Required for containerization
   * **Linux**: Docker will be automatically installed by the setup script.
   * **macOS**:&#x20;
-    1. **Install manually**: Download Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop/).
-    2. **Launch Docker**: After installation, open the Docker Desktop application.
+    * **Install manually**: Download Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop/)
+    * **Launch Docker**: After installation, open the Docker Desktop application.
 *   **Available Ports**:&#x20;
 
     The platform requires the following ports to be available on your machine:
