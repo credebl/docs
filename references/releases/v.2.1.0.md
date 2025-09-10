@@ -32,3 +32,37 @@ Encrypt your **raw** Agent API key using **AES** with `CRYPTO_PRIVATE_KEY`. You 
     <pre><code><strong>base_URL/agent/token
     </strong></code></pre>
 * You can access the tenant wallet and perform operations using the tenant bearer token, which is returned in the response during tenant creation.
+
+### SSO (Single Sign-On)
+
+* Studio
+  * [NextAuth.js](http://nextauth.js) is used for implementing SSO.
+  * To run the application, refer to the `env.demo` file for the required NextAuth-related values.
+  * Make sure these values are added to your `.env` file.
+* Platform
+  * As part of the SSO implementation, additional environment variables need to be set on the backend side as well.Please refer to the `env.demo` file for the required values when running the Platform.
+  * As part of session management, for users who want to use the client ID / client secret based token generation feature, we have updated the response to include cookies.\
+    Using these cookies, users can fetch their session details.
+    *   To fetch the session details, call the following API while passing the stored cookies in the request headers`:`
+
+        * `/auth/sessionDetails`
+
+
+
+**SSO Integration Between CREDEBL and Other Frontend Applications**
+
+* Frontend
+  * For applications that need to use SSO, implement [NextAuth.js](https://next-auth.js.org/getting-started/introduction) in your frontend by adding the required environment variables.
+  * For reference, you can check the Studio code or the official [NextAuth.js documentation](https://next-auth.js.org/getting-started/introduction).
+* Platform
+  * When adding a new client application as an SSO-enabled application, you must configure the corresponding environment variables on the platform side as well.\
+    Essentially, you need to replicate the SSO-related values with the client application's name.
+  * Please refer to the example below or check the `env.demo` file for guidance.
+    * Make sure to add these in your platform application env file (replace \<App name> with your specific application's name):
+      * `<App name>_CLIENT_ALIAS`
+      * `<App name>_DOMAIN`
+      * `<App name>_KEYCLOAK_REDIRECT_INDEX`
+      * `<App name>_KEYCLOAK_MANAGEMENT_CLIENT_ID`
+      * `<App name>_KEYCLOAK_MANAGEMENT_CLIENT_SECRET`
+      * `SUPPORTED_SSO_CLIENTS=CREDEBL,<App name>`
+

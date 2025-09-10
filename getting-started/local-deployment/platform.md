@@ -11,7 +11,7 @@ Before installing the CREDEBL Platform services, it is essential to ensure that 
 
 Here is the list of software needed to get started:&#x20;
 
-* **Operating System**: The platform supports Linux and macOS systems. Note that only `X86_64` architecture is currently supported.
+* **Operating System**: The platform supports Linux and macOS systems.&#x20;
 * **Git**: Ensure you have Git installed (version **2.34.1 or higher**)
 * **Docker Engine**: Required for containerization
   * **Linux**: Docker will be automatically installed by the setup script.

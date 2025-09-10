@@ -583,6 +583,15 @@ AFJ_VERSION=credo-controller-0.5.3:latest
 
 </details>
 
+### SSO (Single Sign-On) (Applicable for V 2.1.0 onwards)&#x20;
+
+* If applications consuming CREDEBL want to use SSO feature, additional environment variables need to be set on the backend side as well.Please refer to the `env.demo` file for the required values when running the Platform.
+* As part of session management, for users who want to use the client ID / client secret based token generation feature, we have updated the response to include cookies.\
+  Using these cookies, users can fetch their session details.
+  * To fetch the session details, call the following API while passing the stored cookies in the request headers`:`
+    * `/auth/sessionDetails`
+* For more details visit this - [https://docs.credebl.id/docs/\~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0](https://docs.credebl.id/docs/~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0#sso-single-sign-on) &#x20;
+
 ## Installations
 
 Make sure the `.env` file is set with all the required environment variables as per the sample file and the [env guide](service-setup.md#environment-variables) give above.
