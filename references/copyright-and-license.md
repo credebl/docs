@@ -1,11 +1,11 @@
 ---
-icon: copyright
 description: Understanding Usage Rights and Legal Compliance
+icon: copyright
 ---
 
 # Copyright & License
 
-`Copyright © 2019 - 2024, AYANWORKS Technology Solutions Pvt. Ltd. All rights reserved.`
+`Copyright © CREDEBL a Series of LF Projects, LLC. All rights reserved.`&#x20;
 
 `This project is licensed under the`` `**`Apache License 2.0,`**`which permits users to freely use, modify, and distribute the software, provided that they adhere to the terms and conditions of the license. The Apache License 2.0 ensures that any derivative works must include a copy of the original license and acknowledge the original authors.`
 
