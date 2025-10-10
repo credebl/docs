@@ -32,8 +32,8 @@ You can easily deploy the required infrastructure by following the steps below.
 1.  **Clone the Repository**: First, get the code from the repository:
 
     ```bash
-    git clone https://github.com/credebl/terraform-scripts.git
-    cd terraform-scripts
+    git clone https://github.com/credebl/install.git
+    cd install/terraform-scripts
     ```
 2.  **Configure AWS**: Ensure that your AWS credentials are set up. Run the following command to configure the AWS CLI if not done already:
 
@@ -43,13 +43,12 @@ You can easily deploy the required infrastructure by following the steps below.
 
     This will prompt you for your **AWS Access Key**, **Secret Access Key**, **Region**, and **Output format**.
 3.  **Create and Configure `terraform.tfvars` File**:\
-    Before initiating the deployment, create a `terraform.tfvars` file by copying the example file (`terraform.tfvars-example)`provided in the repository.\
+    Before initiating the deployment, create a `terraform.tfvars` file on path `terraform-script/aws/platform`.\
     \
     Open the `terraform.tfvars` file and add values to the variables. These values will be used to customize your deployment, such as the AWS region, instance type, and other required settings. Example:
 
     ```
     aws_region = "us-west-2"
-    instance_type = "t2.micro"
     ```
 
 Ensure all required variables are set before proceeding.
@@ -100,6 +99,6 @@ tofu destroy
 
 #### Notes
 
-* For setting up NATS keys for authorization, please refer to the documentation on [NATS](https://docs.nats.io/running-a-nats-service/configuration/securing\_nats/auth\_intro/nkey\_auth) authorization for more details.
+* For setting up NATS keys for authorization, please refer to the documentation on [NATS](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth) authorization for more details.
 * Ensure that the required **AWS IAM roles** and permissions are in place before deploying.
 * For additional details or troubleshooting, refer to the Terraform AWS Provider documentation and the OpenTofu documentation.
