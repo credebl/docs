@@ -4,15 +4,15 @@ icon: aws
 
 # AWS
 
-## Setting Up Infrastructure with OpenTofu
+## Setting Up Infrastructure with **Terraform**
 
-To automate and streamline the deployment of infrastructure for CREDEBL, we use **OpenTofu**.&#x20;
+To automate and streamline the deployment of infrastructure for CREDEBL, we use **Terraform**.&#x20;
 
 You can easily deploy the required infrastructure by following the steps below.
 
 #### Prerequisites
 
-* OpenTofu installed on your local machine. You can download it from the official [**OpenTofu** **website**](https://opentofu.org/docs/intro/install/).
+* **Terraform** installed on your local machine. You can download it from the official [**Terraform website**](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli).
 *   An **AWS account** with the appropriate permissions to create and manage resources.
 
     The following AWS permissions are required for this deployment:
@@ -53,20 +53,20 @@ You can easily deploy the required infrastructure by following the steps below.
 
 Ensure all required variables are set before proceeding.
 
-1.  **Initialise OpenTofu**: Initialise the directory containing OpenTofu files to install the required AWS provider:
+1.  **Initialise Terraform**: Initialise the directory containing Terraform files to install the required AWS provider:
 
     ```bash
-    tofu init
+    terraform init
     ```
-2.  **Preview the Infrastructure Changes**: Run the following command to preview the changes that OpenTofu will make to your AWS infrastructure:
+2.  **Preview the Infrastructure Changes**: Run the following command to preview the changes that Terraform will make to your AWS infrastructure:
 
     ```bash
-    tofu plan
+    terraform plan
     ```
 3.  **Deploy the Infrastructure**: When ready, deploy the resources using the following command:
 
     ```bash
-    tofu apply
+    terraform apply
     ```
 4. **Confirm the Deployment**: Type `yes` when prompted to confirm and proceed with creating the AWS resources.
 
@@ -91,14 +91,14 @@ Ensure all required variables are set before proceeding.
 
 #### Tearing Down AWS Resources
 
-To delete the AWS resources created by OpenTofu, run the following command:
+To delete the AWS resources created by Terraform, run the following command:
 
 ```bash
-tofu destroy
+terraform destroy
 ```
 
 #### Notes
 
 * For setting up NATS keys for authorization, please refer to the documentation on [NATS](https://docs.nats.io/running-a-nats-service/configuration/securing_nats/auth_intro/nkey_auth) authorization for more details.
 * Ensure that the required **AWS IAM roles** and permissions are in place before deploying.
-* For additional details or troubleshooting, refer to the Terraform AWS Provider documentation and the OpenTofu documentation.
+* For additional details or troubleshooting, refer to the Terraform AWS Provider documentation and the Terraform documentation.
