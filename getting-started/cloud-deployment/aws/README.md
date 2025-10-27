@@ -53,9 +53,12 @@ You can easily deploy the required infrastructure by following the steps below.
 
 Ensure all required variables are set before proceeding.
 
-1.  **Initialise Terraform**: Initialise the directory containing Terraform files to install the required AWS provider:
+1.  **Initialise Terraform**:&#x20;
+
+    Navigate to the directory containing Terraform configuration files.
 
     ```bash
+    cd terraform-script/aws/platform
     terraform init
     ```
 2.  **Preview the Infrastructure Changes**: Run the following command to preview the changes that Terraform will make to your AWS infrastructure:
