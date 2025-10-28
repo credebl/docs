@@ -17,7 +17,7 @@
   * [Mobile SDK](getting-started/local-deployment/mobile-sdk.md)
 * [Cloud Deployment](getting-started/cloud-deployment/README.md)
   * [AWS](getting-started/cloud-deployment/aws/README.md)
-    * [v2.1.2-alpha.1](getting-started/cloud-deployment/aws/v2.1.2-alpha.1.md)
+    * [Deployment with Existing VPC](getting-started/cloud-deployment/aws/deployment-with-existing-vpc.md)
 
 ## Resources
 

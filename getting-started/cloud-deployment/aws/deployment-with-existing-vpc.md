@@ -2,7 +2,7 @@
 description: CREDEBL AWS Deployment
 ---
 
-# v2.1.2-alpha.1
+# Deployment with Existing VPC
 
 This release provisions AWS infrastructure for the CREDEBL project using Terraform within an existing VPC.
 
@@ -46,7 +46,8 @@ Before proceeding with the deployment, make sure you are using the correct tagge
     git checkout v2.1.2-alpha.1
     ```
 
-> **Note:** This ensures you are deploying the exact version of Terraform scripts tested for CREDEBL infrastructure provisioning.
+> **Note:** This ensures you are deploying the exact version of Terraform scripts tested for CREDEBL infrastructure provisioning.\
+> All versions released after **`v2.1.2-alpha.1`** will also be compatible and work with this deployment setup.
 
 #### Configuring Environment Variables
 
@@ -373,13 +374,13 @@ If your **existing VPC** has a **firewall** or **network restrictions** that blo
 
 If services cannot connect to the internet to download images or access container registries, whitelist the following domains in your **firewall policy** or **network access rules**:
 
-| Purpose                              | Domains to Whitelist   |
-| ------------------------------------ | ---------------------- |
-| **AWS ECR (Public)**                 | `*.ecr.aws`            |
-| **GitHub Container Registry (GHCR)** | `ghcr.io`              |
-| **Redis Image Repository**           | `registry-1.docker.io` |
-| **NATS Image Repository**            | `registry-1.docker.io` |
-| **Keycloak Image Repository**        | `quay.io`              |
+| Purpose                              | Domains to Whitelist                                                                                                                                        |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **AWS ECR (Public)**                 | <p><code>*.ecr.aws</code> <code>dkr.ecr.us-east-1.amazonaws.com</code> <code>.cloudfront.net</code></p><p><code>.s3.amazonaws.com</code> <br>          </p> |
+| **GitHub Container Registry (GHCR)** | `ghcr.io`                                                                                                                                                   |
+| **Redis Image Repository**           | `registry-1.docker.io`                                                                                                                                      |
+| **NATS Image Repository**            | `registry-1.docker.io`                                                                                                                                      |
+| **Keycloak Image Repository**        | `quay.io`                                                                                                                                                   |
 
 > **Hint:** If your environment uses a proxy, ensure these domains are accessible via the proxy for ECS to successfully pull container images.
 
