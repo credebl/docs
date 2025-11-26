@@ -29,7 +29,7 @@ description: >-
 
 ### Life Events
 
-* Birth Certificate, Death Certificate, Marriage Certificate, etc.
+* Birth Certificate, Death Certificate, Marriage Certificate, etc
 
 
 
