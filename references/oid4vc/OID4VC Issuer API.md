@@ -1,3 +1,8 @@
+---
+description: Guide for OpenID for Verifiable Credential Issuance APIs
+icon: layer-group
+---
+
 # OID4VC Issuer API
 
 ## Create Issuer
