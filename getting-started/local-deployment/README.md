@@ -12,7 +12,7 @@ Welcome to the Local Deployment guide for the CREDEBL platform! This section pro
 Before diving into the installation process, it is important to understand the main components that make up the CREDEBL ecosystem. The local deployment will include the following parts:
 
 * **Prerequisites:** Essential software, dependencies, and system configurations that must be set up before starting the installation process.
-* **Platform:** The core of CREDEBL, responsible for managing identities, transactions, and data flow within the system.
+* **Platform:** The core of CREDEBL, responsible for managing identities, transactions, and data flow within the system. Optionally, its credentials can be stored and sourced from an [OpenBao](openbao.md) secret server instead of the `.env` file.
 * **Studio:** A user-friendly interface that enables interaction with the CREDEBL platform, providing tools for administration and data visualization.
 * **Agent:** The service that handles secure communications and interactions with the platform, acting as the middleware between the user and the platform's core functionalities.
 * **Mobile Wallet:** A secure digital wallet that integrates with CREDEBL Platform, allowing users to manage their digital identities, credentials, and transactions in a safe and controlled manner.

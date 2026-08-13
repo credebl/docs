@@ -13,6 +13,7 @@
 * [Getting Started](getting-started/getting-started.md)
 * [Local Deployment](getting-started/local-deployment/README.md)
   * [Platform](getting-started/local-deployment/platform.md)
+    * [OpenBao Secret Storage (Optional)](getting-started/local-deployment/openbao.md)
   * [Studio](getting-started/local-deployment/studio.md)
   * [Mobile SDK](getting-started/local-deployment/mobile-sdk.md)
 * [Cloud Deployment](getting-started/cloud-deployment/README.md)
