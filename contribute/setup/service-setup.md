@@ -56,6 +56,10 @@ Please find `your-ip` in the `.env` file, and replace **all occurrences** it wit
 If you want to know more about the environment variables, please refer to `.env.sample` file which is given at root of the repository.
 {% endhint %}
 
+{% hint style="info" %}
+The email (SendGrid) and AWS S3 credentials can optionally be stored in an OpenBao server instead of the `.env` file. See [OpenBao Secret Storage](../../getting-started/local-deployment/openbao.md).
+{% endhint %}
+
 Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#top), [Sendgrid](service-setup.md#sendgrid), [AWS S3](service-setup.md#aws-s3), etc at the respective steps.&#x20;
 
 ### PostgreSQL

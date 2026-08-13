@@ -54,6 +54,10 @@ Here is the list of prerequisites we will need for CREDEBL:
     * S3 Bucket Name
     * AWS Region
 
+{% hint style="info" %}
+Instead of placing these credentials directly in your `.env` file, you can optionally store them in an OpenBao server and have the Platform source them at runtime. See [OpenBao Secret Storage](openbao.md).
+{% endhint %}
+
 <details>
 
 <summary>AWS S3 configuration setup </summary>
@@ -85,6 +89,10 @@ Here is the list of prerequisites we will need for CREDEBL:
 
 * [Sendgrid](https://sendgrid.com/en-us)
   * SendGrid is used for sending email. You must obtain an API key from your SendGrid account.
+
+{% hint style="info" %}
+Your SendGrid API key can optionally be stored in an OpenBao server instead of the `.env` file. See [OpenBao Secret Storage](openbao.md).
+{% endhint %}
 
 <details>
 
