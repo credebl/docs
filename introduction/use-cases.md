@@ -15,7 +15,7 @@ description: >-
 
 * Boarding Pass, Passport, Visa, Work Authorization
 
-### [Academic Digital Credentials](implementations.md#credebl-saas)
+### [Academic Digital Credentials](implementations.md#sovio.id)
 
 * Student ID, Degree, Diploma, Transcripts, Bonafide, Transfer Certificate
 
@@ -30,14 +30,3 @@ description: >-
 ### Life Events
 
 * Birth Certificate, Death Certificate, Marriage Certificate, etc
-
-
-
-
-
-
-
-
-
-
-
