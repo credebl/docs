@@ -29,6 +29,9 @@
 
 * [Architecture](references/architecture.md)
 * [Platform APIs](references/platform-apis.md)
+* [OID4VC Issuer API](references/oid4vc/OID4VC%20Issuer%20API.md)
+* [OID4VP Verifier API](references/oid4vc/CREDEBL%20OID4VP%20Verifier%20API.md)
+* [Ecosystem & Trust Service](references/ecosystem/ecosystem.md)
 * [FAQs](references/faqs.md)
 * [Glossary](references/glossary.md)
 * [Copyright & License](references/copyright-and-license.md)

@@ -36,7 +36,7 @@ Encrypt your **raw** Agent API key using **AES** with `CRYPTO_PRIVATE_KEY`. You 
 ### SSO (Single Sign-On)
 
 * Studio
-  * [NextAuth.js](http://nextauth.js) is used for implementing SSO.
+  * [NextAuth.js](https://next-auth.js.org) is used for implementing SSO.
   * To run the application, refer to the `env.demo` file for the required NextAuth-related values.
   * Make sure these values are added to your `.env` file.
 * Platform

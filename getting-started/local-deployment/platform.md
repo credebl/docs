@@ -43,10 +43,10 @@ Ensure these ports are not blocked by your firewall or occupied by other applica
 Here is the list of prerequisites we will need for CREDEBL:
 
 * [Docker / Docker compose](https://docs.docker.com/compose/install/standalone/)​
-* [PostgreSQL](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/postgresql) (>= 14)
-* ​[NATS](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/nats) (>= 2.6.4)
-* ​[REDIS](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/redis) (>= 7.4)
-* ​[Keycloak](https://app.gitbook.com/o/V2P788cbocWTT1Z5YOmy/s/nsdydI5ziLfZ8yT3e0r8/~/diff/~/changes/93/~/revisions/TgbJCysW7FmStzyIiou3/contribute/setup/top) (>= 25.0.6)
+* [PostgreSQL](../../contribute/setup/service-setup.md#postgresql) (>= 14)
+* ​[NATS](../../contribute/setup/service-setup.md#nats) (>= 2.6.4)
+* ​[REDIS](../../contribute/setup/service-setup.md#redis) (>= 7.4)
+* ​[Keycloak](../../contribute/setup/service-setup.md#keycloak) (>= 25.0.6)
 * [AWS S3 Configuration Requirements](https://aws.amazon.com/)
   * The platform uses Amazon S3 for secure file storage. Prepare your:
     * AWS Access Key ID
@@ -101,18 +101,18 @@ Your SendGrid API key can optionally be stored in an OpenBao server instead of t
 * Log in to your SendGrid account:
   * Go to [https://app.sendgrid.com](https://login.sendgrid.com/login/password) and sign in with your credentials.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdmnR2ZTjWIr9ORfRzVmvYHLrLKN0HSc2Wc1h6K-cLQ4FQJfdTEBlrotNpG2Q851P2OCqSd7U1ezy67E2tHUa7RfnYL9S20bBAYmS42COLpTm8xfXZIOdjS8hOEX1WZCbQCS7gjCg?key=d_qWtjEes9qiiyogS_A3bw)
+![](../../.gitbook/assets/sendgrid/sendgrid-login.png)
 
 * Navigate to API Key Settings:-
   * On the left-hand navigation panel, click on "Settings".
   * Under Settings, select "API Keys".
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfy-IUcY6_BTto_2Glo7JSXnmXZVLrR2X8Oudv1F_Tf1CSzQ85Re0RxaSgyWGIgnLCqQsu1x2SRpkCLpfz-jRkDwBlgyz45Pp3Cuyhuf11a-K5NF5dC2LFhK7DdMEMFk0bMfq1hXg?key=d_qWtjEes9qiiyogS_A3bw)
+![](../../.gitbook/assets/sendgrid/sendgrid-settings-api-keys.png)
 
 * Create a New API Key:
   * Click on the "Create API Key" button.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeKwFhpTjxrbEOEfo0ndl8bSfBpS1sPnGQgMQWOiU9Sv8qxseMDbVAyW3w5sjh23Ca6g6RK2LHVHHJREEDoT4xBZi_og7i8r5VPhR_f36NY4WTieqOaYW9ETGP7Y0h13-m3WyXN5A?key=d_qWtjEes9qiiyogS_A3bw)
+![](../../.gitbook/assets/sendgrid/sendgrid-create-api-key.png)
 
 * Choose one of the following access levels:
   * Enter a meaningful name for your API key to help you identify its purpose later.
@@ -121,12 +121,12 @@ Your SendGrid API key can optionally be stored in an OpenBao server instead of t
   * Billing Access – Provides access only to billing-related endpoints.
   * Click the "Create & View" button.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeCZQrz4sNPFaqjeUWQn7ZT8LirX49yNxW4keyaRlM14cFOG_XOR22LfvHTl8SFfDRyrNmvYOb5r751LGS8XfX0jLU-vel7gve-USCNRySOwBG8HDfkDETbJlxkJaszgwT0qFNUkw?key=d_qWtjEes9qiiyogS_A3bw)
+![](../../.gitbook/assets/sendgrid/sendgrid-create-view.png)
 
 * Secure Your API Key:
   * Your API key will be displayed only once, make sure to copy and save this key securely in a password manager or secure vault.
 
-![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfaxBTAD_RmN_r_uqStSpLpkId7A89_amkJuAOFv96TSB56tJ0mF7DGKwxfQqoOFN-FYaG0_MK12_nSWLnHUjCNsWT2rt9qT-l5GYNvFDJbX9TnoSn1ySlH6_FbEEeFLDyCq5SR?key=d_qWtjEes9qiiyogS_A3bw)
+![](../../.gitbook/assets/sendgrid/sendgrid-key-reveal.png)
 
 \
 Note:-&#x20;
@@ -179,7 +179,7 @@ This script will:
 * Launch all required services in separate terminal tabs (each tab will be automatically named for its service, and new services will start a few seconds apart)
 
 After the script completes, the backend and agent services will be running.\
-You will need to start the frontend separately by following the instructions [here](https://docs.credebl.id/docs/contribute/setup/studio).
+You will need to start the frontend separately by following the instructions [here](../../contribute/setup/studio.md).
 
 #### Option 2: Docker Deployment
 
@@ -279,8 +279,7 @@ Keycloak
 
 * #### **Access the CREDEBL API**
 
-Once all containers are running, you can access the CREDEBL API\
-
+Once all containers are running, you can access the CREDEBL API at [http://localhost:5000](http://localhost:5000).
 
 ### **Tearing Down the Infrastructure**
 

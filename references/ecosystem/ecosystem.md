@@ -25,9 +25,6 @@
        - 3.2.6.1 [Create Intent Notice](#3261-create-intent-notice)
        - 3.2.6.2 [Get Intent Notice by Intent ID](#3262-get-intent-notice-by-intent-id)
        - 3.2.6.3 [Update Intent Notice](#3263-update-intent-notice)
-   - 3.3 [Template](#33-template)
-
-4. [Cross-Ecosystem Access](#4-cross-ecosystem-access)
 
 ---
 
@@ -632,7 +629,7 @@ GET /v1/intent/{intentId}/notice
 
 Updates an existing consent notice linked to a specific intent. Use this endpoint when the terms, policies, or data processing rules of a workflow have changed and the notice needs to reflect the latest information.
 
-> **Note:** Updating a notice typically results in a new version being issued. Participants who previously accepted the older version may be may not effect, depending on the platform's consent management policy.
+> **Note:** Updating a notice typically results in a new version being issued. Participants who previously accepted the older version may or may not be affected, depending on the platform's consent management policy.
 
 > **Role required:** Ecosystem Lead and Member
 
@@ -650,5 +647,6 @@ PUT /v1/intent/{intentId}/notice
 
 ---
 
+*Sections covering the credential **Template** registry and **Cross-Ecosystem Access** are planned for a future update.*
 
 *End of document*

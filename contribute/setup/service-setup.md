@@ -31,7 +31,7 @@ Here is the list of prerequisites software we will need for CREDEBL:
 * [PostgreSQL](service-setup.md#postgresql) (>= 14)
 * [NATS](service-setup.md#nats) (>= 2.6.4)
 * [REDIS](service-setup.md#redis) (>= 7.4)
-* [Keycloak](service-setup.md#top) (>= 25.0.6)
+* [Keycloak](service-setup.md#keycloak) (>= 25.0.6)
 * [Sendgrid](service-setup.md#sendgrid)
 * [AWS S3](service-setup.md#aws-s3)
 * [Schema file server](service-setup.md#schema-file-server-optional) (optional)
@@ -60,7 +60,7 @@ If you want to know more about the environment variables, please refer to `.env.
 The email (SendGrid) and AWS S3 credentials can optionally be stored in an OpenBao server instead of the `.env` file. See [OpenBao Secret Storage](../../getting-started/local-deployment/openbao.md).
 {% endhint %}
 
-Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#top), [Sendgrid](service-setup.md#sendgrid), [AWS S3](service-setup.md#aws-s3), etc at the respective steps.&#x20;
+Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#keycloak), [Sendgrid](service-setup.md#sendgrid), [AWS S3](service-setup.md#aws-s3), etc at the respective steps.&#x20;
 
 ### PostgreSQL
 
@@ -70,7 +70,7 @@ In case you already have PostgreSQL preinstalled on your machine, you can simply
 
 PostgreSQL is a powerful, open-source object-relational database system known for its robustness and advanced features. This guide provides instructions for installing and configuring PostgreSQL both natively and using Docker. Installing PostgreSQL
 
-**Initially we'll need to install postures on the host or on docker**
+**Initially we'll need to install PostgreSQL on the host or on Docker**
 
 {% tabs %}
 {% tab title="Ubuntu" %}
@@ -594,7 +594,7 @@ AFJ_VERSION=credo-controller-0.5.3:latest
   Using these cookies, users can fetch their session details.
   * To fetch the session details, call the following API while passing the stored cookies in the request headers`:`
     * `/auth/sessionDetails`
-* For more details visit this - [https://docs.credebl.id/docs/\~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0](https://docs.credebl.id/docs/~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0#sso-single-sign-on) &#x20;
+* For more details, see [SSO (Single Sign-On) in release v.2.1.0](../../references/releases/v.2.1.0.md#sso-single-sign-on).
 
 ## Installations
 
@@ -614,7 +614,7 @@ Before you start the services make sure to update the `credebl-master-table.json
   },
 </code></pre>
 
-At the root of the [platfrom repo](service-setup.md#clone-repository):
+At the root of the [platform repo](service-setup.md#clone-repository):
 
 ```sh
 cd libs/prisma-service

@@ -11,14 +11,14 @@ Clone the studio repository:
 
 Create a .env file and set the required environment variables as per the `.env.demo` file.
 
-*   Update the Keycloak&#x20;
+*   Update the Keycloak
 
-    * For older version&#x20;
+    * For versions before v2.1.0
       * **`PUBLIC_KEYCLOAK_MANAGEMENT_CLIENT_SECRET`**
-    * For newer version (v2.1.0)
+    * For v2.1.0 and above
       * **`NEXT_PUBLIC_KEYCLOAK_MANAGEMENT_CLIENT_SECRET`**
 
-    You can get this value from your platform environment variables or directly from the Keyclock dashboard.
+    You can get this value from your platform environment variables or directly from the Keycloak dashboard.
 * In version v2.1.0, we have implemented NextAuth for SSO. To run the application, please refer to the `env.demo` file for the required NextAuth-related values.
 * `NEXTAUTH_SECRET` Generate this secret by referring [here](https://next-auth.js.org/configuration/options#nextauth_secret.) (Only for v2.1.0).
 *   Add the backend URL for `PUBLIC_ALLOW_DOMAIN`

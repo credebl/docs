@@ -34,17 +34,17 @@ Below is the cliConfig.json file, which needs to be used to set up the agent
 
 <summary>cliConfig.json</summary>
 
-```
+```json
 {
   "label": "AFJ Rest Agent 1",
-  "walletId": "sample",  # Mention your walletId here
-  "walletKey": "sample",   # Mention your walletKey here
-  "walletType": "postgres",  # Mention wallet type here
-  "walletUrl": "localhost:5432",  # Mention your wallet url here
-  "walletAccount": "postgres",  # Mention your wallet account name here
-  "walletPassword": "postgres",   # Mention your wallet password here
+  "walletId": "sample",
+  "walletKey": "sample",
+  "walletType": "postgres",
+  "walletUrl": "localhost:5432",
+  "walletAccount": "postgres",
+  "walletPassword": "postgres",
   "walletAdminAccount": "postgres",
-  "walletAdminPassword": "postgres",,
+  "walletAdminPassword": "postgres",
   "walletScheme": "ProfilePerWallet",
   "indyLedger": [
     {
@@ -80,7 +80,7 @@ Below is the cliConfig.json file, which needs to be used to set up the agent
   "schemaManagerContractAddress": "0x4742d43C2dFCa5a1d4238240Afa8547Daf87Ee7a",
   "rpcUrl": "https://rpc-amoy.polygon.technology",
   "fileServerUrl": "https://schema.credebl.id",
-  "fileServerToken":     #Use your token here
+  "fileServerToken": "<your-token>"
 }
 ```
 
@@ -92,13 +92,13 @@ For polygon mainnet use these configuration
 
 ```json
 "didRegistryContractAddress": "0x0C16958c4246271622201101C83B9F0Fc7180d15",
-"schemaManagerContractAddress": "0x4B16719E73949a62E9A7306F352ec73F1B143c27"
+"schemaManagerContractAddress": "0x4B16719E73949a62E9A7306F352ec73F1B143c27",
 "rpcUrl": "https://polygon-rpc.com"
 ```
 
 _**Description of Fields in cliConfig.json**_
 
-* **referringlabel:** A descriptive name for the agent configuration.
+* **label:** A descriptive name for the agent configuration.
 * **walletId:** The identifier for the wallet used by the agent.
 * **walletKey:** The key or token used to access the wallet.
 * **walletType:** The type of wallet (e.g., PostgreSQL).

@@ -19,7 +19,7 @@ CREDEBL enables end-to-end verifiable credential management with following key f
 
 ### **User Registration**
 
-The platform provides an efficient user registration process through email-based verification. Furthermore, the platform offers modern & highly secure authentication mechanisms such as FIDO Passkey for phishing-resistent user verification. These measures establish a multi-layered approach to user authentication, mitigating the potential for unauthorized access and preserving the security of sensitive user data. Platform also provides highly secure mechanisms such as ClientId and ClientSecret for API authentication.
+The platform provides an efficient user registration process through email-based verification. Furthermore, the platform offers modern & highly secure authentication mechanisms such as FIDO Passkey for phishing-resistant user verification. These measures establish a multi-layered approach to user authentication, mitigating the potential for unauthorized access and preserving the security of sensitive user data. Platform also provides highly secure mechanisms such as ClientId and ClientSecret for API authentication.
 
 ### **Organization Onboarding**
 
@@ -51,9 +51,10 @@ Verifiable credentials (VCs) have these qualities:
 
 * Portability: You can easily send them to others online.
 * Verifiability: You can check who issued the credential, who holds it, if it’s unchanged, and if it’s valid.
-* Privacy: You can choose what info to share using zero-knowledge proofs, giving you more control.Integrity: VCs can’t be changed or faked.”
+* Privacy: You can choose what info to share using zero-knowledge proofs, giving you more control.
+* Integrity: VCs can’t be changed or faked.
 
-Verification credential Stake-holders:
+Verifiable credential stakeholders:
 
 * Issuer: The entity that generates the Verifiable Credential and provides it to another entity.
 * Holder: The entity that possesses the verifiable credential in their digital wallet.
