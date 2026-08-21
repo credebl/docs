@@ -425,7 +425,7 @@ The `appearance` object controls how the credential card is rendered in a wallet
 
 Creates a new credential offer for one or more Verifiable Credentials. The offer can be sent to a holder (wallet) who can then accept and receive the credentials. Both `dc+sd-jwt` and `mso_mdoc` credential formats are supported.
 
-Two types of credential offers can be created: **Reach-out** (issuer initiates and sends the offer to the holder) and **Endor** (offer is generated for the holder to scan/accept).
+Two types of credential offers can be created: **Reach-out** (issuer initiates and sends the offer to the holder) and **Endorser** (offer is generated for the holder to scan/accept).
 
 ---
 
@@ -446,7 +446,7 @@ Two types of credential offers can be created: **Reach-out** (issuer initiates a
 |---------------------|--------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `credentials`       | array        | Yes      | Array of credential objects to be issued as part of this offer. Multiple credentials can be included in a single offer. See [Credential Object](#credential-object) below.                                           |
 | `authorizationType` | string       | Yes      | The authorization flow to use when the holder accepts the offer. See [Authorization Types](#authorization-types) below.                                                                                              |
-| `noticeUrl`         | string (URL) | No       | If multiple credentials are included and their templates each carry their own notice URL, this field override that template based noticeUrl. |
+| `noticeUrl`         | string (URL) | No       | If multiple credentials are included and their templates each carry their own notice URL, this field overrides the template-level `noticeUrl`. |
 
 ---
 
@@ -455,7 +455,7 @@ Two types of credential offers can be created: **Reach-out** (issuer initiates a
 | Value                  | Description                                                                                                                                                                           |
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `preAuthorizedCodeFlow` | The offer is protected by a PIN. When the holder accepts the offer, they are prompted to enter a PIN to complete issuance.                                                           |
-| `authorizationCodeFlow` | The holder must authenticate using a username and password against the IDP server configured for the issuer in the [Create Issuer API](./create_issuer_api.md) (`authorizationServerConfigs`). |
+| `authorizationCodeFlow` | The holder must authenticate using a username and password against the IDP server configured for the issuer in the [Create Issuer API](#create-issuer) (`authorizationServerConfigs`). |
 
 ---
 
@@ -465,7 +465,7 @@ Each entry in the `credentials` array represents a single credential to be issue
 
 | Field          | Type   | Required | Description                                                                                                                                                                    |
 |----------------|--------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `templateId`   | string | Yes      | The UUID of the credential template to use. The template defines the credential format, attributes, signing option, and appearance. Refer to the [Create Template API](./create_credential_template_api.md). |
+| `templateId`   | string | Yes      | The UUID of the credential template to use. The template defines the credential format, attributes, signing option, and appearance. Refer to the [Create Template API](#create-credential-template). |
 | `payload`      | object | Yes      | The claim data to embed in the credential. Structure varies by template format — see [Payload: dc+sd-jwt](#payload-dcsdjwt) and [Payload: mso_mdoc](#payload-mso_mdoc) below. |
 | `validityInfo` | object | Yes      | Defines the validity period of the issued credential. See [Validity Info Object](#validity-info-object) below.                                                                  |
 

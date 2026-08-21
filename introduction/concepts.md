@@ -68,7 +68,7 @@ A credential definition (CRED\_DEF or CLAIM\_DEF) contains the public data neede
 
 ## Wallet
 
-wallet is a digital application that securely stores and manages a user's verifiable credentials and decentralized identifiers (DIDs). It allows individuals to control their data, facilitating the issuance, storage, and sharing of identity information without relying on central authorities. Wallets provide users with an interface to interact with various services, enabling them to present their credentials selectively while maintaining privacy and security.
+A wallet is a digital application that securely stores and manages a user's verifiable credentials and decentralized identifiers (DIDs). It allows individuals to control their data, facilitating the issuance, storage, and sharing of identity information without relying on central authorities. Wallets provide users with an interface to interact with various services, enabling them to present their credentials selectively while maintaining privacy and security.
 
 ### Edge Wallet
 

@@ -70,7 +70,7 @@ In case you already have PostgreSQL preinstalled on your machine, you can simply
 
 PostgreSQL is a powerful, open-source object-relational database system known for its robustness and advanced features. This guide provides instructions for installing and configuring PostgreSQL both natively and using Docker. Installing PostgreSQL
 
-**Initially we'll need to install postures on the host or on docker**
+**Initially we'll need to install PostgreSQL on the host or on Docker**
 
 {% tabs %}
 {% tab title="Ubuntu" %}
@@ -614,7 +614,7 @@ Before you start the services make sure to update the `credebl-master-table.json
   },
 </code></pre>
 
-At the root of the [platfrom repo](service-setup.md#clone-repository):
+At the root of the [platform repo](service-setup.md#clone-repository):
 
 ```sh
 cd libs/prisma-service

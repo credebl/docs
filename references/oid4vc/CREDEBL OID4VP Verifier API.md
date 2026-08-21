@@ -307,7 +307,7 @@ Creates a VP request directly using a specified DCQL query and configuration, wi
 | Field             | Type   | Required | Description                                                                                                                                       |
 |-------------------|--------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | `requestSigner`   | object | Yes      | Configuration for signing the VP request. See [Request Signer Object](#request-signer-object) below.                                             |
-| `dcql`            | object | Yes      | The DCQL query defining which credentials and claims are required from the holder. Follows the same structure as `templateJson.dcql.query` in the [Create Verification Template API](./create_verification_template_api.md). |
+| `dcql`            | object | Yes      | The DCQL query defining which credentials and claims are required from the holder. Follows the same structure as `templateJson.dcql.query` in the [Create Verification Template API](#create-verification-template). |
 | `responseMode`    | string | Yes      | Defines how the holder's wallet should return the VP response. See [Response Modes](#response-modes) below.                                       |
 | `expectedOrigins` | array  | No       | Array of allowed origin URLs. Required when `responseMode` is `dc_api` or `dc_api.jwt`. See [Expected Origins](#expected-origins) below.         |
 

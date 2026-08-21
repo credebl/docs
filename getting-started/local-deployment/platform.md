@@ -279,8 +279,7 @@ Keycloak
 
 * #### **Access the CREDEBL API**
 
-Once all containers are running, you can access the CREDEBL API\
-
+Once all containers are running, you can access the CREDEBL API at [http://localhost:5000](http://localhost:5000).
 
 ### **Tearing Down the Infrastructure**
 
