@@ -31,10 +31,11 @@ Here is the list of prerequisites software we will need for CREDEBL:
 * [PostgreSQL](service-setup.md#postgresql) (>= 14)
 * [NATS](service-setup.md#nats) (>= 2.6.4)
 * [REDIS](service-setup.md#redis) (>= 7.4)
-* [Keycloak](service-setup.md#top) (>= 25.0.6)
+* [Keycloak](service-setup.md#keycloak) (>= 25.0.6)
 * [Sendgrid](service-setup.md#sendgrid)
-* [AWS S3](service-setup.md#aws-s3)
-* [Schema file server](service-setup.md#schema-file-server-optional) (optional)
+* [Storage (AWS S3, RustFS, local)](service-setup.md#storage-aws-s3-rustfs-or-local-filesystem)
+* [OpenBao secrets management](service-setup.md#openbao-secrets-management-optional) (optional)
+* [Schema file server](service-setup.md#schema-file-server) (optional)
 * [Agent Setup](service-setup.md#agent-setup)
 
 ### Clone Repository
@@ -56,7 +57,7 @@ Please find `your-ip` in the `.env` file, and replace **all occurrences** it wit
 If you want to know more about the environment variables, please refer to `.env.sample` file which is given at root of the repository.
 {% endhint %}
 
-Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#top), [Sendgrid](service-setup.md#sendgrid), [AWS S3](service-setup.md#aws-s3), etc at the respective steps.
+Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#keycloak), [Sendgrid](service-setup.md#sendgrid), [Storage (AWS S3, RustFS, local)](service-setup.md#storage-aws-s3-rustfs-or-local-filesystem), etc at the respective steps.
 
 ### PostgreSQL
 
@@ -164,7 +165,7 @@ You can read more about prisma connection URLs in PostgreSQL here: [https://www.
 The CREDEBL platform utilizes NATS for message-driven data exchange between its micro-services.
 
 {% hint style="warning" %}
-For default setup, you can skip NATS and REDIS configurations and [Continue here](service-setup.md#top)
+For default setup, you can skip NATS and REDIS configurations and [Continue here](service-setup.md#keycloak)
 {% endhint %}
 
 <details>
@@ -242,7 +243,7 @@ docker compose -f docker-compose.nats.yml up -d
 The CREDEBL platform leverages Redis as an in-memory data store, primarily for caching and queuing.
 
 {% hint style="warning" %}
-You can skip REDIS setup if you are installing Platform services using docker. [Continue here](service-setup.md#top)
+You can skip REDIS setup if you are installing Platform services using docker. [Continue here](service-setup.md#keycloak)
 {% endhint %}
 
 <details>
@@ -405,31 +406,38 @@ To navigate to SSO Session, go to `Realm settings` option on left sidebar under 
 
 #### **Update the `.env`**
 
-Update the .env file for the Keycloak details:
-
-To set the env variable KEYCLOAK\_MANAGEMENT\_CLIENT\_SECRET
+Update the `.env` file with the Keycloak endpoint details and both client credentials:
 
 1. Go to the `credebl-platform` realm.
-2. Navigate to:
+2. Navigate to **Clients** → `credeblClient`, open the **Credentials** tab, and copy the secret into `KEYCLOAK_MANAGEMENT_CLIENT_SECRET`.
+3. Navigate to **Clients** → `adminClient`, open the **Credentials** tab, and copy the secret into `ADMIN_KEYCLOAK_SECRET`.
 
-* **Clients** → `adminClient`
-* Open the **Credentials** tab
-* Copy the client secret for `ADMIN_KEYCLOAK_SECRET`
-
-```dotenv
+{% code title=".env" %}
+```sh
 KEYCLOAK_DOMAIN=http://localhost:8080/
 KEYCLOAK_ADMIN_URL=http://localhost:8080
 KEYCLOAK_MASTER_REALM=master
-KEYCLOAK_MANAGEMENT_CLIENT_ID=adminClient
-KEYCLOAK_MANAGEMENT_CLIENT_SECRET=
 KEYCLOAK_REALM=credebl-platform
+
+# credeblClient - used by the platform services
+KEYCLOAK_MANAGEMENT_CLIENT_ID=credeblClient
+KEYCLOAK_MANAGEMENT_CLIENT_SECRET=
+
+# adminClient - used for platform administration
+ADMIN_KEYCLOAK_ID=adminClient
+ADMIN_KEYCLOAK_SECRET=
 ```
+{% endcode %}
+
+{% hint style="warning" %}
+From `v2.2.0` onwards `KEYCLOAK_MANAGEMENT_CLIENT_ID` must be `credeblClient`, and both `ADMIN_KEYCLOAK_ID` and `ADMIN_KEYCLOAK_SECRET` must be set. `npx prisma db seed` stops with `Missing environment variable: ADMIN_KEYCLOAK_ID` when they are empty.
+{% endhint %}
 
 ***
 
 #### **Additional Keycloak Configuration for v2.2.0**
 
-If you are upgrading to `v2.2.0` or later, apply the following additional changes.
+If you are installing or upgrading to `v2.2.0` or later, the platform needs a second client named `credeblClient` alongside `adminClient`. Fresh installations create it as described below; existing installations follow [Upgrading from a version before v2.2.0](service-setup.md#upgrading-from-a-version-before-v2.2.0).
 
 #### Create `credeblClient`
 
@@ -489,58 +497,29 @@ Unmanaged Attributes
 
 ***
 
-#### Realm Roles Settings
+#### Upgrading from a version before v2.2.0
 
-1. Under the `credebl-platform` realm, select:
+Installations that predate `v2.2.0` stored `adminClient` as every user's Keycloak client. The seed script rewrites those stored values to the current `KEYCLOAK_MANAGEMENT_CLIENT_ID`.
 
-```
-Realm Roles
-```
+1. Rename the existing `adminClient` to `credeblClient`, keeping its client secret and service account roles.
+2. Check that the renamed client has the service account roles listed above, including `manage-realm`.
+3. Create a new `adminClient` for platform administration and copy its secret into `ADMIN_KEYCLOAK_SECRET`.
+4. Add the old client ID to the `.env`:
 
-2. Click on **Create Role**.
-3. Create a role with:
-
-```
-Role Name = holder
+```env
+PLATFORM_ADMIN_OLD_CLIENT_ID=adminClient
 ```
 
-#### **Update the `.env`**
+5. Run the seed from `libs/prisma-service`:
 
-Update the `.env` file with the following Keycloak configuration details:
-
-{% code title=".env" %}
 ```sh
-KEYCLOAK_DOMAIN=http://localhost:8080/
-KEYCLOAK_ADMIN_URL=http://localhost:8080
-KEYCLOAK_MASTER_REALM=master
-KEYCLOAK_REALM=credebl-platform
-
-KEYCLOAK_MANAGEMENT_CLIENT_ID=credeblClient
-KEYCLOAK_MANAGEMENT_CLIENT_SECRET=<CLIENT_SECRET>
-
-ADMIN_KEYCLOAK_ID=adminClient
-ADMIN_KEYCLOAK_SECRET=<CLIENT_SECRET>
+npx prisma db seed
 ```
-{% endcode %}
 
-To set the environment variables `KEYCLOAK_MANAGEMENT_CLIENT_SECRET` and `ADMIN_KEYCLOAK_SECRET`:
+The seed decrypts each user's stored client ID, replaces `adminClient` with `credeblClient`, and skips the platform admin user. Later seeds find no matching users, so the value can stay in the file.
 
-1. Go to the `credebl-platform` realm.
-2. Navigate to:
-   * **Clients** → `credeblClient`
-   * Open the **Credentials** tab
-   * Copy the client secret for `KEYCLOAK_MANAGEMENT_CLIENT_SECRET`
-3. Navigate to:
-   * **Clients** → `adminClient`
-   * Open the **Credentials** tab
-   * Copy the client secret for `ADMIN_KEYCLOAK_SECRET`
-
-{% hint style="warning" %}
-Below is an optional step to add users and can be skipped
-{% endhint %}
-
-{% hint style="info" %}
-Note : If you are an old user of Credebl platform from before v2.2.0 then make sure to add **PLATFORM\_ADMIN\_OLD\_CLIENT\_ID=adminClient** to you env this will update the clientId in the user table with the newly created clientId credeblClien&#x74;**.** Also rename the old adminClient as credeblClient in keycloak and create the adminClient as ne&#x77;**.**
+{% hint style="danger" %}
+Run the seed only after the clients are renamed and created. If you rename them afterwards, stored user client IDs point at a client that no longer exists.
 {% endhint %}
 
 <details>
@@ -575,27 +554,51 @@ SENDGRID_API_KEY=your-API-key
 ```
 {% endcode %}
 
-### AWS S3
+### Storage (AWS S3, RustFS, or local filesystem)
 
-To utilize all functionalities of CREDEBL, total of 3 S3 buckets are required for;
+To use all CREDEBL functionality, the platform stores files in three buckets:
 
-1. Storing Organization logo during creating and updating an organization
+1. Organization logo, during organization creation and update
 2. Bulk issuance of credentials
-3. Storing connection URL generated from [Agent](../../introduction/concepts.md#agent) and creating shortened URL
+3. Connection URL objects generated by the agent, used to create shortened URLs
 
 {% hint style="info" %}
-From the above mentioned, 1 and 2 can be skipped, if the respective functionality of adding organization logo and Bulk issuance is unused
+Buckets 1 and 2 can be skipped if you do not use organization logos or bulk issuance. The shortened-URL bucket is required for organization connections.
 {% endhint %}
 
-<pre data-title=".env"><code># 1. Used for Adding org-logo during org creation and update 
+#### Choose a storage type
+
+Set `FILE_STORAGE_TYPE` in your `.env` file:
+
+```env
+FILE_STORAGE_TYPE=aws
+```
+
+| Value    | What it does                                       | What you need                                                        |
+| -------- | -------------------------------------------------- | -------------------------------------------------------------------- |
+| `aws`    | Stores files on Amazon S3                          | AWS account, credentials, and the three buckets                      |
+| `rustfs` | Stores files on a RustFS (S3-compatible) server    | RustFS endpoint, credentials, and the three buckets                  |
+| `local`  | Stores files on the API gateway's local filesystem | No cloud credentials; bucket names must match the served directories |
+
+{% hint style="info" %}
+`aws` is the default when `FILE_STORAGE_TYPE` is not set. The platform does not create buckets; create `FILE_SHARING_BUCKET`, `ORG_LOGO_BUCKET_NAME`, and `STOREOBJECT_BUCKET` on the target storage before starting the services.
+{% endhint %}
+
+#### Option 1: AWS S3 (`FILE_STORAGE_TYPE=aws`)
+
+Fill in these variables:
+
+{% code title=".env" %}
+```sh
+# 1. Used for Adding org-logo during org creation and update
 # Optional (Can be skipped if no image is added during org creation and updation)
 AWS_PUBLIC_ACCESS_KEY=
 AWS_PUBLIC_SECRET_KEY=
 AWS_PUBLIC_REGION=
 ORG_LOGO_BUCKET_NAME=
 
-<strong># 2. Used for Bulk issuance of credential
-</strong># Optional (Can be skipped if Bulk issuance is not used)
+# 2. Used for Bulk issuance of credential
+# Optional (Can be skipped if Bulk issuance is not used)
 AWS_ACCESS_KEY=
 AWS_SECRET_KEY=
 AWS_REGION=
@@ -605,16 +608,17 @@ FILE_SHARING_BUCKET=
 # Required (As connecting to org requires Shortened url)
 AWS_S3_STOREOBJECT_ACCESS_KEY=
 AWS_S3_STOREOBJECT_SECRET_KEY=
-AWS_S3_STOREOBJECT_REGION= 
+AWS_S3_STOREOBJECT_REGION=
 STOREOBJECT_BUCKET=
-</code></pre>
+```
+{% endcode %}
 
 Use `STOREOBJECT_BUCKET` to build the shortened URL domain. Follow the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access) for your bucket.
 
 {% code title=".env" overflow="wrap" %}
 ```sh
 # Please refere AWS to determine your bucket url
-# https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access 
+# https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access
 SHORTENED_URL_DOMAIN='https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/STOREOBJECT_BUCKET'
 ```
 {% endcode %}
@@ -623,106 +627,113 @@ SHORTENED_URL_DOMAIN='https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/STOREOB
 Note: Usually, `SHORTENED_URL_DOMAIN` for bucket names with dot ( . ) in it comes after '/': `https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/bucket-name`. While others without a dot(.) are often referred as a subdomain: `https://`**`bucket-name`**`.AWS_S3_STOREOBJECT_REGION.amazonaws.com`
 {% endhint %}
 
-### RustFs and Local Setup Guide
+#### Option 2: RustFS (`FILE_STORAGE_TYPE=rustfs`)
 
-This explains how to configure where your platform stores files (images, CSVs, etc.).
-
-### Choose a storage type
-
-Set `FILE_STORAGE_TYPE` in your `.env` file:
-
-```env
-FILE_STORAGE_TYPE=aws
-```
-
-| Value    | What it does                    | What you need                   |
-| -------- | ------------------------------- | ------------------------------- |
-| `aws`    | Stores files on Amazon S3       | AWS account and credentials     |
-| `rustfs` | Stores files on a RustFS server | RustFS endpoint and credentials |
-
-***
-
-{% hint style="info" %}
-By default the storage configuration uses _aws_ as its default if `FILE_STORAGE_TYPE` isn't provided
-{% endhint %}
-
-### Option 1: AWS S3 (`FILE_STORAGE_TYPE=aws`)
-
-Fill in these variables:
-
-```env
-AWS_ACCESS_KEY=
-AWS_SECRET_KEY=
-AWS_REGION=
-AWS_PUBLIC_ACCESS_KEY=
-AWS_PUBLIC_SECRET_KEY=
-AWS_PUBLIC_REGION=
-AWS_S3_STOREOBJECT_ACCESS_KEY=
-AWS_S3_STOREOBJECT_SECRET_KEY=
-AWS_S3_STOREOBJECT_REGION=
-FILE_SHARING_BUCKET=
-ORG_LOGO_BUCKET_NAME=
-STOREOBJECT_BUCKET=
-```
-
-### Option 2: RustFS (`FILE_STORAGE_TYPE=rustfs`)
-
-```env
+{% code title=".env" %}
+```sh
 RUSTFS_ENDPOINT=http://localhost:9000
 RUSTFS_ACCESS_KEY_ID=
 RUSTFS_SECRET_ACCESS_KEY=
-RUSTFS_REGION=
+
 FILE_SHARING_BUCKET=
 ORG_LOGO_BUCKET_NAME=
 STOREOBJECT_BUCKET=
 ```
+{% endcode %}
 
-Make sure the buckets already exist on your server.
+{% hint style="warning" %}
+`RUSTFS_REGION` appears in `.env.demo` for parity but is not read by the RustFS client. Set `AWS_REGION`, `AWS_PUBLIC_REGION`, and `AWS_S3_STOREOBJECT_REGION` instead — the client takes its region from those.
+{% endhint %}
 
-***
+`RustFsStorageService.getPublicUrl` returns `{RUSTFS_ENDPOINT}/{bucket}/{key}`, so the shortened URL domain must point at the RustFS host and bucket:
 
-### Verify it works
+```env
+SHORTENED_URL_DOMAIN='https://rustfs.example.com/STOREOBJECT_BUCKET'
+```
+
+{% hint style="info" %}
+RustFS credentials are read from `process.env` only. Unlike the AWS S3 provider, the RustFS provider does not fetch credentials from OpenBao.
+{% endhint %}
+
+#### Option 3: Local filesystem (`FILE_STORAGE_TYPE=local`)
+
+Local storage keeps files under `uploadedFiles/` in the API gateway container and is intended for single-node evaluation.
+
+{% code title=".env" %}
+```sh
+FILE_STORAGE_TYPE=local
+PLATFORM_URL=http://your-ip:5000
+
+FILE_SHARING_BUCKET=bulk-verification-templates
+ORG_LOGO_BUCKET_NAME=org-logo
+STOREOBJECT_BUCKET=demo-shortening-url
+SHORTENED_URL_DOMAIN='http://your-ip:5000/uploadedFiles/demo-shortening-url'
+```
+{% endcode %}
+
+{% hint style="warning" %}
+The API gateway serves only a fixed set of directories. `demo-shortening-url` is exposed at `/uploadedFiles/demo-shortening-url`; the logo directories are served from the gateway root. Use the demo bucket names as a starting point and confirm the generated URLs resolve in your deployment. Do not use `local` with more than one gateway replica.
+{% endhint %}
+
+#### Verify it works
 
 1. Start the platform
 2. Upload a file through the UI using the org logo update feature on dashboard for a quick check to see if its working.
 3. Perform a bulk issuance to check if it stores the shortened url and uploaded csv to the storage.
-4. Check that the file appears in the configured S3 or RustFS bucket. Currently there are only 3 features that utilize the file storage in platform \[Organization logo storage , URL shortening for issuance , Csv upload for bulk issuance]
+4. Check that the file appears in the configured S3, RustFS, or local directory. Currently there are only 3 features that utilize the file storage in platform \[Organization logo storage , URL shortening for issuance , Csv upload for bulk issuance]
 
 ***
 
-## OpenBao Secrets Management Guide
+### OpenBao secrets management (optional)
 
-[OpenBao](https://openbao.org/) (a FOSS fork of HashiCorp Vault) for secrets management. All secrets are fetched at runtime and optionally cached with a 10-minute TTL.
+[OpenBao](https://openbao.org/), the open-source fork of HashiCorp Vault, can hold the platform's secrets instead of plain `.env` values. Secrets are fetched on first use and cached per secret key for 10 minutes; each request times out after 10 seconds.
 
-***
+#### Quick start with the bundled stack
 
-### Enabling OpenBao
+The platform repository ships a compose file, a server config, and an idempotent provisioning script:
 
-Set the following environment variables:
+```sh
+docker compose -f docker-compose.openbao.yml up -d
+./openbao-init.sh
+```
 
-```env
+`openbao-init.sh` initializes and unseals OpenBao, enables a KV-v2 engine at `secret/`, creates the `credebl-secrets` policy and the `credebl` AppRole, and writes the four credebl secret paths from your environment. On first run it prints `BAO_ROLE_ID`, `BAO_SECRET_ID`, the unseal key, and the root token. Keep the unseal key and root token safe - they are not needed in `.env`.
+
+{% hint style="warning" %}
+`docker-compose.openbao.yml` mounts `./config.hcl`. Keep that file in the repository root or the container fails to start. Data is persisted in the `openbao_data` volume.
+{% endhint %}
+
+#### Enabling OpenBao
+
+{% code title=".env" %}
+```sh
 ENABLE_BAO=true
 SECRETS_PROVIDER=openbao
-BAO_URL=http://localhost:8200
-BAO_SECRET_PATH=secret/data/my-nestjs-app
+BAO_URL=http://openbao:8200
+BAO_SECRET_PATH=secret/data/credebl_resend_api_key
 BAO_ROLE_ID=<your-approle-role-id>
 BAO_SECRET_ID=<your-approle-secret-id>
 ```
+{% endcode %}
 
-OpenBao is **disabled by default**. When `ENABLE_BAO` is not `"true"`, all secret lookups return an empty object and the application falls back to `process.env` entirely.
+`BAO_URL` must be reachable from every service container. Use the compose service name (`http://openbao:8200`) when the platform runs in the same compose network, or the host IP when services run on the host. `localhost` and `127.0.0.1` point at the service container itself.
 
-***
+`BAO_SECRET_PATH` is the bootstrap path read at startup, and its keys are injected into `process.env`. Set it to one of the credebl paths below; the demo uses `secret/data/credebl_resend_api_key`.
 
-### Secret Paths
+{% hint style="warning" %}
+`.env.demo` ships with `ENABLE_BAO=true`. If you are not running OpenBao, set `ENABLE_BAO=false`. Otherwise startup tries to reach OpenBao and logs `Critical Lifecycle Boot Failure` before continuing with the `process.env` values. Secrets are fetched only when `ENABLE_BAO` is `true` and `SECRETS_PROVIDER` is `openbao`.
+{% endhint %}
 
-All paths are defined in `libs/common/src/common.constant.ts`:
+#### Secret paths
 
-| Constant                        | Path                                   | Used By                    |
-| ------------------------------- | -------------------------------------- | -------------------------- |
-| `CREDEBL_RESEND_API_KEY_PATH`   | `secret/data/credebl_resend_api_key`   | `resend-helper-file.ts`    |
-| `CREDEBL_SMTP_CONFIG_PATH`      | `secret/data/credebl_smtp_config`      | `smtp-helper-file.ts`      |
-| `CREDEBL_SENDGRID_API_KEY_PATH` | `secret/data/credebl_sendgrid_api_key` | `send-grid-helper-file.ts` |
-| `CREDEBL_AWS_KEY_PATH`          | `secret/data/credebl_aws_keys`         | `s3-storage.provider.ts`   |
+Paths are mapped in `libs/config/src/secret-storage/openbao.provider.ts`; the constants are defined in `libs/common/src/common.constant.ts`:
+
+| Constant           | Path                                   | Used by                    |
+| ------------------ | -------------------------------------- | -------------------------- |
+| `RESEND_API_KEY`   | `secret/data/credebl_resend_api_key`   | `resend-helper-file.ts`    |
+| `SMTP_CONFIG`      | `secret/data/credebl_smtp_config`      | `smtp-helper-file.ts`      |
+| `SENDGRID_API_KEY` | `secret/data/credebl_sendgrid_api_key` | `send-grid-helper-file.ts` |
+| `AWS_KEY`          | `secret/data/credebl_aws_keys`         | `s3-storage.provider.ts`   |
 
 Each path returns a flat key-value map. For example, `secret/data/credebl_smtp_config` should contain:
 
@@ -737,11 +748,11 @@ Each path returns a flat key-value map. For example, `secret/data/credebl_smtp_c
 
 ***
 
-### OpenBao UI Configuration Guide (Generic KV-v2 Setup)
+#### OpenBao UI configuration (generic KV-v2 setup)
 
 This guide covers how to set up a KV (Key-Value) Version 2 secrets engine, add arbitrary secret paths, and configure policies using the OpenBao Web Interface.
 
-### Step 1: Enable the KV-v2 Secrets Engine
+#### Step 1: Enable the KV-v2 Secrets Engine
 
 1. Log in to your OpenBao Web Interface (typically `http://localhost:8200`).
 2. In the left navigation menu, click Secrets Engines.
@@ -754,40 +765,46 @@ This guide covers how to set up a KV (Key-Value) Version 2 secrets engine, add a
    * Version: Select Version 2.
 7. Click Enable Engine.
 
-> Note on Paths: Mounting a KV-v2 engine at `secret` automatically prefixes underlying API paths with `/data/`. A path entered as `my-app-config` in the UI is accessed via HTTP at `secret/data/my-app-config`.
+> Note on Paths: Mounting a KV-v2 engine at `secret` automatically prefixes underlying API paths with `/data/`. A path entered as `credebl_smtp_config` in the UI is accessed via HTTP at `secret/data/credebl_smtp_config`.
 
-### Step 2: Create Secret Paths
+#### Step 2: Create Secret Paths
 
 To store key-value pairs under your secrets engine:
 
 1. Click on your mounted secrets engine (e.g., `secret/`).
 2. Click Create secret + in the top-right corner.
 3. Complete the form:
-   * Path for this secret: Enter your identifier (e.g., `app-config` or `service-credentials`).
+   * Path for this secret: Enter your identifier (e.g., `credebl_smtp_config` or `credebl_aws_keys`).
    * Secret data: Enter your key-value pairs (e.g., `KEY_NAME` = `value`).
    * Click Add row to add additional pairs to the same path.
 4. Click Save.
 
-### Step 3: Configure Access Policies
+#### Step 3: Configure Access Policies
 
 To allow applications or roles to read the secrets:
 
 1. Go to Policies in the left sidebar menu.
 2. Click Create ACL policy +.
-3. Enter a Name for your policy (e.g., `read-app-secrets`).
+3. Enter a Name for your policy (e.g., `credebl-secrets`).
 4. Enter the HCL policy definition granting read capabilities:
 
-Terraform
-
-```
-# Allow read capabilities on all paths under the secret engine
-path "secret/data/*" {
+```hcl
+# Allow read capabilities on the credebl secret paths
+path "secret/data/credebl_*" {
   capabilities = ["read"]
+}
+
+path "secret/metadata/credebl_*" {
+  capabilities = ["read", "list"]
 }
 ```
 
 5. Click Create policy.
 6. Attach this policy to your preferred auth method (AppRole, Kubernetes, OIDC, etc.) under Access -> Auth Methods.
+
+{% hint style="info" %}
+`openbao-init.sh` creates the same policy and an AppRole named `credebl` automatically. Use the UI steps only when you provision OpenBao yourself.
+{% endhint %}
 
 ***
 
@@ -855,7 +872,7 @@ FILE_SERVER_TOKEN=
 
 The Docker image built during this process is used to launch agents for new organizations on the CREDEBL platform.The Docker image name is set as an environment variable during the platform setup in a later step.
 
-The default image for agent is `ghcr.io/credebl/credo-controller:latest` refering to latest release of the credo-controller. Refer here: [https://github.com/credebl/credo-controller/pkgs/container/credo-controller](https://github.com/credebl/credo-controller/pkgs/container/credo-controller)
+The default image for agents is `ghcr.io/credebl/credo-controller:latest`. It tracks the latest production release of the credo-controller. Refer here: [https://github.com/credebl/credo-controller/pkgs/container/credo-controller](https://github.com/credebl/credo-controller/pkgs/container/credo-controller)
 
 <details>
 
