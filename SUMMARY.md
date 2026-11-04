@@ -37,7 +37,11 @@
 * [Glossary](references/glossary.md)
 * [Copyright & License](references/copyright-and-license.md)
 * [Releases](references/releases/README.md)
+  * [v.2.3.0 (RC)](references/releases/v.2.3.0-rc.md)
   * [v.2.2.0](references/releases/v.2.2.0.md)
+  * [v.2.1.3](references/releases/v.2.1.3.md)
+  * [v.2.1.2](references/releases/v.2.1.2.md)
+  * [v.2.1.1](references/releases/v.2.1.1.md)
   * [v.2.1.0](references/releases/v.2.1.0.md)
 
 ## Contribute
