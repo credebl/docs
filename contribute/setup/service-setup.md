@@ -5,11 +5,11 @@ icon: layer-group
 
 # Service setup
 
-Before installing the CREDEBL Platform services, it is essential to ensure that your environment meets certain prerequisites. Properly setting up these requirements will help facilitate a smooth installation process and optimal performance of the platform. This includes preparing your system with the necessary software dependencies, configuring the required network settings, and ensuring adequate hardware resources. Following these guidelines will help prevent potential issues and ensure that the CREDEBL Platform services are installed and operate as intended.&#x20;
+Before installing the CREDEBL Platform services, it is essential to ensure that your environment meets certain prerequisites. Properly setting up these requirements will help facilitate a smooth installation process and optimal performance of the platform. This includes preparing your system with the necessary software dependencies, configuring the required network settings, and ensuring adequate hardware resources. Following these guidelines will help prevent potential issues and ensure that the CREDEBL Platform services are installed and operate as intended.
 
 ## System requirements
 
-Here is the list of software needed to get started:&#x20;
+Here is the list of software needed to get started:
 
 * [Node.js](https://nodejs.org/en) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (>= 18)
 * [Git](https://git-scm.com/) (>= 2.34.1)
@@ -48,7 +48,7 @@ cd platform
 
 ### Environment Variables
 
-To help you quick start, a `.env.demo` is already present at the root of the platform repository. To getting started, rename `.env.demo` to `.env`  \
+To help you quick start, a `.env.demo` is already present at the root of the platform repository. To getting started, rename `.env.demo` to `.env`\
 \
 Please find `your-ip` in the `.env` file, and replace **all occurrences** it with your machine's Ip address.
 
@@ -56,11 +56,7 @@ Please find `your-ip` in the `.env` file, and replace **all occurrences** it wit
 If you want to know more about the environment variables, please refer to `.env.sample` file which is given at root of the repository.
 {% endhint %}
 
-{% hint style="info" %}
-The email (SendGrid) and AWS S3 credentials can optionally be stored in an OpenBao server instead of the `.env` file. See [OpenBao Secret Storage](../../getting-started/local-deployment/openbao.md).
-{% endhint %}
-
-Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#top), [Sendgrid](service-setup.md#sendgrid), [AWS S3](service-setup.md#aws-s3), etc at the respective steps.&#x20;
+Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#top), [Sendgrid](service-setup.md#sendgrid), [AWS S3](service-setup.md#aws-s3), etc at the respective steps.
 
 ### PostgreSQL
 
@@ -165,10 +161,10 @@ You can read more about prisma connection URLs in PostgreSQL here: [https://www.
 
 ### NATS
 
-The CREDEBL platform utilizes NATS for message-driven data exchange between its micro-services.&#x20;
+The CREDEBL platform utilizes NATS for message-driven data exchange between its micro-services.
 
 {% hint style="warning" %}
-For default setup, you can skip NATS  and REDIS configurations and [Continue here](service-setup.md#top)
+For default setup, you can skip NATS and REDIS configurations and [Continue here](service-setup.md#top)
 {% endhint %}
 
 <details>
@@ -191,10 +187,7 @@ websocket {
 
 * **port:** The main port for NATS communication is set to 4222.
 * **max\_payload:** Sets the maximum message payload size to 4 MB.
-
-- **websocket:** Enables WebSocket support on port 443 without TLS (for unsecured communication).
-
-
+* **websocket:** Enables WebSocket support on port 443 without TLS (for unsecured communication).
 
 2. **docker-compose.yml File**
 
@@ -226,16 +219,13 @@ To create your Nkeys, you can refer NATS tool nk as per their [official document
 {% endhint %}
 
 * **container\_name:** Sets the name of the container to nats.
-
-- **image:** Uses the official NATS Docker image.
-- **command:** Passes the NATS configuration file to the container at startup.
-- **ports:** Exposes three key ports:
+* **image:** Uses the official NATS Docker image.
+* **command:** Passes the NATS configuration file to the container at startup.
+* **ports:** Exposes three key ports:
   * `4222`: Main NATS client communication port.
   * `6222`: Routing port for NATS clusters.
   * `8222`: HTTP monitoring port for server statistics and health checks.
-- **volumes:** Mounts the nats-server.conf configuration file into the container as read-only (ro).
-
-
+* **volumes:** Mounts the nats-server.conf configuration file into the container as read-only (ro).
 
 3. **Start the NATS Server**
 
@@ -293,87 +283,140 @@ docker compose -f docker-compose.redis.yml up -d
 
 ### Keycloak <a href="#keycloak" id="keycloak"></a>
 
-Keycloak is an open source identity and access management solution
+#### Run Keycloak using Docker
 
-1. **Run Keycloak using docker:**
-
-{% code overflow="wrap" %}
-```sh
-docker run -d -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:25.0.6 start-dev
 ```
-{% endcode %}
+docker run -d -p 8080:8080 \
+-e KEYCLOAK_ADMIN=admin \
+-e KEYCLOAK_ADMIN_PASSWORD=admin \
+quay.io/keycloak/keycloak:25.0.6 start-dev
+```
 
-This command installs and starts Keycloak at the specified endpoints, locally accessible at [http://localhost:8080](http://localhost:8080).
+This command installs and starts Keycloak locally and makes it accessible at:
 
-2.  **Once logged in**:
+```
+http://localhost:8080
+```
 
-    This section guides you through the initial setup and configuration of Keycloak through its administration console.
+***
 
-    1. Go to **administration console**
-    2. Login using username: admin, password: admin.
-    3. Click on the Keycloak dropdown on the top left and add a new realm as “credebl-platform” by clicking on 'Create realm'.
-    4. Go to 'Clients' under 'Manage' in the sidebar on the left and create new client as a clientId = “adminClient”.
-    5. Click on **Next** Button
-    6. Set client authentication to **ON** mode.
-    7. Set Service Accounts Roles to **ON** mode.
-    8. Set Direct Access Grants to **ON** mode.
-    9. Click on **Next** Button
-    10. Add [http://your-url/](http://your-url/)\* (Eg.: [http://localhost:3000/](http://localhost:3000/)\*) in _**Valid Redirect URIs**_ as front-end url.
-    11. Add [http://your-url/](http://your-url/) (Eg.: [http://localhost:8080/](http://localhost:8080/)) in _**Root URL**_.
-    12. Add [http://your-url/](http://your-url/) (Eg.: [http://localhost:8080/](http://localhost:8080/)) in _**Web Origins**_.
+#### Initial Keycloak Configuration
 
-    <figure><img src="../../.gitbook/assets/Keycloak-adminClient-created.png" alt=""><figcaption><p>adminClient details</p></figcaption></figure>
+1. Open the Keycloak Administration Console.
+2. Login using:
+   * Username: `admin`
+   * Password: `admin`
+3. Click on the Keycloak dropdown at the top-left corner.
+4. Create a new realm named:
 
-    1. Save the details
-3.  **Service Account Roles Settings**:
+```
+credebl-platform
+```
 
-    This section outlines the configuration of service account roles to manage permissions and access control within Keycloak.
+***
 
+#### Create `adminClient`
 
+1. Go to **Clients** under **Manage** from the left sidebar.
+2. Click on **Create Client**.
+3. Set:
 
-    <figure><img src="../../.gitbook/assets/Keycloak-roles-assigned.png" alt=""><figcaption><p>assigned service role</p></figcaption></figure>
+```
+Client ID = adminClient
+```
 
-    1. If not already inside, go to **adminClient** from the **clients** in the side bar.
-    2. Go to the **Service account role** section.
-    3. Click on the **Assign role** button.
-    4. Select **Filter by clients** from the dropdown menu.
-    5. Select the below roles from the Available Roles and click on the **Assign** button:
-       * Create-client
-       * Manage-client
-       * Manage-users
-       * Query-clients
-       * Query-users
-       * View-clients
-       * View-users
-4.  **Realm Roles Settings:**
+4. Click **Next**.
+5. Enable the following:
+   * Client Authentication = ON
+   * Service Accounts Roles = ON
+   * Direct Access Grants = ON
+6. Click **Next**.
+7. Configure the following values:
 
-    This section covers the configuration of realm role settings within Keycloak.
+* Valid Front end redirect URIs
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Holder realm role</p></figcaption></figure>
+```
+http://your-url/*
+```
 
-Under the **credebl-platform** realm, from the menu select **realm-roles**.
+Example: `http://localhost:3000/*`
 
-* Under the **credebl-platform** realm, from the menu select **realm-roles**.
-* In **realm-roles**, click on **Create Role** and create a role with **Role name**=**“holder”**
+* Root URL
+
+```
+http://your-url/
+```
+
+Example: `http://localhost:8080/`
+
+* Web Origins
+
+```
+http://your-url/
+```
+
+Example: `http://localhost:8080/`
+
+8. Save the client details.
+
+#### **Configure Service Account Roles for `adminClient`**
+
+1. Open the `adminClient`.
+2. Go to the **Service Account Roles** section.
+3. Click on **Assign Role**.
+4. Select **Filter by Clients** from the dropdown.
+5. Assign the following roles:
+
+```
+create-client
+manage-clients
+manage-users
+query-clients
+query-users
+view-clients
+view-users
+```
+
+***
+
+#### Realm Roles Settings
+
+1. Under the `credebl-platform` realm, select:
+
+```
+Realm Roles
+```
+
+2. Click on **Create Role**.
+3. Create a role with:
+
+```
+Role Name = holder
+```
 
 {% hint style="info" %}
 When a new user registers on the platform we are assigning them a **“holder”** role from the realm.
 {% endhint %}
 
-5. **SSO Session Settings:**\
-   Set SSO Session Idle to 2 days. This is the expiration time of the refresh token if the user is idle on the platform. We can configure this as per our need.\
-   To navigate to SSO Session, go to  `Realm settings` option on left sidebar under `configure,`  now under the `Sessions` tab you can see `SSO Session Idle.`\
+#### **SSO Session Settings:**
 
-6.  **Update the `.env`**
+Set SSO Session Idle to 2 days. This is the expiration time of the refresh token if the user is idle on the platform. We can configure this as per our need.\
+To navigate to SSO Session, go to `Realm settings` option on left sidebar under `configure,` now under the `Sessions` tab you can see `SSO Session Idle.`\\
 
-    Update the .env file for the Keycloak details:\
-    \
-    To set the env variable KEYCLOAK\_MANAGEMENT\_CLIENT\_SECRET, in credebl-platform realm, go to clients >> adminClient. Now in the Credentials tab, copy the client secret
+#### **Update the `.env`**
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Keycloak client credentials</p></figcaption></figure>
+Update the .env file for the Keycloak details:
 
-{% code title=".env" %}
-```sh
+To set the env variable KEYCLOAK\_MANAGEMENT\_CLIENT\_SECRET
+
+1. Go to the `credebl-platform` realm.
+2. Navigate to:
+
+* **Clients** → `adminClient`
+* Open the **Credentials** tab
+* Copy the client secret for `ADMIN_KEYCLOAK_SECRET`
+
+```dotenv
 KEYCLOAK_DOMAIN=http://localhost:8080/
 KEYCLOAK_ADMIN_URL=http://localhost:8080
 KEYCLOAK_MASTER_REALM=master
@@ -381,7 +424,116 @@ KEYCLOAK_MANAGEMENT_CLIENT_ID=adminClient
 KEYCLOAK_MANAGEMENT_CLIENT_SECRET=
 KEYCLOAK_REALM=credebl-platform
 ```
+
+***
+
+#### **Additional Keycloak Configuration for v2.2.0**
+
+If you are upgrading to `v2.2.0` or later, apply the following additional changes.
+
+#### Create `credeblClient`
+
+1. Go to **Clients** under **Manage**.
+2. Click on **Create Client**.
+3. Set:
+
+```
+Client ID = credeblClient
+```
+
+4. Click **Next**.
+5. Enable the following:
+   * Client Authentication = ON
+   * Service Accounts Roles = ON
+   * Direct Access Grants = ON
+6. Click **Next**.
+7. Configure the same Redirect URIs, Root URL, and Web Origins used for `adminClient`.
+8. Save the client details.
+
+#### Configure Service Account Roles for `credeblClient`
+
+1. Open the `credeblClient`.
+2. Go to the **Service Account Roles** section.
+3. Click on **Assign Role**.
+4. Select **Filter by Clients** from the dropdown.
+5. Assign the same roles configured for `adminClient`:
+
+```
+create-client
+manage-clients
+manage-users
+query-clients
+query-users
+view-clients
+view-users
+manage-realm
+```
+
+***
+
+#### Enable Unmanaged Attributes
+
+1. Go to:
+
+```
+Realm Settings
+```
+
+2. Locate:
+
+```
+Unmanaged Attributes
+```
+
+3. If it is disabled, enable it.
+
+***
+
+#### Realm Roles Settings
+
+1. Under the `credebl-platform` realm, select:
+
+```
+Realm Roles
+```
+
+2. Click on **Create Role**.
+3. Create a role with:
+
+```
+Role Name = holder
+```
+
+#### **Update the `.env`**
+
+Update the `.env` file with the following Keycloak configuration details:
+
+{% code title=".env" %}
+```sh
+KEYCLOAK_DOMAIN=http://localhost:8080/
+KEYCLOAK_ADMIN_URL=http://localhost:8080
+KEYCLOAK_MASTER_REALM=master
+KEYCLOAK_REALM=credebl-platform
+
+KEYCLOAK_MANAGEMENT_CLIENT_ID=credeblClient
+KEYCLOAK_MANAGEMENT_CLIENT_SECRET=<CLIENT_SECRET>
+
+ADMIN_KEYCLOAK_ID=adminClient
+ADMIN_KEYCLOAK_SECRET=<CLIENT_SECRET>
+```
 {% endcode %}
+
+To set the environment variables `KEYCLOAK_MANAGEMENT_CLIENT_SECRET` and `ADMIN_KEYCLOAK_SECRET`:
+
+1. Go to the `credebl-platform` realm.
+2. Navigate to:
+   * **Clients** → `credeblClient`
+   * Open the **Credentials** tab
+   * Copy the client secret for `KEYCLOAK_MANAGEMENT_CLIENT_SECRET`
+3. Navigate to:
+   * **Clients** → `adminClient`
+   * Open the **Credentials** tab
+   * Copy the client secret for `ADMIN_KEYCLOAK_SECRET`
 
 {% hint style="warning" %}
 Below is an optional step to add users and can be skipped
@@ -421,7 +573,7 @@ SENDGRID_API_KEY=your-API-key
 
 ### AWS S3
 
-To utilize all functionalities of CREDEBL, total of 3 S3 buckets are required for;&#x20;
+To utilize all functionalities of CREDEBL, total of 3 S3 buckets are required for;
 
 1. Storing Organization logo during creating and updating an organization
 2. Bulk issuance of credentials
@@ -453,7 +605,7 @@ AWS_S3_STOREOBJECT_REGION=
 AWS_S3_STOREOBJECT_BUCKET=
 </code></pre>
 
-According to the `AWS_S3_STOREOBJECT_BUCKET` name, as per the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access), add domain to access objects from the bucket and save it, as it is utilized for the another .env variable &#x20;
+According to the `AWS_S3_STOREOBJECT_BUCKET` name, as per the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access), add domain to access objects from the bucket and save it, as it is utilized for the another .env variable
 
 {% code title=".env" overflow="wrap" %}
 ```sh
@@ -480,7 +632,7 @@ cd schema-file-server
 
 #### Environment Variables
 
-To help you quick start, a `.env.demo` is already present at the root of the platform repository. To getting started, rename `.env.demo` to `.env`  \
+To help you quick start, a `.env.demo` is already present at the root of the platform repository. To getting started, rename `.env.demo` to `.env`\
 \
 Please find `JWT_TOKEN_SECRET` in the `.env` file and replace its value with a base64-encoded JWT token.
 
@@ -531,14 +683,14 @@ FILE_SERVER_TOKEN=
 
 The Docker image built during this process is used to launch agents for new organizations on the CREDEBL platform.The Docker image name is set as an environment variable during the platform setup in a later step.
 
-The default image for agent is `ghcr.io/credebl/credo-controller:latest` refering to latest release of the credo-controller. Refer here: [https://github.com/credebl/credo-controller/pkgs/container/credo-controller](https://github.com/credebl/credo-controller/pkgs/container/credo-controller)&#x20;
+The default image for agent is `ghcr.io/credebl/credo-controller:latest` refering to latest release of the credo-controller. Refer here: [https://github.com/credebl/credo-controller/pkgs/container/credo-controller](https://github.com/credebl/credo-controller/pkgs/container/credo-controller)
 
 <details>
 
 <summary>Optional: In case you want to build your own image for the agent</summary>
 
 {% hint style="danger" %}
-Note: Currently to have agent setup(image built), we need node version to be - `18.19.0` \
+Note: Currently to have agent setup(image built), we need node version to be - `18.19.0`\
 However, we are actively seeking contributions to update it to the Latest Stable Version, you can check the open issue [here](https://github.com/credebl/credo-controller/issues/267)
 {% endhint %}
 
@@ -587,20 +739,20 @@ AFJ_VERSION=credo-controller-0.5.3:latest
 
 </details>
 
-### SSO (Single Sign-On) (Applicable for V 2.1.0 onwards)&#x20;
+### SSO (Single Sign-On) (Applicable for V 2.1.0 onwards)
 
 * If applications consuming CREDEBL want to use SSO feature, additional environment variables need to be set on the backend side as well.Please refer to the `env.demo` file for the required values when running the Platform.
 * As part of session management, for users who want to use the client ID / client secret based token generation feature, we have updated the response to include cookies.\
   Using these cookies, users can fetch their session details.
   * To fetch the session details, call the following API while passing the stored cookies in the request headers`:`
     * `/auth/sessionDetails`
-* For more details visit this - [https://docs.credebl.id/docs/\~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0](https://docs.credebl.id/docs/~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0#sso-single-sign-on) &#x20;
+* For more details visit this - [https://docs.credebl.id/docs/\~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0](https://docs.credebl.id/docs/~/revisions/IXcpHdsfgTsukxV376wG/references/releases/v.2.1.0#sso-single-sign-on)
 
 ## Installations
 
 Make sure the `.env` file is set with all the required environment variables as per the sample file and the [env guide](service-setup.md#environment-variables) give above.
 
-Before you start the services make sure to update the `credebl-master-table.json` present at location, `libs/prisma-service/prisma/data`  [sendgrid](service-setup.md#sendgrid) details as well as your `ip-address`&#x20;
+Before you start the services make sure to update the `credebl-master-table.json` present at location, `libs/prisma-service/prisma/data` [sendgrid](service-setup.md#sendgrid) details as well as your `ip-address`
 
 <pre class="language-json" data-title="credebl-master-table.json" data-line-numbers><code class="lang-json">{
   "platformConfigData": {

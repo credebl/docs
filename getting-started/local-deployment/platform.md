@@ -5,23 +5,23 @@ icon: layer-group
 
 # Platform
 
-Before installing the CREDEBL Platform services, it is essential to ensure that your environment meets certain prerequisites. Properly setting up these requirements will help facilitate a smooth installation process and optimal performance of the platform. Following these guidelines will help prevent potential issues and ensure that the CREDEBL Platform services are installed and operate as intended.&#x20;
+Before installing the CREDEBL Platform services, it is essential to ensure that your environment meets certain prerequisites. Properly setting up these requirements will help facilitate a smooth installation process and optimal performance of the platform. Following these guidelines will help prevent potential issues and ensure that the CREDEBL Platform services are installed and operate as intended.
 
 ## System requirements
 
-Here is the list of software needed to get started:&#x20;
+Here is the list of software needed to get started:
 
-* **Operating System**:&#x20;
+* **Operating System**:
   *   **Supported Architectures:** ARM and AMD (x86)
 
       > **Note:** Support for ARM and AMD servers is available starting from **v2.1.0**. Versions prior to v2.1.0 only support AMD (x86) architecture.
 * **Git**: Ensure you have Git installed (version **2.34.1 or higher**)
 * **Docker Engine**: Required for containerization
   * **Linux**: Docker will be automatically installed by the setup script.
-  * **macOS**:&#x20;
+  * **macOS**:
     * **Install manually**: Download Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop/)
     * **Launch Docker**: After installation, open the Docker Desktop application.
-*   **Available Ports**:&#x20;
+*   **Available Ports**:
 
     The platform requires the following ports to be available on your machine:
 
@@ -54,13 +54,9 @@ Here is the list of prerequisites we will need for CREDEBL:
     * S3 Bucket Name
     * AWS Region
 
-{% hint style="info" %}
-Instead of placing these credentials directly in your `.env` file, you can optionally store them in an OpenBao server and have the Platform source them at runtime. See [OpenBao Secret Storage](openbao.md).
-{% endhint %}
-
 <details>
 
-<summary>AWS S3 configuration setup </summary>
+<summary>AWS S3 configuration setup</summary>
 
 * **IAM User Setup**
   * **Step 1: Create Dedicated IAM User**
@@ -73,9 +69,8 @@ Instead of placing these credentials directly in your `.env` file, you can optio
     After user creation, download:
     * Access Key ID
     * Secret Access Key\
-      &#xNAN;_(Store securely for CREDEBL installation)_
-
--   **S3 Bucket Folder Requirements**
+      \&#xNAN;_(Store securely for CREDEBL installation)_
+*   **S3 Bucket Folder Requirements**
 
     Please ensure the following folder structure is created in the respective S3 buckets:
 
@@ -89,10 +84,6 @@ Instead of placing these credentials directly in your `.env` file, you can optio
 
 * [Sendgrid](https://sendgrid.com/en-us)
   * SendGrid is used for sending email. You must obtain an API key from your SendGrid account.
-
-{% hint style="info" %}
-Your SendGrid API key can optionally be stored in an OpenBao server instead of the `.env` file. See [OpenBao Secret Storage](openbao.md).
-{% endhint %}
 
 <details>
 
@@ -129,7 +120,7 @@ Your SendGrid API key can optionally be stored in an OpenBao server instead of t
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXfaxBTAD_RmN_r_uqStSpLpkId7A89_amkJuAOFv96TSB56tJ0mF7DGKwxfQqoOFN-FYaG0_MK12_nSWLnHUjCNsWT2rt9qT-l5GYNvFDJbX9TnoSn1ySlH6_FbEEeFLDyCq5SR?key=d_qWtjEes9qiiyogS_A3bw)
 
 \
-Note:-&#x20;
+Note:-
 
 * Do not hard-code the key in your application code.
 * Avoid committing the key to any public repositories (e.g., GitHub)
@@ -145,7 +136,7 @@ However, you must have your **AWS credentials** and **SendGrid API key** ready b
 
 To setup, use the provided script which automatically checks your environment, installs Docker Engine, Docker Compose and Terraform on Linux, and runs the `docker compose up` command. This helps ensure all dependencies are met and streamlines the startup process for CREDEBL.
 
-#### Option 1: Local deployment&#x20;
+#### Option 1: Local deployment
 
 1.  **Clone the Repository**\
     Begin by cloning the CREDEBL installation repository from GitHub. This repository contains all necessary scripts and configurations.
@@ -189,8 +180,6 @@ You will need to start the frontend separately by following the instructions [he
     ```
     git clone -b main https://github.com/credebl/install.git && cd install/docker-deployment
     ```
-
-
 2.  **Grant Execution Permissions**
 
     The installation script requires executable permissions to run.
@@ -200,9 +189,7 @@ You will need to start the frontend separately by following the instructions [he
     ```
 
     This command makes the `setup.sh` script executable.
-
-
-3.  #### **Execute the Setup Script**
+3.  **Execute the Setup Script**
 
     Run the setup script to begin the automated installation process.
 
@@ -277,10 +264,18 @@ Keycloak
 
 </details>
 
-* #### **Access the CREDEBL API**
+* **Access the CREDEBL API**
 
-Once all containers are running, you can access the CREDEBL API\
+Once all containers are running, you can access the CREDEBL API
 
+{% hint style="info" %}
+* This setup does not uses authentication for NATS.&#x20;
+* &#x20;To use **NKeys based NATS authentication:**
+  * To create your Nkeys, you can refer NATS tool nk as per their [official documentation](https://docs.nats.io/using-nats/nats-tools/nk)\
+    Add one key from the generated NKey pair to your `.env` file and add the other key to the `nats-server.conf` file.
+* To use **jwt based NATS authentication** refer to [Nats directory](https://github.com/credebl/nats) in CREDEBL git organisatio&#x6E;**.**
+* To use **username and password based authentication** for NATS Refer the [dropdown](../cloud-deployment/aws.md#to-use-username-and-password-based-authentication-for-nats.-refer-this) on cloud deployment page.
+{% endhint %}
 
 ### **Tearing Down the Infrastructure**
 
@@ -290,22 +285,16 @@ When you no longer need the local infra, you can clean up all resources using th
 
     Ensure the script has executable permissions:
 
-
-
     ```
     chmod +x destroy.sh
     ```
-2.  #### **Run the Destroy Script**
+2.  **Run the Destroy Script**
 
     Execute the script to remove all Docker resources:
-
-
 
     ```
     ./destroy.sh
     ```
-
-
 
     **This script will**:
 
@@ -317,14 +306,10 @@ When you no longer need the local infra, you can clean up all resources using th
 
 ### **Additional Notes**
 
-
-
 * **Firewall Configuration**:\
   If you encounter connection issues, ensure your firewall allows traffic on the ports listed in the prerequisites.
 *   **Troubleshooting**:\
     If containers fail to start, check the logs using:
-
-
 
     ```
     docker logs <container_name>
