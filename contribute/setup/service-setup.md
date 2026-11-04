@@ -539,6 +539,10 @@ To set the environment variables `KEYCLOAK_MANAGEMENT_CLIENT_SECRET` and `ADMIN_
 Below is an optional step to add users and can be skipped
 {% endhint %}
 
+{% hint style="info" %}
+Note : If you are an old user of Credebl platform from before v2.2.0 then make sure to add **PLATFORM\_ADMIN\_OLD\_CLIENT\_ID=adminClient** to you env this will update the clientId in the user table with the newly created clientId credeblClien&#x74;**.** Also rename the old adminClient as credeblClient in keycloak and create the adminClient as ne&#x77;**.**
+{% endhint %}
+
 <details>
 
 <summary><strong>Optional: Add users manually</strong></summary>
@@ -588,36 +592,204 @@ From the above mentioned, 1 and 2 can be skipped, if the respective functionalit
 AWS_PUBLIC_ACCESS_KEY=
 AWS_PUBLIC_SECRET_KEY=
 AWS_PUBLIC_REGION=
-AWS_ORG_LOGO_BUCKET_NAME=
+ORG_LOGO_BUCKET_NAME=
 
 <strong># 2. Used for Bulk issuance of credential
 </strong># Optional (Can be skipped if Bulk issuance is not used)
 AWS_ACCESS_KEY=
 AWS_SECRET_KEY=
 AWS_REGION=
-AWS_BUCKET=
+FILE_SHARING_BUCKET=
 
 # 3. Used for storing connection URL generated from Agent and creating shortened URL
 # Required (As connecting to org requires Shortened url)
 AWS_S3_STOREOBJECT_ACCESS_KEY=
 AWS_S3_STOREOBJECT_SECRET_KEY=
 AWS_S3_STOREOBJECT_REGION= 
-AWS_S3_STOREOBJECT_BUCKET=
+STOREOBJECT_BUCKET=
 </code></pre>
 
-According to the `AWS_S3_STOREOBJECT_BUCKET` name, as per the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access), add domain to access objects from the bucket and save it, as it is utilized for the another .env variable
+Use `STOREOBJECT_BUCKET` to build the shortened URL domain. Follow the [AWS S3 path style](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access) for your bucket.
 
 {% code title=".env" overflow="wrap" %}
 ```sh
 # Please refere AWS to determine your bucket url
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access 
-SHORTENED_URL_DOMAIN='https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/AWS_S3_STOREOBJECT_BUCKET'
+SHORTENED_URL_DOMAIN='https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/STOREOBJECT_BUCKET'
 ```
 {% endcode %}
 
 {% hint style="info" %}
 Note: Usually, `SHORTENED_URL_DOMAIN` for bucket names with dot ( . ) in it comes after '/': `https://s3.AWS_S3_STOREOBJECT_REGION.amazonaws.com/bucket-name`. While others without a dot(.) are often referred as a subdomain: `https://`**`bucket-name`**`.AWS_S3_STOREOBJECT_REGION.amazonaws.com`
 {% endhint %}
+
+### RustFs and Local Setup Guide
+
+This explains how to configure where your platform stores files (images, CSVs, etc.).
+
+### Choose a storage type
+
+Set `FILE_STORAGE_TYPE` in your `.env` file:
+
+```env
+FILE_STORAGE_TYPE=aws
+```
+
+| Value    | What it does                    | What you need                   |
+| -------- | ------------------------------- | ------------------------------- |
+| `aws`    | Stores files on Amazon S3       | AWS account and credentials     |
+| `rustfs` | Stores files on a RustFS server | RustFS endpoint and credentials |
+
+***
+
+{% hint style="info" %}
+By default the storage configuration uses _aws_ as its default if `FILE_STORAGE_TYPE` isn't provided
+{% endhint %}
+
+### Option 1: AWS S3 (`FILE_STORAGE_TYPE=aws`)
+
+Fill in these variables:
+
+```env
+AWS_ACCESS_KEY=
+AWS_SECRET_KEY=
+AWS_REGION=
+AWS_PUBLIC_ACCESS_KEY=
+AWS_PUBLIC_SECRET_KEY=
+AWS_PUBLIC_REGION=
+AWS_S3_STOREOBJECT_ACCESS_KEY=
+AWS_S3_STOREOBJECT_SECRET_KEY=
+AWS_S3_STOREOBJECT_REGION=
+FILE_SHARING_BUCKET=
+ORG_LOGO_BUCKET_NAME=
+STOREOBJECT_BUCKET=
+```
+
+### Option 2: RustFS (`FILE_STORAGE_TYPE=rustfs`)
+
+```env
+RUSTFS_ENDPOINT=http://localhost:9000
+RUSTFS_ACCESS_KEY_ID=
+RUSTFS_SECRET_ACCESS_KEY=
+RUSTFS_REGION=
+FILE_SHARING_BUCKET=
+ORG_LOGO_BUCKET_NAME=
+STOREOBJECT_BUCKET=
+```
+
+Make sure the buckets already exist on your server.
+
+***
+
+### Verify it works
+
+1. Start the platform
+2. Upload a file through the UI using the org logo update feature on dashboard for a quick check to see if its working.
+3. Perform a bulk issuance to check if it stores the shortened url and uploaded csv to the storage.
+4. Check that the file appears in the configured S3 or RustFS bucket. Currently there are only 3 features that utilize the file storage in platform \[Organization logo storage , URL shortening for issuance , Csv upload for bulk issuance]
+
+***
+
+## OpenBao Secrets Management Guide
+
+[OpenBao](https://openbao.org/) (a FOSS fork of HashiCorp Vault) for secrets management. All secrets are fetched at runtime and optionally cached with a 10-minute TTL.
+
+***
+
+### Enabling OpenBao
+
+Set the following environment variables:
+
+```env
+ENABLE_BAO=true
+SECRETS_PROVIDER=openbao
+BAO_URL=http://localhost:8200
+BAO_SECRET_PATH=secret/data/my-nestjs-app
+BAO_ROLE_ID=<your-approle-role-id>
+BAO_SECRET_ID=<your-approle-secret-id>
+```
+
+OpenBao is **disabled by default**. When `ENABLE_BAO` is not `"true"`, all secret lookups return an empty object and the application falls back to `process.env` entirely.
+
+***
+
+### Secret Paths
+
+All paths are defined in `libs/common/src/common.constant.ts`:
+
+| Constant                        | Path                                   | Used By                    |
+| ------------------------------- | -------------------------------------- | -------------------------- |
+| `CREDEBL_RESEND_API_KEY_PATH`   | `secret/data/credebl_resend_api_key`   | `resend-helper-file.ts`    |
+| `CREDEBL_SMTP_CONFIG_PATH`      | `secret/data/credebl_smtp_config`      | `smtp-helper-file.ts`      |
+| `CREDEBL_SENDGRID_API_KEY_PATH` | `secret/data/credebl_sendgrid_api_key` | `send-grid-helper-file.ts` |
+| `CREDEBL_AWS_KEY_PATH`          | `secret/data/credebl_aws_keys`         | `s3-storage.provider.ts`   |
+
+Each path returns a flat key-value map. For example, `secret/data/credebl_smtp_config` should contain:
+
+```json
+{
+  "SMTP_HOST": "smtp.example.com",
+  "SMTP_PORT": "587",
+  "SMTP_USER": "user@example.com",
+  "SMTP_PASS": "your-password"
+}
+```
+
+***
+
+### OpenBao UI Configuration Guide (Generic KV-v2 Setup)
+
+This guide covers how to set up a KV (Key-Value) Version 2 secrets engine, add arbitrary secret paths, and configure policies using the OpenBao Web Interface.
+
+### Step 1: Enable the KV-v2 Secrets Engine
+
+1. Log in to your OpenBao Web Interface (typically `http://localhost:8200`).
+2. In the left navigation menu, click Secrets Engines.
+3. Click Enable new engine + in the top-right corner.
+4. Under the Generic section, select KV.
+5. Click Next.
+6. Configure the engine settings:
+   * Path: Set your desired mount path (e.g., `secret`).
+   * Expand Method Options.
+   * Version: Select Version 2.
+7. Click Enable Engine.
+
+> Note on Paths: Mounting a KV-v2 engine at `secret` automatically prefixes underlying API paths with `/data/`. A path entered as `my-app-config` in the UI is accessed via HTTP at `secret/data/my-app-config`.
+
+### Step 2: Create Secret Paths
+
+To store key-value pairs under your secrets engine:
+
+1. Click on your mounted secrets engine (e.g., `secret/`).
+2. Click Create secret + in the top-right corner.
+3. Complete the form:
+   * Path for this secret: Enter your identifier (e.g., `app-config` or `service-credentials`).
+   * Secret data: Enter your key-value pairs (e.g., `KEY_NAME` = `value`).
+   * Click Add row to add additional pairs to the same path.
+4. Click Save.
+
+### Step 3: Configure Access Policies
+
+To allow applications or roles to read the secrets:
+
+1. Go to Policies in the left sidebar menu.
+2. Click Create ACL policy +.
+3. Enter a Name for your policy (e.g., `read-app-secrets`).
+4. Enter the HCL policy definition granting read capabilities:
+
+Terraform
+
+```
+# Allow read capabilities on all paths under the secret engine
+path "secret/data/*" {
+  capabilities = ["read"]
+}
+```
+
+5. Click Create policy.
+6. Attach this policy to your preferred auth method (AppRole, Kubernetes, OIDC, etc.) under Access -> Auth Methods.
+
+***
 
 ### Schema File Server
 
