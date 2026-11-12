@@ -414,10 +414,10 @@ Two types of credential offers can be created: **Reach-out** (issuer initiates a
 
 ### Authorization Types
 
-| Value                   | Description                                                                                                                                                                                                                    |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `preAuthorizedCodeFlow` | The offer is protected by a PIN. When the holder accepts the offer, they are prompted to enter a PIN to complete issuance.                                                                                                     |
-| `authorizationCodeFlow` | The holder must authenticate using a username and password against the IDP server configured for the issuer in the [Create Issuer API](/broken/pages/39589ce051b8801d15903271aa30cb38d11ee47f) (`authorizationServerConfigs`). |
+| Value                   | Description                                                                                                                                                                                                                             |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `preAuthorizedCodeFlow` | The offer is protected by a PIN. When the holder accepts the offer, they are prompted to enter a PIN to complete issuance.                                                                                                              |
+| `authorizationCodeFlow` | The holder must authenticate using a username and password against the IDP server configured for the issuer in the [Create Issuer API](openid-for-verifiable-credential-issuance-apis.md#create-issuer) (`authorizationServerConfigs`). |
 
 ### Credential Object
 
@@ -425,7 +425,7 @@ Each entry in the `credentials` array represents a single credential to be issue
 
 | Field          | Type   | Required | Description                                                                                                                                                                                                                                                                      |
 | -------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `templateId`   | string | Yes      | The UUID of the credential template to use. The template defines the credential format, attributes, signing option, and appearance. Refer to the [Create Template API](/broken/pages/19b3ea6c60172999b663cef5bb6fb0ee2b0e2234).                                                  |
+| `templateId`   | string | Yes      | The UUID of the credential template to use. The template defines the credential format, attributes, signing option, and appearance. Refer to the [Create Template API](openid-for-verifiable-credential-issuance-apis.md#create-credential-template).                            |
 | `payload`      | object | Yes      | The claim data to embed in the credential. Structure varies by template format — see [Payload: dc+sd-jwt](openid-for-verifiable-credential-issuance-apis.md#payload-dcsdjwt) and [Payload: mso\_mdoc](openid-for-verifiable-credential-issuance-apis.md#payload-mso_mdoc) below. |
 | `validityInfo` | object | Yes      | Defines the validity period of the issued credential. See [Validity Info Object](openid-for-verifiable-credential-issuance-apis.md#validity-info-object) below.                                                                                                                  |
 
@@ -596,3 +596,65 @@ Currently, revocation is supported only for dc+sd-jwt credentials using the IETF
 `"error": "Bad Request"`\
 `}`
 
+## Wallet Notifications
+
+When a wallet receives a credential, it can tell the issuer what it did with it (OpenID4VCI 1.0, section 11). CREDEBL relays each notification to the organization's webhook URL, so the issuing organization learns whether the wallet stored the credential.
+
+| Event                 | Meaning                                                                                |
+| --------------------- | -------------------------------------------------------------------------------------- |
+| `credential_accepted` | The wallet stored the credential.                                                      |
+| `credential_failure`  | The wallet could not store the credential, for example because it failed to verify it. |
+| `credential_deleted`  | The holder deleted the credential from the wallet.                                     |
+
+{% hint style="info" %}
+A notification does not change the issuance session's state; it stays `Completed`. Notifications are sent only by wallets that support them, and only when the issuer agent serves the OID4VCI notification endpoint. With an older agent, nothing changes.
+{% endhint %}
+
+### Webhook Payload
+
+Notifications arrive on the same organization webhook as the issuance state changes. Each post has the body `{ "data": { ... } }` and is signed with the organization's webhook secret when one is set.
+
+**A post is a wallet notification if, and only if, `data.notification` is present.** All other fields are the same as in a state-change post.
+
+```json
+{
+  "data": {
+    "id": "5f0c2a7e-1b7e-4d0b-9a49-1d1a0c3e9b11",
+    "credentialOfferId": "a3c8e1d2-...",
+    "credentialOfferPayload": { "credential_configuration_ids": ["EmployeeBadge-sdjwt"] },
+    "state": "Completed",
+    "issuerId": "issuer-public-id",
+    "notification": {
+      "notificationId": "8c7d4f0e-...",
+      "credentialConfigurationId": "EmployeeBadge-sdjwt",
+      "event": "credential_accepted",
+      "receivedAt": "2026-11-12T10:00:06.118Z"
+    },
+    "notifications": [
+      {
+        "notificationId": "8c7d4f0e-...",
+        "credentialConfigurationId": "EmployeeBadge-sdjwt",
+        "events": [{ "event": "credential_accepted", "receivedAt": "2026-11-12T10:00:06.118Z" }]
+      }
+    ]
+  }
+}
+```
+
+#### `notification` — Object Fields
+
+| Field                       | Type              | Description                                                          |
+| --------------------------- | ----------------- | -------------------------------------------------------------------- |
+| `notificationId`            | string            | The `notification_id` the issuer returned with the credential.       |
+| `credentialConfigurationId` | string            | The credential configuration of the credential.                      |
+| `event`                     | string            | `credential_accepted`, `credential_failure` or `credential_deleted`. |
+| `eventDescription`          | string (optional) | Free text from the wallet; present only when the wallet sent one.    |
+| `receivedAt`                | string (ISO 8601) | When the issuer received the notification.                           |
+
+### Notes
+
+* Use `data.id` (the issuance session id returned when the offer was created) and `notification.credentialConfigurationId` to match a notification to the offer. There is one `notificationId` per credential configuration in the session.
+* A `notificationId` can receive more than one event over time, for example `credential_accepted` and later `credential_deleted`. Each event arrives as its own post.
+* `data.notifications` is the session's notification history so far. It also appears on ordinary state-change posts once credentials are issued, with empty `events`. Check for `notification`, not `notifications`, to detect a notification.
+* **Validation:** CREDEBL validates `notification` and rejects an invalid one. It accepts `notifications` in any shape, because the issuer agent sends the history on every webhook after issuance, including the `Completed` state change; a change in its format must not block state changes. The history is forwarded to your webhook unchanged. CREDEBL stores only its well-formed entries and logs the rest as a warning.
+* The history is stored on the issuance session. `GET /v1/orgs/{orgId}/oid4vc/credential-offer/{id}` returns it in `notifications`.
