@@ -57,6 +57,15 @@ Please find `your-ip` in the `.env` file, and replace **all occurrences** it wit
 If you want to know more about the environment variables, please refer to `.env.sample` file which is given at root of the repository.
 {% endhint %}
 
+From `v2.3.0` the `.env.demo` file also contains these variables:
+
+| Variable              | Purpose                                                                                                  |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| `API_GATEWAY_VERSION` | Version value exposed by the API gateway (default `1.0`).                                                |
+| `ENABLE_SWAGGER`      | Set to `true` to serve the per-module Swagger UIs, `false` to turn them off (for example in production). |
+
+The optional OpenBao variables (`ENABLE_BAO`, `SECRETS_PROVIDER`, `BAO_*`) are described in [OpenBao secrets management](service-setup.md#openbao-secrets-management-optional).
+
 Apart from the already present variables, you need to add few variables generated from the below prerequisites like the [PostgreSQL](service-setup.md#postgresql), [Keycloak](service-setup.md#keycloak), [Sendgrid](service-setup.md#sendgrid), [Storage (AWS S3, RustFS, local)](service-setup.md#storage-aws-s3-rustfs-or-local-filesystem), etc at the respective steps.
 
 ### PostgreSQL
@@ -260,7 +269,7 @@ To set up Redis for the CREDEBL platform, follow the steps below to create and l
 version: '3'
 services:
   redis:
-    image: redis:6.2-alpine
+    image: redis:8.10-alpine
     restart: always
     ports:
       - '6379:6379'
@@ -872,22 +881,33 @@ FILE_SERVER_TOKEN=
 
 The Docker image built during this process is used to launch agents for new organizations on the CREDEBL platform.The Docker image name is set as an environment variable during the platform setup in a later step.
 
-The default image for agents is `ghcr.io/credebl/credo-controller:latest`. It tracks the latest production release of the credo-controller. Refer here: [https://github.com/credebl/credo-controller/pkgs/container/credo-controller](https://github.com/credebl/credo-controller/pkgs/container/credo-controller)
+Platform `v2.3.0` requires agent controller `v2.3.3`. Pin the image in the platform `.env`:
+
+```sh
+AFJ_VERSION=ghcr.io/credebl/credo-controller:v2.3.3
+```
+
+The `latest` tag tracks the latest production release of the controller, but pinning a tag keeps the agent and platform versions in step. The image name is still `credo-controller`.
+
+{% hint style="warning" %}
+Controller `v2.3.3` turns plaintext key import off. If your deployment creates did:polygon DIDs, set `ALLOW_PLAINTEXT_KEY_IMPORT=true` in the agent environment (`agent.env`) until the platform sends encrypted keys.
+{% endhint %}
+
+Other agent settings introduced in `v2.3.x`: `OID4VCI_NOTIFICATION_ENDPOINT_ENABLED` (default on; `false` turns the OID4VCI notification endpoint off) and `OID4VCI_ACCESS_TOKEN_EXPIRY` (default `3600` seconds; a wallet can report a notification only while its access token is valid). See [(Optional) Agent](optional-agent/) for the rest. Refer here: [https://github.com/credebl/credo-controller/pkgs/container/credo-controller](https://github.com/credebl/credo-controller/pkgs/container/credo-controller)
 
 <details>
 
 <summary>Optional: In case you want to build your own image for the agent</summary>
 
 {% hint style="danger" %}
-Note: Currently to have agent setup(image built), we need node version to be - `18.19.0`\
-However, we are actively seeking contributions to update it to the Latest Stable Version, you can check the open issue [here](https://github.com/credebl/credo-controller/issues/267)
+Note: agent controller `v2.3.0` and later use a Node 26 base image, and the repository is now named `agent-controller` (https://github.com/credebl/agent-controller). Rebuild images without cache; layers built on an older Node version fail at runtime.
 {% endhint %}
 
 * Clone the following repository:
 
 ```sh
-git clone https://github.com/credebl/credo-controller
-cd credo-controller
+git clone https://github.com/credebl/agent-controller
+cd agent-controller
 ```
 
 * Use following commands to install and upgrade Yarn:

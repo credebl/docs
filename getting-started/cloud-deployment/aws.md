@@ -90,7 +90,7 @@ Before proceeding with the deployment, make sure you are using the correct tagge
     image_tag               = "latest"
     ```
 
-    > **Note:**&#x20;
+    > **Note:**
     >
     > * Make sure all required variables defined in `variables.tf` are set in `terraform.tfvars`.
     > * If you have multiple AWS CLI profiles configured, specify the profile name, or comment out the profile line to use default credentials.
@@ -135,14 +135,14 @@ The following services and components will be provisioned:
 
 #### Post-Execution Steps
 
-1.  **Container Image Source**&#x20;
+1.  **Container Image Source**
 
-    By default, container images are pulled from CREDEBL GitHub Container Registry (GHCR). To use private Amazon ECR images instead:&#x20;
+    By default, container images are pulled from CREDEBL GitHub Container Registry (GHCR). To use private Amazon ECR images instead:
 
-    1. Pull the required images from GitHub Packages: [https://github.com/orgs/credebl/packages](https://github.com/orgs/credebl/packages)&#x20;
-    2. Tag and push all service images to your ECR repository:&#x20;
+    1. Pull the required images from GitHub Packages: [https://github.com/orgs/credebl/packages](https://github.com/orgs/credebl/packages)
+    2. Tag and push all service images to your ECR repository:
 
-    ACCOUNT\_ID.dkr.ecr.us-east-1.amazonaws.com/ECR\_REPO:SERVICE\_NAME&#x20;
+    ACCOUNT\_ID.dkr.ecr.us-east-1.amazonaws.com/ECR\_REPO:SERVICE\_NAME
 2.  **Database Setup**
 
     You will need **three PostgreSQL databases** for the services:
@@ -156,8 +156,6 @@ The following services and components will be provisioned:
     * **Option 1:** Create a new PostgreSQL database manually.
     * **Option 2:** Use an existing database by providing its connection details in the environment files.
 3.  **Create and Configure the `.env` File**:
-
-
 
     You will need to create **three environment files** for the services, using the environment prefix defined in your `terraform.tfvars` (e.g., `dev`, `qa`, or `prod`).
 
@@ -174,8 +172,6 @@ The following services and components will be provisioned:
     * `DEV-credebl.env` → Refer to:\
       [https://github.com/credebl/platform/blob/main/.env.demo](https://github.com/credebl/platform/blob/main/.env.demo)
 
-
-
     While configuring `DEV-credebl.env` for CREDEBL, the Terraform script provisions services on **ECS Fargate**, so you must update/add the following environment variables:
 
     ```bash
@@ -188,7 +184,7 @@ The following services and components will be provisioned:
     S3_BUCKET_ARN=<credo_env_file_bucket_ARN>
     ECS_SUBNET_ID=<subnet_ID_for_CREDO_service>
     FILESYSTEMID=<CREDO_EFS_ID>
-    AFJ_VERSION=ghcr.io/credebl/credo-controller:latest <optional: specify different image; default uses GHCR image>
+    AFJ_VERSION=ghcr.io/credebl/credo-controller:v2.3.3 <optional: specify different image; v2.3.3 is the version paired with platform v2.3.0>
     INBOUND_TG_ARN=<CREDO_inbound_target_group_ARN>
     ADMIN_TG_ARN=<CREDO_admin_target_group_ARN>
 
@@ -204,12 +200,8 @@ The following services and components will be provisioned:
 
     This ensures the **CREDEBL ECS service** can start properly with the correct **network, security, and service connectivity configuration**.
 
-
-
     `DEV-credo.env` → Refer to:\
     [https://github.com/credebl/platform/blob/main/agent.env](https://github.com/credebl/platform/blob/main/agent.env)
-
-
 
     * `DEV-keycloak.env` → Use the following template:
 
@@ -240,12 +232,8 @@ The following services and components will be provisioned:
     ```
 
     > **Note:** Replace placeholders like `HOST`, `PORT`, `Database`, and `KEYCLOAK_DOMAIN` with actual values.
-
-
-4.  **Upload the `.env`  files to S3**:\
-    Once you've configured the `.env` files, you’ll need to upload it to the S3 bucket that was created during the deployment.
-
-
+4. **Upload the `.env` files to S3**:\
+   Once you've configured the `.env` files, you’ll need to upload it to the S3 bucket that was created during the deployment.
 5.  **Bastion and EFS Configuration**
 
     1. **Create a Bastion Server**
@@ -264,22 +252,18 @@ The following services and components will be provisioned:
            sudo mount -t efs fs-xxxxxxx:/ /nats-efs	# replace with NATS EFS ID 
            sudo mount -t efs fs-yyyyyyy:/ /credo-efs   # replace with CREDO EFS ID 
            ```
-    3.  Configure EFS Contents&#x20;
+    3.  Configure EFS Contents
 
         ```bash
         mkdir -p /credo-efs/token 
         mkdir -p /credo-efs/seed
         ```
 
-
-
-        *   Place the master-data.json file inside the seed/ directory and add&#x20;
+        *   Place the master-data.json file inside the seed/ directory and add
 
             add the `credebl-master-table.json` file:
 
     Refer: [https://github.com/credebl/platform/blob/main/libs/prisma-service/prisma/data/credebl-master-table.json](https://github.com/credebl/platform/blob/main/libs/prisma-service/prisma/data/credebl-master-table.json)
-
-
 
     Update only the platformConfigData section and platformAdminKeycloakPassword for your environment:
 
@@ -327,8 +311,6 @@ The following services and components will be provisioned:
 <details>
 
 <summary>To use username and password based authentication for NATS. Refer this</summary>
-
-
 
 ```
 jetstream: {
@@ -385,7 +367,7 @@ SYS: {
 
     1. **Start Keycloak Service**
        1. Start the Keycloak service first.
-       2.  Navigate to the Keycloak Terraform directory:&#x20;
+       2.  Navigate to the Keycloak Terraform directory:
 
            ```
            cd install/terraform-scripts/keycloak
@@ -397,7 +379,7 @@ SYS: {
            terraform init && terraform plan && terraform apply 
            ```
        5. A secret.env file will be generated containing adminClient, platformClient, and trust-client secrets.
-       6.  Copy the secrets into your credebl.env file:&#x20;
+       6.  Copy the secrets into your credebl.env file:
 
            ```
            KEYCLOAK_DOMAIN=https://KEYCLOAK_DOMAIN/ 

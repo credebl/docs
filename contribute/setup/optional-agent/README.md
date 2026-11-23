@@ -143,6 +143,27 @@ Use the following command to run the agent locally :
 
 The agent env sample file is already provided in the repository, for a quick start rename the file to `.env`
 
+### Agent controller v2.3.x settings
+
+Agent controller `v2.3.3` is the version paired with platform `v2.3.0` (`ghcr.io/credebl/credo-controller:v2.3.3`). These settings are new or changed since `v2.2.0`.
+
+| Variable                                             | Default           | Purpose                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ALLOW_PLAINTEXT_KEY_IMPORT`                         | `false`           | Allows `privateKey`, `privateKeyJwk` and `passphrase` on `POST /dids/write`, `/dids/web/import`, `/dids/x509/import` and `/x509/import`, and the did:polygon `privatekey`. Set `true` on deployments that create did:polygon DIDs through the platform. Otherwise import keys encrypted: `POST /dids/import/session` returns a single-use session and the key is sent as `encryptedKey`. |
+| `OID4VCI_NOTIFICATION_ENDPOINT_ENABLED`              | `true`            | Issuers advertise a `notification_endpoint` and post wallet notifications on the `/openid4vc-issuance` webhook. `false` turns it off.                                                                                                                                                                                                                                                    |
+| `OID4VCI_ACCESS_TOKEN_EXPIRY`                        | `3600`            | Seconds an OID4VCI access token stays valid. A wallet can report a notification only while it is valid.                                                                                                                                                                                                                                                                                  |
+| `OPENBAO_ENABLED`                                    | `false`           | Optional OpenBao Transit KMS for did:x509 and X.509 keys. Askar stays the default KMS. Startup fails if OpenBao is enabled but sealed or unreachable. Use the `OPENBAO_*` settings in the agent's `.env.sample`.                                                                                                                                                                         |
+| `OPENBAO_DID_KEY_ENABLED`, `OPENBAO_DID_WEB_ENABLED` | `false`           | Also keep did:key and did:web keys in OpenBao.                                                                                                                                                                                                                                                                                                                                           |
+| `OPENBAO_WRITE_ENABLED`                              | see `.env.sample` | Set `false` to stop writing new keys to OpenBao (rollback switch).                                                                                                                                                                                                                                                                                                                       |
+| `ALLOW_TRUST_LIST_FALLBACK`                          | off in production | When `TRUST_LIST_URL` cannot be reached in `NoAuth` mode, the agent uses the certificates trusted with `POST /x509/trusted`. On by default outside production, so set `NODE_ENV` correctly on production deployments.                                                                                                                                                                    |
+
+{% hint style="info" %}
+The agent's OpenBao KMS is separate from the platform's OpenBao secret storage. You can use either, both or neither.
+{% endhint %}
+
+* **did:x509.** `POST /dids/x509/import` takes a certificate chain (leaf first) and the leaf private key. SD-JWT VCs signed with a did:x509 carry the chain in `x5c`, and verification requires the chain to lead to a root trusted by the trust configuration described above.
+* **Several agent instances.** The issuance session lock and key import sessions are held in memory per process. Route every request for one issuance session, and a key import session request with its import, to the same instance.
+
 ### Trust List Configuration
 
 The agent controller supports an optional **trust-list validation** step during OID4VC verification. When enabled, it checks that the issuer's X.509 certificate chain is present in a trusted certificate registry before accepting a presentation.
