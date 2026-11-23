@@ -7,7 +7,7 @@ icon: certificate
 
 # did:x509 and KMS backend
 
-Platform `v2.3.0` adds `did:x509` import and records which KMS backend holds each X.509 certificate and each DID. Both need agent controller `v2.3.3`; with an older agent the platform returns an "upgrade the agent" error for did:x509 import.
+`did:x509` import and X.509 KMS backend tracking are available with platform `v2.3.0` and agent controller `v2.3.3`. With an older agent, the platform returns an "upgrade the agent" error for `did:x509` import.
 
 ## Import a did:x509
 
