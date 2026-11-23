@@ -1,5 +1,6 @@
 ---
 description: Where the agent stores each key and how to check it
+icon: vault
 ---
 
 # KMS backends

@@ -1,5 +1,6 @@
 ---
 description: Use a did:web that is created and hosted by an external authority
+icon: globe
 ---
 
 # Import did:web from an authority

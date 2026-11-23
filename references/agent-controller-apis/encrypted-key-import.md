@@ -1,5 +1,6 @@
 ---
 description: Import a private key into the agent without sending it as plain text
+icon: lock
 ---
 
 # Encrypted key import

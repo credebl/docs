@@ -2,6 +2,7 @@
 description: >-
   Issue mDoc and SD-JWT credentials with X.509 certificates, and understand
   wallet errors
+icon: triangle-exclamation
 ---
 
 # X.509 issuance and holder errors

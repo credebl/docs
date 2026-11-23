@@ -1,5 +1,6 @@
 ---
 description: Import a CA issued certificate chain and use it as a DID
+icon: certificate
 ---
 
 # did:x509

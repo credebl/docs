@@ -1,5 +1,6 @@
 ---
 description: APIs of the CREDEBL agent controller for DIDs and keys
+icon: key
 ---
 
 # Agent Controller APIs
