@@ -274,12 +274,12 @@ Creates a VP request directly using a specified DCQL query and configuration, wi
 
 **Content-Type:** `application/json`
 
-| Field             | Type   | Required | Description                                                                                                                                                                                                                                   |
-| ----------------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `requestSigner`   | object | Yes      | Configuration for signing the VP request. See [Request Signer Object](openid-for-verifiable-presentation-apis.md#request-signer-object) below.                                                                                                |
-| `dcql`            | object | Yes      | The DCQL query defining which credentials and claims are required from the holder. Follows the same structure as `templateJson.dcql.query` in the [Create Verification Template API](/broken/pages/732debebf12c3dc64d3aaa190ae60408fb674178). |
-| `responseMode`    | string | Yes      | Defines how the holder's wallet should return the VP response. See [Response Modes](openid-for-verifiable-presentation-apis.md#response-modes) below.                                                                                         |
-| `expectedOrigins` | array  | No       | Array of allowed origin URLs. Required when `responseMode` is `dc_api` or `dc_api.jwt`. See [Expected Origins](openid-for-verifiable-presentation-apis.md#expected-origins) below.                                                            |
+| Field             | Type   | Required | Description                                                                                                                                                                                                                                                    |
+| ----------------- | ------ | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `requestSigner`   | object | Yes      | Configuration for signing the VP request. See [Request Signer Object](openid-for-verifiable-presentation-apis.md#request-signer-object) below.                                                                                                                 |
+| `dcql`            | object | Yes      | The DCQL query defining which credentials and claims are required from the holder. Follows the same structure as `templateJson.dcql.query` in the [Create Verification Template API](openid-for-verifiable-presentation-apis.md#create-verification-template). |
+| `responseMode`    | string | Yes      | Defines how the holder's wallet should return the VP response. See [Response Modes](openid-for-verifiable-presentation-apis.md#response-modes) below.                                                                                                          |
+| `expectedOrigins` | array  | No       | Array of allowed origin URLs. Required when `responseMode` is `dc_api` or `dc_api.jwt`. See [Expected Origins](openid-for-verifiable-presentation-apis.md#expected-origins) below.                                                                             |
 
 #### Sample Request Payload
 
@@ -413,10 +413,30 @@ Retrieves the actual Verifiable Presentation data submitted by the holder and re
 | ---------------------------- | ------ | -------- | --------------------------------------------------------------------------------------- |
 | `verificationPresentationId` | string | Yes      | The ID of the verification presentation session whose response data is to be retrieved. |
 
+#### Response
+
+The response is an envelope with `success` (boolean), `message` and `data`. `success` is `true` unless the verification failed: when `data.verificationStatus` is `failed` (the session is in the `Error` state, for example because a credential was revoked or failed verification), the call still returns `200 OK` but with `success: false`, and the reason is in `data.error`.
+
+```json
+{
+  "success": false,
+  "message": "Verification presentation response details retrieved; verification failed.",
+  "data": {
+    "responseStatus": "Error",
+    "verificationStatus": "failed",
+    "verified": false,
+    "error": "<failure reason>"
+  }
+}
+```
+
+A verified session returns `success: true`, the message `Verification presentation response details retrieved successfully.` and `data` with `verificationStatus: "verified"`, `verified: true` and `error: null`, plus the presentation data.
+
 #### Notes
 
 * **Use the correct API for the right stage:** Use [Get Verifier Presentation](openid-for-verifiable-presentation-apis.md#get-verifier-presentation) to poll the session status during the verification flow. Only call [Get Verifier Presentation Response](openid-for-verifiable-presentation-apis.md#get-verifier-presentation-response) once the session state is `ResponseVerified`.
 * The `id` query parameter on the Get Verifier Presentation API can be used to fetch a single specific session record instead of listing all sessions.
+* **Verification result fields.** The response envelope includes `success` (boolean, `false` when `verificationStatus` is `failed`). Its `data` includes `verificationStatus` (`pending`, `verified` or `failed`), `verified` (boolean, `true` only when `verificationStatus` is `verified`), `responseStatus` (the session state) and `error` (the failure reason, or `null`). See [Response](openid-for-verifiable-presentation-apis.md#response) below.
 * The `authorizationRequestId` is shared across session from verifier to holder so we treat it as sessionId/threadId in any functional usecases.
 
 ***
@@ -428,6 +448,8 @@ Retrieves the actual Verifiable Presentation data submitted by the holder and re
 **`POST`** `/v1/orgs/{orgId}/oid4vp/verify-authorization-response`
 
 Submits the authorization response received on the browser back to the verifier system to update the associated verification session. This API is specific to the **DC API flow** (`dc_api` and `dc_api.jwt` response modes), where the holder's wallet returns the Verifiable Presentation directly to the browser rather than posting it to the verifier's endpoint.
+
+The call returns `200 OK` with the verification result (`verificationStatus`, `verified`, `error`). When the session failed verification (for example a revoked credential), it returns `422 Unprocessable Entity` with the failure reason, and the session cannot be verified again.
 
 The verifier backend receives the browser-side `authorizationResponse` object and forwards it via this API. The agent then verifies the presentation data and updates the verification session state accordingly.
 

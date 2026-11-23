@@ -22,13 +22,14 @@ Creates a new issuer within the specified organization. The issuer acts as an id
 
 **Content-Type:** `application/json`
 
-| Field                         | Type         | Required | Description                                                                                                                                                                          |
-| ----------------------------- | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `issuerId`                    | string       | Yes      | A unique name or identifier for the issuer within the organization. Used to identify and reference the issuer in subsequent API calls and credential flows (e.g. `"lemon-corp"`).    |
-| `batchCredentialIssuanceSize` | integer      | No       | Defines the maximum number of credentials that can be issued in a single batch operation. Reserved for future use — batch credential issuance is not yet supported.                  |
-| `display`                     | array        | No       | An array of localized display objects containing the issuer's human-readable information. Presented to credential holders when they receive a credential offer or view a credential. |
-| `authorizationServerUrl`      | string (URL) | Yes      | The URL of the authorization server for this issuer. Must be the agent endpoint URL, which is referenced during the credential offer flow to authorize and issue credentials.        |
-| `authorizationServerConfigs`  | object       | No       | Configuration for an external Identity Provider (IDP) used to authenticate users during the offer creation flow. Omit this field if user authentication via an IDP is not required.  |
+| Field                         | Type             | Required | Description                                                                                                                                                                                                                                                                                                       |
+| ----------------------------- | ---------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `issuerId`                    | string           | Yes      | A unique name or identifier for the issuer within the organization. Used to identify and reference the issuer in subsequent API calls and credential flows (e.g. `"lemon-corp"`).                                                                                                                                 |
+| `batchCredentialIssuanceSize` | integer          | No       | Defines the maximum number of credentials that can be issued in a single batch operation. Reserved for future use — batch credential issuance is not yet supported.                                                                                                                                               |
+| `display`                     | array            | No       | An array of localized display objects containing the issuer's human-readable information. Presented to credential holders when they receive a credential offer or view a credential.                                                                                                                              |
+| `authorizationServerUrl`      | string (URL)     | Yes      | The URL of the authorization server for this issuer. Must be the agent endpoint URL, which is referenced during the credential offer flow to authorize and issue credentials.                                                                                                                                     |
+| `cryptographicBindingMethods` | array of strings | No       | Default holder binding methods (`cryptographic_binding_methods_supported`) for this issuer's templates. A template-level list overrides it. See [Holder binding methods](openid-for-verifiable-credential-issuance-apis.md#holder-binding-methods). Updating the issuer re-pushes its configuration to the agent. |
+| `authorizationServerConfigs`  | object           | No       | Configuration for an external Identity Provider (IDP) used to authenticate users during the offer creation flow. Omit this field if user authentication via an IDP is not required.                                                                                                                               |
 
 ### `display[]` — Object Fields
 
@@ -105,26 +106,27 @@ Creates a new credential template for the specified issuer. A credential templat
 
 **Content-Type:** `application/json`
 
-| Field          | Type         | Required | Description                                                                                                                                                                                                                                                                  |
-| -------------- | ------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`         | string       | Yes      | Human-readable name of the credential template (e.g. `"Birth Certificate"`).                                                                                                                                                                                                 |
-| `description`  | string       | No       | A short description of the credential template.                                                                                                                                                                                                                              |
-| `signerOption` | string       | Yes      | Specifies the signing method to use when issuing credentials. See [Signer Options](openid-for-verifiable-credential-issuance-apis.md#signer-options) below. At offer creation time, the platform fetches the organization's signing certificates configured for this option. |
-| `format`       | string       | Yes      | The credential format. See [Credential Formats](openid-for-verifiable-credential-issuance-apis.md#credential-formats) below.                                                                                                                                                 |
-| `template`     | object       | Yes      | The credential schema definition. Structure varies based on the `format` value. See [Template Object](openid-for-verifiable-credential-issuance-apis.md#template-object) below.                                                                                              |
-| `canBeRevoked` | boolean      | No       | Indicates whether credentials issued from this template can be revoked. Currently has no effect — revocation support via a status list (revocation registry) will be enabled in a future release.                                                                            |
-| `appearance`   | object       | No       | Visual display configuration for how the credential appears in a wallet or app UI. See [Appearance Object](openid-for-verifiable-credential-issuance-apis.md#appearance-object) below.                                                                                       |
-| `noticeUrl`    | string (URL) | No       | URL of a consent notice to be presented to the holder at the time of offer creation. The notice URL is generated via the Consent Service — refer to the [Consent Service documentation](openid-for-verifiable-credential-issuance-apis.md#) for details.                     |
+| Field                         | Type             | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------- | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                        | string           | Yes      | Human-readable name of the credential template (e.g. `"Birth Certificate"`).                                                                                                                                                                                                                                                                                                                                                                         |
+| `description`                 | string           | No       | A short description of the credential template.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `signerOption`                | string           | Yes      | Specifies the signing method to use when issuing credentials. See [Signer Options](openid-for-verifiable-credential-issuance-apis.md#signer-options) below. At offer creation time, the platform fetches the organization's signing certificates configured for this option.                                                                                                                                                                         |
+| `format`                      | string           | Yes      | The credential format. See [Credential Formats](openid-for-verifiable-credential-issuance-apis.md#credential-formats) below.                                                                                                                                                                                                                                                                                                                         |
+| `template`                    | object           | Yes      | The credential schema definition. Structure varies based on the `format` value. See [Template Object](openid-for-verifiable-credential-issuance-apis.md#template-object) below.                                                                                                                                                                                                                                                                      |
+| `canBeRevoked`                | boolean          | No       | Indicates whether credentials issued from this template can be revoked. Stored with the template. Revocation is requested per offer with `isRevocable`.                                                                                                                                                                                                                                                                                              |
+| `cryptographicBindingMethods` | array of strings | No       | Overrides the issuer's holder binding methods for `dc+sd-jwt`, `jwt_vc_json-ld`, and `ldp_vc`. Published as `cryptographic_binding_methods_supported`. Values: `jwk`, `did:key`, `did:web`, `did:jwk`, `did:indy`, `did:sov`, `did:cheqd`, `did:webvh`, `did:polygon`. For `mso_mdoc`, this field is ignored and the method is always `jwk`. See [Holder binding methods](openid-for-verifiable-credential-issuance-apis.md#holder-binding-methods). |
+| `appearance`                  | object           | No       | Visual display configuration for how the credential appears in a wallet or app UI. See [Appearance Object](openid-for-verifiable-credential-issuance-apis.md#appearance-object) below.                                                                                                                                                                                                                                                               |
+| `noticeUrl`                   | string (URL)     | No       | URL of a consent notice to be presented to the holder at the time of offer creation. The notice URL is generated via the Consent Service — refer to the [Consent Service documentation](openid-for-verifiable-credential-issuance-apis.md#) for details.                                                                                                                                                                                             |
 
 ### Signer Options
 
 The `signerOption` field determines how the issued credential will be signed. The platform uses this to look up the organization's configured signing certificates at offer creation time. Refer to the [Signing Certificates configuration guide](openid-for-verifiable-credential-issuance-apis.md#) for details on how to set up certificates per option.
 
-| Value          | Supported Formats            | Description                                                                                               |
-| -------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `DID`          | `dc+sd-jwt`, `jsonld`, `jwt` | Signs the credential using a Decentralized Identifier (DID).                                              |
-| `x509_ED25519` | `mso_mdoc`, `dc+sd-jwt`      | Signs the credential using an X.509 certificate with Ed25519 key type.                                    |
-| `X509_P256`    | `mso_mdoc`, `dc+sd-jwt`      | Signs the credential using an X.509 certificate with P-256 key type. Required for `mso_mdoc` credentials. |
+| Value          | Supported Formats                       | Description                                                                                               |
+| -------------- | --------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `DID`          | `dc+sd-jwt`, `jwt_vc_json-ld`, `ldp_vc` | Signs the credential using a Decentralized Identifier (DID).                                              |
+| `x509_ED25519` | `mso_mdoc`, `dc+sd-jwt`                 | Signs the credential using an X.509 certificate with Ed25519 key type.                                    |
+| `X509_P256`    | `mso_mdoc`, `dc+sd-jwt`                 | Signs the credential using an X.509 certificate with P-256 key type. Required for `mso_mdoc` credentials. |
 
 {% hint style="warning" %}
 `mso_mdoc` credentials must always use an X.509-based signer option (`x509_ED25519` or `X509_P256`). DID-based signing is not supported for the mdoc format.
@@ -134,12 +136,12 @@ The `signerOption` field determines how the issued credential will be signed. Th
 
 The `format` field defines the serialization and encoding format of the issued credential.
 
-| Value       | Description                                                                                    |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| `dc+sd-jwt` | SD-JWT-based Verifiable Credential (selective disclosure).                                     |
-| `mso_mdoc`  | ISO 18013-5 / ISO 23220 mobile document format (mdoc). Requires an X.509-based `signerOption`. |
-| `jsonld`    | JSON-LD Verifiable Credential (For future consideration).                                      |
-| `jwt`       | Plain JWT Verifiable Credential (For future consideration).                                    |
+| Value            | Description                                                                                    |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| `dc+sd-jwt`      | SD-JWT-based Verifiable Credential (selective disclosure).                                     |
+| `mso_mdoc`       | ISO 18013-5 / ISO 23220 mobile document format (mdoc). Requires an X.509-based `signerOption`. |
+| `jwt_vc_json-ld` | W3C Verifiable Credential in JSON-LD, secured as a JWT. Signed with a DID.                     |
+| `ldp_vc`         | W3C Verifiable Credential in JSON-LD with a Linked Data Proof. Signed with a DID.              |
 
 ### Template Object
 
@@ -381,10 +383,11 @@ The `appearance` object controls how the credential card is rendered in a wallet
 
 ### Notes
 
-* The `template` object structure is specific to the credential `format`. Use the `dc+sd-jwt` structure for SD-JWT credentials and the `mso_mdoc` structure for mdoc credentials. Documentation for `jsonld` and `jwt` formats will be covered separately.
+* The `template` object structure is specific to the credential `format`. Use the `dc+sd-jwt` structure for SD-JWT credentials and the `mso_mdoc` structure for mdoc credentials. `jwt_vc_json-ld` and `ldp_vc` templates are JSON-LD credentials; they do not take a `doctype`.
 * `mso_mdoc` credentials must always use an X.509-based `signerOption` (`x509_ED25519` or `X509_P256`). DID-based signing is not supported for this format.
 * `signerOption` is used at offer creation time — the platform looks up the organization's configured signing certificates for the selected option. Refer to the [X509 Certificates configuration guide](openid-for-verifiable-credential-issuance-apis.md#) for setup instructions.
-* `canBeRevoked` is accepted and stored but currently has no effect. Full revocation support via a status list / revocation registry will be enabled in a future release.
+* `canBeRevoked` is accepted and stored on the template. Whether the credentials of an offer are revocable is decided per offer with `isRevocable` (see [Create Credential Offer](openid-for-verifiable-credential-issuance-apis.md#create-credential-offer) and [Revoke Credential](openid-for-verifiable-credential-issuance-apis.md#revoke-credential)).
+* `cryptographicBindingMethods` (optional array) sets the holder binding methods advertised as `cryptographic_binding_methods_supported` for this template. See [Holder binding methods](openid-for-verifiable-credential-issuance-apis.md#holder-binding-methods).
 * `noticeUrl` is optional. If provided, the consent notice is presented to the holder during offer creation. Use the [Consent Service](openid-for-verifiable-credential-issuance-apis.md#) to generate a notice and obtain its URL before assigning it here.
 * Multiple `display` entries (in both `appearance` and attribute `display` arrays) can be provided per locale to support internationalization.
 
@@ -409,8 +412,8 @@ Two types of credential offers can be created: **Reach-out** (issuer initiates a
 
 **Content-Type:** `application/json`
 
-<table><thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>credentials</code></td><td>array</td><td>Yes</td><td>Array of credential objects to be issued as part of this offer. Multiple credentials can be included in a single offer. See <a href="openid-for-verifiable-credential-issuance-apis.md#credential-object">Credential Object</a> below.</td></tr><tr><td><code>authorizationType</code></td><td>string</td><td>Yes</td><td>The authorization flow to use when the holder accepts the offer. See <a href="openid-for-verifiable-credential-issuance-apis.md#authorization-types">Authorization Types</a> below.</td></tr><tr><td><code>noticeUrl</code></td><td>string (URL)</td><td>No</td><td>If multiple credentials are included and their templates each carry their own notice URL, this field override that template based noticeUrl.</td></tr><tr><td><pre><code>isRecovable
-</code></pre></td><td>Boolean</td><td>No</td><td>If multiple credentials are included and their templates each carry their own revocation setting, this field overrides those template-based settings. Currently, revocation is only supported for SD-JWT credentials using the Status List server.</td></tr></tbody></table>
+<table><thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead><tbody><tr><td><code>credentials</code></td><td>array</td><td>Yes</td><td>Array of credential objects to be issued as part of this offer. Multiple credentials can be included in a single offer. See <a href="openid-for-verifiable-credential-issuance-apis.md#credential-object">Credential Object</a> below.</td></tr><tr><td><code>authorizationType</code></td><td>string</td><td>Yes</td><td>The authorization flow to use when the holder accepts the offer. See <a href="openid-for-verifiable-credential-issuance-apis.md#authorization-types">Authorization Types</a> below.</td></tr><tr><td><code>noticeUrl</code></td><td>string (URL)</td><td>No</td><td>If multiple credentials are included and their templates each carry their own notice URL, this field override that template based noticeUrl.</td></tr><tr><td><pre><code>isRevocable
+</code></pre></td><td>Boolean</td><td>No</td><td>If multiple credentials are included and their templates each carry their own revocation setting, this field overrides those template-based settings. Set it to `true` to issue revocable credentials. Revocation is supported for `dc+sd-jwt`, `jwt_vc_json-ld` and `ldp_vc` credentials. JSON-LD credentials use a W3C Bitstring Status List entry; `credentialVersion` (`v1.0` or `v2.0`, default `v1.0`) selects the credential data model version.</td></tr></tbody></table>
 
 ### Authorization Types
 
@@ -565,7 +568,7 @@ For mdoc credentials, the payload is wrapped in a `namespaces` object. Each key 
 Instantly revokes all credentials issued during a specific OID4VC issuance session. This is typically used when a credential needs to be invalidated due to loss, theft, or change in the holder's status.
 
 NOTE\
-Currently, revocation is supported only for dc+sd-jwt credentials using the IETF Token Status List 2021 standard.
+Revocation is supported for `dc+sd-jwt`, `jwt_vc_json-ld` and `ldp_vc` credentials that were issued with `isRevocable: true`. The revocation time is stored (`revokedAt`). OID4VP verification of a revoked credential returns a structured result instead of a generic error.
 
 #### Path Parameters
 
@@ -596,6 +599,49 @@ Currently, revocation is supported only for dc+sd-jwt credentials using the IETF
 `"error": "Bad Request"`\
 `}`
 
+### Offer validation
+
+* Offer and session ids that are not UUIDs return `400`.
+* The signing algorithm for `mso_mdoc` in the issuer metadata is the COSE number `-7`.
+* An mDoc offer is checked before it is created: the signing certificate must have a country, and `issuing_country` must match it. A mismatch returns `422`.
+
+### Offer status
+
+Get offer and list offers return a `status` object:
+
+| Field           | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `label`         | Short readable state of the offer.                              |
+| `description`   | A sentence explaining the state.                                |
+| `canBeRedeemed` | `true` while a holder can still use the offer.                  |
+| `needsNewOffer` | `true` when the offer was used or expired and must be reissued. |
+
+### Reissue Credential Offer
+
+`POST /v1/orgs/{orgId}/oid4vc/credential-offer/{offerId}/reissue`
+
+Creates a new credential offer for an offer that was used or has expired. Only the organization owner can call it. The optional body field `validityInfo` sets the validity of the new mDoc credentials; by default the new credentials keep the length of the earlier validity, starting now, and the validity must fit the validity of the signing certificate.
+
+### Holder binding methods
+
+`cryptographic_binding_methods_supported` in the issuer metadata tells a wallet which key types and DID methods it may use to bind a credential to itself. A `did:web` wallet only gets a credential bound to its DID when the issuer advertises `did:web`.
+
+Allowed values: `jwk`, `did:key`, `did:web`, `did:jwk`, `did:indy`, `did:sov`, `did:cheqd`, `did:webvh`, `did:polygon`. `did:peer` is not offered. The issuer agent needs the matching DID resolver.
+
+The list for a credential configuration is resolved in this order:
+
+1. `cryptographicBindingMethods` on the credential template (`dc+sd-jwt`, `jwt_vc_json-ld`, `ldp_vc`).
+2. `cryptographicBindingMethods` on the issuer (create and update issuer APIs).
+3. The default for the format: `dc+sd-jwt` and `jwt_vc_json-ld` use `did:key`, `did:web`, `did:jwk`, `jwk`; `ldp_vc` uses `did:key`, `did:web`.
+
+`mso_mdoc` is always `jwk`. An empty or omitted list means no override at that level.
+
+Issuer metadata also accepts `RS256` proofs for `dc+sd-jwt` and `jwt_vc_json-ld`, so a holder whose `did:web` uses an RSA key (for example an Indian Class 3 DSC) can receive a bound credential. `mso_mdoc` is unchanged.
+
+{% hint style="info" %}
+Existing issuers and templates keep what is already published in their agent metadata until it is pushed again. Update the issuer (`POST /v1/orgs/{orgId}/oid4vc/issuers/{issuerId}`) to re-push it; a template is pushed when it is created or updated.
+{% endhint %}
+
 ## Wallet Notifications
 
 When a wallet receives a credential, it can tell the issuer what it did with it (OpenID4VCI 1.0, section 11). CREDEBL relays each notification to the organization's webhook URL, so the issuing organization learns whether the wallet stored the credential.
@@ -607,7 +653,7 @@ When a wallet receives a credential, it can tell the issuer what it did with it 
 | `credential_deleted`  | The holder deleted the credential from the wallet.                                     |
 
 {% hint style="info" %}
-A notification does not change the issuance session's state; it stays `Completed`. Notifications are sent only by wallets that support them, and only when the issuer agent serves the OID4VCI notification endpoint. With an older agent, nothing changes.
+A notification does not change the issuance session's state; it stays `Completed`. Notifications are sent only by wallets that support them, and only when the issuer agent serves the OID4VCI notification endpoint. With an older agent (before `v2.3.3`), nothing changes. Set `OID4VCI_NOTIFICATION_ENDPOINT_ENABLED=false` in the agent environment to turn the endpoint off. A wallet can report a notification only while the access token of its session is valid (`OID4VCI_ACCESS_TOKEN_EXPIRY`, default 3600 seconds).
 {% endhint %}
 
 ### Webhook Payload
