@@ -48,4 +48,4 @@ The platform also tracks whether a DID is archived (`isArchived`, `archivedAt`) 
 
 ## Migrations
 
-`add_kms_backend_to_x509_certificates`, `add_certificate_chain_to_x509_certificates`, `add_did_archive_and_usage_tracking` and `add_kms_backend_to_org_dids`. Run `npx prisma migrate deploy`. See [v.2.3.0](../releases/v.2.3.0-rc.md).
+`add_kms_backend_to_x509_certificates`, `add_certificate_chain_to_x509_certificates`, `add_did_archive_and_usage_tracking` and `add_kms_backend_to_org_dids`. Run `npx prisma migrate deploy`. See [v.2.3.0](../releases/v.2.3.0.md).

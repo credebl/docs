@@ -50,4 +50,4 @@ OID4VP verification returns a structured result for a revoked or failed session 
 
 ## Upgrade notes
 
-The release adds database columns for status lists (`statusListId`, `statusListIndex`, `statusListUri`, `credentialVersion`, `revokedAt` on `credentials`, and `revokedAt` on `issued_oid4vc_credentials`). Run `npx prisma migrate deploy`. See [v.2.3.0](../releases/v.2.3.0-rc.md).
+The release adds database columns for status lists (`statusListId`, `statusListIndex`, `statusListUri`, `credentialVersion`, `revokedAt` on `credentials`, and `revokedAt` on `issued_oid4vc_credentials`). Run `npx prisma migrate deploy`. See [v.2.3.0](../releases/v.2.3.0.md).
