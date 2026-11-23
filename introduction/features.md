@@ -59,11 +59,15 @@ Verification credential Stake-holders:
 * Holder: The entity that possesses the verifiable credential in their digital wallet.
 * Verifier: The entity that gets and verifies instantly the shared information.
 
-### **Credential Lifecycle Management**&#x20;
+### **Credential Lifecycle Management**
 
 #### **Issuance, Verification & Revocation**
 
-The platform provides a consistent process for creating and managing the VC lifecycle. It empowers the trusted issuers (like Universities, Employers, or Government Agencies) to seamlessly issue or revoke digital credentials to individuals.&#x20;
+The platform provides a consistent process for creating and managing the VC lifecycle. It empowers the trusted issuers (like Universities, Employers, or Government Agencies) to seamlessly issue or revoke digital credentials to individuals.
+
+**Revocation.** Since platform `v2.3.0`, JSON-LD credentials (DIDComm and OID4VC `jwt_vc_json-ld` / `ldp_vc`) can be issued as revocable with a W3C Bitstring Status List, and SD-JWT VC credentials can be revoked through the issuance session. See [Credential revocation](../references/platform-apis/credential-revocation.md).
+
+**Holder wallet.** The cloud wallet lists, decodes and deletes credentials by format, runs OpenID4VCI and OpenID4VP flows, and can bind credentials to a DID of the wallet. See [Cloud wallet APIs](../references/platform-apis/cloud-wallet-apis.md).
 
 Furthermore, the platform furnishes a means for individuals or entities relying on the credentials to cryptographically verify and confirm the legitimacy of the credential provided by individuals. These entities are typically Employers, Educational Institutions, or any other entity requiring validation of someone’s qualifications or other identity claims.
 
