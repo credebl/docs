@@ -115,7 +115,7 @@ Run `npx prisma migrate deploy`. Eight migrations are new since `v2.2.1`, all ad
 
 ## Studio
 
-Studio has no `v2.3.0` release. Continue using your current Studio version; no Studio-side upgrade is required.
+Studio v2.3.0 is released together with platform v2.3.0 and agent controller v2.3.3. The image is ghcr.io/credebl/studio:v2.3.0. New in Studio: an organization wallet page with DID details, resolve, set as primary, archive, restore and delete actions; browser-encrypted private key import for did:key, did:web and did:polygon; did:x509 import from a reviewed certificate chain and X.509 certificate import with its chain; the KMS backend (Askar, NodeKMS or OpenBao) shown for each DID and certificate; OID4VC issuer, template and offer management; a platform admin console at /admin; and light, dark and system themes on Next.js 16. Deploy platform v2.3.0 with its migrations and agent controller v2.3.3 before Studio, and set NEXT\_PUBLIC\_CURRENT\_RELEASE=v2.3.0. Release notes: https://github.com/credebl/studio/releases/tag/v2.3.0
 
 ## Upgrade notes
 
