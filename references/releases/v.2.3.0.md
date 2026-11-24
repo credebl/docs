@@ -45,13 +45,13 @@ Agent settings are described in [(Optional) Agent](../../contribute/setup/option
 ### Features
 
 * **OpenBao secret storage.** Optional provider, provisioning script and `docker-compose.openbao.yml`, controlled by `ENABLE_BAO`, `SECRETS_PROVIDER` and the `BAO_*` variables.
-* **Revocation with Bitstring Status List.** JSON-LD credentials can be issued as revocable (`isRevocable`, `credentialVersion` `v1.0` or `v2.0`). The new `POST /orgs/:orgId/credentials/:threadId/revoke` revokes DIDComm credentials, idempotently. OID4VC revocation of SD-JWT VC, `jwt_vc_json-ld` and `ldp_vc` credentials is persisted. OID4VP verification returns a structured result for revoked or failed sessions. See [credential-revocation.md](../platform-apis/credential-revocation.md "mention").
-* **Cloud wallet.** Credential management by format, OpenID4VCI and OpenID4VP holder flows, and DID binding. See [cloud-wallet-apis.md](../platform-apis/cloud-wallet-apis.md "mention").
-* **Configurable holder binding methods** per template and per issuer; `ldp_vc` advertises `did:web` by default. See [holder-binding-methods.md](../platform-apis/oid4vc-apis/holder-binding-methods.md "mention").
+* **Revocation with Bitstring Status List.** JSON-LD credentials can be issued as revocable (`isRevocable`, `credentialVersion` `v1.0` or `v2.0`). The new `POST /orgs/:orgId/credentials/:threadId/revoke` revokes DIDComm credentials, idempotently. OID4VC revocation of SD-JWT VC, `jwt_vc_json-ld` and `ldp_vc` credentials is persisted. OID4VP verification returns a structured result for revoked or failed sessions. See [Credential revocation](../platform-apis/credential-revocation.md).
+* **Cloud wallet.** Credential management by format, OpenID4VCI and OpenID4VP holder flows, and DID binding. See [Cloud wallet APIs](../platform-apis/cloud-wallet-apis.md).
+* **Configurable holder binding methods** per template and per issuer; `ldp_vc` advertises `did:web` by default. See [Holder binding methods](../platform-apis/oid4vc-apis/holder-binding-methods.md).
 * **RS256 holder proofs** for `dc+sd-jwt` and `jwt_vc_json-ld`, so a holder whose `did:web` uses an RSA key can receive a bound credential. `mso_mdoc` is unchanged.
 * **OID4VC offer checks, readable offer states and reissue.** Non-UUID offer and session ids return `400`; an mDoc offer is checked before creation (`422` when `issuing_country` does not match the certificate); offers return a `status` object; `POST /orgs/{orgId}/oid4vc/credential-offer/{offerId}/reissue` creates a new offer for a used or expired one.
 * **OID4VCI wallet notifications** relayed to the organization's webhook, with history stored per issuance session.
-* **`did:x509`** import and chain read, and the **KMS backend** of X.509 certificates and DIDs. See [did-x509-and-kms-backend.md](../platform-apis/did-x509-and-kms-backend.md "mention").
+* **`did:x509`** import and chain read, and the **KMS backend** of X.509 certificates and DIDs. See [did:x509 and KMS backend](../platform-apis/did-x509-and-kms-backend.md).
 * Swagger UIs per module group, switched with `ENABLE_SWAGGER`; the API gateway version through `API_GATEWAY_VERSION`; and changesets for release notes.
 
 ### Fixes
