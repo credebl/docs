@@ -1,6 +1,6 @@
 # v.2.3.0
 
-This release is published together with agent controller `v2.3.3`. The platform image is tagged `v2.3.0`; the agent image is `ghcr.io/credebl/credo-controller:v2.3.3`. Both were released on **23 November 2026**. The previous release is `v2.2.1`, published on 11 November 2026.
+This release is published together with agent controller `v2.3.3`. The platform image is tagged `v2.3.0`; the agent image is `ghcr.io/credebl/credo-controller:v2.3.3`. Both were released on **23 November 2026**. The previous release is `v2.2.1`, published on 11 November 2026. Studio v2.3.0 is released with it; the Studio image is ghcr.io/credebl/studio:v2.3.0.
 
 This page lists what was merged after `v2.2.1`, including everything first shipped in the `v2.3.0` release candidates. Full platform changelog: [v2.2.1...v2.3.0](https://github.com/credebl/platform/compare/v2.2.1...v2.3.0).
 
