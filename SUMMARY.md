@@ -60,6 +60,7 @@
 * [How to contribute](contribute/how-to-contribute.md)
 * [Setup](contribute/setup/README.md)
   * [Service setup](contribute/setup/service-setup.md)
+  * [Health endpoints (optional)](contribute/setup/health-endpoints.md)
   * [Studio](contribute/setup/studio/README.md)
     * [Admin portal](contribute/setup/studio/admin-portal.md)
   * [(Optional) Agent](contribute/setup/optional-agent/README.md)
